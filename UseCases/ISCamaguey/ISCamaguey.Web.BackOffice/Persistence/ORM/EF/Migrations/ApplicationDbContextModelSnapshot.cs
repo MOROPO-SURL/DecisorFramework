@@ -8547,6 +8547,66 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.ToTable("isostandards", "decisoriscamaguey_quality");
                 });
 
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Recommending.Persistence.Entities.RecomendationReport", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<Guid>("DocumentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("documentid");
+
+                    b.Property<string>("Reference")
+                        .HasColumnType("text")
+                        .HasColumnName("reference");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("title");
+
+                    b.HasKey("Id")
+                        .HasName("pk_recomendationreports");
+
+                    b.HasIndex("DocumentId")
+                        .HasDatabaseName("ix_recomendationreports_documentid");
+
+                    b.ToTable("recomendationreports", "decisoriscamaguey_recommending");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Recommending.Persistence.Entities.RecomendationReportEmployeeBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_recomendationreportemployeebridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_recomendationreportemployeebridges_sternid");
+
+                    b.ToTable("recomendationreportemployeebridges", "decisoriscamaguey_recommending");
+                });
+
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Reporting.Persistence.Entities.SampleAnalysisReport", b =>
                 {
                     b.Property<Guid>("Id")
@@ -13995,6 +14055,39 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Stern");
                 });
 
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Recommending.Persistence.Entities.RecomendationReport", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Document")
+                        .WithMany()
+                        .HasForeignKey("DocumentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_recomendationreports_documents_documentid");
+
+                    b.Navigation("Document");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Recommending.Persistence.Entities.RecomendationReportEmployeeBridge", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Recommending.Persistence.Entities.RecomendationReport", "Prow")
+                        .WithMany("EmployeeBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_recomendationreportemployeebridges_recomendationreports_pro~");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_recomendationreportemployeebridges_employees_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Reporting.Persistence.Entities.SampleAnalysisReport", b =>
                 {
                     b.HasOne("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.Analysis", "Analysis")
@@ -15324,6 +15417,11 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("CubanStandardBridges");
 
                     b.Navigation("IsoStandardBridges");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Recommending.Persistence.Entities.RecomendationReport", b =>
+                {
+                    b.Navigation("EmployeeBridges");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.Contract.AbstractServicingContract", b =>

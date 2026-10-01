@@ -9,7 +9,8 @@ public class ThesisResultConfigurationValidator : AbstractValidator<Models.Page.
     {
         RuleFor(model => model.Title)
             .NotEmpty()
-            .MaximumLength(512);
+            .MaximumLength(512)
+            .WithName("Título");
 
         RuleFor(model => model.ThesisKind)
             .NotNull()

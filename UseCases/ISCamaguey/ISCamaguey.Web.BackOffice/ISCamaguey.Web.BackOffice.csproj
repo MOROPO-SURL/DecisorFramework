@@ -77,6 +77,7 @@
 		<ProjectReference Include="..\Servicing\Servicing.Presentation.Web.Backend\Servicing.Presentation.Web.Backend.csproj" />
 		<ProjectReference Include="..\Servicing\Servicing.Presentation.Web.Frontend\Servicing.Presentation.Web.Frontend.csproj" />
 		<ProjectReference Include="..\Production\Production.Presentation.Web.Frontend\Production.Presentation.Web.Frontend.csproj" />
+		<ProjectReference Include="..\Recommending\Recommending.Presentation.Web.Frontend\Recommending.Presentation.Web.Frontend.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Content Update="Areas\Security\Views\Account\Edit.cshtml">

@@ -125,6 +125,7 @@
 		<ProjectReference Include="..\Quality\Quality.Presentation.Terminal.MAUI.UI.Default\Quality.Presentation.Terminal.MAUI.UI.Default.csproj" />
 		<ProjectReference Include="..\Servicing\Servicing.Presentation.Terminal.MAUI.UI.Default\Servicing.Presentation.Terminal.MAUI.UI.Default.csproj" />
 		<ProjectReference Include="..\Production\Production.Presentation.Terminal.MAUI.UI.Default\Production.Presentation.Terminal.MAUI.UI.Default.csproj" />
+		<ProjectReference Include="..\Recommending\Recommending.Presentation.Terminal.MAUI.UI.Default\Recommending.Presentation.Terminal.MAUI.UI.Default.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -167,6 +168,9 @@
 	  <MauiXaml Update="UI\Shells\LabShell.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="UI\Shells\RecommendingShell.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="UI\Shells\QualityShell.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -204,6 +208,9 @@
 	  </Compile>
 	  <Compile Update="UI\Shells\GovernanceShell.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Shells\RecommendingShell.xaml.cs">
+	    <DependentUpon>RecommendingShell.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="UI\Views\Card\OcupationSimplifiedManageOrganizationalStructuringUnitLeafCardView.xaml.cs">
 	    <DependentUpon>OcupationSimplifiedManageOrganizationalStructuringUnitLeafCardView.xaml</DependentUpon>

@@ -1,7 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<AssemblyName>MOROPO.ISCamaguey.Decisor.Recommending.Persistence</AssemblyName>
+		<RootNamespace>MOROPO.ISCamaguey.Decisor.Recommending.Persistence</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\..\Domain\Domain.Persistence\Domain.Persistence.csproj" />
+	</ItemGroup>
 
 </Project>

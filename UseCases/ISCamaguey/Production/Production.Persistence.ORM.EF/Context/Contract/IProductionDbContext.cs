@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace MOROPO.ISCamaguey.Decisor.Production.Persistence.ORM.EF.Context;
+namespace MOROPO.ISCamaguey.Decisor.Production.Persistence.ORM.EF.Context.Contract;
 
 public interface IProductionDbContext : Framework.Decisor.Domain.Persistence.ORM.EF.Context.Contract.IDomainDbContext, Framework.Decisor.Production.Persistence.ORM.EF.Context.Contract.IProductionDbContext
 {

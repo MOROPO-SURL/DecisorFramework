@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<AssemblyName>MOROPO.ISCamaguey.Decisor.Recommending.Presentation.Web.Common</AssemblyName>
+		<RootNamespace>MOROPO.ISCamaguey.Decisor.Recommending.Presentation.Web.Common</RootNamespace>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="GuamaFramework.Core.Security.Common.Persistence.ORM.EF" Version="6.0.2" />
+		<PackageReference Include="GuamaFramework.Identity.Presentation.Web.Common" Version="6.0.2" />
+		<PackageReference Include="SkiaSharp" Version="2.88.8" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Recommending.Interop.API.Common\Recommending.Interop.API.Common.csproj" />
+		<ProjectReference Include="..\Recommending.Persistence.ORM.EF\Recommending.Persistence.ORM.EF.csproj" />
+	</ItemGroup>
+
+</Project>

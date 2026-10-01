@@ -20,6 +20,7 @@ using MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities;
 using MOROPO.ISCamaguey.Decisor.Reporting.Persistence.Entities;
 using MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities;
 using MOROPO.Framework.Decisor.Production.Persistence.Entities;
+using MOROPO.ISCamaguey.Decisor.Recommending.Persistence.Entities;
 
 namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
 {
@@ -31,7 +32,8 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         Framework.Guama.Security.Personal.Persistence.ORM.EF.Contract.IPersistenceDbContext,
         Framework.Decisor.HumanResources.Persistence.ORM.EF.Context.Contract.IHumanResourcesDbContext,
         Framework.Decisor.Commercial.Persistence.ORM.EF.Context.Contract.ICommercialDbContext,
-        Production.Persistence.ORM.EF.Context.IProductionDbContext,
+        Production.Persistence.ORM.EF.Context.Contract.IProductionDbContext,
+        Recommending.Persistence.ORM.EF.Context.Contract.IRecommendingDbContext,
         Reporting.Persistence.ORM.EF.Context.Contract.IReportingDbContext
     {
         public ApplicationDbContext(System.Collections.Generic.IEnumerable<Framework.Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade> dbSchemaConfigurationProviders, DbContextOptions options) : base(dbSchemaConfigurationProviders, options)
@@ -328,6 +330,9 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<AcademicAchievementKnowledgeAreaBridge> AcademicAchievementKnowledgeAreaBridges { get; set; }
 
         public DbSet<Production.Persistence.Entities.ProductionQualityCheck> ProductionQualityChecks { get; set; }
+
+        public DbSet<RecomendationReport> RecomendationReports { get; set; }
+        public DbSet<RecomendationReportEmployeeBridge> RecomendationReportEmployeeBridges { get; set; }
     }
 }
 

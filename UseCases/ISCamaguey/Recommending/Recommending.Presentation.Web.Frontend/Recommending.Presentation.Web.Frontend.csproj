@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<AssemblyName>MOROPO.ISCamaguey.Decisor.Recommending.Presentation.Web.Frontend</AssemblyName>
+		<RootNamespace>MOROPO.ISCamaguey.Decisor.Recommending.Presentation.Web.Frontend</RootNamespace>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="GuamaFramework.Core.Security.Common.Presentation.Web.Frontend" Version="6.0.2" />
+		<PackageReference Include="GuamaFramework.Core.Presentation.Web.API" Version="6.0.2" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.25" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Recommending.Presentation.Web.Common\Recommending.Presentation.Web.Common.csproj" />
+	</ItemGroup>
+
+</Project>

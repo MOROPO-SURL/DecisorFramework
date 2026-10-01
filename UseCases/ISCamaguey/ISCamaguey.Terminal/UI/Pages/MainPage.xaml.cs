@@ -103,7 +103,7 @@ public partial class MainPage : Framework.Caney.MVVM.Core.Pages.BindingContexted
 
     private void RecomendationSectionCardFrameTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
-        //Microsoft.Maui.Controls.Application.Current.MainPage = new Shells.CommercialShell();
+        Microsoft.Maui.Controls.Application.Current.MainPage = new Shells.RecommendingShell();
     }
 
     private void QualitySectionCardFrameTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
