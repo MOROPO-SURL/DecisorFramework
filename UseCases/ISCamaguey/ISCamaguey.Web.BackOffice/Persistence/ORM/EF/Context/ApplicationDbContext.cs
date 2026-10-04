@@ -286,8 +286,12 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<SampleAnalysisServiceReport> SampleAnalysisServiceReports { get; set; }
         public DbSet<Analysis> Analyses { get; set; }
         public DbSet<AnalysisQualityCheck> AnalysisQualityChecks { get; set; }
+        public DbSet<AnalysisQualityCheckCubanStandardBridge> AnalysisQualityCheckCubanStandardBridges { get; set; }
+        public DbSet<AnalysisQualityCheckIsoStandardBridge> AnalysisQualityCheckIsoStandardBridges { get; set; }
         public DbSet<Assessment> Assessments { get; set; }
         public DbSet<AssessmentQualityCheck> AssessmentQualityChecks { get; set; }
+        public DbSet<AssessmentQualityCheckCubanStandardBridge> AssessmentQualityCheckCubanStandardBridges { get; set; }
+        public DbSet<AssessmentQualityCheckIsoStandardBridge> AssessmentQualityCheckIsoStandardBridges { get; set; }
         public DbSet<SampleKind> SampleKinds { get; set; }
         public DbSet<ResearchSample> ResearchSamples { get; set; }
         public DbSet<ServiceOrderSample> ServiceOrderSamples { get; set; }
@@ -330,6 +334,8 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<AcademicAchievementKnowledgeAreaBridge> AcademicAchievementKnowledgeAreaBridges { get; set; }
 
         public DbSet<Production.Persistence.Entities.ProductionQualityCheck> ProductionQualityChecks { get; set; }
+        public DbSet<Production.Persistence.Entities.ProductionQualityCheckCubanStandardBridge> ProductionQualityCheckCubanStandardBridges { get; set; }
+        public DbSet<Production.Persistence.Entities.ProductionQualityCheckIsoStandardBridge> ProductionQualityCheckIsoStandardBridges { get; set; }
 
         public DbSet<RecomendationReport> RecomendationReports { get; set; }
         public DbSet<RecomendationReportEmployeeBridge> RecomendationReportEmployeeBridges { get; set; }

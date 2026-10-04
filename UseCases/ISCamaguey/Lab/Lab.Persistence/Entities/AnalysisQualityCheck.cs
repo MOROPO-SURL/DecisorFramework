@@ -22,5 +22,9 @@
 
         [System.ComponentModel.DataAnnotations.Required]
         public string Description { get; set; }
+
+        public System.Collections.Generic.List<AnalysisQualityCheckCubanStandardBridge> CubanStandardBridge { get; set; } = new System.Collections.Generic.List<AnalysisQualityCheckCubanStandardBridge>();
+
+        public System.Collections.Generic.List<AnalysisQualityCheckIsoStandardBridge> IsoStandardBridge { get; set; } = new System.Collections.Generic.List<AnalysisQualityCheckIsoStandardBridge>();
     }
 }

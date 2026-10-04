@@ -5,6 +5,7 @@
     xmlns:local_card_views="clr-namespace:MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Views.Card"
     xmlns:local_converters="clr-namespace:MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Converters"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display;assembly=MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common"
+    xmlns:quality_interop_common_display_models="clr-namespace:MOROPO.ISCamaguey.Decisor.Quality.Interop.API.Common.Models.Display;assembly=MOROPO.ISCamaguey.Decisor.Quality.Interop.API.Common"
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.AnalysisQualityCheckDetailPage"
@@ -63,7 +64,55 @@
                             <Label
                                 VerticalOptions="Center"
                                 Text="{Binding QualityPercent, StringFormat='({0:F2}%)'}" />
-                        </StackLayout>
+                        </StackLayout>                      
+                        <Label 
+                            Style="{StaticResource CaptionPropertyLabelStyle}"
+                            Text="Normas Cubanas confirmadas" />
+                        <CollectionView
+                            ItemsSource="{Binding CubanStandards}">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Vertical" ItemSpacing="4" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.EmptyView>
+                                <Label Text="---" />
+                            </CollectionView.EmptyView>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="quality_interop_common_display_models:CubanStandardDisplayModel">
+                                    <StackLayout Orientation="Horizontal" Spacing="4">
+                                        <Label 
+                                            Text="-" 
+                                            FontAttributes="Bold" />
+                                        <Label 
+                                            HorizontalOptions="FillAndExpand"
+                                            Text="{Binding Name}" />
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                        <Label 
+                            Style="{StaticResource CaptionPropertyLabelStyle}"
+                            Text="Normas ISO confirmadas" />
+                        <CollectionView
+                            ItemsSource="{Binding CubanStandards}">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Vertical" ItemSpacing="4" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.EmptyView>
+                                <Label Text="---" />
+                            </CollectionView.EmptyView>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="quality_interop_common_display_models:IsoStandardDisplayModel">
+                                    <StackLayout Orientation="Horizontal" Spacing="4">
+                                        <Label 
+                                            Text="-" 
+                                            FontAttributes="Bold" />
+                                        <Label 
+                                            HorizontalOptions="FillAndExpand"
+                                            Text="{Binding Name}" />
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
                         <Label 
                             Style="{StaticResource CaptionPropertyLabelStyle}"
                             Text="Conclusiones" />

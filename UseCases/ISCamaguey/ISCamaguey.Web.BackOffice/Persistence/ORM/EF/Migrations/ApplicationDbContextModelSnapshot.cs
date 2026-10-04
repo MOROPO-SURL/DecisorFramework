@@ -7978,6 +7978,44 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.ToTable("analysisqualitychecks", "decisoriscamaguey_lab");
                 });
 
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.AnalysisQualityCheckCubanStandardBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_analysisqualitycheckcubanstandardbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_analysisqualitycheckcubanstandardbridges_sternid");
+
+                    b.ToTable("analysisqualitycheckcubanstandardbridges", "decisoriscamaguey_lab");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.AnalysisQualityCheckIsoStandardBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_analysisqualitycheckisostandardbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_analysisqualitycheckisostandardbridges_sternid");
+
+                    b.ToTable("analysisqualitycheckisostandardbridges", "decisoriscamaguey_lab");
+                });
+
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.Assessment", b =>
                 {
                     b.Property<Guid>("Id")
@@ -8075,6 +8113,44 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasDatabaseName("ix_assessmentqualitychecks_authorid");
 
                     b.ToTable("assessmentqualitychecks", "decisoriscamaguey_lab");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.AssessmentQualityCheckCubanStandardBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_assessmentqualitycheckcubanstandardbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_assessmentqualitycheckcubanstandardbridges_sternid");
+
+                    b.ToTable("assessmentqualitycheckcubanstandardbridges", "decisoriscamaguey_lab");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.AssessmentQualityCheckIsoStandardBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_assessmentqualitycheckisostandardbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_assessmentqualitycheckisostandardbridges_sternid");
+
+                    b.ToTable("assessmentqualitycheckisostandardbridges", "decisoriscamaguey_lab");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.Contract.AbstractSample", b =>
@@ -8385,6 +8461,44 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasDatabaseName("ix_productionqualitychecks_productionid");
 
                     b.ToTable("productionqualitychecks", "decisoriscamaguey_production");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Production.Persistence.Entities.ProductionQualityCheckCubanStandardBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_productionqualitycheckcubanstandardbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_productionqualitycheckcubanstandardbridges_sternid");
+
+                    b.ToTable("productionqualitycheckcubanstandardbridges", "decisoriscamaguey_production");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Production.Persistence.Entities.ProductionQualityCheckIsoStandardBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_productionqualitycheckisostandardbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_productionqualitycheckisostandardbridges_sternid");
+
+                    b.ToTable("productionqualitycheckisostandardbridges", "decisoriscamaguey_production");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Quality.Persistence.Entities.Certification", b =>
@@ -13767,6 +13881,48 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Author");
                 });
 
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.AnalysisQualityCheckCubanStandardBridge", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.AnalysisQualityCheck", "Prow")
+                        .WithMany("CubanStandardBridge")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_analysisqualitycheckcubanstandardbridges_analysisqualityche~");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Quality.Persistence.Entities.CubanStandard", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_analysisqualitycheckcubanstandardbridges_cubanstandards_ste~");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.AnalysisQualityCheckIsoStandardBridge", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.AnalysisQualityCheck", "Prow")
+                        .WithMany("IsoStandardBridge")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_analysisqualitycheckisostandardbridges_analysisqualitycheck~");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Quality.Persistence.Entities.IsoStandard", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_analysisqualitycheckisostandardbridges_isostandards_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.Assessment", b =>
                 {
                     b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Author")
@@ -13824,6 +13980,48 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Assessment");
 
                     b.Navigation("Author");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.AssessmentQualityCheckCubanStandardBridge", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.AssessmentQualityCheck", "Prow")
+                        .WithMany("CubanStandardBridge")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_assessmentqualitycheckcubanstandardbridges_assessmentqualit~");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Quality.Persistence.Entities.CubanStandard", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_assessmentqualitycheckcubanstandardbridges_cubanstandards_s~");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.AssessmentQualityCheckIsoStandardBridge", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.AssessmentQualityCheck", "Prow")
+                        .WithMany("IsoStandardBridge")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_assessmentqualitycheckisostandardbridges_assessmentqualityc~");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Quality.Persistence.Entities.IsoStandard", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_assessmentqualitycheckisostandardbridges_isostandards_stern~");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.Contract.AbstractSample", b =>
@@ -14011,6 +14209,48 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Author");
 
                     b.Navigation("Production");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Production.Persistence.Entities.ProductionQualityCheckCubanStandardBridge", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Production.Persistence.Entities.ProductionQualityCheck", "Prow")
+                        .WithMany("CubanStandardBridge")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_productionqualitycheckcubanstandardbridges_productionqualit~");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Quality.Persistence.Entities.CubanStandard", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_productionqualitycheckcubanstandardbridges_cubanstandards_s~");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Production.Persistence.Entities.ProductionQualityCheckIsoStandardBridge", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Production.Persistence.Entities.ProductionQualityCheck", "Prow")
+                        .WithMany("IsoStandardBridge")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_productionqualitycheckisostandardbridges_productionqualityc~");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Quality.Persistence.Entities.IsoStandard", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_productionqualitycheckisostandardbridges_isostandards_stern~");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Quality.Persistence.Entities.CertificationCubanStandardBridge", b =>
@@ -15396,6 +15636,20 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("InternalResearcherBridges");
                 });
 
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.AnalysisQualityCheck", b =>
+                {
+                    b.Navigation("CubanStandardBridge");
+
+                    b.Navigation("IsoStandardBridge");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.AssessmentQualityCheck", b =>
+                {
+                    b.Navigation("CubanStandardBridge");
+
+                    b.Navigation("IsoStandardBridge");
+                });
+
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.WorkPlan", b =>
                 {
                     b.Navigation("ProductionSampleBridges");
@@ -15410,6 +15664,13 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("EmployeeBridges");
 
                     b.Navigation("TechniqueBridges");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Production.Persistence.Entities.ProductionQualityCheck", b =>
+                {
+                    b.Navigation("CubanStandardBridge");
+
+                    b.Navigation("IsoStandardBridge");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Quality.Persistence.Entities.Certification", b =>

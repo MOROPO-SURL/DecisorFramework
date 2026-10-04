@@ -27,7 +27,9 @@ public partial class ProductionQualityCheckConfigurationPage : Framework.Decisor
             QualityPercent = ConcreteBindingContext.QualityPercent,
             Description = ConcreteBindingContext.Description,
             ProductionId = ConcreteBindingContext.Production.Id,
-            AuthorId = ConcreteBindingContext.Author.Id
+            AuthorId = ConcreteBindingContext.Author.Id,
+            CubanStandards = [.. ConcreteBindingContext.CubanStandards],
+            IsoStandards = [.. ConcreteBindingContext.IsoStandards]
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -46,7 +48,9 @@ public partial class ProductionQualityCheckConfigurationPage : Framework.Decisor
             QualityPercent = ConcreteBindingContext.QualityPercent,
             Description = ConcreteBindingContext.Description,
             ProductionId = ConcreteBindingContext.Production.Id,
-            AuthorId = ConcreteBindingContext.Author.Id
+            AuthorId = ConcreteBindingContext.Author.Id,
+            CubanStandards = [.. ConcreteBindingContext.CubanStandards],
+            IsoStandards = [.. ConcreteBindingContext.IsoStandards]
         };
 
         await apiConnectClient.EditAsync(model);
@@ -74,6 +78,64 @@ public partial class ProductionQualityCheckConfigurationPage : Framework.Decisor
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.EmployeePickPage(AuthorPickComplete_Callback)));
     }
 
+    private void CubanStandardAgregationButton_Clicked(object sender, System.EventArgs e)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Quality.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.CubanStandardPickPage(CubanStandardPickComplete_Callback)));
+    }
+
+    private void CubanStandardDetailButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Quality.Interop.API.Common.Models.Display.CubanStandardDisplayModel;
+
+        this.NavigationPushModalPageAsync(new Quality.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.CubanStandardDetailPage(target, null));
+    }
+
+    private void CubanStandardRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar esta norma cubana?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Quality.Interop.API.Common.Models.Display.CubanStandardDisplayModel;
+
+                ConcreteBindingContext.CubanStandards.Remove(target);
+
+                hasChangesFlag = true;
+            });
+        });
+    }
+
+    private void IsoStandardAgregationButton_Clicked(object sender, System.EventArgs e)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Quality.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.IsoStandardPickPage(IsoStandardPickComplete_Callback)));
+    }
+
+    private void IsoStandardDetailButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Quality.Interop.API.Common.Models.Display.IsoStandardDisplayModel;
+
+        this.NavigationPushModalPageAsync(new Quality.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.IsoStandardDetailPage(target, null));
+    }
+
+    private void IsoStandardRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar esta norma ISO?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Quality.Interop.API.Common.Models.Display.IsoStandardDisplayModel;
+
+                ConcreteBindingContext.IsoStandards.Remove(target);
+
+                hasChangesFlag = true;
+            });
+        });
+    }
+
     private void AuthorPickComplete_Callback(Framework.Decisor.Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel model)
     {
         ConcreteBindingContext.Author = model;
@@ -84,6 +146,20 @@ public partial class ProductionQualityCheckConfigurationPage : Framework.Decisor
     private void ProductionPicked_Callback(ProductionDisplayModel model)
     {
         ConcreteBindingContext.Production = model;
+
+        hasChangesFlag = true;
+    }
+
+    private void CubanStandardPickComplete_Callback(Quality.Interop.API.Common.Models.Display.CubanStandardDisplayModel model)
+    {
+        ConcreteBindingContext.CubanStandards.Add(model);
+
+        hasChangesFlag = true;
+    }
+
+    private void IsoStandardPickComplete_Callback(Quality.Interop.API.Common.Models.Display.IsoStandardDisplayModel model)
+    {
+        ConcreteBindingContext.IsoStandards.Add(model);
 
         hasChangesFlag = true;
     }

@@ -1,7 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
-using System.Linq;
 
 namespace MOROPO.ISCamaguey.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
@@ -24,8 +23,8 @@ public partial class TechniqueConfigurationPage : Framework.Decisor.Core.Present
             Name = ConcreteBindingContext.Name,
             Description = ConcreteBindingContext.Description,
             Priority = ConcreteBindingContext.Priority,
-            CubanStandards = ConcreteBindingContext.CubanStandards.ToList(),
-            IsoStandards = ConcreteBindingContext.IsoStandards.ToList()
+            CubanStandards = [.. ConcreteBindingContext.CubanStandards],
+            IsoStandards = [.. ConcreteBindingContext.IsoStandards]
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -43,8 +42,8 @@ public partial class TechniqueConfigurationPage : Framework.Decisor.Core.Present
             Name = ConcreteBindingContext.Name,
             Description = ConcreteBindingContext.Description,
             Priority = ConcreteBindingContext.Priority,
-            CubanStandards = ConcreteBindingContext.CubanStandards.ToList(),
-            IsoStandards = ConcreteBindingContext.IsoStandards.ToList()
+            CubanStandards = [.. ConcreteBindingContext.CubanStandards],
+            IsoStandards = [.. ConcreteBindingContext.IsoStandards]
         };
 
         await apiConnectClient.EditAsync(model);

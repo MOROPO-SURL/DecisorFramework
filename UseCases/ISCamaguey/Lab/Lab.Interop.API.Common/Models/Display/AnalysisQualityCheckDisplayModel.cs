@@ -1,6 +1,7 @@
 ﻿using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Guama.Core.Persistence.Presentation.Models.Contract;
 using MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities;
+using System.Linq;
 
 namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display
 {
@@ -18,13 +19,33 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display
 
         public string Description { get; set; }
 
+        public Quality.Interop.API.Common.Models.Display.CubanStandardDisplayModel[] CubanStandards { get; set; }
+
+        public Quality.Interop.API.Common.Models.Display.IsoStandardDisplayModel[] IsoStandards { get; set; }
+
         public virtual void Import(AnalysisQualityCheck entity)
         {
             Id = entity.Id;
             At = entity.At;
             QualityPercent = entity.QualityPercent;
             Description = entity.Description;
-            
+            CubanStandards = entity.CubanStandardBridge.Select(bridge =>
+            {
+                var model = new Quality.Interop.API.Common.Models.Display.CubanStandardDisplayModel();
+
+                model.Import(bridge.Stern);
+
+                return model;
+            }).ToArray();
+            IsoStandards = entity.IsoStandardBridge.Select(bridge =>
+            {
+                var model = new Quality.Interop.API.Common.Models.Display.IsoStandardDisplayModel();
+
+                model.Import(bridge.Stern);
+
+                return model;
+            }).ToArray();
+
             if (entity.Analysis != null)
             {
                 Analysis = new AnalysisDisplayModel();

@@ -16,6 +16,7 @@
             priority = model.Priority;
             name = model.Name;
             description = model.Description;
+
             CubanStandards = [.. model.CubanStandards];
             IsoStandards = [.. model.IsoStandards];
         }

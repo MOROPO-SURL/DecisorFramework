@@ -10,6 +10,7 @@
 		<ProjectReference Include="..\..\..\..\Core\Core.Persistence\Core.Persistence.csproj" />
 		<ProjectReference Include="..\..\..\..\Production\Production.Persistence\Production.Persistence.csproj" />
 		<ProjectReference Include="..\..\IDi\IDi.Persistence\IDi.Persistence.csproj" />
+		<ProjectReference Include="..\..\Quality\Quality.Persistence\Quality.Persistence.csproj" />
 		<ProjectReference Include="..\..\Servicing\Servicing.Persistence\Servicing.Persistence.csproj" />
 	</ItemGroup>
 

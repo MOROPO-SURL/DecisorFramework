@@ -32,6 +32,7 @@
 		<ProjectReference Include="..\..\..\..\Core\Core.Presentation.Terminal.MAUI.UI.Default\Core.Presentation.Terminal.MAUI.UI.Default.csproj" />
 		<ProjectReference Include="..\..\..\..\Domain\Domain.Presentation.Terminal.MAUI.UI.Default\Domain.Presentation.Terminal.MAUI.UI.Default.csproj" />
 		<ProjectReference Include="..\..\..\..\Production\Production.Presentation.Terminal.MAUI.UI.Default\Production.Presentation.Terminal.MAUI.UI.Default.csproj" />
+		<ProjectReference Include="..\..\Quality\Quality.Presentation.Terminal.MAUI.UI.Default\Quality.Presentation.Terminal.MAUI.UI.Default.csproj" />
 		<ProjectReference Include="..\Production.Presentation.Terminal.MAUI\Production.Presentation.Terminal.MAUI.csproj" />
 	</ItemGroup>
 	<ItemGroup>

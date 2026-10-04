@@ -10,7 +10,9 @@ public class ProductionDbSchemaConfigurationProvider : Framework.Guama.Core.Pers
         {
             return
             [
-                new BaseEntityTypeConfigurator<Entities.ProductionQualityCheck>()
+                new BaseEntityTypeConfigurator<Entities.ProductionQualityCheck>(),
+                new Configurators.ProductionQualityCheckCubanStandardBridgeEntityTypeConfigurator(),
+                new Configurators.ProductionQualityCheckIsoStandardBridgeEntityTypeConfigurator()
             ];
         }
     }

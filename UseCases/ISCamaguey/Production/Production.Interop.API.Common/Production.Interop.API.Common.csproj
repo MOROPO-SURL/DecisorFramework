@@ -8,6 +8,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\..\Production\Production.Interop.API.Common\Production.Interop.API.Common.csproj" />
+		<ProjectReference Include="..\..\Quality\Quality.Interop.API.Common\Quality.Interop.API.Common.csproj" />
 		<ProjectReference Include="..\Production.Persistence\Production.Persistence.csproj" />
 	</ItemGroup>
 

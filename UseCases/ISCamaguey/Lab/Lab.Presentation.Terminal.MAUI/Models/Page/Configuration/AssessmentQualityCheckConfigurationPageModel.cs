@@ -29,6 +29,9 @@ public sealed class AssessmentQualityCheckConfigurationPageModel : AbstractConfi
         description = model.Description;
         assessment = model.Assessment;
         author = model.Author;
+
+        CubanStandards = [.. model.CubanStandards];
+        IsoStandards = [.. model.IsoStandards];
     }
 
     public System.Guid Id { get; init; }
@@ -42,4 +45,8 @@ public sealed class AssessmentQualityCheckConfigurationPageModel : AbstractConfi
     public AssessmentDisplayModel Assessment { get => assessment; set => SetProperty(ref assessment, value); }
 
     public EmployeeDisplayModel Author { get => author; set => SetProperty(ref author, value); }
+
+    public System.Collections.ObjectModel.ObservableCollection<Quality.Interop.API.Common.Models.Display.CubanStandardDisplayModel> CubanStandards { get; set; } = [];
+
+    public System.Collections.ObjectModel.ObservableCollection<Quality.Interop.API.Common.Models.Display.IsoStandardDisplayModel> IsoStandards { get; set; } = [];
 }

@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local_converters="clr-namespace:MOROPO.ISCamaguey.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Converters"
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.ISCamaguey.Decisor.Production.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.ISCamaguey.Decisor.Production.Presentation.Terminal.MAUI"
+    xmlns:quality_interop_common_display_models="clr-namespace:MOROPO.ISCamaguey.Decisor.Quality.Interop.API.Common.Models.Display;assembly=MOROPO.ISCamaguey.Decisor.Quality.Interop.API.Common"
     xmlns:fwrk_domain_presentation_card_views="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Views.Card;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
     xmlns:fwrk_production_presentation_constants="clr-namespace:MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Constants;assembly=MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default"
     xmlns:fwrk_production_presentation_card_views="clr-namespace:MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Views.Card;assembly=MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default"
@@ -115,6 +116,176 @@
                         </StackLayout>
                     </VerticalStackLayout>
                 </FlexLayout>
+                <VerticalStackLayout 
+                    Margin="8"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Normas Cubanas confirmadas" />
+                    <Frame Padding="8">
+                        <Grid RowSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="2" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Button
+                                Grid.Column="1" Grid.Row="0"
+                                HorizontalOptions="End"
+                                Text="Agregar"
+                                Clicked="CubanStandardAgregationButton_Clicked" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Color="{StaticResource Gray050}" />
+                            <FlexLayout
+                                Grid.ColumnSpan="2" Grid.Row="2"
+                                Margin="4"
+                                Wrap="Wrap"
+                                AlignItems="Start" AlignContent="Start"
+                                BindableLayout.ItemsSource="{Binding CubanStandards}">
+                                <BindableLayout.EmptyView>
+                                    <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                </BindableLayout.EmptyView>
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate x:DataType="quality_interop_common_display_models:CubanStandardDisplayModel">
+                                        <Frame 
+                                            Padding="8" Margin="4" 
+                                            HeightRequest="160"
+                                            WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource ViewChildParentWidthToRelativeWidthConverter}}">
+                                            <Grid ColumnSpacing="8" RowSpacing="8">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+                                                <StackLayout 
+                                                    Grid.Column="0" Grid.RowSpan="2" 
+                                                    VerticalOptions="Start"
+                                                    Padding="8">
+                                                    <Label 
+                                                        LineBreakMode="TailTruncation"
+                                                        FontSize="Medium"
+                                                        Text="{Binding Name}" />
+                                                    <Label 
+                                                        Margin="0,4,0,0"
+                                                        Text="Descripción"
+                                                        TextColor="DimGray"
+                                                        FontSize="Caption"
+                                                        FontAttributes="Bold" />
+                                                    <Label 
+                                                        VerticalOptions="FillAndExpand"
+                                                        LineBreakMode="TailTruncation"
+                                                        MaxLines="2"
+                                                        Text="{Binding Description, TargetNullValue='---'}" />
+                                                </StackLayout>
+                                                <Button
+                                                    Grid.Column="1" Grid.Row="0"
+                                                    Style="{StaticResource FontIconImageButtonStyle}"
+                                                    Text="&#xF2FD;"
+                                                    Clicked="CubanStandardDetailButton_Clicked" />
+                                                <Button
+                                                    Grid.Column="1" Grid.Row="1" VerticalOptions="Start"
+                                                    Style="{StaticResource FontIconImageButtonStyle}"
+                                                    Text="&#xFA78;"
+                                                    Clicked="CubanStandardRemotionButton_Clicked" />
+                                            </Grid>
+                                        </Frame>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </FlexLayout>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
+                <VerticalStackLayout 
+                    Margin="8"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Normas ISO confirmadas" />
+                    <Frame Padding="8">
+                        <Grid RowSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="2" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Button
+                                Grid.Column="1" Grid.Row="0"
+                                HorizontalOptions="End"
+                                Text="Agregar"
+                                Clicked="IsoStandardAgregationButton_Clicked" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Color="{StaticResource Gray050}" />
+                            <FlexLayout
+                                Grid.ColumnSpan="2" Grid.Row="2"
+                                Margin="4"
+                                Wrap="Wrap"
+                                AlignItems="Start" AlignContent="Start"
+                                BindableLayout.ItemsSource="{Binding IsoStandards}">
+                                <BindableLayout.EmptyView>
+                                    <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                </BindableLayout.EmptyView>
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate x:DataType="quality_interop_common_display_models:IsoStandardDisplayModel">
+                                        <Frame 
+                                            Padding="8" Margin="4" 
+                                            HeightRequest="160"
+                                            WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource ViewChildParentWidthToRelativeWidthConverter}}">
+                                            <Grid ColumnSpacing="8" RowSpacing="8">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+                                                <StackLayout 
+                                                    Grid.Column="0" Grid.RowSpan="2" 
+                                                    VerticalOptions="Start"
+                                                    Padding="8">
+                                                    <Label 
+                                                        LineBreakMode="TailTruncation"
+                                                        FontSize="Medium"
+                                                        Text="{Binding Name}" />
+                                                    <Label 
+                                                        Margin="0,4,0,0"
+                                                        Text="Descripción"
+                                                        TextColor="DimGray"
+                                                        FontSize="Caption"
+                                                        FontAttributes="Bold" />
+                                                    <Label 
+                                                        VerticalOptions="FillAndExpand"
+                                                        LineBreakMode="TailTruncation"
+                                                        MaxLines="2"
+                                                        Text="{Binding Description, TargetNullValue='---'}" />
+                                                </StackLayout>
+                                                <Button
+                                                    Grid.Column="1" Grid.Row="0"
+                                                    Style="{StaticResource FontIconImageButtonStyle}"
+                                                    Text="&#xF2FD;"
+                                                    Clicked="IsoStandardDetailButton_Clicked" />
+                                                <Button
+                                                    Grid.Column="1" Grid.Row="1" VerticalOptions="Start"
+                                                    Style="{StaticResource FontIconImageButtonStyle}"
+                                                    Text="&#xFA78;"
+                                                    Clicked="IsoStandardRemotionButton_Clicked" />
+                                            </Grid>
+                                        </Frame>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </FlexLayout>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
                 <VerticalStackLayout 
                     Margin="8"
                     Spacing="6">

@@ -1,5 +1,6 @@
 ﻿using MOROPO.Framework.Guama.Core.Persistence.Presentation.Models.Contract;
 using MOROPO.ISCamaguey.Decisor.Production.Persistence.Entities;
+using System.Linq;
 
 namespace MOROPO.ISCamaguey.Decisor.Production.Interop.API.Common.Models.Input
 {
@@ -18,6 +19,10 @@ namespace MOROPO.ISCamaguey.Decisor.Production.Interop.API.Common.Models.Input
 
         [System.ComponentModel.DataAnnotations.Required]
         public string Description { get; set; }
+
+        public Quality.Interop.API.Common.Models.Display.CubanStandardDisplayModel[] CubanStandards { get; set; }
+
+        public Quality.Interop.API.Common.Models.Display.IsoStandardDisplayModel[] IsoStandards { get; set; }
 
         public ProductionQualityCheck Export()
         {
@@ -38,6 +43,12 @@ namespace MOROPO.ISCamaguey.Decisor.Production.Interop.API.Common.Models.Input
             entity.At = At;
             entity.QualityPercent = QualityPercent;
             entity.Description = Description;
+
+            entity.CubanStandardBridge.Clear();
+            entity.CubanStandardBridge = CubanStandards.Select(model => new ProductionQualityCheckCubanStandardBridge { ProwId = entity.Id, SternId = model.Id }).ToList();
+
+            entity.IsoStandardBridge.Clear();
+            entity.IsoStandardBridge = IsoStandards.Select(model => new ProductionQualityCheckIsoStandardBridge { ProwId = entity.Id, SternId = model.Id }).ToList();
 
             if (entity.ProductionId != ProductionId)
             {

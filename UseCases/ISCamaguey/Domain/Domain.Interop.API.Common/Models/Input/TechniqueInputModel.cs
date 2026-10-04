@@ -13,9 +13,9 @@ namespace MOROPO.ISCamaguey.Decisor.Domain.Interop.API.Common.Models.Input
 
         public int Priority { get; set; }
 
-        public System.Collections.Generic.List<Quality.Interop.API.Common.Models.Display.CubanStandardDisplayModel> CubanStandards { get; set; } = new System.Collections.Generic.List<Quality.Interop.API.Common.Models.Display.CubanStandardDisplayModel>();
+        public Quality.Interop.API.Common.Models.Display.CubanStandardDisplayModel[] CubanStandards { get; set; }
 
-        public System.Collections.Generic.List<Quality.Interop.API.Common.Models.Display.IsoStandardDisplayModel> IsoStandards { get; set; } = new System.Collections.Generic.List<Quality.Interop.API.Common.Models.Display.IsoStandardDisplayModel>();
+        public Quality.Interop.API.Common.Models.Display.IsoStandardDisplayModel[] IsoStandards { get; set; }
 
         public Persistence.Entities.Technique Export()
         {
