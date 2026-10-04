@@ -43,8 +43,9 @@ public partial class ProductionConfigurationPage : Core.Presentation.Terminal.MA
             At = ConcreteBindingContext.At,
             Description = ConcreteBindingContext.Description,
             ProductBridges = ConcreteBindingContext.ProductBridges.Select(_model => new Interop.API.Common.Models.Bridge.ProductionProductBridgeModel { Product = _model.Product, Amount = _model.Amount, UnitMeasurement = _model.UnitMeasurement }).ToList(),
-            EmployeeBridges = ConcreteBindingContext.EmployeeBridges.ToList(),
-            ColaboratorBridges = ConcreteBindingContext.ColaboratorBridges.ToList()
+            EmployeeBridges = [.. ConcreteBindingContext.EmployeeBridges],
+            ColaboratorBridges = [.. ConcreteBindingContext.ColaboratorBridges],
+            NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray()
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -65,8 +66,9 @@ public partial class ProductionConfigurationPage : Core.Presentation.Terminal.MA
             At = ConcreteBindingContext.At,
             Description = ConcreteBindingContext.Description,
             ProductBridges = ConcreteBindingContext.ProductBridges.Select(_model => new Interop.API.Common.Models.Bridge.ProductionProductBridgeModel { Product = _model.Product, Amount = _model.Amount, UnitMeasurement = _model.UnitMeasurement }).ToList(),
-            EmployeeBridges = ConcreteBindingContext.EmployeeBridges.ToList(),
-            ColaboratorBridges = ConcreteBindingContext.ColaboratorBridges.ToList()
+            EmployeeBridges = [.. ConcreteBindingContext.EmployeeBridges],
+            ColaboratorBridges = [.. ConcreteBindingContext.ColaboratorBridges],
+            NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray()
         };
 
         await apiConnectClient.EditAsync(model);
@@ -92,6 +94,33 @@ public partial class ProductionConfigurationPage : Core.Presentation.Terminal.MA
     private void OrderPickButton_Clicked(object sender, System.EventArgs e)
     {
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.ProductionOrderPickPage(OrderPickComplete_Callback)));
+    }
+
+    protected void NotificationUserAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Core.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.UserPickPage(NotificationUserPickComplete_Callback)));
+    }
+
+    private void NotificationUserRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar este usuario de las notificaciones?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Core.Interop.API.Common.Models.Display.UserDisplayModel;
+
+                ConcreteBindingContext.NotificationUsers.Remove(target);
+
+                hasChangesFlag = true;
+            });
+        });
+    }
+
+    private void NotificationUserPickComplete_Callback(Core.Interop.API.Common.Models.Display.UserDisplayModel model)
+    {
+        ConcreteBindingContext.NotificationUsers.Add(model);
     }
 
     private void OrderPickComplete_Callback(ProductionOrderDisplayModel model)
