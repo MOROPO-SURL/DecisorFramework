@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<caneyframework_mvvm_pages:BindingContextedContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_page_models="clr-namespace:MOROPO.ISCamaguey.Decisor.Terminal.Models.Page"
+    xmlns:fwrk_core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:fwrk_core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:caneyframework_mvvm_pages="clr-namespace:MOROPO.Framework.Caney.MVVM.Core.Pages;assembly=MOROPO.Framework.Caney.MVVM"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.ISCamaguey.Decisor.Terminal.UI.Pages.RecommendingDashboardPage"
+    x:TypeArguments="local_page_models:RecommendingDashboardPageModel"
+    x:DataType="local_page_models:RecommendingDashboardPageModel"
+    Title="Panel de Control para Recomendaciones">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <fwrk_core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
+
+            <communitytoolkit_converters:MathExpressionConverter x:Key="MathExpressionConverter" />
+
+            <Style x:Key="CardHeaderSeparatorBoxViewStyle" TargetType="BoxView">
+                <Setter Property="Color" Value="DimGray" />
+                <Setter Property="Margin" Value="0,5,0,10" />
+                <Setter Property="HeightRequest" Value="2" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Actualizar"
+            Clicked="ReloadToolbarItems_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF450;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ScrollView Orientation="Vertical">
+        <VerticalStackLayout>
+            <CarouselView
+                x:Name="MainCarouselView"
+                HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width, Converter={StaticResource MathExpressionConverter}, ConverterParameter='X * 0.5'}"
+                ItemsSource="{Binding Images}"
+                Loop="True"
+                IsBounceEnabled="False"
+                IsSwipeEnabled="False"
+                IndicatorView="MainIndicatorView">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate x:DataType="ImageSource">
+                        <Image 
+                            Aspect="AspectFill"
+                            Source="{Binding .}" />
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+            <IndicatorView 
+                x:Name="MainIndicatorView" 
+                Margin="0,16,0,0"
+                InputTransparent="True" />
+            <VerticalStackLayout Spacing="4" Margin="8">
+                <FlexLayout
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <Frame
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=4, ExtraLargeContainerColumn=5, LargeContainerColumn=6, MediumContainerColumn=8, SmallContainerColumn=10}}"
+                        Margin="4"
+                        VerticalOptions="Start">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label
+                                Grid.ColumnSpan="2" Grid.Row="0"
+                                FontSize="Medium"
+                                FontAttributes="Bold"
+                                LineBreakMode="TailTruncation"
+                                Text="Informes de Recomendaciones" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                            <Label
+                                Grid.Column="0" Grid.Row="2"
+                                VerticalOptions="Center"
+                                FontFamily="MaterialDesignIcons"
+                                FontSize="Header"
+                                Text="&#xF215;" />
+                            <Label
+                                Grid.Column="1" Grid.Row="2"
+                                VerticalOptions="Center"
+                                FontSize="Large"
+                                HorizontalTextAlignment="End"
+                                LineBreakMode="TailTruncation"
+                                Text="{Binding ReportCount}" />
+                        </Grid>
+                    </Frame>
+                </FlexLayout>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</caneyframework_mvvm_pages:BindingContextedContentPage>

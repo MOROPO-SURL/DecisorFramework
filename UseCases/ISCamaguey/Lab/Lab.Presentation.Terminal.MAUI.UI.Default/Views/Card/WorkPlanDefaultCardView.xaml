@@ -15,7 +15,7 @@
                 Margin="0,12,0,0"
                 LineBreakMode="TailTruncation"
                 FontAttributes="Bold"
-                Text="Equipo" />
+                Text="Grupo de Trabajo" />
             <Label
                 LineBreakMode="TailTruncation"
                 Text="{Binding WorkingGroup.Name}" />

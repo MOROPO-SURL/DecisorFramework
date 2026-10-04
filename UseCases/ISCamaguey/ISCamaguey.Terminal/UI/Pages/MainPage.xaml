@@ -92,7 +92,7 @@
                     </VerticalStackLayout.GestureRecognizers>
                     <Label
                         HorizontalOptions="Center"
-                        Text="&#xF09E;"
+                        Text="&#xF0E6;"
                         TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
                         FontFamily="MaterialDesignIcons"
                         FontSize="Header" />

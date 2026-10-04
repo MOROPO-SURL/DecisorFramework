@@ -94,6 +94,11 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <None Remove="Resources\Images\governance.jpg" />
+	  <None Remove="Resources\Images\recommending-01.jpg" />
+	  <None Remove="Resources\Images\recommending-02.jpg" />
+	  <None Remove="Resources\Images\recommending-03.jpg" />
+	  <None Remove="Resources\Images\recommending-04.jpg" />
+	  <None Remove="Resources\Images\recommending-05.jpg" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -133,6 +138,18 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\Configuration\SimplifiedVacantConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\IDiDashboardPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\LabDashboardPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\ProductionDashboardPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\RecommendingDashboardPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\ServicingDashboardPage.xaml">

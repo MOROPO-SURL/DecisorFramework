@@ -9,7 +9,7 @@ public class WorkPlanConfigurationValidator : AbstractValidator<Models.Page.Conf
 
     public WorkPlanConfigurationValidator()
     {
-        RuleFor(model => model.WorkingGroup).NotNull().NotEmpty().WithName("Equipo");
+        RuleFor(model => model.WorkingGroup).NotNull().NotEmpty().WithName("Grupo de Trabajo");
 
         RuleFor(model => model.ServiceOrderSamples)
             .Must((model, field) => field.Any() || model.ResearchSamples.Any() || model.ProductionSamples.Any())

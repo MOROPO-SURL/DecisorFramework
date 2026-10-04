@@ -2,6 +2,7 @@
 <Shell 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_pages="clr-namespace:MOROPO.ISCamaguey.Decisor.Terminal.UI.Pages"
     xmlns:fwrk_domain_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
     xmlns:idi_manage_pages="clr-namespace:MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default"
     xmlns:idi_list_pages="clr-namespace:MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Pages.List;assembly=MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default"
@@ -38,8 +39,8 @@
     </Shell.FlyoutHeader>
     <MenuFlyoutItem Text="Inicio" IsEnabled="False" />
     <ShellContent
-        Title="Panel de Control (%)"
-        ContentTemplate="{DataTemplate ContentPage}">
+        Title="Panel de Control"
+        ContentTemplate="{DataTemplate local_pages:IDiDashboardPage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -186,6 +187,7 @@
     </ShellContent>
     <ShellContent
         Title="Tipos de Logro Científico"
+        Route="AwardKindsManagePage"
         ContentTemplate="{DataTemplate idi_manage_pages:AwardKindsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
@@ -196,6 +198,7 @@
     </ShellContent>
     <ShellContent
         Title="Tipos de Resultados CTI"
+        Route="ScientificTechnicalResultKindsManagePage"
         ContentTemplate="{DataTemplate idi_manage_pages:ScientificTechnicalResultKindsManagePage}">
         <ShellContent.Icon>
             <FontImageSource

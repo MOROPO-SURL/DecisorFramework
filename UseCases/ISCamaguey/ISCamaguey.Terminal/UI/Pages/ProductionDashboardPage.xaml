@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<caneyframework_mvvm_pages:BindingContextedContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_page_models="clr-namespace:MOROPO.ISCamaguey.Decisor.Terminal.Models.Page"
+    xmlns:fwrk_core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:fwrk_core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:caneyframework_mvvm_pages="clr-namespace:MOROPO.Framework.Caney.MVVM.Core.Pages;assembly=MOROPO.Framework.Caney.MVVM"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.ISCamaguey.Decisor.Terminal.UI.Pages.ProductionDashboardPage"
+    x:TypeArguments="local_page_models:ProductionDashboardPageModel"
+    x:DataType="local_page_models:ProductionDashboardPageModel"
+    Title="Panel de Control para Producción">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <fwrk_core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
+
+            <communitytoolkit_converters:MathExpressionConverter x:Key="MathExpressionConverter" />
+            <communitytoolkit_converters:BoolToObjectConverter 
+                x:Key="BoolToColor" 
+                TrueObject="#45A049"            
+                FalseObject="#E65100" />
+            <communitytoolkit_converters:BoolToObjectConverter 
+                x:Key="IsModuleReadeyToGlyph" 
+                TrueObject="&#xF790;"
+                FalseObject="&#xFCC1;" />
+            <communitytoolkit_converters:BoolToObjectConverter 
+                x:Key="HasAnyToGlyph" 
+                TrueObject="&#xFE70;"
+                FalseObject="&#xF026;" />
+            <communitytoolkit_converters:BoolToObjectConverter 
+                x:Key="IsModuleReadeyToTitle" 
+                TrueObject="Configuración mínima del módulo completada"
+                FalseObject="Se requiere configuración mínima del módulo" />
+            <communitytoolkit_converters:BoolToObjectConverter 
+                x:Key="BoolToTitle" 
+                TrueObject="Al menos una definida"
+                FalseObject="0 definidas" />
+
+            <Style x:Key="CardHeaderSeparatorBoxViewStyle" TargetType="BoxView">
+                <Setter Property="Color" Value="DimGray" />
+                <Setter Property="Margin" Value="0,5,0,10" />
+                <Setter Property="HeightRequest" Value="2" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Actualizar"
+            Clicked="ReloadToolbarItems_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF450;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ScrollView Orientation="Vertical">
+        <VerticalStackLayout>
+            <CarouselView
+                x:Name="MainCarouselView"
+                HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width, Converter={StaticResource MathExpressionConverter}, ConverterParameter='X * 0.5'}"
+                ItemsSource="{Binding Images}"
+                Loop="True"
+                IsBounceEnabled="False"
+                IsSwipeEnabled="False"
+                IndicatorView="MainIndicatorView">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate x:DataType="ImageSource">
+                        <Image 
+                            Aspect="AspectFill"
+                            Source="{Binding .}" />
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+            <IndicatorView 
+                x:Name="MainIndicatorView" 
+                Margin="0,16,0,0"
+                InputTransparent="True" />
+            <VerticalStackLayout Spacing="4" Margin="8">
+                <FlexLayout
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <Frame
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=4, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                        Margin="4"
+                        VerticalOptions="Start">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label
+                                Grid.ColumnSpan="2" Grid.Row="0"
+                                FontSize="Medium"
+                                FontAttributes="Bold"
+                                LineBreakMode="TailTruncation"
+                                Text="Órdernes" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                            <Label
+                                Grid.Column="0" Grid.Row="2"
+                                VerticalOptions="Center"
+                                FontFamily="MaterialDesignIcons"
+                                FontSize="Header"
+                                Text="&#xF14E;" />
+                            <Label
+                                Grid.Column="1" Grid.Row="2"
+                                VerticalOptions="Center"
+                                FontSize="Large"
+                                HorizontalTextAlignment="End"
+                                LineBreakMode="TailTruncation"
+                                Text="{Binding OrderCount}" />
+                        </Grid>
+                    </Frame>
+                    <Frame
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=4, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                        Margin="4"
+                        VerticalOptions="Start">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label
+                                Grid.ColumnSpan="2" Grid.Row="0"
+                                FontSize="Medium"
+                                FontAttributes="Bold"
+                                LineBreakMode="TailTruncation"
+                                Text="Producciones" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                            <Label
+                                Grid.Column="0" Grid.Row="2"
+                                VerticalOptions="Center"
+                                FontFamily="MaterialDesignIcons"
+                                FontSize="Header"
+                                Text="&#xF8D5;" />
+                            <Label
+                                Grid.Column="1" Grid.Row="2"
+                                VerticalOptions="Center"
+                                FontSize="Large"
+                                HorizontalTextAlignment="End"
+                                LineBreakMode="TailTruncation"
+                                Text="{Binding ProductionCount}" />
+                        </Grid>
+                    </Frame>
+                    <Frame
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=4, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                        Margin="4"
+                        VerticalOptions="Start">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label
+                                Grid.ColumnSpan="2" Grid.Row="0"
+                                FontSize="Medium"
+                                FontAttributes="Bold"
+                                LineBreakMode="TailTruncation"
+                                Text="Evaluaciones de Calidad" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                            <Label
+                                Grid.Column="0" Grid.Row="2"
+                                VerticalOptions="Center"
+                                FontFamily="MaterialDesignIcons"
+                                FontSize="Header"
+                                Text="&#xF14C;" />
+                            <Label
+                                Grid.Column="1" Grid.Row="2"
+                                VerticalOptions="Center"
+                                FontSize="Large"
+                                HorizontalTextAlignment="End"
+                                LineBreakMode="TailTruncation"
+                                Text="{Binding QualityCheckCount}" />
+                        </Grid>
+                    </Frame>
+                    <Frame
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=4, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                        Margin="4"
+                        VerticalOptions="Start">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label
+                                Grid.ColumnSpan="2" Grid.Row="0"
+                                FontSize="Medium"
+                                FontAttributes="Bold"
+                                LineBreakMode="TailTruncation"
+                                Text="Técnicas de Producción" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                            <Label
+                                Grid.Column="0" Grid.Row="2"
+                                VerticalOptions="Center"
+                                FontFamily="MaterialDesignIcons"
+                                FontSize="Header"
+                                Text="&#xF093;" />
+                            <Label
+                                Grid.Column="1" Grid.Row="2"
+                                VerticalOptions="Center"
+                                FontSize="Large"
+                                HorizontalTextAlignment="End"
+                                LineBreakMode="TailTruncation"
+                                Text="{Binding ElaborationCount}" />
+                        </Grid>
+                    </Frame>
+                    <Frame
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=4, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                        Margin="4"
+                        VerticalOptions="Start">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label
+                                Grid.ColumnSpan="2" Grid.Row="0"
+                                FontSize="Medium"
+                                FontAttributes="Bold"
+                                LineBreakMode="TailTruncation"
+                                Text="Productos" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                            <Label
+                                Grid.Column="0" Grid.Row="2"
+                                VerticalOptions="Center"
+                                FontFamily="MaterialDesignIcons"
+                                FontSize="Header"
+                                Text="&#xF2D8;" />
+                            <Label
+                                Grid.Column="1" Grid.Row="2"
+                                VerticalOptions="Center"
+                                FontSize="Large"
+                                HorizontalTextAlignment="End"
+                                LineBreakMode="TailTruncation"
+                                Text="{Binding ProductCount}" />
+                        </Grid>
+                    </Frame>
+                    <Frame
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=4, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                        Margin="4"
+                        VerticalOptions="Start">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label
+                                Grid.ColumnSpan="2" Grid.Row="0"
+                                FontSize="Medium"
+                                FontAttributes="Bold"
+                                LineBreakMode="TailTruncation"
+                                Text="Familias de Productos" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                            <Label
+                                Grid.Column="0" Grid.Row="2"
+                                VerticalOptions="Center"
+                                FontFamily="MaterialDesignIcons"
+                                FontSize="Header"
+                                Text="&#xF6E0;" />
+                            <Label
+                                Grid.Column="1" Grid.Row="2"
+                                VerticalOptions="Center"
+                                FontSize="Large"
+                                HorizontalTextAlignment="End"
+                                LineBreakMode="TailTruncation"
+                                Text="{Binding FamilyCount}" />
+                        </Grid>
+                    </Frame>
+                    <Frame
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=3, LargeContainerColumn=4, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                        Margin="4"
+                        VerticalOptions="Start">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label
+                                Grid.ColumnSpan="2" Grid.Row="0"
+                                FontSize="Medium"
+                                FontAttributes="Bold"
+                                LineBreakMode="TailTruncation"
+                                Text="Unidades de Medida" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                            <Label
+                                Grid.Column="0" Grid.Row="2"
+                                VerticalOptions="Center"
+                                FontFamily="MaterialDesignIcons"
+                                FontSize="Header"
+                                Text="&#xF472;" />
+                            <Label
+                                Grid.Column="1" Grid.Row="2"
+                                VerticalOptions="Center"
+                                FontSize="Large"
+                                HorizontalTextAlignment="End"
+                                LineBreakMode="TailTruncation"
+                                Text="{Binding UnitMeasurementCount}" />
+                        </Grid>
+                    </Frame>
+                </FlexLayout>
+                <Frame Margin="8">
+                    <VerticalStackLayout>
+                        <Label
+                            HorizontalTextAlignment="Center"
+                            FontFamily="MaterialDesignIcons"
+                            FontSize="96"
+                            TextColor="{Binding IsModuleReady, Converter={StaticResource BoolToColor}}"
+                            Text="{Binding IsModuleReady, Converter={StaticResource IsModuleReadeyToGlyph}}" />
+                        <Label
+                            HorizontalTextAlignment="Center"
+                            FontSize="Medium"
+                            TextColor="{Binding IsModuleReady, Converter={StaticResource BoolToColor}}"
+                            Text="{Binding IsModuleReady, Converter={StaticResource IsModuleReadeyToTitle}}" />
+                        <BoxView
+                            Style="{StaticResource SeparatorBoxView}"
+                            Margin="0,24"
+                            HeightRequest="2" />
+                        <FlexLayout
+                            Wrap="Wrap"
+                            AlignItems="Start" AlignContent="Start">
+                            <VerticalStackLayout
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, SmallContainerColumn=6}}"
+                                Margin="4,8">
+                                <Label
+                                    HorizontalTextAlignment="Center"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="48"
+                                    Text="&#xF472;" />
+                                <Label
+                                    HorizontalTextAlignment="Center"
+                                    FontAttributes="Bold"
+                                    Text="Unidades de Medida" />
+                                <Label
+                                    HorizontalOptions="Center"
+                                    Margin="0,8,0,0"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="36"
+                                    TextColor="{Binding HasAnyUnitMeasurement, Converter={StaticResource BoolToColor}}"
+                                    Text="{Binding HasAnyUnitMeasurement, Converter={StaticResource HasAnyToGlyph}}" />
+                                <Label
+                                    HorizontalOptions="Center"
+                                    TextColor="{Binding HasAnyUnitMeasurement, Converter={StaticResource BoolToColor}}"
+                                    Text="{Binding HasAnyUnitMeasurement, Converter={StaticResource BoolToTitle}}" />
+                                <Button
+                                    HorizontalOptions="Center"
+                                    Margin="0,8,0,0"
+                                    Text="Gestionar"
+                                    Clicked="GoUnitMeasurementsManageSiteButton_Clicked" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, SmallContainerColumn=6}}"
+                                Margin="4,8">
+                                <Label
+                                    HorizontalTextAlignment="Center"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="48"
+                                    Text="&#xF093;" />
+                                <Label
+                                    HorizontalTextAlignment="Center"
+                                    FontAttributes="Bold"
+                                    Text="Técnicas de Producción" />
+                                <Label
+                                    HorizontalOptions="Center"
+                                    Margin="0,8,0,0"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="36"
+                                    TextColor="{Binding HasAnyElaboration, Converter={StaticResource BoolToColor}}"
+                                    Text="{Binding HasAnyElaboration, Converter={StaticResource HasAnyToGlyph}}" />
+                                <Label
+                                    HorizontalOptions="Center"
+                                    TextColor="{Binding HasAnyElaboration, Converter={StaticResource BoolToColor}}"
+                                    Text="{Binding HasAnyElaboration, Converter={StaticResource BoolToTitle}}" />
+                                <Button
+                                    HorizontalOptions="Center"
+                                    Margin="0,8,0,0"
+                                    Text="Gestionar"
+                                    Clicked="GoElaborationsManageSiteButton_Clicked" />
+                            </VerticalStackLayout>
+                        </FlexLayout>
+                    </VerticalStackLayout>
+                </Frame>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</caneyframework_mvvm_pages:BindingContextedContentPage>

@@ -33,7 +33,7 @@
                                 Text="{Binding At, StringFormat='{0:D}'}" />
                             <Label 
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Text="Equipo" />
+                                Text="Grupo de Trabajo" />
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
                                 Text="{Binding WorkingGroup.Name}" />

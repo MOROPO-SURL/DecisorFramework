@@ -19,6 +19,7 @@
         <ResourceDictionary>
             <fwrk_core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
 
+            <communitytoolkit_converters:MathExpressionConverter x:Key="MathExpressionConverter" />
             <communitytoolkit_converters:BoolToObjectConverter x:Key="BoolToMockOpacityObjectConverter">
                 <communitytoolkit_converters:BoolToObjectConverter.TrueObject>
                     <x:Double>0.15</x:Double>
@@ -27,6 +28,26 @@
                     <x:Double>1.0</x:Double>
                 </communitytoolkit_converters:BoolToObjectConverter.FalseObject>
             </communitytoolkit_converters:BoolToObjectConverter>
+            <communitytoolkit_converters:BoolToObjectConverter 
+                x:Key="BoolToColor" 
+                TrueObject="#45A049"            
+                FalseObject="#E65100" />
+            <communitytoolkit_converters:BoolToObjectConverter 
+                x:Key="IsModuleReadeyToGlyph" 
+                TrueObject="&#xF790;"
+                FalseObject="&#xFCC1;" />
+            <communitytoolkit_converters:BoolToObjectConverter 
+                x:Key="HasAnyToGlyph" 
+                TrueObject="&#xFE70;"
+                FalseObject="&#xF026;" />
+            <communitytoolkit_converters:BoolToObjectConverter 
+                x:Key="IsModuleReadeyToTitle" 
+                TrueObject="Configuración mínima del módulo completada"
+                FalseObject="Se requiere configuración mínima del módulo" />
+            <communitytoolkit_converters:BoolToObjectConverter 
+                x:Key="BoolToTitle" 
+                TrueObject="Al menos una definida"
+                FalseObject="0 definidas" />
 
             <Style x:Key="CardHeaderSeparatorBoxViewStyle" TargetType="BoxView">
                 <Setter Property="Color" Value="DimGray" />
@@ -46,302 +67,365 @@
     </ContentPage.ToolbarItems>
     <Grid>
         <ScrollView Orientation="Vertical">
-            <VerticalStackLayout Spacing="4" Margin="8">
-                <FlexLayout
-                    Wrap="Wrap"
-                    AlignItems="Start" AlignContent="Start">
-                    <Frame
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, ExtraLargeContainerColumn=3, LargeContainerColumn=6, MediumContainerColumn=6, SmallContainerColumn=6}}"
-                        Margin="4"
-                        VerticalOptions="Start">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Label
-                                Grid.ColumnSpan="2" Grid.Row="0"
-                                FontSize="Medium"
-                                FontAttributes="Bold"
-                                LineBreakMode="TailTruncation"
-                                Text="Tipos de Muestras" />
-                            <BoxView
-                                Grid.ColumnSpan="2" Grid.Row="1"
-                                Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
-                            <Label
-                                Grid.Column="0" Grid.Row="2"
-                                VerticalOptions="Center"
-                                FontFamily="MaterialDesignIcons"
-                                FontSize="Header"
-                                Text="&#xF68F;" />
-                            <Label
-                                Grid.Column="1" Grid.Row="2"
-                                VerticalOptions="Center"
-                                FontSize="Large"
-                                HorizontalTextAlignment="End"
-                                LineBreakMode="TailTruncation"
-                                Text="{Binding SampleKindCount}" />
-                        </Grid>
-                    </Frame>
-                    <Frame
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, ExtraLargeContainerColumn=3, LargeContainerColumn=6, MediumContainerColumn=6, SmallContainerColumn=6}}"
-                        Margin="4"
-                        VerticalOptions="Start">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Label
-                                Grid.ColumnSpan="2" Grid.Row="0"
-                                FontSize="Medium"
-                                FontAttributes="Bold"
-                                LineBreakMode="TailTruncation"
-                                Text="Serv. Capacitación" />
-                            <BoxView
-                                Grid.ColumnSpan="2" Grid.Row="1"
-                                Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
-                            <Label
-                                Grid.Column="0" Grid.Row="2"
-                                VerticalOptions="Center"
-                                FontFamily="MaterialDesignIcons"
-                                FontSize="Header"
-                                Text="&#xF88F;" />
-                            <Label
-                                Grid.Column="1" Grid.Row="2"
-                                VerticalOptions="Center"
-                                FontSize="Large"
-                                HorizontalTextAlignment="End"
-                                LineBreakMode="TailTruncation"
-                                Text="{Binding TrainingServiceCount}" />
-                        </Grid>
-                    </Frame>
-                    <Frame
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, ExtraLargeContainerColumn=3, LargeContainerColumn=6, MediumContainerColumn=6, SmallContainerColumn=6}}"
-                        Margin="4"
-                        VerticalOptions="Start">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Label
-                                Grid.ColumnSpan="2" Grid.Row="0"
-                                FontSize="Medium"
-                                FontAttributes="Bold"
-                                LineBreakMode="TailTruncation"
-                                Text="Serv. Proc. de Muestras" />
-                            <BoxView
-                                Grid.ColumnSpan="2" Grid.Row="1"
-                                Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
-                            <Label
-                                Grid.Column="0" Grid.Row="2"
-                                VerticalOptions="Center"
-                                FontFamily="MaterialDesignIcons"
-                                FontSize="Header"
-                                Text="&#xF025C;" />
-                            <Label
-                                Grid.Column="1" Grid.Row="2"
-                                VerticalOptions="Center"
-                                FontSize="Large"
-                                HorizontalTextAlignment="End"
-                                LineBreakMode="TailTruncation"
-                                Text="{Binding SampleAnalysisServiceCount}" />
-                        </Grid>
-                    </Frame>
-                    <Frame
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, ExtraLargeContainerColumn=3, LargeContainerColumn=6, MediumContainerColumn=6, SmallContainerColumn=6}}"
-                        Margin="4"
-                        VerticalOptions="Start">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Label
-                                Grid.ColumnSpan="2" Grid.Row="0"
-                                FontSize="Medium"
-                                FontAttributes="Bold"
-                                LineBreakMode="TailTruncation"
-                                Text="Serv. de Est. Int. de Suelo" />
-                            <BoxView
-                                Grid.ColumnSpan="2" Grid.Row="1"
-                                Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
-                            <Label
-                                Grid.Column="0" Grid.Row="2"
-                                VerticalOptions="Center"
-                                FontFamily="MaterialDesignIcons"
-                                FontSize="Header"
-                                Text="&#xFE49;" />
-                            <Label
-                                Grid.Column="1" Grid.Row="2"
-                                VerticalOptions="Center"
-                                FontSize="Large"
-                                HorizontalTextAlignment="End"
-                                LineBreakMode="TailTruncation"
-                                Text="{Binding GroundIntegralStudyServiceCount}" />
-                        </Grid>
-                    </Frame>
-                    <Frame
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=4, ExtraLargeContainerColumn=6, LargeContainerColumn=6, MediumContainerColumn=12, SmallContainerColumn=12}}"
-                        Margin="4"
-                        VerticalOptions="Start">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Label
-                                Grid.ColumnSpan="2" Grid.Row="0"
-                                FontSize="Medium"
-                                FontAttributes="Bold"
-                                LineBreakMode="TailTruncation"
-                                Text="Órdenes de Servicio" />
-                            <BoxView
-                                Grid.ColumnSpan="2" Grid.Row="1"
-                                Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
-                            <Label
-                                Grid.Column="0" Grid.Row="2"
-                                VerticalOptions="Center"
-                                FontFamily="MaterialDesignIcons"
-                                FontSize="Header"
-                                Text="&#xFF75;" />
-                            <Label
-                                Grid.Column="1" Grid.Row="2"
-                                VerticalOptions="Center"
-                                FontSize="Large"
-                                HorizontalTextAlignment="End"
-                                LineBreakMode="TailTruncation"
-                                Text="{Binding OrderCount}" />
-                        </Grid>
-                    </Frame>
-                </FlexLayout>
-                <Frame Margin="8">
-                    <VerticalStackLayout>
-                        <Label
-                            FontSize="Medium"
-                            FontAttributes="Bold"
-                            Text="Ingresos por prestación de servicios" />
-                        <Label
-                            FontAttributes="Bold"
-                            Text="Últimos 12 meses" />
-                        <BoxView Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
-                        <Grid>
-                            <live_charts_controls:CartesianChart 
-                                x:Name="CollectBalanceMontlyCartesianChart"
-                                Opacity="{Binding IsCollectBalanceMontlyChartMock, Converter={StaticResource BoolToMockOpacityObjectConverter}}"
-                                HeightRequest="400"
-                                Series="{Binding CollectBalanceMontlyChart.Series}"
-                                XAxes="{Binding CollectBalanceMontlyChart.XAxes}"
-                                YAxes="{Binding CollectBalanceMontlyChart.YAxes}" />
-                            <VerticalStackLayout 
-                                HorizontalOptions="Center" VerticalOptions="Center"
-                                IsVisible="{Binding IsCollectBalanceMontlyChartMock}">
-                                <Label
-                                    HorizontalTextAlignment="Center"
-                                    FontSize="Medium"
-                                    Text="Sin datos suficientes" />
-                                <Label
-                                    HorizontalTextAlignment="Center"
-                                    FontAttributes="Italic"
-                                    Text="mostrando datos simulados" />
-                            </VerticalStackLayout>
-                        </Grid>
-                    </VerticalStackLayout>
-                </Frame>
-                <FlexLayout
-                    Wrap="Wrap"
-                    AlignItems="Start"
-                    AlignContent="Start">
-                    <Frame 
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=3, ExtraLargeContainerColumn=4, LargeContainerColumn=6, MediumContainerColumn=9, SmallContainerColumn=12}}"
-                        Margin="4">
-                        <VerticalStackLayout>
-                            <Label
-                                FontSize="Medium"
-                                FontAttributes="Bold"
-                                LineBreakMode="TailTruncation"
-                                Text="Distribución de los servicios" />
-                            <Label
-                                FontAttributes="Bold"
-                                Text="Últimos 6 meses" />
-                            <BoxView Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+            <VerticalStackLayout>
+                <CarouselView
+                    x:Name="MainCarouselView"
+                    HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width, Converter={StaticResource MathExpressionConverter}, ConverterParameter='X * 0.5'}"
+                    ItemsSource="{Binding Images}"
+                    Loop="True"
+                    IsBounceEnabled="False"
+                    IsSwipeEnabled="False"
+                    IndicatorView="MainIndicatorView">
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate x:DataType="ImageSource">
+                            <Image 
+                                Aspect="AspectFill"
+                                Source="{Binding .}" />
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
+                <IndicatorView 
+                    x:Name="MainIndicatorView" 
+                    Margin="0,16,0,0"
+                    InputTransparent="True" />
+                <VerticalStackLayout Spacing="4" Margin="8">
+                    <FlexLayout
+                        Wrap="Wrap"
+                        AlignItems="Start" AlignContent="Start">
+                        <Frame
+                            WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=4, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                            Margin="4"
+                            VerticalOptions="Start">
                             <Grid>
-                                <live_charts_controls:PieChart 
-                                    x:Name="OrderDistributionChartPieChart"
-                                    Opacity="{Binding IsOrderDistributionChartMock, Converter={StaticResource BoolToMockOpacityObjectConverter}}"
-                                    HeightRequest="420"
-                                    Series="{Binding OrderDistributionChart.Series}"
-                                    LegendPosition="Bottom" />
-                                <VerticalStackLayout 
-                                    HorizontalOptions="Center" VerticalOptions="Center"
-                                    IsVisible="{Binding IsOrderDistributionChartMock}">
-                                    <Label
-                                        HorizontalTextAlignment="Center"
-                                        FontSize="Medium"
-                                        Text="Sin datos suficientes" />
-                                    <Label
-                                        HorizontalTextAlignment="Center"
-                                        FontAttributes="Italic"
-                                        Text="mostrando datos simulados" />
-                                </VerticalStackLayout>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Label
+                                    Grid.ColumnSpan="2" Grid.Row="0"
+                                    FontSize="Medium"
+                                    FontAttributes="Bold"
+                                    LineBreakMode="TailTruncation"
+                                    Text="Serv. Capacitación" />
+                                <BoxView
+                                    Grid.ColumnSpan="2" Grid.Row="1"
+                                    Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                                <Label
+                                    Grid.Column="0" Grid.Row="2"
+                                    VerticalOptions="Center"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="Header"
+                                    Text="&#xF88F;" />
+                                <Label
+                                    Grid.Column="1" Grid.Row="2"
+                                    VerticalOptions="Center"
+                                    FontSize="Large"
+                                    HorizontalTextAlignment="End"
+                                    LineBreakMode="TailTruncation"
+                                    Text="{Binding TrainingServiceCount}" />
                             </Grid>
-                        </VerticalStackLayout>
-                    </Frame>
-                    <Frame 
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=9, ExtraLargeContainerColumn=8, LargeContainerColumn=12, MediumContainerColumn=12, SmallContainerColumn=12}}"
-                        Margin="4">
+                        </Frame>
+                        <Frame
+                            WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=4, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                            Margin="4"
+                            VerticalOptions="Start">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Label
+                                    Grid.ColumnSpan="2" Grid.Row="0"
+                                    FontSize="Medium"
+                                    FontAttributes="Bold"
+                                    LineBreakMode="TailTruncation"
+                                    Text="Serv. Proc. de Muestras" />
+                                <BoxView
+                                    Grid.ColumnSpan="2" Grid.Row="1"
+                                    Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                                <Label
+                                    Grid.Column="0" Grid.Row="2"
+                                    VerticalOptions="Center"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="Header"
+                                    Text="&#xF025C;" />
+                                <Label
+                                    Grid.Column="1" Grid.Row="2"
+                                    VerticalOptions="Center"
+                                    FontSize="Large"
+                                    HorizontalTextAlignment="End"
+                                    LineBreakMode="TailTruncation"
+                                    Text="{Binding SampleAnalysisServiceCount}" />
+                            </Grid>
+                        </Frame>
+                        <Frame
+                            WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=4, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                            Margin="4"
+                            VerticalOptions="Start">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Label
+                                    Grid.ColumnSpan="2" Grid.Row="0"
+                                    FontSize="Medium"
+                                    FontAttributes="Bold"
+                                    LineBreakMode="TailTruncation"
+                                    Text="Serv. de Est. Int. de Suelo" />
+                                <BoxView
+                                    Grid.ColumnSpan="2" Grid.Row="1"
+                                    Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                                <Label
+                                    Grid.Column="0" Grid.Row="2"
+                                    VerticalOptions="Center"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="Header"
+                                    Text="&#xFE49;" />
+                                <Label
+                                    Grid.Column="1" Grid.Row="2"
+                                    VerticalOptions="Center"
+                                    FontSize="Large"
+                                    HorizontalTextAlignment="End"
+                                    LineBreakMode="TailTruncation"
+                                    Text="{Binding GroundIntegralStudyServiceCount}" />
+                            </Grid>
+                        </Frame>
+                        <Frame
+                            WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=6, MediumContainerColumn=12, SmallContainerColumn=12}}"
+                            Margin="4"
+                            VerticalOptions="Start">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Label
+                                    Grid.ColumnSpan="2" Grid.Row="0"
+                                    FontSize="Medium"
+                                    FontAttributes="Bold"
+                                    LineBreakMode="TailTruncation"
+                                    Text="Órdenes de Servicio" />
+                                <BoxView
+                                    Grid.ColumnSpan="2" Grid.Row="1"
+                                    Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                                <Label
+                                    Grid.Column="0" Grid.Row="2"
+                                    VerticalOptions="Center"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="Header"
+                                    Text="&#xFF75;" />
+                                <Label
+                                    Grid.Column="1" Grid.Row="2"
+                                    VerticalOptions="Center"
+                                    FontSize="Large"
+                                    HorizontalTextAlignment="End"
+                                    LineBreakMode="TailTruncation"
+                                    Text="{Binding ServiceOrderCount}" />
+                            </Grid>
+                        </Frame>
+                        <Frame
+                            WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=6, MediumContainerColumn=12, SmallContainerColumn=12}}"
+                            Margin="4"
+                            VerticalOptions="Start">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Label
+                                    Grid.ColumnSpan="2" Grid.Row="0"
+                                    FontSize="Medium"
+                                    FontAttributes="Bold"
+                                    LineBreakMode="TailTruncation"
+                                    Text="Ejecusiones de Servicio" />
+                                <BoxView
+                                    Grid.ColumnSpan="2" Grid.Row="1"
+                                    Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                                <Label
+                                    Grid.Column="0" Grid.Row="2"
+                                    VerticalOptions="Center"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="Header"
+                                    Text="&#xF0349;" />
+                                <Label
+                                    Grid.Column="1" Grid.Row="2"
+                                    VerticalOptions="Center"
+                                    FontSize="Large"
+                                    HorizontalTextAlignment="End"
+                                    LineBreakMode="TailTruncation"
+                                    Text="{Binding ServiceExecutionCount}" />
+                            </Grid>
+                        </Frame>
+                        <Frame
+                            WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=3, LargeContainerColumn=6, MediumContainerColumn=6, SmallContainerColumn=6}}"
+                            Margin="4"
+                            VerticalOptions="Start">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Label
+                                    Grid.ColumnSpan="2" Grid.Row="0"
+                                    FontSize="Medium"
+                                    FontAttributes="Bold"
+                                    LineBreakMode="TailTruncation"
+                                    Text="Clientes" />
+                                <BoxView
+                                    Grid.ColumnSpan="2" Grid.Row="1"
+                                    Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                                <Label
+                                    Grid.Column="0" Grid.Row="2"
+                                    VerticalOptions="Center"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="Header"
+                                    Text="&#xFAC0;" />
+                                <Label
+                                    Grid.Column="1" Grid.Row="2"
+                                    VerticalOptions="Center"
+                                    FontSize="Large"
+                                    HorizontalTextAlignment="End"
+                                    LineBreakMode="TailTruncation"
+                                    Text="{Binding ClientCount}" />
+                            </Grid>
+                        </Frame>
+                        <Frame
+                            WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=3, LargeContainerColumn=6, MediumContainerColumn=6, SmallContainerColumn=6}}"
+                            Margin="4"
+                            VerticalOptions="Start">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Label
+                                    Grid.ColumnSpan="2" Grid.Row="0"
+                                    FontSize="Medium"
+                                    FontAttributes="Bold"
+                                    LineBreakMode="TailTruncation"
+                                    Text="Contratos" />
+                                <BoxView
+                                    Grid.ColumnSpan="2" Grid.Row="1"
+                                    Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                                <Label
+                                    Grid.Column="0" Grid.Row="2"
+                                    VerticalOptions="Center"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="Header"
+                                    Text="&#xF01B1;" />
+                                <Label
+                                    Grid.Column="1" Grid.Row="2"
+                                    VerticalOptions="Center"
+                                    FontSize="Large"
+                                    HorizontalTextAlignment="End"
+                                    LineBreakMode="TailTruncation"
+                                    Text="{Binding ContractCount}" />
+                            </Grid>
+                        </Frame>
+                        <Frame
+                            WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, ExtraLargeContainerColumn=3, LargeContainerColumn=6, MediumContainerColumn=6, SmallContainerColumn=6}}"
+                            Margin="4"
+                            VerticalOptions="Start">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Label
+                                    Grid.ColumnSpan="2" Grid.Row="0"
+                                    FontSize="Medium"
+                                    FontAttributes="Bold"
+                                    LineBreakMode="TailTruncation"
+                                    Text="Tipos de Muestras" />
+                                <BoxView
+                                    Grid.ColumnSpan="2" Grid.Row="1"
+                                    Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                                <Label
+                                    Grid.Column="0" Grid.Row="2"
+                                    VerticalOptions="Center"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="Header"
+                                    Text="&#xF68F;" />
+                                <Label
+                                    Grid.Column="1" Grid.Row="2"
+                                    VerticalOptions="Center"
+                                    FontSize="Large"
+                                    HorizontalTextAlignment="End"
+                                    LineBreakMode="TailTruncation"
+                                    Text="{Binding SampleKindCount}" />
+                            </Grid>
+                        </Frame>
+                    </FlexLayout>
+                    <!--<Frame Margin="8">
                         <VerticalStackLayout>
                             <Label
                                 FontSize="Medium"
                                 FontAttributes="Bold"
-                                LineBreakMode="TailTruncation"
-                                Text="Distribución de órdenes de servicio" />
+                                Text="Ingresos por prestación de servicios" />
                             <Label
                                 FontAttributes="Bold"
-                                Text="Últimos 6 meses" />
+                                Text="Últimos 12 meses" />
                             <BoxView Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
                             <Grid>
                                 <live_charts_controls:CartesianChart 
-                                    x:Name="OrderReceptionBalanceMontlyChartCartesianChart"
-                                    Opacity="{Binding IsOrderReceptionBalanceMontlyChartMock, Converter={StaticResource BoolToMockOpacityObjectConverter}}"
-                                    HeightRequest="420"
-                                    Series="{Binding OrderReceptionBalanceMontlyChart.Series}"
-                                    XAxes="{Binding OrderReceptionBalanceMontlyChart.XAxes}"
-                                    LegendPosition="Bottom" />
+                                    x:Name="CollectBalanceMontlyCartesianChart"
+                                    Opacity="{Binding IsCollectBalanceMontlyChartMock, Converter={StaticResource BoolToMockOpacityObjectConverter}}"
+                                    HeightRequest="400"
+                                    Series="{Binding CollectBalanceMontlyChart.Series}"
+                                    XAxes="{Binding CollectBalanceMontlyChart.XAxes}"
+                                    YAxes="{Binding CollectBalanceMontlyChart.YAxes}" />
                                 <VerticalStackLayout 
                                     HorizontalOptions="Center" VerticalOptions="Center"
-                                    IsVisible="{Binding IsOrderReceptionBalanceMontlyChartMock}">
+                                    IsVisible="{Binding IsCollectBalanceMontlyChartMock}">
                                     <Label
                                         HorizontalTextAlignment="Center"
                                         FontSize="Medium"
@@ -354,39 +438,167 @@
                             </Grid>
                         </VerticalStackLayout>
                     </Frame>
-                </FlexLayout>                
-                <Frame Margin="8">
-                    <VerticalStackLayout>
-                        <Label
-                            FontSize="Medium"
-                            FontAttributes="Bold"
-                            LineBreakMode="TailTruncation"
-                            Text="Clientes con más órdenes de servicio" />
-                        <BoxView Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
-                        <Grid>
-                            <live_charts_controls:CartesianChart 
-                                x:Name="MostClientOrderBalanceChartCartesianChart"
-                                Opacity="{Binding IsMostClientOrderBalanceChartMock, Converter={StaticResource BoolToMockOpacityObjectConverter}}"
-                                HeightRequest="420"
-                                TooltipPosition="Hidden"
-                                Series="{Binding MostClientOrderBalanceChart.Series}"
-                                XAxes="{Binding MostClientOrderBalanceChart.XAxes}"
-                                YAxes="{Binding MostClientOrderBalanceChart.YAxes}" />
-                            <VerticalStackLayout 
-                                HorizontalOptions="Center" VerticalOptions="Center"
-                                IsVisible="{Binding IsMostClientOrderBalanceChartMock}">
+                    <FlexLayout
+                        Wrap="Wrap"
+                        AlignItems="Start"
+                        AlignContent="Start">
+                        <Frame 
+                            WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=3, ExtraLargeContainerColumn=4, LargeContainerColumn=6, MediumContainerColumn=9, SmallContainerColumn=12}}"
+                            Margin="4">
+                            <VerticalStackLayout>
                                 <Label
-                                    HorizontalTextAlignment="Center"
                                     FontSize="Medium"
-                                    Text="Sin datos suficientes" />
+                                    FontAttributes="Bold"
+                                    LineBreakMode="TailTruncation"
+                                    Text="Distribución de los servicios" />
                                 <Label
-                                    HorizontalTextAlignment="Center"
-                                    FontAttributes="Italic"
-                                    Text="mostrando datos simulados" />
+                                    FontAttributes="Bold"
+                                    Text="Últimos 6 meses" />
+                                <BoxView Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                                <Grid>
+                                    <live_charts_controls:PieChart 
+                                        x:Name="OrderDistributionChartPieChart"
+                                        Opacity="{Binding IsOrderDistributionChartMock, Converter={StaticResource BoolToMockOpacityObjectConverter}}"
+                                        HeightRequest="420"
+                                        Series="{Binding OrderDistributionChart.Series}"
+                                        LegendPosition="Bottom" />
+                                    <VerticalStackLayout 
+                                        HorizontalOptions="Center" VerticalOptions="Center"
+                                        IsVisible="{Binding IsOrderDistributionChartMock}">
+                                        <Label
+                                            HorizontalTextAlignment="Center"
+                                            FontSize="Medium"
+                                            Text="Sin datos suficientes" />
+                                        <Label
+                                            HorizontalTextAlignment="Center"
+                                            FontAttributes="Italic"
+                                            Text="mostrando datos simulados" />
+                                    </VerticalStackLayout>
+                                </Grid>
                             </VerticalStackLayout>
-                        </Grid>
-                    </VerticalStackLayout>
-                </Frame>
+                        </Frame>
+                        <Frame 
+                            WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=9, ExtraLargeContainerColumn=8, LargeContainerColumn=12, MediumContainerColumn=12, SmallContainerColumn=12}}"
+                            Margin="4">
+                            <VerticalStackLayout>
+                                <Label
+                                    FontSize="Medium"
+                                    FontAttributes="Bold"
+                                    LineBreakMode="TailTruncation"
+                                    Text="Distribución de órdenes de servicio" />
+                                <Label
+                                    FontAttributes="Bold"
+                                    Text="Últimos 6 meses" />
+                                <BoxView Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                                <Grid>
+                                    <live_charts_controls:CartesianChart 
+                                        x:Name="OrderReceptionBalanceMontlyChartCartesianChart"
+                                        Opacity="{Binding IsOrderReceptionBalanceMontlyChartMock, Converter={StaticResource BoolToMockOpacityObjectConverter}}"
+                                        HeightRequest="420"
+                                        Series="{Binding OrderReceptionBalanceMontlyChart.Series}"
+                                        XAxes="{Binding OrderReceptionBalanceMontlyChart.XAxes}"
+                                        LegendPosition="Bottom" />
+                                    <VerticalStackLayout 
+                                        HorizontalOptions="Center" VerticalOptions="Center"
+                                        IsVisible="{Binding IsOrderReceptionBalanceMontlyChartMock}">
+                                        <Label
+                                            HorizontalTextAlignment="Center"
+                                            FontSize="Medium"
+                                            Text="Sin datos suficientes" />
+                                        <Label
+                                            HorizontalTextAlignment="Center"
+                                            FontAttributes="Italic"
+                                            Text="mostrando datos simulados" />
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </FlexLayout>
+                    <Frame Margin="8">
+                        <VerticalStackLayout>
+                            <Label
+                                FontSize="Medium"
+                                FontAttributes="Bold"
+                                LineBreakMode="TailTruncation"
+                                Text="Clientes con más órdenes de servicio" />
+                            <BoxView Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                            <Grid>
+                                <live_charts_controls:CartesianChart 
+                                    x:Name="MostClientOrderBalanceChartCartesianChart"
+                                    Opacity="{Binding IsMostClientOrderBalanceChartMock, Converter={StaticResource BoolToMockOpacityObjectConverter}}"
+                                    HeightRequest="420"
+                                    TooltipPosition="Hidden"
+                                    Series="{Binding MostClientOrderBalanceChart.Series}"
+                                    XAxes="{Binding MostClientOrderBalanceChart.XAxes}"
+                                    YAxes="{Binding MostClientOrderBalanceChart.YAxes}" />
+                                <VerticalStackLayout 
+                                    HorizontalOptions="Center" VerticalOptions="Center"
+                                    IsVisible="{Binding IsMostClientOrderBalanceChartMock}">
+                                    <Label
+                                        HorizontalTextAlignment="Center"
+                                        FontSize="Medium"
+                                        Text="Sin datos suficientes" />
+                                    <Label
+                                        HorizontalTextAlignment="Center"
+                                        FontAttributes="Italic"
+                                        Text="mostrando datos simulados" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Frame>-->
+                    <Frame Margin="8">
+                        <VerticalStackLayout>
+                            <Label
+                                HorizontalTextAlignment="Center"
+                                FontFamily="MaterialDesignIcons"
+                                FontSize="96"
+                                TextColor="{Binding IsModuleReady, Converter={StaticResource BoolToColor}}"
+                                Text="{Binding IsModuleReady, Converter={StaticResource IsModuleReadeyToGlyph}}" />
+                            <Label
+                                HorizontalTextAlignment="Center"
+                                FontSize="Medium"
+                                TextColor="{Binding IsModuleReady, Converter={StaticResource BoolToColor}}"
+                                Text="{Binding IsModuleReady, Converter={StaticResource IsModuleReadeyToTitle}}" />
+                            <BoxView
+                                Style="{StaticResource SeparatorBoxView}"
+                                Margin="0,24"
+                                HeightRequest="2" />
+                            <FlexLayout
+                                Wrap="Wrap"
+                                AlignItems="Start" AlignContent="Start">
+                                <VerticalStackLayout
+                                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, SmallContainerColumn=6}}"
+                                    Margin="4,8">
+                                    <Label
+                                        HorizontalTextAlignment="Center"
+                                        FontFamily="MaterialDesignIcons"
+                                        FontSize="48"
+                                        Text="&#xF68F;" />
+                                    <Label
+                                        HorizontalTextAlignment="Center"
+                                        FontAttributes="Bold"
+                                        Text="Tipos de Muestra" />
+                                    <Label
+                                        HorizontalOptions="Center"
+                                        Margin="0,8,0,0"
+                                        FontFamily="MaterialDesignIcons"
+                                        FontSize="36"
+                                        TextColor="{Binding HasAnySampleKind, Converter={StaticResource BoolToColor}}"
+                                        Text="{Binding HasAnySampleKind, Converter={StaticResource HasAnyToGlyph}}" />
+                                    <Label
+                                        HorizontalOptions="Center"
+                                        TextColor="{Binding HasAnySampleKind, Converter={StaticResource BoolToColor}}"
+                                        Text="{Binding HasAnySampleKind, Converter={StaticResource BoolToTitle}}" />
+                                    <Button
+                                        HorizontalOptions="Center"
+                                        Margin="0,8,0,0"
+                                        Text="Administrar"
+                                        Clicked="GoSampleKindsAdminSiteManagePageButton_Clicked" />
+                                </VerticalStackLayout>
+                            </FlexLayout>
+                        </VerticalStackLayout>
+                    </Frame>
+                </VerticalStackLayout>
             </VerticalStackLayout>
         </ScrollView>
         <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}" />

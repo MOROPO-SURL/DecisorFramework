@@ -1,6 +1,7 @@
 <Shell 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_pages="clr-namespace:MOROPO.ISCamaguey.Decisor.Terminal.UI.Pages"
     xmlns:frwk_production_list_pages="clr-namespace:MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.List;assembly=MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default"
     xmlns:frwk_production_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default"
     xmlns:production_manage_pages="clr-namespace:MOROPO.ISCamaguey.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.ISCamaguey.Decisor.Production.Presentation.Terminal.MAUI.UI.Default"
@@ -39,8 +40,8 @@
     </Shell.FlyoutHeader>
     <MenuFlyoutItem Text="Inicio" />
     <ShellContent
-        Title="Panel de Control (%)"
-        ContentTemplate="{DataTemplate ContentPage}">
+        Title="Panel de Control"
+        ContentTemplate="{DataTemplate local_pages:ProductionDashboardPage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -87,6 +88,7 @@
     <MenuFlyoutItem Text="Gestión" />
     <ShellContent
         Title="Técnicas de Producción"
+        Route="ElaborationsManagePage"
         ContentTemplate="{DataTemplate frwk_production_manage_pages:ElaborationsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
@@ -117,6 +119,7 @@
     </ShellContent>
     <ShellContent
         Title="Unidades de Medida"
+        Route="UnitMeasurementsManagePage"
         ContentTemplate="{DataTemplate frwk_domain_manage_pages:UnitMeasurementsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
