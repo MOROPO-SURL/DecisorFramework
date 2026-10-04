@@ -61,6 +61,11 @@ public partial class MainPage : Framework.Caney.MVVM.Core.Pages.BindingContexted
         });
     }
 
+    private async void GoUserProfilePageButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        await Microsoft.Maui.ApplicationModel.Launcher.OpenAsync($"{Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>().HttpClientHelper.ClientBaseAddress}security/account");
+    }
+
     private void DomainSectionCardFrameTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
         Microsoft.Maui.Controls.Application.Current.MainPage = new Shells.DomainShell();
