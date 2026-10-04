@@ -65,5 +65,10 @@
     <x:String x:Key="PublicationResultMaterialDesignGlyphIconId">&#xF002A;</x:String>
     <x:String x:Key="ThesisResultMaterialDesignGlyphIconId">&#xF474;</x:String>
     <x:String x:Key="ScientificTechnicalResultMaterialDesignGlyphIconId">&#xF005C;</x:String>
+    <x:String x:Key="ProductionOrderMaterialDesignGlyphIconId">&#xF14E;</x:String>
+    <x:String x:Key="ProductionMaterialDesignGlyphIconId">&#xF8D5;</x:String>
+    <x:String x:Key="ElaborationMaterialDesignGlyphIconId">&#xF093;</x:String>
+    <x:String x:Key="ProductMaterialDesignGlyphIconId">&#xF2D8;</x:String>
+    <x:String x:Key="ProductFamilyMaterialDesignGlyphIconId">&#xF6E0;</x:String>
 
 </ResourceDictionary>

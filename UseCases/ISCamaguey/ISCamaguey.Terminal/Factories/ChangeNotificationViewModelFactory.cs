@@ -303,7 +303,47 @@ public class ChangeNotificationViewModelFactory : Framework.Decisor.Domain.Prese
 
         #endregion
 
-        #region Production UC
+        #region Production
+
+        if (typeof(Framework.Decisor.Production.Persistence.Entities.ProductionOrder) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creada" : "Modificada")} Órden de Producción";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["ProductionOrderMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        if (typeof(Framework.Decisor.Production.Persistence.Entities.Production) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creada" : "Modificada")} Producción";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["ProductionMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        if (typeof(Framework.Decisor.Production.Persistence.Entities.Elaboration) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creada" : "Modificada")} Técnica de Producción";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["ElaborationMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        if (typeof(Framework.Decisor.Inventory.Persistence.Entities.Product) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creado" : "Modificado")} Producto";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["ProductMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        if (typeof(Framework.Decisor.Inventory.Persistence.Entities.Family) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creada" : "Modificada")} Familia de Productos";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["ProductFamilyMaterialDesignGlyphIconId"];
+
+            return result;
+        }
 
         if (typeof(Production.Persistence.Entities.ProductionQualityCheck) == entityType)
         {
