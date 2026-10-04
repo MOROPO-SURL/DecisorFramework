@@ -3,10 +3,8 @@ using System.Collections.Generic;
 
 namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Input
 {
-    public sealed class WorkPlanInputModel : Framework.Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<WorkPlan, System.Guid>
+    public sealed class WorkPlanInputModel : Framework.Decisor.Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<WorkPlan, System.Guid>
     {
-        public System.Guid Id { get; set; }
-
         public System.DateTime At { get; set; }
 
         public System.Guid WorkingGroupId { get; set; }
@@ -22,7 +20,7 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Input
         public IEnumerable<System.Guid> InProductionSampleIds { get; set; }
         public IEnumerable<System.Guid> OutProductionSampleIds { get; set; }
 
-        public WorkPlan Export()
+        public override WorkPlan Export()
         {
             var entity = new WorkPlan { Id = Id, Archived = false, Enabled = true };
 
@@ -31,12 +29,7 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Input
             return entity;
         }
 
-        public void Import(WorkPlan entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Mergue(WorkPlan entity)
+        public override void Mergue(WorkPlan entity)
         {
             entity.At = At;
             entity.Description = Description;

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MOROPO.Framework.Guama.Core.Persistence.Entities.Contract;
+using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
+using MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Extensions;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using MOROPO.Framework.Guama.Media.Persistence.Entities;
 using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
@@ -10,6 +11,7 @@ using MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities;
 
 namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Web.Frontend.Controllers.API;
 
+[Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
 [Route("api/idi/[controller]")]
 [ApiController]
 public class ProjectsController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementFilteredController<Project, System.Guid, ProjectInputModel, ProjectDisplayModel, ProjectFilterModel>
@@ -20,8 +22,9 @@ public class ProjectsController : Framework.Guama.Core.Presentation.Web.API.Cont
     private readonly IEntityRepository<InternalResearcherProjectParticipation, System.Guid> internalResearcherProjectParticipationRepository;
     private readonly IEntityRepository<ExternalResearcherProjectParticipation, System.Guid> externalResearcherProjectParticipationRepository;
     private readonly IEntityRepository<ProjectBudgetFunancing, System.Guid> bugetFunancingRepository;
+    private readonly IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository;
 
-    public ProjectsController(IEntityRepository<ProjectBudgetFunancing, System.Guid> bugetFunancingRepository, IEntityRepository<ExternalResearcherProjectParticipation, System.Guid> externalResearcherProjectParticipationRepository, IEntityRepository<InternalResearcherProjectParticipation, System.Guid> internalResearcherProjectParticipationRepository, IDocumentFileManagerFacade documentFileManager, IEntityRepository<Document, System.Guid> documentRepository, IEntityRepository<ProjectSpecificObjective, System.Guid> specificObjectiveRepository, IEntityRepository<Project, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ProjectsController> localizer, Microsoft.Extensions.Logging.ILogger<ProjectsController> logger)
+    public ProjectsController(IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository, IEntityRepository<ProjectBudgetFunancing, System.Guid> bugetFunancingRepository, IEntityRepository<ExternalResearcherProjectParticipation, System.Guid> externalResearcherProjectParticipationRepository, IEntityRepository<InternalResearcherProjectParticipation, System.Guid> internalResearcherProjectParticipationRepository, IDocumentFileManagerFacade documentFileManager, IEntityRepository<Document, System.Guid> documentRepository, IEntityRepository<ProjectSpecificObjective, System.Guid> specificObjectiveRepository, IEntityRepository<Project, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ProjectsController> localizer, Microsoft.Extensions.Logging.ILogger<ProjectsController> logger)
         : base(repository, localizer, logger)
     {
         this.specificObjectiveRepository = specificObjectiveRepository;
@@ -30,6 +33,7 @@ public class ProjectsController : Framework.Guama.Core.Presentation.Web.API.Cont
         this.internalResearcherProjectParticipationRepository = internalResearcherProjectParticipationRepository;
         this.externalResearcherProjectParticipationRepository = externalResearcherProjectParticipationRepository;
         this.bugetFunancingRepository = bugetFunancingRepository;
+        this.changeNotificationRepository = changeNotificationRepository;
     }
 
     protected override System.Linq.Expressions.Expression<System.Func<Project, bool>> GetGlobalSelector()
@@ -281,5 +285,19 @@ public class ProjectsController : Framework.Guama.Core.Presentation.Web.API.Cont
 
             externalResearcherProjectParticipationRepository.Add(_entity, User.Identity.Name, false);
         }
+    }
+
+    protected override void PostCreate(Project entity, ProjectInputModel model)
+    {
+        base.PostCreate(entity, model);
+
+        this.ChangeNotificationOnPostCreate(entity, model, changeNotificationRepository);
+    }
+
+    protected override void PostEdit(Project entity, ProjectInputModel model)
+    {
+        base.PostEdit(entity, model);
+
+        this.ChangeNotificationOnPostEdit(entity, model, changeNotificationRepository);
     }
 }

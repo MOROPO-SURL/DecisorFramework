@@ -1,14 +1,11 @@
 ﻿using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Input;
-using MOROPO.Framework.Guama.Core.Persistence.Presentation.Models.Contract;
 using MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display;
 using MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities;
 
 namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
 {
-    public sealed class ThesisResultInputModel : IEntityInputModel<ThesisResult, System.Guid>
+    public sealed class ThesisResultInputModel : Framework.Decisor.Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<ThesisResult, System.Guid>
     {
-        public System.Guid Id { get; set; }
-
         public string Description { get; set; }
 
         public System.DateTime At { get; set; }
@@ -26,7 +23,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
 
         public DocumentInputModel Document { get; set; }
 
-        public ThesisResult Export()
+        public override ThesisResult Export()
         {
             var entity = new ThesisResult { Id = Id, Archived = false };
 
@@ -35,12 +32,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
             return entity;
         }
 
-        public void Import(ThesisResult entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Mergue(ThesisResult entity)
+        public override void Mergue(ThesisResult entity)
         {
             entity.At = At;
             entity.Description = Description;

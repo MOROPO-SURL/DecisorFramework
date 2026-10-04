@@ -2,14 +2,11 @@
 using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace MOROPO.ISCamaguey.Decisor.Servicing.Interop.API.Common.Models.Input.Contract
 {
-    public abstract class AbstractServiceInputModel<TEntity> : Framework.Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<TEntity, System.Guid> where TEntity : Persistence.Entities.Contract.AbstractService
+    public abstract class AbstractServiceInputModel<TEntity> : Framework.Decisor.Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<TEntity, System.Guid> where TEntity : Persistence.Entities.Contract.AbstractService
     {
-        public System.Guid Id { get; set; }
-
         [System.ComponentModel.DataAnnotations.Required]
         public string Name { get; set; }
 
@@ -25,14 +22,7 @@ namespace MOROPO.ISCamaguey.Decisor.Servicing.Interop.API.Common.Models.Input.Co
         public List<DocumentInputModel> IncomingDocuments { get; set; } = new List<DocumentInputModel>();
         public List<DocumentDisplayModel> OutgoingDocuments { get; set; } = new List<DocumentDisplayModel>();
 
-        public abstract TEntity Export();
-
-        public void Import(TEntity entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public virtual void Mergue(TEntity entity)
+        public override void Mergue(TEntity entity)
         {
             entity.Name = Name;
             entity.Description = Description;

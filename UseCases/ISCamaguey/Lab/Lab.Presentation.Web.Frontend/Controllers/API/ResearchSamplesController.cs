@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
+using MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Extensions;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using MOROPO.Framework.Guama.Media.Persistence.Entities;
 using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
@@ -9,17 +11,20 @@ using MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities;
 
 namespace MOROPO.ISCamaguey.Decisor.Lab.Presentation.Web.Frontend.Controllers.API;
 
+[Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
 [Route("api/lab/[controller]")]
 [ApiController]
 public class ResearchSamplesController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementFilteredController<ResearchSample, System.Guid, ResearchSampleInputModel, ResearchSampleDisplayModel, Interop.API.Common.Models.Filter.CommonSampleFilterModel<ResearchSampleDisplayModel, ResearchSample>>
 {
     private readonly IEntityRepository<Image, System.Guid> imageRepository;
     private readonly IImageFileManagerFacade imageFileManager;
+    private readonly IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository;
 
-    public ResearchSamplesController(IImageFileManagerFacade imageFileManager, IEntityRepository<Image, System.Guid> imageRepository, IEntityRepository<ResearchSample, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ResearchSamplesController> localizer, Microsoft.Extensions.Logging.ILogger<ResearchSamplesController> logger) : base(repository, localizer, logger)
+    public ResearchSamplesController(IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository, IImageFileManagerFacade imageFileManager, IEntityRepository<Image, System.Guid> imageRepository, IEntityRepository<ResearchSample, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ResearchSamplesController> localizer, Microsoft.Extensions.Logging.ILogger<ResearchSamplesController> logger) : base(repository, localizer, logger)
     {
         this.imageRepository = imageRepository;
         this.imageFileManager = imageFileManager;
+        this.changeNotificationRepository = changeNotificationRepository;
     }
 
     protected override System.Linq.Expressions.Expression<System.Func<ResearchSample, bool>> GetGlobalSelector()
@@ -127,9 +132,18 @@ public class ResearchSamplesController : Framework.Guama.Core.Presentation.Web.A
         }
     }
 
+    protected override void PostCreate(ResearchSample entity, ResearchSampleInputModel model)
+    {
+        base.PostCreate(entity, model);
+
+        this.ChangeNotificationOnPostCreate(entity, model, changeNotificationRepository);
+    }
+
     protected override void PostEdit(ResearchSample entity, ResearchSampleInputModel model)
     {
         base.PostEdit(entity, model);
+
+        this.ChangeNotificationOnPostEdit(entity, model, changeNotificationRepository);
 
         try
         {

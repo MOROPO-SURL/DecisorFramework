@@ -74,7 +74,8 @@ public partial class ProjectConfigurationPage : Framework.Decisor.Core.Presentat
             IncomingSpecificObjectives = incomingSpecificObjectives,
             IncomingBudgetFunancings = incomingBudgetFunancings,
             IncomingExternalResearcherProjectParticipations = incomingExternalResearcherProjectParticipations,
-            IncomingInternalResearcherProjectParticipations = incomingInternalResearcherProjectParticipations
+            IncomingInternalResearcherProjectParticipations = incomingInternalResearcherProjectParticipations,
+            NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray()
         };
 
         if (documentFilePickResult != null)
@@ -133,7 +134,8 @@ public partial class ProjectConfigurationPage : Framework.Decisor.Core.Presentat
             OutgoingExternalResearcherProjectParticipations = outgoingExternalResearcherProjectParticipations,
             IncomingInternalResearcherProjectParticipations = incomingInternalResearcherProjectParticipations,
             EditionInternalResearcherProjectParticipations = editionInternalResearcherProjectParticipations,
-            OutgoingInternalResearcherProjectParticipations = outgoingInternalResearcherProjectParticipations
+            OutgoingInternalResearcherProjectParticipations = outgoingInternalResearcherProjectParticipations,
+            NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray()
         };
 
         if (documentFilePickResult != null)
@@ -263,6 +265,33 @@ public partial class ProjectConfigurationPage : Framework.Decisor.Core.Presentat
                 };
             });
         });
+    }
+
+    protected void NotificationUserAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.UserPickPage(NotificationUserPickComplete_Callback)));
+    }
+
+    private void NotificationUserRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar este usuario de las notificaciones?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Framework.Decisor.Core.Interop.API.Common.Models.Display.UserDisplayModel;
+
+                ConcreteBindingContext.NotificationUsers.Remove(target);
+
+                hasChangesFlag = true;
+            });
+        });
+    }
+
+    private void NotificationUserPickComplete_Callback(Framework.Decisor.Core.Interop.API.Common.Models.Display.UserDisplayModel model)
+    {
+        ConcreteBindingContext.NotificationUsers.Add(model);
     }
 
     #region SpecificObjective

@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
+using MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Extensions;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using MOROPO.Framework.Guama.Media.Persistence.Entities;
 using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
@@ -9,17 +11,20 @@ using MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities;
 
 namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Web.Frontend.Controllers.API;
 
+[Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
 [Route("api/idi/[controller]")]
 [ApiController]
 public class ProjectProposalsController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementFilteredController<ProjectProposal, System.Guid, ProjectProposalInputModel, ProjectProposalDisplayModel, ProjectProposalFilterModel>
 {
     private readonly IEntityRepository<Document, System.Guid> documentRepository;
     private readonly IDocumentFileManagerFacade documentFileManager;
+    private readonly IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository;
 
-    public ProjectProposalsController(IDocumentFileManagerFacade documentFileManager, IEntityRepository<Document, System.Guid> documentRepository, IEntityRepository<ProjectProposal, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ProjectProposalsController> localizer, Microsoft.Extensions.Logging.ILogger<ProjectProposalsController> logger) : base(repository, localizer, logger)
+    public ProjectProposalsController(IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository, IDocumentFileManagerFacade documentFileManager, IEntityRepository<Document, System.Guid> documentRepository, IEntityRepository<ProjectProposal, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ProjectProposalsController> localizer, Microsoft.Extensions.Logging.ILogger<ProjectProposalsController> logger) : base(repository, localizer, logger)
     {
         this.documentRepository = documentRepository;
         this.documentFileManager = documentFileManager;
+        this.changeNotificationRepository = changeNotificationRepository;
     }
 
     protected override System.Linq.Expressions.Expression<System.Func<ProjectProposal, bool>> GetGlobalSelector()
@@ -116,5 +121,19 @@ public class ProjectProposalsController : Framework.Guama.Core.Presentation.Web.
         //}
 
         //#endregion
+    }
+
+    protected override void PostCreate(ProjectProposal entity, ProjectProposalInputModel model)
+    {
+        base.PostCreate(entity, model);
+
+        this.ChangeNotificationOnPostCreate(entity, model, changeNotificationRepository);
+    }
+
+    protected override void PostEdit(ProjectProposal entity, ProjectProposalInputModel model)
+    {
+        base.PostEdit(entity, model);
+
+        this.ChangeNotificationOnPostEdit(entity, model, changeNotificationRepository);
     }
 }

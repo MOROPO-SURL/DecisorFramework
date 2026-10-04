@@ -1,13 +1,10 @@
-﻿using MOROPO.Framework.Guama.Core.Persistence.Presentation.Models.Contract;
-using MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities;
+﻿using MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities;
 using System.Linq;
 
 namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Input
 {
-    public sealed class AssessmentQualityCheckInputModel : IEntityInputModel<AssessmentQualityCheck, System.Guid>
+    public sealed class AssessmentQualityCheckInputModel : Framework.Decisor.Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<AssessmentQualityCheck, System.Guid>
     {
-        public System.Guid Id { get; set; }
-
         public System.DateTime At { get; set; }
 
         public System.Guid AssessmentId { get; set; }
@@ -24,7 +21,7 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Input
 
         public Quality.Interop.API.Common.Models.Display.IsoStandardDisplayModel[] IsoStandards { get; set; }
 
-        public AssessmentQualityCheck Export()
+        public override AssessmentQualityCheck Export()
         {
             var entity = new AssessmentQualityCheck { Id = Id, Archived = false };
 
@@ -33,12 +30,7 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Input
             return entity;
         }
 
-        public void Import(AssessmentQualityCheck entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Mergue(AssessmentQualityCheck entity)
+        public override void Mergue(AssessmentQualityCheck entity)
         {
             entity.At = At;
             entity.QualityPercent = QualityPercent;

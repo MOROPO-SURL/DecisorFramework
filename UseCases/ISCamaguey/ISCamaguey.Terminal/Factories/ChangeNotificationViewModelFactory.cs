@@ -11,7 +11,7 @@ public class ChangeNotificationViewModelFactory : Framework.Decisor.Domain.Prese
 
         var entityType = System.Type.GetType(model.EntityName);
 
-        #region Domain
+        #region Domain Fwrk
 
         if (typeof(Framework.Decisor.Domain.Persistence.Entities.UnitMeasurement) == entityType)
         {
@@ -177,6 +177,200 @@ public class ChangeNotificationViewModelFactory : Framework.Decisor.Domain.Prese
         {
             result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creado" : "Modificado")} Cliente (Natural)";
             result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["ClientMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        #endregion
+
+        #region Domain UC
+
+        if (typeof(Domain.Persistence.Entities.Technique) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creada" : "Modificada")} Técnica";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["TechniqueMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        #endregion
+
+        #region Recommending
+
+        if (typeof(Recommending.Persistence.Entities.RecomendationReport) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creado" : "Modificado")} Informe de Recomendaciones";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["RecomendationReportMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        #endregion
+
+        #region IDi
+
+        if (typeof(IDi.Persistence.Entities.CallForProposal) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creada" : "Modificada")} Convocatoria";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["CallForProposalMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        if (typeof(IDi.Persistence.Entities.ProjectProposal) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creada" : "Modificada")} Propuesta de Proyecto";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["ProjectProposalMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        if (typeof(IDi.Persistence.Entities.Project) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creado" : "Modificado")} Proyecto";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["ProjectMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        if (typeof(IDi.Persistence.Entities.ScientificTechnicalResultIntroduction) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creada" : "Modificada")} Introducción de Resultados";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["ScientificTechnicalResultIntroductionMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        if (typeof(IDi.Persistence.Entities.AwardResult) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creado" : "Modificado")} Logro Científico";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["AwardResultMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        if (typeof(IDi.Persistence.Entities.PublicationResult) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creada" : "Modificada")} Publicación";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["PublicationResultMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        if (typeof(IDi.Persistence.Entities.ScientificTechnicalResult) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creado" : "Modificado")} Resultado CTI";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["ScientificTechnicalResultMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        if (typeof(IDi.Persistence.Entities.ThesisResult) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creada" : "Modificada")} Tesis";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["ThesisResultMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        #endregion
+
+        #region Servicing
+
+        if (typeof(Servicing.Persistence.Entities.GroundIntegralStudyService) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creado" : "Modificado")} Servicio de Estudio Integral de Suelo";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["GroundIntegralStudyServiceMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        if (typeof(Servicing.Persistence.Entities.SampleAnalysisService) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creado" : "Modificado")} Servicio de Análisis de Muestra";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["SampleAnalysisServiceMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        if (typeof(Servicing.Persistence.Entities.TrainingService) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creado" : "Modificado")} Servicio de Capacitación";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["TrainingServiceMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        #endregion
+
+        #region Production UC
+
+        if (typeof(Production.Persistence.Entities.ProductionQualityCheck) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creada" : "Modificada")} Evaluación de Calidad a Producción";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["QualityCheckMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        #endregion
+
+        #region Lab
+
+        if (typeof(Lab.Persistence.Entities.ProductionSample) == entityType ||
+            typeof(Lab.Persistence.Entities.ResearchSample) == entityType ||
+            typeof(Lab.Persistence.Entities.ServiceOrderSample) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creada" : "Modificada")} Recepción de Muestra";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["SampleReceptionMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        if (typeof(Lab.Persistence.Entities.Analysis) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creado" : "Modificado")} Análisis de Muestra";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["AnalysisMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        if (typeof(Lab.Persistence.Entities.Assessment) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creado" : "Modificado")} Procesamiento de Muestra";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["AssessmentMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        if (typeof(Lab.Persistence.Entities.AnalysisQualityCheck) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creada" : "Modificada")} Evaluación de Calidad a Análisis de Muestra";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["QualityCheckMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        if (typeof(Lab.Persistence.Entities.AssessmentQualityCheck) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creada" : "Modificada")} Evaluación de Calidad a Procesamiento de Muestra";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["QualityCheckMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        if (typeof(Lab.Persistence.Entities.WorkingGroup) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creado" : "Modificado")} Grupo de Trabajo";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["WorkingGroupMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        if (typeof(Lab.Persistence.Entities.WorkPlan) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creado" : "Modificado")} Plan de Trabajo";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["WorkPlanMaterialDesignGlyphIconId"];
 
             return result;
         }

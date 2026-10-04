@@ -1,14 +1,11 @@
 ﻿using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Input;
-using MOROPO.Framework.Guama.Core.Persistence.Presentation.Models.Contract;
 using MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display;
 using MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities;
 
 namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
 {
-    public sealed class PublicationResultInputModel : IEntityInputModel<PublicationResult, System.Guid>
+    public sealed class PublicationResultInputModel : Framework.Decisor.Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<PublicationResult, System.Guid>
     {
-        public System.Guid Id { get; set; }
-
         public string Description { get; set; }
 
         public System.DateTime At { get; set; }
@@ -24,7 +21,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
 
         public DocumentInputModel Document { get; set; }
 
-        public PublicationResult Export()
+        public override PublicationResult Export()
         {
             var entity = new PublicationResult { Id = Id, Archived = false };
 
@@ -33,12 +30,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
             return entity;
         }
 
-        public void Import(PublicationResult entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Mergue(PublicationResult entity)
+        public override void Mergue(PublicationResult entity)
         {
             entity.At = At;
             entity.Description = Description;

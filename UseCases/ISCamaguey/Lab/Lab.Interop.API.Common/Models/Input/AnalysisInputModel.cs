@@ -1,12 +1,9 @@
-﻿using MOROPO.Framework.Guama.Core.Persistence.Presentation.Models.Contract;
-using MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities;
+﻿using MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities;
 
 namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Input
 {
-    public sealed class AnalysisInputModel : IEntityInputModel<Analysis, System.Guid>
+    public sealed class AnalysisInputModel : Framework.Decisor.Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<Analysis, System.Guid>
     {
-        public System.Guid Id { get; set; }
-
         public System.DateTime At { get; set; }
 
         public string Description { get; set; }
@@ -19,7 +16,7 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Input
 
         public System.Guid AuthorId { get; set; }
 
-        public Analysis Export()
+        public override Analysis Export()
         {
             Analysis entity = new Analysis() { Id = Id, Archived = false };
 
@@ -28,12 +25,7 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Input
             return entity;
         }
 
-        public void Import(Analysis entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Mergue(Analysis entity)
+        public override void Mergue(Analysis entity)
         {
             entity.At = At;
             entity.Description = Description;

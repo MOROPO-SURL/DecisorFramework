@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
+using MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Extensions;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using MOROPO.Framework.Guama.Media.Persistence.Entities;
 using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
@@ -10,6 +12,7 @@ using System.Linq;
 
 namespace MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Web.Frontend.Controllers.API;
 
+[Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
 [Route("api/servicing/[controller]")]
 [ApiController]
 public class SampleAnalysisServicesController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementFilteredController<SampleAnalysisService, System.Guid, SampleAnalysisServiceInputModel, SampleAnalysisServiceDisplayModel, SampleAnalysisServiceFilterModel>
@@ -17,12 +20,14 @@ public class SampleAnalysisServicesController : Framework.Guama.Core.Presentatio
     private readonly IEntityRepository<SampleAnalysisServiceStep, System.Guid> stepRepository;
     private readonly IEntityRepository<Document, System.Guid> documentRepository;
     private readonly IDocumentFileManagerFacade documentFileManager;
+    private readonly IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository;
 
-    public SampleAnalysisServicesController(IDocumentFileManagerFacade documentFileManager, IEntityRepository<Document, System.Guid> documentRepository, IEntityRepository<SampleAnalysisServiceStep, System.Guid> stepRepository, IEntityRepository<SampleAnalysisService, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<SampleAnalysisServicesController> localizer, Microsoft.Extensions.Logging.ILogger<SampleAnalysisServicesController> logger) : base(repository, localizer, logger)
+    public SampleAnalysisServicesController(IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository, IDocumentFileManagerFacade documentFileManager, IEntityRepository<Document, System.Guid> documentRepository, IEntityRepository<SampleAnalysisServiceStep, System.Guid> stepRepository, IEntityRepository<SampleAnalysisService, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<SampleAnalysisServicesController> localizer, Microsoft.Extensions.Logging.ILogger<SampleAnalysisServicesController> logger) : base(repository, localizer, logger)
     {
         this.stepRepository = stepRepository;
         this.documentRepository = documentRepository;
         this.documentFileManager = documentFileManager;
+        this.changeNotificationRepository = changeNotificationRepository;
     }
 
     protected override System.Linq.Expressions.Expression<System.Func<SampleAnalysisService, bool>> GetGlobalSelector()
@@ -190,5 +195,19 @@ public class SampleAnalysisServicesController : Framework.Guama.Core.Presentatio
         }
 
         #endregion
+    }
+
+    protected override void PostCreate(SampleAnalysisService entity, SampleAnalysisServiceInputModel model)
+    {
+        base.PostCreate(entity, model);
+
+        this.ChangeNotificationOnPostCreate(entity, model, changeNotificationRepository);
+    }
+
+    protected override void PostEdit(SampleAnalysisService entity, SampleAnalysisServiceInputModel model)
+    {
+        base.PostEdit(entity, model);
+
+        this.ChangeNotificationOnPostEdit(entity, model, changeNotificationRepository);
     }
 }

@@ -28,7 +28,8 @@ public partial class AnalysisConfigurationPage : Framework.Decisor.Core.Presenta
             WorkPlanId = ConcreteBindingContext.WorkPlan.Id,
             SampleId = ConcreteBindingContext.Sample.Id,
             TechniqueId = ConcreteBindingContext.Technique.Id,
-            AuthorId = ConcreteBindingContext.Author.Id
+            AuthorId = ConcreteBindingContext.Author.Id,
+            NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray()
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -48,7 +49,8 @@ public partial class AnalysisConfigurationPage : Framework.Decisor.Core.Presenta
             WorkPlanId = ConcreteBindingContext.WorkPlan.Id,
             SampleId = ConcreteBindingContext.Sample.Id,
             TechniqueId = ConcreteBindingContext.Technique.Id,
-            AuthorId = ConcreteBindingContext.Author.Id
+            AuthorId = ConcreteBindingContext.Author.Id,
+            NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray()
         };
 
         await apiConnectClient.EditAsync(model);
@@ -84,6 +86,33 @@ public partial class AnalysisConfigurationPage : Framework.Decisor.Core.Presenta
     private void SamplePickButton_Clicked(object sender, System.EventArgs args)
     {
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.WorkPlanSamplePickPage(ConcreteBindingContext.WorkPlan, ServiceOrderSamplePicked_Callback, ResearchSamplePicked_Callback, ProductionSamplePicked_Callback)));
+    }
+
+    protected void NotificationUserAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.UserPickPage(NotificationUserPickComplete_Callback)));
+    }
+
+    private void NotificationUserRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar este usuario de las notificaciones?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Framework.Decisor.Core.Interop.API.Common.Models.Display.UserDisplayModel;
+
+                ConcreteBindingContext.NotificationUsers.Remove(target);
+
+                hasChangesFlag = true;
+            });
+        });
+    }
+
+    private void NotificationUserPickComplete_Callback(Framework.Decisor.Core.Interop.API.Common.Models.Display.UserDisplayModel model)
+    {
+        ConcreteBindingContext.NotificationUsers.Add(model);
     }
 
     private void AuthorPickComplete_Callback(Framework.Decisor.Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel model)

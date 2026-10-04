@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
+using MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Extensions;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using MOROPO.Framework.Guama.Media.Persistence.Entities;
 using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
@@ -8,6 +10,7 @@ using MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities;
 
 namespace MOROPO.ISCamaguey.Decisor.Lab.Presentation.Web.Frontend.Controllers.API;
 
+[Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
 [Route("api/lab/[controller]")]
 [ApiController]
 public class ServiceOrderSamplesController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementFilteredController<ServiceOrderSample, System.Guid, ServiceOrderSampleInputModel, ServiceOrderSampleDisplayModel, Interop.API.Common.Models.Filter.CommonSampleFilterModel<ServiceOrderSampleDisplayModel, ServiceOrderSample>>
@@ -15,12 +18,14 @@ public class ServiceOrderSamplesController : Framework.Guama.Core.Presentation.W
     private readonly IEntityRepository<Servicing.Persistence.Entities.Contract.AbstractSampleAnalysisServiceOrder, long> orderRepository;
     private readonly IEntityRepository<Image, System.Guid> imageRepository;
     private readonly IImageFileManagerFacade imageFileManager;
+    private readonly IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository;
 
-    public ServiceOrderSamplesController(IImageFileManagerFacade imageFileManager, IEntityRepository<Image, System.Guid> imageRepository, IEntityRepository<Servicing.Persistence.Entities.Contract.AbstractSampleAnalysisServiceOrder, long> orderRepository, IEntityRepository<ServiceOrderSample, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ServiceOrderSamplesController> localizer, Microsoft.Extensions.Logging.ILogger<ServiceOrderSamplesController> logger) : base(repository, localizer, logger)
+    public ServiceOrderSamplesController(IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository, IImageFileManagerFacade imageFileManager, IEntityRepository<Image, System.Guid> imageRepository, IEntityRepository<Servicing.Persistence.Entities.Contract.AbstractSampleAnalysisServiceOrder, long> orderRepository, IEntityRepository<ServiceOrderSample, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ServiceOrderSamplesController> localizer, Microsoft.Extensions.Logging.ILogger<ServiceOrderSamplesController> logger) : base(repository, localizer, logger)
     {
         this.orderRepository = orderRepository;
         this.imageRepository = imageRepository;
         this.imageFileManager = imageFileManager;
+        this.changeNotificationRepository = changeNotificationRepository;
     }
 
     protected override System.Linq.Expressions.Expression<System.Func<ServiceOrderSample, bool>> GetGlobalSelector()
@@ -106,9 +111,18 @@ public class ServiceOrderSamplesController : Framework.Guama.Core.Presentation.W
         }
     }
 
+    protected override void PostCreate(ServiceOrderSample entity, ServiceOrderSampleInputModel model)
+    {
+        base.PostCreate(entity, model);
+
+        this.ChangeNotificationOnPostCreate(entity, model, changeNotificationRepository);
+    }
+
     protected override void PostEdit(ServiceOrderSample entity, ServiceOrderSampleInputModel model)
     {
         base.PostEdit(entity, model);
+
+        this.ChangeNotificationOnPostEdit(entity, model, changeNotificationRepository);
 
         try
         {

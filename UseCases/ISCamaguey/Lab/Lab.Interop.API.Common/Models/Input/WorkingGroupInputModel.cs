@@ -2,10 +2,8 @@
 
 namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Input
 {
-    public class WorkingGroupInputModel : Framework.Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.WorkingGroup, System.Guid>
+    public class WorkingGroupInputModel : Framework.Decisor.Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<Persistence.Entities.WorkingGroup, System.Guid>
     {
-        public System.Guid Id { get; set; }
-
         public int Priority { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
@@ -21,7 +19,7 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Input
 
         public System.Collections.Generic.List<Framework.Decisor.Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel> Employees { get; set; } = new System.Collections.Generic.List<Framework.Decisor.Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel>();
 
-        public Persistence.Entities.WorkingGroup Export()
+        public override Persistence.Entities.WorkingGroup Export()
         {
             var entity = new Persistence.Entities.WorkingGroup { Id = Id, Enabled = true };
 
@@ -30,12 +28,7 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Input
             return entity;
         }
 
-        public void Import(Persistence.Entities.WorkingGroup entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Mergue(Persistence.Entities.WorkingGroup entity)
+        public override void Mergue(Persistence.Entities.WorkingGroup entity)
         {
             entity.Priority = Priority;
             entity.Name = Name;

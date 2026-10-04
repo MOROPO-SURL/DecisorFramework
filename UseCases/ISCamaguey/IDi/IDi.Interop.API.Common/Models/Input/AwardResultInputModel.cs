@@ -1,12 +1,9 @@
-﻿using MOROPO.Framework.Guama.Core.Persistence.Presentation.Models.Contract;
-using MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities;
+﻿using MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities;
 
 namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
 {
-    public sealed class AwardResultInputModel : IEntityInputModel<AwardResult, System.Guid>
+    public sealed class AwardResultInputModel : Framework.Decisor.Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<AwardResult, System.Guid>
     {
-        public System.Guid Id { get; set; }
-
         public string Description { get; set; }
 
         public System.DateTime At { get; set; }
@@ -22,7 +19,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
 
         public System.Guid? ProjectId { get; set; }
 
-        public AwardResult Export()
+        public override AwardResult Export()
         {
             var entity = new AwardResult { Id = Id, Archived = false };
 
@@ -31,12 +28,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
             return entity;
         }
 
-        public void Import(AwardResult entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Mergue(AwardResult entity)
+        public override void Mergue(AwardResult entity)
         {
             entity.At = At;
             entity.Description = Description;

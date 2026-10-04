@@ -6,10 +6,8 @@ using System.Linq;
 
 namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
 {
-    public class CallForProposalInputModel : Framework.Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.CallForProposal, System.Guid>
+    public class CallForProposalInputModel : Framework.Decisor.Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<Persistence.Entities.CallForProposal, System.Guid>
     {
-        public System.Guid Id { get; set; }
-
         [System.ComponentModel.DataAnnotations.Required]
         public string Title { get; set; }
 
@@ -27,7 +25,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
         public List<DocumentInputModel> IncomingDocuments { get; set; } = new List<DocumentInputModel>();
         public List<DocumentDisplayModel> OutgoingDocuments { get; set; } = new List<DocumentDisplayModel>();
 
-        public Persistence.Entities.CallForProposal Export()
+        public override Persistence.Entities.CallForProposal Export()
         {
             var entity = new Persistence.Entities.CallForProposal { Id = Id };
 
@@ -36,12 +34,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
             return entity;
         }
 
-        public void Import(Persistence.Entities.CallForProposal entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Mergue(Persistence.Entities.CallForProposal entity)
+        public override void Mergue(Persistence.Entities.CallForProposal entity)
         {
             entity.Title = Title;
             entity.Description = Description;

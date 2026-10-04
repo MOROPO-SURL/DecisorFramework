@@ -1,14 +1,11 @@
 ﻿using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
-using MOROPO.Framework.Guama.Core.Persistence.Presentation.Models.Contract;
 using MOROPO.ISCamaguey.Decisor.Recommending.Persistence.Entities;
 
 namespace MOROPO.ISCamaguey.Decisor.Recommending.Interop.API.Common.Models.Input
 {
-    public sealed class RecomendationReportInputModel : IEntityInputModel<RecomendationReport, System.Guid>
+    public sealed class RecomendationReportInputModel : Framework.Decisor.Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<RecomendationReport, System.Guid>
     {
-        public System.Guid Id { get; set; }
-
         public System.DateTime At { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
@@ -22,7 +19,7 @@ namespace MOROPO.ISCamaguey.Decisor.Recommending.Interop.API.Common.Models.Input
 
         public EmployeeDisplayModel[] Authors { get; set; }
 
-        public RecomendationReport Export()
+        public override RecomendationReport Export()
         {
             var entity = new RecomendationReport { Id = Id, Archived = false };
 
@@ -31,12 +28,7 @@ namespace MOROPO.ISCamaguey.Decisor.Recommending.Interop.API.Common.Models.Input
             return entity;
         }
 
-        public void Import(RecomendationReport entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Mergue(RecomendationReport entity)
+        public override void Mergue(RecomendationReport entity)
         {
             entity.Title = Title;
             entity.Reference = Reference;

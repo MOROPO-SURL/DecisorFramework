@@ -1,15 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
+using MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Extensions;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
+using MOROPO.Framework.Guama.Media.Persistence.Entities;
+using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
 using MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display;
 using MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Input;
-using MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.Contract;
 using MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities;
-using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
-using MOROPO.Framework.Guama.Media.Persistence.Entities;
+using MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.Contract;
 using MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.Contract;
 
 namespace MOROPO.ISCamaguey.Decisor.Lab.Presentation.Web.Frontend.Controllers.API;
 
+[Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
 [Route("api/lab/[controller]")]
 [ApiController]
 public sealed class AssessmentsController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<Assessment, System.Guid, AssessmentInputModel, AssessmentDisplayModel>
@@ -18,13 +21,15 @@ public sealed class AssessmentsController : Framework.Guama.Core.Presentation.We
     private readonly IEntityRepository<Document, System.Guid> documentRepository;
     private readonly IDocumentFileManagerFacade documentFileManager;
     private readonly IEntityRepository<AbstractServiceOrder, long> serviceOrderRepository;
+    private readonly IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository;
 
-    public AssessmentsController(IEntityRepository<AbstractServiceOrder, long> serviceOrderRepository, IDocumentFileManagerFacade documentFileManager, IEntityRepository<Document, System.Guid> documentRepository, IEntityRepository<AbstractSample, System.Guid> sampleRepository, IEntityRepository<Assessment, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<AssessmentsController> localizer, Microsoft.Extensions.Logging.ILogger<AssessmentsController> logger) : base(repository, localizer, logger)
+    public AssessmentsController(IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository, IEntityRepository<AbstractServiceOrder, long> serviceOrderRepository, IDocumentFileManagerFacade documentFileManager, IEntityRepository<Document, System.Guid> documentRepository, IEntityRepository<AbstractSample, System.Guid> sampleRepository, IEntityRepository<Assessment, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<AssessmentsController> localizer, Microsoft.Extensions.Logging.ILogger<AssessmentsController> logger) : base(repository, localizer, logger)
     {
         this.sampleRepository = sampleRepository;
         this.documentRepository = documentRepository;
         this.documentFileManager = documentFileManager;
         this.serviceOrderRepository = serviceOrderRepository;
+        this.changeNotificationRepository = changeNotificationRepository;
     }
 
     protected override System.Linq.Expressions.Expression<System.Func<Assessment, bool>> GetGlobalSelector()
@@ -108,5 +113,19 @@ public sealed class AssessmentsController : Framework.Guama.Core.Presentation.We
 
             documentFileManager.SaveDocumentFileContent(entity.Document.Id, model.Document.ContentData, model.Document.ContentType);
         }
+    }
+
+    protected override void PostCreate(Assessment entity, AssessmentInputModel model)
+    {
+        base.PostCreate(entity, model);
+
+        this.ChangeNotificationOnPostCreate(entity, model, changeNotificationRepository);
+    }
+
+    protected override void PostEdit(Assessment entity, AssessmentInputModel model)
+    {
+        base.PostEdit(entity, model);
+
+        this.ChangeNotificationOnPostEdit(entity, model, changeNotificationRepository);
     }
 }

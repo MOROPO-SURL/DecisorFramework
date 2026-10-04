@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
+using MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Extensions;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using MOROPO.ISCamaguey.Decisor.Production.Interop.API.Common.Models.Display;
 using MOROPO.ISCamaguey.Decisor.Production.Interop.API.Common.Models.Filter;
@@ -7,12 +9,16 @@ using MOROPO.ISCamaguey.Decisor.Production.Persistence.Entities;
 
 namespace MOROPO.ISCamaguey.Decisor.Production.Presentation.Web.Frontend.Controllers.API;
 
+[Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
 [Route("api/production/[controller]")]
 [ApiController]
 public sealed class ProductionQualityChecksController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementFilteredController<ProductionQualityCheck, System.Guid, ProductionQualityCheckInputModel, ProductionQualityCheckDisplayModel, ProductionQualityCheckFilterModel>
 {
-    public ProductionQualityChecksController(IEntityRepository<ProductionQualityCheck, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ProductionQualityChecksController> localizer, Microsoft.Extensions.Logging.ILogger<ProductionQualityChecksController> logger) : base(repository, localizer, logger)
+    private readonly IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository;
+
+    public ProductionQualityChecksController(IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository, IEntityRepository<ProductionQualityCheck, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ProductionQualityChecksController> localizer, Microsoft.Extensions.Logging.ILogger<ProductionQualityChecksController> logger) : base(repository, localizer, logger)
     {
+        this.changeNotificationRepository = changeNotificationRepository;
     }
 
     protected override System.Linq.Expressions.Expression<System.Func<ProductionQualityCheck, bool>> GetGlobalSelector()
@@ -39,5 +45,19 @@ public sealed class ProductionQualityChecksController : Framework.Guama.Core.Pre
         }
 
         return model;
+    }
+
+    protected override void PostCreate(ProductionQualityCheck entity, ProductionQualityCheckInputModel model)
+    {
+        base.PostCreate(entity, model);
+
+        this.ChangeNotificationOnPostCreate(entity, model, changeNotificationRepository);
+    }
+
+    protected override void PostEdit(ProductionQualityCheck entity, ProductionQualityCheckInputModel model)
+    {
+        base.PostEdit(entity, model);
+
+        this.ChangeNotificationOnPostEdit(entity, model, changeNotificationRepository);
     }
 }

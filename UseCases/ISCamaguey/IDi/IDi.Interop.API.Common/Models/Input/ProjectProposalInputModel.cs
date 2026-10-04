@@ -1,9 +1,7 @@
 ﻿namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
 {
-    public class ProjectProposalInputModel : Framework.Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.ProjectProposal, System.Guid>
+    public class ProjectProposalInputModel : Framework.Decisor.Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<Persistence.Entities.ProjectProposal, System.Guid>
     {
-        public System.Guid Id { get; set; } = System.Guid.NewGuid();
-
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DataAnnotations.MaxLength(255)]
         public string Title { get; set; }
@@ -20,7 +18,7 @@
 
         public Framework.Decisor.Core.Interop.API.Common.Models.Input.DocumentInputModel Document { get; set; }
 
-        public Persistence.Entities.ProjectProposal Export()
+        public override Persistence.Entities.ProjectProposal Export()
         {
             var entity = new Persistence.Entities.ProjectProposal { Id = Id, Enabled = true };
 
@@ -29,12 +27,7 @@
             return entity;
         }
 
-        public void Import(Persistence.Entities.ProjectProposal entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Mergue(Persistence.Entities.ProjectProposal entity)
+        public override void Mergue(Persistence.Entities.ProjectProposal entity)
         {
             entity.Title = Title;
             entity.Description = Description;

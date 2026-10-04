@@ -31,7 +31,8 @@ public partial class CallForProposalConfigurationPage : Framework.Decisor.Core.P
             EndAt = ConcreteBindingContext.EndAt,
             FinancierId = ConcreteBindingContext.Financier.Id,
             KnowledgeAreas = [.. ConcreteBindingContext.KnowledgeAreas],
-            IncomingDocuments = incomingDocuments
+            IncomingDocuments = incomingDocuments,
+            NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray()
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -54,7 +55,8 @@ public partial class CallForProposalConfigurationPage : Framework.Decisor.Core.P
             KnowledgeAreas = [.. ConcreteBindingContext.KnowledgeAreas],
             IncomingDocuments = incomingDocuments,
             EditionDocuments = editionDocuments,
-            OutgoingDocuments = outgoingDocuments
+            OutgoingDocuments = outgoingDocuments,
+            NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray()
         };
 
         await apiConnectClient.EditAsync(model);
@@ -210,6 +212,33 @@ public partial class CallForProposalConfigurationPage : Framework.Decisor.Core.P
                 hasChangesFlag = true;
             });
         });
+    }
+
+    protected void NotificationUserAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.UserPickPage(NotificationUserPickComplete_Callback)));
+    }
+
+    private void NotificationUserRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar este usuario de las notificaciones?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Framework.Decisor.Core.Interop.API.Common.Models.Display.UserDisplayModel;
+
+                ConcreteBindingContext.NotificationUsers.Remove(target);
+
+                hasChangesFlag = true;
+            });
+        });
+    }
+
+    private void NotificationUserPickComplete_Callback(Framework.Decisor.Core.Interop.API.Common.Models.Display.UserDisplayModel model)
+    {
+        ConcreteBindingContext.NotificationUsers.Add(model);
     }
 
     private void FinancierPickComplete_Callback(Interop.API.Common.Models.Display.FinancierDisplayModel model)

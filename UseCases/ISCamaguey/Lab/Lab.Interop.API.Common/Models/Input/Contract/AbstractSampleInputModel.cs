@@ -1,9 +1,7 @@
 ﻿namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Input.Contract
 {
-    public abstract class AbstractSampleInputModel<TEntity> : Framework.Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<TEntity, System.Guid> where TEntity : Persistence.Entities.Contract.AbstractSample
+    public abstract class AbstractSampleInputModel<TEntity> : Framework.Decisor.Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<TEntity, System.Guid> where TEntity : Persistence.Entities.Contract.AbstractSample
     {
-        public System.Guid Id { get; set; }
-
         public int Index { get; set; }
 
         public int Year { get; set; }
@@ -18,14 +16,7 @@
 
         public System.Guid UnitMeasurementId { get; set; }
 
-        public abstract TEntity Export();
-
-        public void Import(TEntity entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public virtual void Mergue(TEntity entity)
+        public override void Mergue(TEntity entity)
         {
             entity.Index = Index;
             entity.Year = Year;

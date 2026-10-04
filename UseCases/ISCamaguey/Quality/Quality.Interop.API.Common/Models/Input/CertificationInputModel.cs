@@ -1,13 +1,9 @@
-﻿
-
-using System.Linq;
+﻿using System.Linq;
 
 namespace MOROPO.ISCamaguey.Decisor.Quality.Interop.API.Common.Models.Input
 {
-    public class CertificationInputModel : Framework.Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.Certification, System.Guid>
+    public class CertificationInputModel : Framework.Decisor.Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<Persistence.Entities.Certification, System.Guid>
     {
-        public System.Guid Id { get; set; }
-
         [System.ComponentModel.DataAnnotations.Required]
         public string Name { get; set; }
 
@@ -21,7 +17,7 @@ namespace MOROPO.ISCamaguey.Decisor.Quality.Interop.API.Common.Models.Input
 
         public System.Collections.Generic.List<Display.IsoStandardDisplayModel> IsoStandards { get; set; } = new System.Collections.Generic.List<Display.IsoStandardDisplayModel>();
 
-        public Persistence.Entities.Certification Export()
+        public override Persistence.Entities.Certification Export()
         {
             var entity = new Persistence.Entities.Certification { Id = Id, Enabled = true };
 
@@ -30,12 +26,7 @@ namespace MOROPO.ISCamaguey.Decisor.Quality.Interop.API.Common.Models.Input
             return entity;
         }
 
-        public void Import(Persistence.Entities.Certification entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Mergue(Persistence.Entities.Certification entity)
+        public override void Mergue(Persistence.Entities.Certification entity)
         {
             entity.Name = Name;
             entity.Description = Description;

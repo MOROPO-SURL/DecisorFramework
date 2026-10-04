@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
+using MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Extensions;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using MOROPO.Framework.Guama.Media.Persistence.Entities;
 using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
@@ -10,17 +12,20 @@ using System.Linq;
 
 namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Web.Frontend.Controllers.API;
 
+[Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
 [Route("api/idi/[controller]")]
 [ApiController]
 public class CallForProposalsController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementFilteredController<CallForProposal, System.Guid, CallForProposalInputModel, CallForProposalDisplayModel, CallForProposalFilterModel>
 {
     private readonly IEntityRepository<Document, System.Guid> documentRepository;
     private readonly IDocumentFileManagerFacade documentFileManager;
+    private readonly IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository;
 
-    public CallForProposalsController(IDocumentFileManagerFacade documentFileManager, IEntityRepository<Document, System.Guid> documentRepository, IEntityRepository<CallForProposal, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<CallForProposalsController> localizer, Microsoft.Extensions.Logging.ILogger<CallForProposalsController> logger) : base(repository, localizer, logger)
+    public CallForProposalsController(IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository, IDocumentFileManagerFacade documentFileManager, IEntityRepository<Document, System.Guid> documentRepository, IEntityRepository<CallForProposal, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<CallForProposalsController> localizer, Microsoft.Extensions.Logging.ILogger<CallForProposalsController> logger) : base(repository, localizer, logger)
     {
         this.documentRepository = documentRepository;
         this.documentFileManager = documentFileManager;
+        this.changeNotificationRepository = changeNotificationRepository;
     }
 
     protected override System.Linq.Expressions.Expression<System.Func<CallForProposal, bool>> GetGlobalSelector()
@@ -129,5 +134,19 @@ public class CallForProposalsController : Framework.Guama.Core.Presentation.Web.
         }
 
         #endregion
+    }
+
+    protected override void PostCreate(CallForProposal entity, CallForProposalInputModel model)
+    {
+        base.PostCreate(entity, model);
+
+        this.ChangeNotificationOnPostCreate(entity, model, changeNotificationRepository);
+    }
+
+    protected override void PostEdit(CallForProposal entity, CallForProposalInputModel model)
+    {
+        base.PostEdit(entity, model);
+
+        this.ChangeNotificationOnPostEdit(entity, model, changeNotificationRepository);
     }
 }

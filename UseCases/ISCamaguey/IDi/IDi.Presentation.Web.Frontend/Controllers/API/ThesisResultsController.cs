@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
+using MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Extensions;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using MOROPO.Framework.Guama.Media.Persistence.Entities;
 using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
@@ -10,18 +12,21 @@ using System.Linq;
 
 namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Web.Frontend.Controllers.API;
 
+[Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
 [Route("api/idi/[controller]")]
 [ApiController]
 public class ThesisResultsController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementFilteredController<ThesisResult, System.Guid, ThesisResultInputModel, ThesisResultDisplayModel, ThesisResultFilterModel>
 {
     private readonly IEntityRepository<Document, System.Guid> documentRepository;
     private readonly IDocumentFileManagerFacade documentFileManager;
+    private readonly IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository;
 
-    public ThesisResultsController(IDocumentFileManagerFacade documentFileManager, IEntityRepository<Document, System.Guid> documentRepository, IEntityRepository<ThesisResult, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ThesisResultsController> localizer, Microsoft.Extensions.Logging.ILogger<ThesisResultsController> logger)
+    public ThesisResultsController(IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository, IDocumentFileManagerFacade documentFileManager, IEntityRepository<Document, System.Guid> documentRepository, IEntityRepository<ThesisResult, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ThesisResultsController> localizer, Microsoft.Extensions.Logging.ILogger<ThesisResultsController> logger)
         : base(repository, localizer, logger)
     {
         this.documentRepository = documentRepository;
         this.documentFileManager = documentFileManager;
+        this.changeNotificationRepository = changeNotificationRepository;
     }
 
     protected override System.Linq.Expressions.Expression<System.Func<ThesisResult, bool>> GetGlobalSelector() => entity => !entity.Archived;
@@ -110,5 +115,19 @@ public class ThesisResultsController : Framework.Guama.Core.Presentation.Web.API
 
             documentFileManager.SaveDocumentFileContent(entity.Document.Id, model.Document.ContentData, model.Document.ContentType);
         }
+    }
+
+    protected override void PostCreate(ThesisResult entity, ThesisResultInputModel model)
+    {
+        base.PostCreate(entity, model);
+
+        this.ChangeNotificationOnPostCreate(entity, model, changeNotificationRepository);
+    }
+
+    protected override void PostEdit(ThesisResult entity, ThesisResultInputModel model)
+    {
+        base.PostEdit(entity, model);
+
+        this.ChangeNotificationOnPostEdit(entity, model, changeNotificationRepository);
     }
 }

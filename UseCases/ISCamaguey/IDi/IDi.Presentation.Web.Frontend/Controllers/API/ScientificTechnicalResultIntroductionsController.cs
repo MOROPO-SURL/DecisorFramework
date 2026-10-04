@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
+using MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Extensions;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display;
 using MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Filter;
@@ -9,13 +11,17 @@ using System.Linq;
 
 namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Web.Frontend.Controllers.API;
 
+[Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
 [Route("api/idi/[controller]")]
 [ApiController]
 public sealed class ScientificTechnicalResultIntroductionsController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementFilteredController<ScientificTechnicalResultIntroduction, System.Guid, ScientificTechnicalResultIntroductionInputModel, ScientificTechnicalResultIntroductionDisplayModel, ScientificTechnicalResultIntroductionFilterModel>
 {
-    public ScientificTechnicalResultIntroductionsController(IEntityRepository<ScientificTechnicalResultIntroduction, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ScientificTechnicalResultIntroductionsController> localizer, Microsoft.Extensions.Logging.ILogger<ScientificTechnicalResultIntroductionsController> logger)
+    private readonly IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository;
+
+    public ScientificTechnicalResultIntroductionsController(IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository, IEntityRepository<ScientificTechnicalResultIntroduction, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ScientificTechnicalResultIntroductionsController> localizer, Microsoft.Extensions.Logging.ILogger<ScientificTechnicalResultIntroductionsController> logger)
         : base(repository, localizer, logger)
     {
+        this.changeNotificationRepository = changeNotificationRepository;
     }
 
     protected override System.Linq.Expressions.Expression<System.Func<ScientificTechnicalResultIntroduction, bool>> GetGlobalSelector() => entity => !entity.Archived;
@@ -48,5 +54,19 @@ public sealed class ScientificTechnicalResultIntroductionsController : Framework
         })];
 
         return model;
+    }
+
+    protected override void PostCreate(ScientificTechnicalResultIntroduction entity, ScientificTechnicalResultIntroductionInputModel model)
+    {
+        base.PostCreate(entity, model);
+
+        this.ChangeNotificationOnPostCreate(entity, model, changeNotificationRepository);
+    }
+
+    protected override void PostEdit(ScientificTechnicalResultIntroduction entity, ScientificTechnicalResultIntroductionInputModel model)
+    {
+        base.PostEdit(entity, model);
+
+        this.ChangeNotificationOnPostEdit(entity, model, changeNotificationRepository);
     }
 }

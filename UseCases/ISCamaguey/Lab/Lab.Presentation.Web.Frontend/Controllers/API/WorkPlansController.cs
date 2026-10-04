@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
+using MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Extensions;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display;
 using MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Input;
@@ -7,6 +9,7 @@ using System.Linq;
 
 namespace MOROPO.ISCamaguey.Decisor.Lab.Presentation.Web.Frontend.Controllers.API;
 
+[Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
 [Route("api/lab/[controller]")]
 [ApiController]
 public sealed class WorkPlansController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<WorkPlan, System.Guid, WorkPlanInputModel, WorkPlanDisplayModel>
@@ -14,12 +17,14 @@ public sealed class WorkPlansController : Framework.Guama.Core.Presentation.Web.
     private readonly IEntityRepository<ServiceOrderSample, System.Guid> serviceOrderSampleRepository;
     private readonly IEntityRepository<ResearchSample, System.Guid> researchSampleRepository;
     private readonly IEntityRepository<ProductionSample, System.Guid> productionSampleRepository;
+    private readonly IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository;
 
-    public WorkPlansController(IEntityRepository<ProductionSample, System.Guid> productionSampleRepository, IEntityRepository<ResearchSample, System.Guid> researchSampleRepository, IEntityRepository<ServiceOrderSample, System.Guid> serviceOrderSampleRepository, IEntityRepository<WorkPlan, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<WorkPlansController> localizer, Microsoft.Extensions.Logging.ILogger<WorkPlansController> logger) : base(repository, localizer, logger)
+    public WorkPlansController(IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository, IEntityRepository<ProductionSample, System.Guid> productionSampleRepository, IEntityRepository<ResearchSample, System.Guid> researchSampleRepository, IEntityRepository<ServiceOrderSample, System.Guid> serviceOrderSampleRepository, IEntityRepository<WorkPlan, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<WorkPlansController> localizer, Microsoft.Extensions.Logging.ILogger<WorkPlansController> logger) : base(repository, localizer, logger)
     {
         this.serviceOrderSampleRepository = serviceOrderSampleRepository;
         this.researchSampleRepository = researchSampleRepository;
         this.productionSampleRepository = productionSampleRepository;
+        this.changeNotificationRepository = changeNotificationRepository;
     }
 
     protected override System.Linq.Expressions.Expression<System.Func<WorkPlan, bool>> GetGlobalSelector()
@@ -162,5 +167,19 @@ public sealed class WorkPlansController : Framework.Guama.Core.Presentation.Web.
 
             productionSampleRepository.Update(productionSample, User.Identity.Name, false);
         }
+    }
+
+    protected override void PostCreate(WorkPlan entity, WorkPlanInputModel model)
+    {
+        base.PostCreate(entity, model);
+
+        this.ChangeNotificationOnPostCreate(entity, model, changeNotificationRepository);
+    }
+
+    protected override void PostEdit(WorkPlan entity, WorkPlanInputModel model)
+    {
+        base.PostEdit(entity, model);
+
+        this.ChangeNotificationOnPostEdit(entity, model, changeNotificationRepository);
     }
 }

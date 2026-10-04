@@ -49,6 +49,37 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
+    <MenuFlyoutItem Text="Catálogo" IsEnabled="False" />
+    <ShellContent
+        Title="Capacitación"
+        ContentTemplate="{DataTemplate servicing_manage_pages:TrainingServicesManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="{StaticResource TrainingServiceMaterialDesignGlyphIconId}"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Procesamiento de Muestras"
+        ContentTemplate="{DataTemplate servicing_manage_pages:SampleAnalysisServicesManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="{StaticResource SampleAnalysisServiceMaterialDesignGlyphIconId}"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Estudios Int. de Suelo"
+        ContentTemplate="{DataTemplate servicing_manage_pages:GroundIntegralStudyServicesManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="{StaticResource GroundIntegralStudyServiceMaterialDesignGlyphIconId}"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
     <MenuFlyoutItem Text="Órdenes" IsEnabled="False" />
     <FlyoutItem Title="Capacitación">
         <FlyoutItem.Icon>
@@ -135,37 +166,6 @@
             Title="Naturales"
             ContentTemplate="{DataTemplate servicing_manage_pages:NaturalClientGroundIntegralStudyServiceExecutionsManagePage}" />
     </FlyoutItem>
-    <MenuFlyoutItem Text="Catálogo" IsEnabled="False" />
-    <ShellContent
-        Title="Capacitación"
-        ContentTemplate="{DataTemplate servicing_manage_pages:TrainingServicesManagePage}">
-        <ShellContent.Icon>
-            <FontImageSource
-                FontFamily="MaterialDesignIcons"
-                Glyph="&#xF88F;"
-                Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </ShellContent.Icon>
-    </ShellContent>
-    <ShellContent
-        Title="Procesamiento de Muestras"
-        ContentTemplate="{DataTemplate servicing_manage_pages:SampleAnalysisServicesManagePage}">
-        <ShellContent.Icon>
-            <FontImageSource
-                FontFamily="MaterialDesignIcons"
-                Glyph="&#xF025C;"
-                Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </ShellContent.Icon>
-    </ShellContent>
-    <ShellContent
-        Title="Estudios Int. de Suelo"
-        ContentTemplate="{DataTemplate servicing_manage_pages:GroundIntegralStudyServicesManagePage}">
-        <ShellContent.Icon>
-            <FontImageSource
-                FontFamily="MaterialDesignIcons"
-                Glyph="&#xFE49;"
-                Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </ShellContent.Icon>
-    </ShellContent>
     <MenuFlyoutItem Text="Gestión" IsEnabled="False" />
     <FlyoutItem Title="Clientes">
         <FlyoutItem.Icon>

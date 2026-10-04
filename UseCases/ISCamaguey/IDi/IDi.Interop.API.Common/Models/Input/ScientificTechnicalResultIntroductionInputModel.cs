@@ -1,13 +1,10 @@
 ﻿using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
-using MOROPO.Framework.Guama.Core.Persistence.Presentation.Models.Contract;
 using MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities;
 
 namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
 {
-    public sealed class ScientificTechnicalResultIntroductionInputModel : IEntityInputModel<ScientificTechnicalResultIntroduction, System.Guid>
+    public sealed class ScientificTechnicalResultIntroductionInputModel : Framework.Decisor.Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<ScientificTechnicalResultIntroduction, System.Guid>
     {
-        public System.Guid Id { get; set; }
-
         public string Description { get; set; }
 
         public System.DateTime At { get; set; }
@@ -19,7 +16,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
 
         public EmployeeDisplayModel[] Supervisors { get; set; }
 
-        public ScientificTechnicalResultIntroduction Export()
+        public override ScientificTechnicalResultIntroduction Export()
         {
             var entity = new ScientificTechnicalResultIntroduction { Id = Id, Archived = false };
 
@@ -28,12 +25,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
             return entity;
         }
 
-        public void Import(ScientificTechnicalResultIntroduction entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Mergue(ScientificTechnicalResultIntroduction entity)
+        public override void Mergue(ScientificTechnicalResultIntroduction entity)
         {
             entity.Description = Description;
             entity.At = At;

@@ -66,7 +66,8 @@ public partial class ResearchSampleConfigurationPage : Framework.Decisor.Core.Pr
             SampleKindId = ConcreteBindingContext.SampleKind.Id,
             ProjectId = ConcreteBindingContext.Project.Id,
             Observation = ConcreteBindingContext.Observation,
-            ResearcherId = ConcreteBindingContext.Project.InternalResearcherProjectParticipations.FirstOrDefault(item => item.Researcher.Employee.Contact.Id == ConcreteBindingContext.ResearcherContact.Id)?.Researcher.Id ?? ConcreteBindingContext.Project.ExternalResearcherProjectParticipations.Single(item => item.Researcher.Contact.Id == ConcreteBindingContext.ResearcherContact.Id).Researcher.Id
+            ResearcherId = ConcreteBindingContext.Project.InternalResearcherProjectParticipations.FirstOrDefault(item => item.Researcher.Employee.Contact.Id == ConcreteBindingContext.ResearcherContact.Id)?.Researcher.Id ?? ConcreteBindingContext.Project.ExternalResearcherProjectParticipations.Single(item => item.Researcher.Contact.Id == ConcreteBindingContext.ResearcherContact.Id).Researcher.Id,
+            NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray()
         };
 
         if (featureImagePickedModel != null)
@@ -96,7 +97,8 @@ public partial class ResearchSampleConfigurationPage : Framework.Decisor.Core.Pr
             SampleKindId = ConcreteBindingContext.SampleKind.Id,
             Observation = ConcreteBindingContext.Observation,
             ProjectId = ConcreteBindingContext.Project.Id,
-            ResearcherId = ConcreteBindingContext.Project.InternalResearcherProjectParticipations.FirstOrDefault(item => item.Researcher.Employee.Contact.Id == ConcreteBindingContext.ResearcherContact.Id)?.Researcher.Id ?? ConcreteBindingContext.Project.ExternalResearcherProjectParticipations.Single(item => item.Researcher.Contact.Id == ConcreteBindingContext.ResearcherContact.Id).Researcher.Id
+            ResearcherId = ConcreteBindingContext.Project.InternalResearcherProjectParticipations.FirstOrDefault(item => item.Researcher.Employee.Contact.Id == ConcreteBindingContext.ResearcherContact.Id)?.Researcher.Id ?? ConcreteBindingContext.Project.ExternalResearcherProjectParticipations.Single(item => item.Researcher.Contact.Id == ConcreteBindingContext.ResearcherContact.Id).Researcher.Id,
+            NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray()
         };
 
         if (featureImagePickedModel != null)
@@ -140,6 +142,33 @@ public partial class ResearchSampleConfigurationPage : Framework.Decisor.Core.Pr
     private void LabelPickButton_Clicked(object sender, System.EventArgs eventArgs)
     {
         // TODO Remove this delegate!!!
+    }
+
+    protected void NotificationUserAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.UserPickPage(NotificationUserPickComplete_Callback)));
+    }
+
+    private void NotificationUserRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar este usuario de las notificaciones?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Framework.Decisor.Core.Interop.API.Common.Models.Display.UserDisplayModel;
+
+                ConcreteBindingContext.NotificationUsers.Remove(target);
+
+                hasChangesFlag = true;
+            });
+        });
+    }
+
+    private void NotificationUserPickComplete_Callback(Framework.Decisor.Core.Interop.API.Common.Models.Display.UserDisplayModel model)
+    {
+        ConcreteBindingContext.NotificationUsers.Add(model);
     }
 
     private void FeatureImagePickSuccess_Callback(ImageInputModel model)

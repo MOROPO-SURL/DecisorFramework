@@ -46,4 +46,24 @@
     <x:String x:Key="NaturalBusinessKindMaterialDesignGlyphIconId">&#xF00F5;</x:String>
     <x:String x:Key="PaymentTermMaterialDesignGlyphIconId">&#xF0F0;</x:String>
 
+    <x:String x:Key="TechniqueMaterialDesignGlyphIconId">&#xF654;</x:String>
+    <x:String x:Key="QualityCheckMaterialDesignGlyphIconId">&#xF14C;</x:String>
+    <x:String x:Key="RecomendationReportMaterialDesignGlyphIconId">&#xF215;</x:String>
+    <x:String x:Key="CallForProposalMaterialDesignGlyphIconId">&#xF0E6;</x:String>
+    <x:String x:Key="ProjectProposalMaterialDesignGlyphIconId">&#xF6E7;</x:String>
+    <x:String x:Key="ProjectMaterialDesignGlyphIconId">&#xF00AA;</x:String>
+    <x:String x:Key="ScientificTechnicalResultIntroductionMaterialDesignGlyphIconId">&#xF4CF;</x:String>
+    <x:String x:Key="GroundIntegralStudyServiceMaterialDesignGlyphIconId">&#xFE49;</x:String>
+    <x:String x:Key="SampleAnalysisServiceMaterialDesignGlyphIconId">&#xF025C;</x:String>
+    <x:String x:Key="TrainingServiceMaterialDesignGlyphIconId">&#xF88F;</x:String>
+    <x:String x:Key="SampleReceptionMaterialDesignGlyphIconId">&#xF025A;</x:String>
+    <x:String x:Key="AnalysisMaterialDesignGlyphIconId">&#xF0254;</x:String>
+    <x:String x:Key="AssessmentMaterialDesignGlyphIconId">&#xF0256;</x:String>
+    <x:String x:Key="WorkingGroupMaterialDesignGlyphIconId">&#xFA8B;</x:String>
+    <x:String x:Key="WorkPlanMaterialDesignGlyphIconId">&#xF14E;</x:String>
+    <x:String x:Key="AwardResultMaterialDesignGlyphIconId">&#xF539;</x:String>
+    <x:String x:Key="PublicationResultMaterialDesignGlyphIconId">&#xF002A;</x:String>
+    <x:String x:Key="ThesisResultMaterialDesignGlyphIconId">&#xF474;</x:String>
+    <x:String x:Key="ScientificTechnicalResultMaterialDesignGlyphIconId">&#xF005C;</x:String>
+
 </ResourceDictionary>

@@ -11,6 +11,8 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\..\Core\Core.Interop.API.Common\Core.Interop.API.Common.csproj" />
+		<ProjectReference Include="..\..\..\..\Domain\Domain.Persistence\Domain.Persistence.csproj" />
+		<ProjectReference Include="..\..\..\..\Domain\Domain.Presentation.Web.Frontend\Domain.Presentation.Web.Frontend.csproj" />
 		<ProjectReference Include="..\Quality.Interop.API.Common\Quality.Interop.API.Common.csproj" />
 		<ProjectReference Include="..\Quality.Presentation.Web.Common\Quality.Presentation.Web.Common.csproj" />
 	</ItemGroup>
