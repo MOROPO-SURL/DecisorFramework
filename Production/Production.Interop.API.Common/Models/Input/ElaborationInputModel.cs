@@ -5,10 +5,8 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input
 {
-    public class ElaborationInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.Elaboration, System.Guid>
+    public class ElaborationInputModel : Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<Persistence.Entities.Elaboration, System.Guid>
     {
-        public System.Guid Id { get; set; }
-
         public int Priority { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
@@ -37,7 +35,7 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input
         public List<DocumentInputModel> IncomingDocuments { get; set; } = new List<DocumentInputModel>();
         public List<DocumentDisplayModel> OutgoingDocuments { get; set; } = new List<DocumentDisplayModel>();
 
-        public Persistence.Entities.Elaboration Export()
+        public override Persistence.Entities.Elaboration Export()
         {
             var entity = new Persistence.Entities.Elaboration { Id = Id, Enabled = true };
 
@@ -46,12 +44,7 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input
             return entity;
         }
 
-        public void Import(Persistence.Entities.Elaboration entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Mergue(Persistence.Entities.Elaboration entity)
+        public override void Mergue(Persistence.Entities.Elaboration entity)
         {
             entity.Priority = Priority;
             entity.Name = Name;

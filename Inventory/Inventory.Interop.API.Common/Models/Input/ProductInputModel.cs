@@ -3,10 +3,8 @@ using System.Collections.Generic;
 
 namespace MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Input
 {
-    public class ProductInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.Product, System.Guid>
+    public class ProductInputModel : Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<Persistence.Entities.Product, System.Guid>
     {
-        public System.Guid Id { get; set; }
-
         [System.ComponentModel.DataAnnotations.Required]
         public string Name { get; set; }
 
@@ -26,7 +24,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Input
         public List<ClassificationInputModel> IncomingClassificationItems { get; set; } = new List<ClassificationInputModel>();
         public List<ClassificationDisplayModel> OutgoingClassificationItems { get; set; } = new List<ClassificationDisplayModel>();
 
-        public Persistence.Entities.Product Export()
+        public override Persistence.Entities.Product Export()
         {
             var entity = new Persistence.Entities.Product
             {
@@ -39,12 +37,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Input
             return entity;
         }
 
-        public void Import(Persistence.Entities.Product entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Mergue(Persistence.Entities.Product entity)
+        public override void Mergue(Persistence.Entities.Product entity)
         {
             entity.Name = Name;
             entity.Description = Description;

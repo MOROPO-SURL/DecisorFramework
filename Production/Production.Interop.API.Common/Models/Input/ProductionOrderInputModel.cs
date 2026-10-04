@@ -2,10 +2,8 @@
 
 namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input
 {
-    public class ProductionOrderInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<ProductionOrder, System.Guid>
+    public class ProductionOrderInputModel : Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<ProductionOrder, System.Guid>
     {
-        public System.Guid Id { get; set; }
-
         public int Priority { get; set; }
 
         public string Description { get; set; }
@@ -20,7 +18,7 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input
 
         public decimal Amount { get; set; }
 
-        public ProductionOrder Export()
+        public override ProductionOrder Export()
         {
             var entity = new ProductionOrder { Id = Id };
 
@@ -29,12 +27,7 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input
             return entity;
         }
 
-        public void Import(ProductionOrder entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Mergue(ProductionOrder entity)
+        public override void Mergue(ProductionOrder entity)
         {
             entity.RequestedFor = RequestedFor;
             entity.Priority = Priority;
