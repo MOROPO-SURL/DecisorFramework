@@ -1,0 +1,390 @@
+﻿@{
+    const string HEADING = "Centro de Ayuda";
+
+    ViewData["Heading"] = HEADING;
+
+    ViewData["Title"] = HEADING;
+
+    ViewData[BreadcrumbViewModel.BREADCRUMBS_MAP_KEY] = new List<BreadcrumbViewModel>
+    {
+        new BreadcrumbViewModel
+        {
+            Caption = $"<span class=\"mdi mdi-account-circle\" style=\"margin-right: 4px;\"></span> {HEADING}"
+        }
+    };
+
+    Layout = "_Layout";
+}
+
+<div class="container">
+    <div class="text-center">
+        <img src="~/img/identity.png" />
+        <h4 class="text-dark font-weight-bold">Instituto de Suelos Camagüey Decisor™</h4>
+        <h2 class="mt-3 mb-5">@HEADING</h2>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <div class="jumbotron text-center">
+                <h3>Manual de Usuario de Operaciones</h3>
+                <p>Documento en formato PDF que documenta el uso de la herramienta en su sección designada a las personas que participan en la parte operativa del funcionamiento de la entidad.</p>
+                <a class="btn btn-primary" href="/files/documents/manual-usuario-operaciones.pdf">Descarcar</a>
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <div class="jumbotron text-center">
+                <h3>Manual de Usuario de Adminstración</h3>
+                <p>Documento en formato PDF que documenta el despliegue y uso de la herramienta por parte de los especialistas que participan en la administración del sistema informático.</p>
+                <a class="btn btn-primary" href="/files/documents/manual-usuario-administracion.pdf">Descarcar</a>
+            </div>
+        </div>
+    </div>
+
+    <h3 class="mt-0 mb-0">Tutoriales de Operaciones</h3>
+    <small class="text-muted lead">audiovisuales para explicar el uso de la herramienta en su sección designada a las personas que participan en la parte operativa del funcionamiento de la entidad.</small>
+    <hr class="mt-2 mb-3" />
+    <div class="row mb-3">
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <video controls="controls">
+                        <source src="/files/videos/operation-introduction.mp4" type="video/mp4">
+                        Su explorar no soporta nativamente la reproducción de videos.
+                    </video>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Introducción</h5>
+                    <p class="card-text">Inicio de sesión y vista inicial con módulos disponibles</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <video controls="controls">
+                        <source src="/files/videos/operation-module-domain.mp4" type="video/mp4">
+                        Su explorar no soporta nativamente la reproducción de videos.
+                    </video>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Módulo Dominio</h5>
+                    <p class="card-text">Gestión de elementos secundarios para la representación estructural de la entidad</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <video controls="controls">
+                        <source src="/files/videos/operation-module-hhrr.mp4" type="video/mp4">
+                        Su explorar no soporta nativamente la reproducción de videos.
+                    </video>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Módulo Recursos Humanos</h5>
+                    <p class="card-text">Gestión de elementos secundarios para la definición de la plantilla de la entidad</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <video controls="controls">
+                        <source src="/files/videos/operation-module-financing.mp4" type="video/mp4">
+                        Su explorar no soporta nativamente la reproducción de videos.
+                    </video>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Módulo Finanzas</h5>
+                    <p class="card-text">Gestión de elementos secundarios para la referencia a cuentas bancarias</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <video controls="controls">
+                        <source src="/files/videos/operation-module-governance.mp4" type="video/mp4">
+                        Su explorar no soporta nativamente la reproducción de videos.
+                    </video>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Módulo Gobernanza</h5>
+                    <p class="card-text">Gestión de elementos secundarios para la documentación de acuerdos</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <video controls="controls">
+                        <source src="/files/videos/operation-module-commercial.mp4" type="video/mp4">
+                        Su explorar no soporta nativamente la reproducción de videos.
+                    </video>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Módulo Comercial</h5>
+                    <p class="card-text">Gestión de elementos secundarios para el manejo de contactos y clientes</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <video controls="controls">
+                        <source src="/files/videos/operation-module-research.mp4" type="video/mp4">
+                        Su explorar no soporta nativamente la reproducción de videos.
+                    </video>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Módulo Investigación</h5>
+                    <p class="card-text">Gestión de elementos para el manejo de programas y proyectos de la entidad</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <video controls="controls">
+                        <source src="/files/videos/operation-module-servicing.mp4" type="video/mp4">
+                        Su explorar no soporta nativamente la reproducción de videos.
+                    </video>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Módulo Servicios</h5>
+                    <p class="card-text">Gestión de elementos para el manejo de los servicios técnicos de la entidad</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <video controls="controls">
+                        <source src="/files/videos/operation-module-production.mp4" type="video/mp4">
+                        Su explorar no soporta nativamente la reproducción de videos.
+                    </video>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Módulo Producción</h5>
+                    <p class="card-text">Gestión de elementos para el manejo de las funciones de la producción</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <video controls="controls">
+                        <source src="/files/videos/operation-module-lab.mp4" type="video/mp4">
+                        Su explorar no soporta nativamente la reproducción de videos.
+                    </video>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Módulo Laboratorio</h5>
+                    <p class="card-text">Gestión de elementos para el manejo de las funciones del laboratorio</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <video controls="controls">
+                        <source src="/files/videos/operation-module-recommending.mp4" type="video/mp4">
+                        Su explorar no soporta nativamente la reproducción de videos.
+                    </video>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Módulo Recomendaciones</h5>
+                    <p class="card-text">Gestión de elementos para la emisión de informes de recomendaciones</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <video controls="controls">
+                        <source src="/files/videos/operation-module-quality.mp4" type="video/mp4">
+                        Su explorar no soporta nativamente la reproducción de videos.
+                    </video>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Módulo Calidad</h5>
+                    <p class="card-text">Gestión de elementos para el manejo de las componentes del control de la calidad</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h3 class="mt-5 mb-0">Tutoriales de Administración</h3>
+    <small class="text-muted lead">audiovisuales para explicar el uso de la herramienta por parte de los especialistas que participan en la administración del sistema informático.</small>
+    <hr class="mt-2 mb-3" />
+    <div class="row mb-4">
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <video controls="controls">
+                        <source src="/files/videos/backoffice-introduction.mp4" type="video/mp4">
+                        Su explorar no soporta nativamente la reproducción de videos.
+                    </video>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Introducción</h5>
+                    <p class="card-text">Inicio de sesión, perfil de usuario y panel de control</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <video controls="controls">
+                        <source src="/files/videos/backoffice-area-security.mp4" type="video/mp4">
+                        Su explorar no soporta nativamente la reproducción de videos.
+                    </video>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Área de Seguridad</h5>
+                    <p class="card-text">Administración de usuarios, grupos y registros de cambios</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <video controls="controls">
+                        <source src="/files/videos/backoffice-location-area.mp4" type="video/mp4">
+                        Su explorar no soporta nativamente la reproducción de videos.
+                    </video>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Área de Locación</h5>
+                    <p class="card-text">Administración de elementos secundarios para direcciones postales</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <video controls="controls">
+                        <source src="/files/videos/backoffice-domain-area.mp4" type="video/mp4">
+                        Su explorar no soporta nativamente la reproducción de videos.
+                    </video>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Área de Dominio</h5>
+                    <p class="card-text">Administración de elementos secundarios para la representación estructural de la entidad</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <video controls="controls">
+                        <source src="/files/videos/backoffice-hhrr-area.mp4" type="video/mp4">
+                        Su explorar no soporta nativamente la reproducción de videos.
+                    </video>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Área de Recursos Humanos</h5>
+                    <p class="card-text">Administración de elementos secundarios para la definición de la plantilla de la entidad</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <video controls="controls">
+                        <source src="/files/videos/backoffice-commercial-area.mp4" type="video/mp4">
+                        Su explorar no soporta nativamente la reproducción de videos.
+                    </video>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Área de Comercial</h5>
+                    <p class="card-text">Administración de elementos secundarios para el manejo de contactos y clientes</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <video controls="controls">
+                        <source src="/files/videos/backoffice-research-area.mp4" type="video/mp4">
+                        Su explorar no soporta nativamente la reproducción de videos.
+                    </video>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Área de Investigación</h5>
+                    <p class="card-text">Administración de elementos para el manejo de programas y proyectos de la entidad</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <video controls="controls">
+                        <source src="/files/videos/backoffice-servicing-area.mp4" type="video/mp4">
+                        Su explorar no soporta nativamente la reproducción de videos.
+                    </video>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Área de Servicios Técnicos</h5>
+                    <p class="card-text">Administración de elementos para el manejo de los servicios de la entidad</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <video controls="controls">
+                        <source src="/files/videos/backoffice-lab-area.mp4" type="video/mp4">
+                        Su explorar no soporta nativamente la reproducción de videos.
+                    </video>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Área de Laboratorio</h5>
+                    <p class="card-text">Administración de elementos para el manejo de las funciones del laboratorio</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <video controls="controls">
+                        <source src="/files/videos/backoffice-production-area.mp4" type="video/mp4">
+                        Su explorar no soporta nativamente la reproducción de videos.
+                    </video>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Área de Producción</h5>
+                    <p class="card-text">Administración de elementos para el manejo de las funciones de la producción</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <video controls="controls">
+                        <source src="/files/videos/backoffice-quality-area.mp4" type="video/mp4">
+                        Su explorar no soporta nativamente la reproducción de videos.
+                    </video>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Área de Calidad</h5>
+                    <p class="card-text">Administración de elementos para el manejo de las componentes del control de la calidad</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+            <div class="card shadow-sm h-100">
+                <div class="embed-responsive embed-responsive-16by9">
+                    <video controls="controls">
+                        <source src="/files/videos/backoffice-recommending-area.mp4" type="video/mp4">
+                        Su explorar no soporta nativamente la reproducción de videos.
+                    </video>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Área de Recomendaciones</h5>
+                    <p class="card-text">Administración de elementos para la emisión de informes de recomendaciones</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

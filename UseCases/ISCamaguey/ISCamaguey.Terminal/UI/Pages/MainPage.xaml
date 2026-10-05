@@ -131,6 +131,9 @@
                     MinimumWidthRequest="124"
                     VerticalOptions="Center"
                     Padding="20" Spacing="4">
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="HelpLayoutTapGestureRecognizer_Tapped" />
+                    </VerticalStackLayout.GestureRecognizers>
                     <Label
                         HorizontalOptions="Center"
                         Text="&#xF78A;"
