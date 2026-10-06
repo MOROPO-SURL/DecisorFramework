@@ -174,5 +174,25 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Constants.Security
         public const string ScientificTechnicalResultKindEditorPermission = "scientific-technical-result-kind-editor-permission";
         public const string ScientificTechnicalResultKindRemoverPermission = "scientific-technical-result-kind-remover-permission";
         #endregion
+
+
+        #region AwardKind
+        public const string AwardKindManagementPermissionGroup = "award-kind-management-permission-group";
+
+        public const string AwardKindViewerPermission = "award-kind-viewer-permission";
+        public const string AwardKindCreatorPermission = "award-kind-creator-permission";
+        public const string AwardKindEditorPermission = "award-kind-editor-permission";
+        public const string AwardKindRemoverPermission = "award-kind-remover-permission";
+        #endregion
+
+
+        #region CallForPropousal
+        public const string CallForPropousalManagementPermissionGroup = "callforppropousal-management-permission-group";
+
+        public const string CallForPropousalViewerPermission = "callforppropousal-viewer-permission";
+        public const string CallForPropousalCreatorPermission = "callforppropousal-creator-permission";
+        public const string CallForPropousalEditorPermission = "callforppropousal-editor-permission";
+        public const string CallForPropousalRemoverPermission = "callforppropousal-remover-permission";
+        #endregion
     }
 }

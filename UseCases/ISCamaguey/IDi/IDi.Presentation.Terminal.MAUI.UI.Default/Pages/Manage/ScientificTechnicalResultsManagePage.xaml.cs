@@ -9,6 +9,12 @@ public partial class ScientificTechnicalResultsManagePage : Framework.Decisor.Co
         InitializeComponent();
     }
 
+    protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.ScientificTechnicalResultViewerPermission;
+
+    protected override string CreatorPermissionCode => Interop.API.Common.Constants.Security.Authorization.ScientificTechnicalResultCreatorPermission;
+
+    protected override string EditorPermissionCode => Interop.API.Common.Constants.Security.Authorization.ScientificTechnicalResultEditorPermission;
+
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView()
     {
         return ItemsCollectionView;

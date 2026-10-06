@@ -9,6 +9,12 @@ public partial class InternalResearchersManagePage : Framework.Decisor.Core.Pres
         InitializeComponent();
     }
 
+    protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.InternalResearcherViewerPermission;
+
+    protected override string CreatorPermissionCode => Interop.API.Common.Constants.Security.Authorization.InternalResearcherCreatorPermission;
+
+    protected override string EditorPermissionCode => Interop.API.Common.Constants.Security.Authorization.InternalResearcherEditorPermission;
+
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
 
     protected override double ItemViewRequestWidth => Constants.CardViewHeightConstants.INTERNAL_RESEARCHER_DEFAULT_CARD_VIEW_WIDTH;

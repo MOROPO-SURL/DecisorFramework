@@ -333,6 +333,44 @@ public class IDiDataInitializationHelper : Framework.Guama.Core.Persistence.ORM.
         }
         #endregion
 
+        #region AwardKind
+        if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.AwardKindViewerPermission)))
+        {
+            permissionDbSet.Add(Authorization.AwardKindViewerPermission.ToPermissionEntity(Authorization.AwardKindManagementPermissionGroup));
+        }
+        if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.AwardKindCreatorPermission)))
+        {
+            permissionDbSet.Add(Authorization.AwardKindCreatorPermission.ToPermissionEntity(Authorization.AwardKindManagementPermissionGroup));
+        }
+        if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.AwardKindEditorPermission)))
+        {
+            permissionDbSet.Add(Authorization.AwardKindEditorPermission.ToPermissionEntity(Authorization.AwardKindManagementPermissionGroup));
+        }
+        if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.AwardKindRemoverPermission)))
+        {
+            permissionDbSet.Add(Authorization.AwardKindRemoverPermission.ToPermissionEntity(Authorization.AwardKindManagementPermissionGroup));
+        }
+        #endregion
+
+        #region CallForPropousal
+        if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.CallForPropousalViewerPermission)))
+        {
+            permissionDbSet.Add(Authorization.CallForPropousalViewerPermission.ToPermissionEntity(Authorization.CallForPropousalManagementPermissionGroup));
+        }
+        if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.CallForPropousalCreatorPermission)))
+        {
+            permissionDbSet.Add(Authorization.CallForPropousalCreatorPermission.ToPermissionEntity(Authorization.CallForPropousalManagementPermissionGroup));
+        }
+        if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.CallForPropousalEditorPermission)))
+        {
+            permissionDbSet.Add(Authorization.CallForPropousalEditorPermission.ToPermissionEntity(Authorization.CallForPropousalManagementPermissionGroup));
+        }
+        if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.CallForPropousalRemoverPermission)))
+        {
+            permissionDbSet.Add(Authorization.CallForPropousalRemoverPermission.ToPermissionEntity(Authorization.CallForPropousalManagementPermissionGroup));
+        }
+        #endregion
+
         if (dbContext is Framework.Guama.Core.Persistence.ORM.EF.Context.Contract.ITraceableDbContext)
         {
             (dbContext as Framework.Guama.Core.Persistence.ORM.EF.Context.Contract.ITraceableDbContext).SaveChanges("system");
