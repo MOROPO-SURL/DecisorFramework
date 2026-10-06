@@ -178,101 +178,98 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Extensions
             researchSection.Add(new ManagementDashboardSectionViewModel
             {
                 Title = "Propuestas",
-                Controller = "propousals",
+                Controller = "projectproposals",
                 Action = "Index",
-                Area = "resarch",
-                // TODO Set spected permission
-                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
+                Area = "idi",
+                Role = IDi.Interop.API.Common.Constants.Security.Authorization.ProjectProposalViewerPermission
             });
             researchSection.Add(new ManagementDashboardSectionViewModel
             {
                 Title = "Proyectos",
                 Controller = "projects",
                 Action = "Index",
-                Area = "resarch",
-                // TODO Set spected permission
-                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
+                Area = "idi",
+                Role = IDi.Interop.API.Common.Constants.Security.Authorization.ProjectViewerPermission
             });
             researchSection.Add(new ManagementDashboardSectionViewModel
             {
                 Title = "Logros Científicos",
-                Controller = "achivements",
+                Controller = "awardresults",
                 Action = "Index",
-                Area = "resarch",
-                // TODO Set spected permission
-                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
+                Area = "idi",
+                Role = IDi.Interop.API.Common.Constants.Security.Authorization.AwardResultViewerPermission
             });
             researchSection.Add(new ManagementDashboardSectionViewModel
             {
                 Title = "Resultados CTI",
-                Controller = "ctihits",
+                Controller = "scientifictechnicalresults",
                 Action = "Index",
-                Area = "resarch",
-                // TODO Set spected permission
-                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
+                Area = "idi",
+                Role = IDi.Interop.API.Common.Constants.Security.Authorization.ScientificTechnicalResultViewerPermission
             });
             researchSection.Add(new ManagementDashboardSectionViewModel
             {
                 Title = "Introducción de Resultados",
-                Controller = "ctihitintroductions",
+                Controller = "scientifictechnicalresultintroductions",
                 Action = "Index",
-                Area = "resarch",
-                // TODO Set spected permission
-                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
+                Area = "idi",
+                Role = IDi.Interop.API.Common.Constants.Security.Authorization.ScientificTechnicalResultIntroductionViewerPermission
             });
             researchSection.Add(new ManagementDashboardSectionViewModel
             {
                 Title = "Publicaciones",
-                Controller = "publishes",
+                Controller = "publicationresults",
                 Action = "Index",
-                Area = "resarch",
-                // TODO Set spected permission
-                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
+                Area = "idi",
+                Role = IDi.Interop.API.Common.Constants.Security.Authorization.PublicationResultViewerPermission
+            });
+            researchSection.Add(new ManagementDashboardSectionViewModel
+            {
+                Title = "Tesis",
+                Controller = "thesisresults",
+                Action = "Index",
+                Area = "idi",
+                Role = IDi.Interop.API.Common.Constants.Security.Authorization.ThesisResultViewerPermission
             });
             researchSection.Add(new ManagementDashboardSectionViewModel
             {
                 Title = "Programas",
                 Controller = "programs",
                 Action = "Index",
-                Area = "resarch",
-                // TODO Set spected permission
-                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
+                Area = "idi",
+                Role = IDi.Interop.API.Common.Constants.Security.Authorization.ProgramViewerPermission
             });
             researchSection.Add(new ManagementDashboardSectionViewModel
             {
                 Title = "Investigadores",
-                Controller = "researchers",
+                Controller = "internalresearchers",
                 Action = "Index",
-                Area = "resarch",
-                // TODO Set spected permission
-                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
+                Area = "idi",
+                Role = IDi.Interop.API.Common.Constants.Security.Authorization.InternalResearcherViewerPermission
             });
             researchSection.Add(new ManagementDashboardSectionViewModel
             {
                 Title = "Entidades Participantes",
-                Controller = "researpartners",
+                Controller = "participatingorganizations",
                 Action = "Index",
-                Area = "resarch",
-                // TODO Set spected permission
-                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
+                Area = "idi",
+                Role = IDi.Interop.API.Common.Constants.Security.Authorization.ParticipatingOrganizationViewerPermission
             });
             researchSection.Add(new ManagementDashboardSectionViewModel
             {
                 Title = "Financistas",
-                Controller = "sponsors",
+                Controller = "financiers",
                 Action = "Index",
-                Area = "resarch",
-                // TODO Set spected permission
-                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
+                Area = "idi",
+                Role = IDi.Interop.API.Common.Constants.Security.Authorization.FinancierViewerPermission
             });
             researchSection.Add(new ManagementDashboardSectionViewModel
             {
                 Title = "Tipos de Resultado CTI",
-                Controller = "ctihitkinds",
+                Controller = "scientifictechnicalresultkinds",
                 Action = "Index",
-                Area = "resarch",
-                // TODO Set spected permission
-                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
+                Area = "idi",
+                Role = IDi.Interop.API.Common.Constants.Security.Authorization.ScientificTechnicalResultKindViewerPermission
             });
             researchSection.Add(new ManagementDashboardSectionViewModel
             {
@@ -280,8 +277,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Extensions
                 Controller = "programkinds",
                 Action = "Index",
                 Area = "IDi",
-                // TODO Set spected permission
-                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
+                Role = IDi.Interop.API.Common.Constants.Security.Authorization.ProgramKindViewerPermission
             });
             researchSection.Add(new ManagementDashboardSectionViewModel
             {
@@ -289,8 +285,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Extensions
                 Controller = "projectcategories",
                 Action = "Index",
                 Area = "IDi",
-                // TODO Set spected permission
-                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
+                Role = IDi.Interop.API.Common.Constants.Security.Authorization.ProjectCategoryViewerPermission
             });
             researchSection.Add(new ManagementDashboardSectionViewModel
             {
@@ -298,8 +293,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Extensions
                 Controller = "researchercategories",
                 Action = "Index",
                 Area = "IDi",
-                // TODO Set spected permission
-                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
+                Role = IDi.Interop.API.Common.Constants.Security.Authorization.ResearcherCategoryViewerPermission
             });
             researchSection.Add(new ManagementDashboardSectionViewModel
             {
@@ -307,8 +301,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Extensions
                 Controller = "teachingcategories",
                 Action = "Index",
                 Area = "IDi",
-                // TODO Set spected permission
-                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
+                Role = IDi.Interop.API.Common.Constants.Security.Authorization.TeachingCategoryViewerPermission
             });
 
             #endregion
@@ -321,7 +314,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Extensions
                 Controller = "trainingservices",
                 Action = "Index",
                 Area = "servicing",
-                // TODO Set spected permission
                 Role = Servicing.Interop.API.Common.Constants.Security.Authorization.TrainingServiceViewerPermission
             });
             techServicingSection.Add(new ManagementDashboardSectionViewModel
@@ -330,7 +322,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Extensions
                 Controller = "sampleanalysisservices",
                 Action = "Index",
                 Area = "servicing",
-                // TODO Set spected permission
                 Role = Servicing.Interop.API.Common.Constants.Security.Authorization.SampleAnalysisServiceViewerPermission
             });
             techServicingSection.Add(new ManagementDashboardSectionViewModel
@@ -339,7 +330,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Extensions
                 Controller = "groundintegralstudyservices",
                 Action = "Index",
                 Area = "servicing",
-                // TODO Set spected permission
                 Role = Servicing.Interop.API.Common.Constants.Security.Authorization.GroundIntegralStudyServiceViewerPermission
             });
             techServicingSection.Add(new ManagementDashboardSectionViewModel
@@ -348,7 +338,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Extensions
                 Controller = "naturalclienttrainingserviceorders",
                 Action = "Index",
                 Area = "servicing",
-                // TODO Set spected permission
                 Role = Servicing.Interop.API.Common.Constants.Security.Authorization.NaturalClientTrainingServiceOrderViewerPermission
             });
 
@@ -412,7 +401,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Extensions
                 Controller = "serviceordersamples",
                 Action = "Index",
                 Area = "lab",
-                // TODO Set spected permission
                 Role = Lab.Interop.API.Common.Constants.Security.Authorization.ServiceOrderSampleViewerPermission
             });
             laboratorySection.Add(new ManagementDashboardSectionViewModel
@@ -421,7 +409,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Extensions
                 Controller = "workplans",
                 Action = "Index",
                 Area = "lab",
-                // TODO Set spected permission
                 Role = Lab.Interop.API.Common.Constants.Security.Authorization.WorkPlanViewerPermission
             });
             laboratorySection.Add(new ManagementDashboardSectionViewModel
@@ -430,7 +417,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Extensions
                 Controller = "workinggroups",
                 Action = "Index",
                 Area = "lab",
-                // TODO Set spected permission
                 Role = Lab.Interop.API.Common.Constants.Security.Authorization.WorkingGroupViewerPermission
             });
             laboratorySection.Add(new ManagementDashboardSectionViewModel
@@ -439,7 +425,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Extensions
                 Controller = "assessments",
                 Action = "Index",
                 Area = "lab",
-                // TODO Set spected permission
                 Role = Lab.Interop.API.Common.Constants.Security.Authorization.AssessmentViewerPermission
             });
             laboratorySection.Add(new ManagementDashboardSectionViewModel
@@ -448,7 +433,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Extensions
                 Controller = "techniques",
                 Action = "Index",
                 Area = "domain",
-                // TODO Set spected permission
                 Role = Domain.Interop.API.Common.Constants.Security.Authorization.TechniqueViewerPermission
             });
             laboratorySection.Add(new ManagementDashboardSectionViewModel
@@ -457,7 +441,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Extensions
                 Controller = "samplekinds",
                 Action = "Index",
                 Area = "domain",
-                // TODO Set spected permission
                 Role = Domain.Interop.API.Common.Constants.Security.Authorization.SampleKindViewerPermission
             });
             laboratorySection.Add(new ManagementDashboardSectionViewModel
@@ -466,7 +449,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Extensions
                 Controller = "analysisqualitychecks",
                 Action = "Index",
                 Area = "lab",
-                // TODO Set spected permission
                 Role = Lab.Interop.API.Common.Constants.Security.Authorization.AnalysisQualityCheckViewerPermission
             });
 
@@ -494,7 +476,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Extensions
                 Controller = "cubanstandards",
                 Action = "Index",
                 Area = "quality",
-                // TODO Set spected permission
                 Role = Quality.Interop.API.Common.Constants.Security.Authorization.CubanStandardViewerPermission
             });
             qualitySection.Add(new ManagementDashboardSectionViewModel
@@ -503,7 +484,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Extensions
                 Controller = "isostandards",
                 Action = "Index",
                 Area = "quality",
-                // TODO Set spected permission
                 Role = Quality.Interop.API.Common.Constants.Security.Authorization.IsoStandardViewerPermission
             });
             qualitySection.Add(new ManagementDashboardSectionViewModel
@@ -512,7 +492,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Extensions
                 Controller = "certifications",
                 Action = "Index",
                 Area = "quality",
-                // TODO Set spected permission
                 Role = Quality.Interop.API.Common.Constants.Security.Authorization.CertificationViewerPermission
             });
 

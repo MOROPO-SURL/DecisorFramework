@@ -20,7 +20,7 @@
 
         public Framework.Decisor.Core.Interop.API.Common.Models.Display.DocumentDisplayModel Document { get; set; }
 
-        public void Import(Persistence.Entities.ProjectProposal entity)
+        public virtual void Import(Persistence.Entities.ProjectProposal entity)
         {
             Id = entity.Id;
             Title = entity.Title;

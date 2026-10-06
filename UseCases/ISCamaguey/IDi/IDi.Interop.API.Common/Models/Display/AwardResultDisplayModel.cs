@@ -5,7 +5,7 @@ using MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities;
 
 namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display
 {
-    public sealed class AwardResultDisplayModel : IEntityDisplayModel<AwardResult, System.Guid>
+    public class AwardResultDisplayModel : IEntityDisplayModel<AwardResult, System.Guid>
     {
         public System.Guid Id { get; set; }
 
@@ -23,7 +23,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display
 
         public EmployeeDisplayModel Receptor { get; set; }
 
-        public void Import(AwardResult entity)
+        public virtual void Import(AwardResult entity)
         {
             Id = entity.Id; 
             Description = entity.Description;

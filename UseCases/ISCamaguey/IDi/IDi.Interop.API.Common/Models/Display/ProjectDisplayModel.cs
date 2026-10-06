@@ -54,7 +54,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display
 
         public List<ExternalResearcherProjectParticipationDisplayModel> ExternalResearcherProjectParticipations { get; set; } = new List<ExternalResearcherProjectParticipationDisplayModel>();
 
-        public void Import(Persistence.Entities.Project entity)
+        public virtual void Import(Persistence.Entities.Project entity)
         {
             Id = entity.Id;
             Enabled = entity.Enabled;

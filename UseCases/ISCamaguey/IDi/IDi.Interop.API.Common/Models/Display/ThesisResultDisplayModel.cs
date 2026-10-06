@@ -4,7 +4,7 @@ using MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities;
 
 namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display
 {
-    public sealed class ThesisResultDisplayModel : IEntityDisplayModel<ThesisResult, System.Guid>
+    public class ThesisResultDisplayModel : IEntityDisplayModel<ThesisResult, System.Guid>
     {
         public System.Guid Id { get; set; }
 
@@ -24,7 +24,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display
 
         public Framework.Decisor.Core.Interop.API.Common.Models.Display.DocumentDisplayModel Document { get; set; }
 
-        public void Import(ThesisResult entity)
+        public virtual void Import(ThesisResult entity)
         {
             Id = entity.Id; 
             Description = entity.Description;

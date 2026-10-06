@@ -26,7 +26,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display
 
         public ProgramExpectResultDisplayModel[] ExpectResults { get; set; }
 
-        public void Import(Persistence.Entities.Program entity)
+        public virtual void Import(Persistence.Entities.Program entity)
         {
             Id = entity.Id;
             Enabled = entity.Enabled;

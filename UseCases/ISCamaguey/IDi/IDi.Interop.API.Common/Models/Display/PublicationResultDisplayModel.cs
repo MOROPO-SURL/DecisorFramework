@@ -3,7 +3,7 @@ using MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities;
 
 namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display
 {
-    public sealed class PublicationResultDisplayModel : IEntityDisplayModel<PublicationResult, System.Guid>
+    public class PublicationResultDisplayModel : IEntityDisplayModel<PublicationResult, System.Guid>
     {
         public System.Guid Id { get; set; }
 
@@ -21,7 +21,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display
 
         public Framework.Decisor.Core.Interop.API.Common.Models.Display.DocumentDisplayModel Document { get; set; }
 
-        public void Import(PublicationResult entity)
+        public virtual void Import(PublicationResult entity)
         {
             Id = entity.Id;
             Description = entity.Description;
