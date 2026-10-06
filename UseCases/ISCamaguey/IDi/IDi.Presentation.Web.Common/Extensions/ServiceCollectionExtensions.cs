@@ -35,5 +35,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IEntityRepository<ScientificTechnicalResultIntroduction, System.Guid>, ScientificTechnicalResultIntroductionRepository>();
 
         services.AddSingleton<Framework.Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade, Persistence.ORM.EF.Providers.IDiDbSchemaConfigurationProvider>();
+
+        services.AddSingleton<Framework.Guama.Core.Persistence.ORM.EF.Helpers.Facade.IDataInitializationHelper, Helpers.IDiDataInitializationHelper>();
     }
 }

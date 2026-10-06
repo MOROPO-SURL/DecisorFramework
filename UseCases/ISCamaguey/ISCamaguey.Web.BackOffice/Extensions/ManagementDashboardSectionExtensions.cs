@@ -148,7 +148,7 @@
 
             if (target.Controller == "awardresults") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-trophy-award");
 
-            if (target.Controller == "thesisresults") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-podium");
+            if (target.Controller == "thesisresults") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-school");
 
             if (target.Controller == "publicationresults") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-post");
 
@@ -156,7 +156,7 @@
 
             if (target.Controller == "scientifictechnicalresults") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-file-star");
 
-            if (target.Controller == "scientifictechnicalresultintroduction") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-star-circle");
+            if (target.Controller == "scientifictechnicalresultintroductions") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-star-circle");
 
             if (target.Controller == "scientifictechnicalresultkinds") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-playlist-star");
 
