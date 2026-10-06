@@ -14,7 +14,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display
 
         public Framework.Decisor.Domain.Interop.API.Common.Models.Display.KnowledgeAreaDisplayModel[] KnowledgeAreas { get; set; }
 
-        public void Import(Persistence.Entities.ParticipatingOrganization entity)
+        public virtual void Import(Persistence.Entities.ParticipatingOrganization entity)
         {
             Id = entity.Id;
             Enabled = entity.Enabled;

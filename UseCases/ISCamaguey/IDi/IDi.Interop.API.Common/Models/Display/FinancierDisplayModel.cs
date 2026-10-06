@@ -16,7 +16,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display
 
         public Framework.Decisor.Core.Interop.API.Common.Models.Display.DocumentDisplayModel[] Documents { get; set; }
 
-        public void Import(Persistence.Entities.Financier entity)
+        public virtual void Import(Persistence.Entities.Financier entity)
         {
             Id = entity.Id;
             Enabled = entity.Enabled;

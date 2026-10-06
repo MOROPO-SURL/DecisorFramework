@@ -5,7 +5,7 @@ using MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities;
 
 namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display
 {
-    public sealed class ScientificTechnicalResultDisplayModel : IEntityDisplayModel<ScientificTechnicalResult, System.Guid>
+    public class ScientificTechnicalResultDisplayModel : IEntityDisplayModel<ScientificTechnicalResult, System.Guid>
     {
         public System.Guid Id { get; set; }
 
@@ -21,7 +21,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display
 
         public ProjectDisplayModel Project { get; set; }
 
-        public void Import(ScientificTechnicalResult entity)
+        public virtual void Import(ScientificTechnicalResult entity)
         {
             Id = entity.Id; 
             Description = entity.Description;
