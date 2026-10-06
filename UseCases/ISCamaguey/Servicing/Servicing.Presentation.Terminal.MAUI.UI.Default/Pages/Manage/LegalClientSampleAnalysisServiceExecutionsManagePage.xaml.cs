@@ -7,7 +7,13 @@ public partial class LegalClientSampleAnalysisServiceExecutionsManagePage : Fram
     public LegalClientSampleAnalysisServiceExecutionsManagePage()
 	{
 		InitializeComponent();
-	}
+    }
+
+    protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.LegalClientSampleAnalysisServiceExecutionViewerPermission;
+
+    protected override string CreatorPermissionCode => Interop.API.Common.Constants.Security.Authorization.LegalClientSampleAnalysisServiceExecutionCreatorPermission;
+
+    protected override string EditorPermissionCode => Interop.API.Common.Constants.Security.Authorization.LegalClientSampleAnalysisServiceExecutionEditorPermission;
 
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
 

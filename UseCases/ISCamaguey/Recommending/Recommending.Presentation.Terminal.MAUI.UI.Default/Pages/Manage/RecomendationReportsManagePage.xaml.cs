@@ -14,6 +14,12 @@ public partial class RecomendationReportsManagePage : Framework.Decisor.Core.Pre
         return ItemsCollectionView;
     }
 
+    protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.RecomendationReportViewerPermission;
+
+    protected override string CreatorPermissionCode => Interop.API.Common.Constants.Security.Authorization.RecomendationReportCreatorPermission;
+
+    protected override string EditorPermissionCode => Interop.API.Common.Constants.Security.Authorization.RecomendationReportEditorPermission;
+
     protected override double ItemViewRequestWidth => Constants.CardViewHeightConstants.RECOMENDATION_REPORT_DEFAULT_CARD_VIEW_WIDTH;
 
     protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewHeightConstants.RECOMENDATION_REPORT_DEFAULT_CARD_VIEW_HEIGHT;

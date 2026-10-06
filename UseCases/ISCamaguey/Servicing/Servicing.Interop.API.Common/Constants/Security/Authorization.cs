@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MOROPO.ISCamaguey.Decisor.Servicing.Interop.API.Common.Constants.Security
+﻿namespace MOROPO.ISCamaguey.Decisor.Servicing.Interop.API.Common.Constants.Security
 {
     public static class Authorization
     {
@@ -57,12 +53,12 @@ namespace MOROPO.ISCamaguey.Decisor.Servicing.Interop.API.Common.Constants.Secur
 
 
         #region LegalClientGroundIntegralStudyServiceOrder
-        public const string LegalClientGroundIntegralStudyServiceOrderManagementPermissionGroup = "legalclient-groundintegralstudy-serviceorder-management-permission-group";
+        public const string LegalClientGroundIntegralStudyServiceOrderManagementPermissionGroup = "legalclient-groundintegralstudy-service-order-management-permission-group";
 
-        public const string LegalClientGroundIntegralStudyServiceOrderViewerPermission = "legalclient-groundintegralstudy-serviceorder-viewer-permission";
-        public const string LegalClientGroundIntegralStudyServiceOrderCreatorPermission = "legalclient-groundintegralstudy-serviceorder-creator-permission";
-        public const string LegalClientGroundIntegralStudyServiceOrderEditorPermission = "legalclient-groundintegralstudy-serviceorder-editor-permission";
-        public const string LegalClientGroundIntegralStudyServiceOrderRemoverPermission = "legalclient-groundintegralstudy-serviceorder-remover-permission";
+        public const string LegalClientGroundIntegralStudyServiceOrderViewerPermission = "legalclient-groundintegralstudy-service-order-viewer-permission";
+        public const string LegalClientGroundIntegralStudyServiceOrderCreatorPermission = "legalclient-groundintegralstudy-service-order-creator-permission";
+        public const string LegalClientGroundIntegralStudyServiceOrderEditorPermission = "legalclient-groundintegralstudy-service-order-editor-permission";
+        public const string LegalClientGroundIntegralStudyServiceOrderRemoverPermission = "legalclient-groundintegralstudy-service-order-remover-permission";
         #endregion
 
 
@@ -87,12 +83,71 @@ namespace MOROPO.ISCamaguey.Decisor.Servicing.Interop.API.Common.Constants.Secur
 
 
         #region NaturalClientGroundIntegralStudyServiceOrder
-        public const string NaturalClientGroundIntegralStudyServiceOrderManagementPermissionGroup = "naturalclient-groundintegralstudy-serviceorder-management-permission-group";
+        public const string NaturalClientGroundIntegralStudyServiceOrderManagementPermissionGroup = "naturalclient-groundintegralstudy-service-order-management-permission-group";
 
-        public const string NaturalClientGroundIntegralStudyServiceOrderViewerPermission = "naturalclient-groundintegralstudy-serviceorder-viewer-permission";
-        public const string NaturalClientGroundIntegralStudyServiceOrderCreatorPermission = "naturalclient-groundintegralstudy-serviceorder-creator-permission";
-        public const string NaturalClientGroundIntegralStudyServiceOrderEditorPermission = "naturalclient-groundintegralstudy-serviceorder-editor-permission";
-        public const string NaturalClientGroundIntegralStudyServiceOrderRemoverPermission = "naturalclient-groundintegralstudy-serviceorder-remover-permission";
+        public const string NaturalClientGroundIntegralStudyServiceOrderViewerPermission = "naturalclient-groundintegralstudy-service-order-viewer-permission";
+        public const string NaturalClientGroundIntegralStudyServiceOrderCreatorPermission = "naturalclient-groundintegralstudy-service-order-creator-permission";
+        public const string NaturalClientGroundIntegralStudyServiceOrderEditorPermission = "naturalclient-groundintegralstudy-service-order-editor-permission";
+        public const string NaturalClientGroundIntegralStudyServiceOrderRemoverPermission = "naturalclient-groundintegralstudy-service-order-remover-permission";
+        #endregion
+
+        #region LegalClientTrainingServiceExecution
+        public const string LegalClientTrainingServiceExecutionManagementPermissionGroup = "legal-client-training-service-execution-management-permission-group";
+
+        public const string LegalClientTrainingServiceExecutionViewerPermission = "legal-client-training-service-execution-viewer-permission";
+        public const string LegalClientTrainingServiceExecutionCreatorPermission = "legal-client-training-service-execution-creator-permission";
+        public const string LegalClientTrainingServiceExecutionEditorPermission = "legal-client-training-service-execution-editor-permission";
+        public const string LegalClientTrainingServiceExecutionRemoverPermission = "legal-client-training-service-execution-remover-permission";
+        #endregion
+
+
+        #region LegalClientSampleAnalysisServiceExecution
+        public const string LegalClientSampleAnalysisServiceExecutionManagementPermissionGroup = "legal-client-sample-analysis-service-execution-management-permission-group";
+
+        public const string LegalClientSampleAnalysisServiceExecutionViewerPermission = "legal-client-sample-analysis-service-execution-viewer-permission";
+        public const string LegalClientSampleAnalysisServiceExecutionCreatorPermission = "legal-client-sample-analysis-service-execution-creator-permission";
+        public const string LegalClientSampleAnalysisServiceExecutionEditorPermission = "legal-client-sample-analysis-service-execution-editor-permission";
+        public const string LegalClientSampleAnalysisServiceExecutionRemoverPermission = "legal-client-sample-analysis-service-execution-remover-permission";
+        #endregion
+
+
+        #region LegalClientGroundIntegralStudyServiceExecution
+        public const string LegalClientGroundIntegralStudyServiceExecutionManagementPermissionGroup = "legalclient-groundintegralstudy-service-execution-management-permission-group";
+
+        public const string LegalClientGroundIntegralStudyServiceExecutionViewerPermission = "legalclient-groundintegralstudy-service-execution-viewer-permission";
+        public const string LegalClientGroundIntegralStudyServiceExecutionCreatorPermission = "legalclient-groundintegralstudy-service-execution-creator-permission";
+        public const string LegalClientGroundIntegralStudyServiceExecutionEditorPermission = "legalclient-groundintegralstudy-service-execution-editor-permission";
+        public const string LegalClientGroundIntegralStudyServiceExecutionRemoverPermission = "legalclient-groundintegralstudy-service-execution-remover-permission";
+        #endregion
+
+
+        #region NaturalClientTrainingServiceExecution
+        public const string NaturalClientTrainingServiceExecutionManagementPermissionGroup = "natural-client-training-service-execution-management-permission-group";
+
+        public const string NaturalClientTrainingServiceExecutionViewerPermission = "natural-client-training-service-execution-viewer-permission";
+        public const string NaturalClientTrainingServiceExecutionCreatorPermission = "natural-client-training-service-execution-creator-permission";
+        public const string NaturalClientTrainingServiceExecutionEditorPermission = "natural-client-training-service-execution-editor-permission";
+        public const string NaturalClientTrainingServiceExecutionRemoverPermission = "natural-client-training-service-execution-remover-permission";
+        #endregion
+
+
+        #region NaturalClientSampleAnalysisServiceExecution
+        public const string NaturalClientSampleAnalysisServiceExecutionManagementPermissionGroup = "natural-client-sample-analysis-service-execution-management-permission-group";
+
+        public const string NaturalClientSampleAnalysisServiceExecutionViewerPermission = "natural-client-sample-analysis-service-execution-viewer-permission";
+        public const string NaturalClientSampleAnalysisServiceExecutionCreatorPermission = "natural-client-sample-analysis-service-execution-creator-permission";
+        public const string NaturalClientSampleAnalysisServiceExecutionEditorPermission = "natural-client-sample-analysis-service-execution-editor-permission";
+        public const string NaturalClientSampleAnalysisServiceExecutionRemoverPermission = "natural-client-sample-analysis-service-execution-remover-permission";
+        #endregion
+
+
+        #region NaturalClientGroundIntegralStudyServiceExecution
+        public const string NaturalClientGroundIntegralStudyServiceExecutionManagementPermissionGroup = "naturalclient-groundintegralstudy-service-execution-management-permission-group";
+
+        public const string NaturalClientGroundIntegralStudyServiceExecutionViewerPermission = "naturalclient-groundintegralstudy-service-execution-viewer-permission";
+        public const string NaturalClientGroundIntegralStudyServiceExecutionCreatorPermission = "naturalclient-groundintegralstudy-service-execution-creator-permission";
+        public const string NaturalClientGroundIntegralStudyServiceExecutionEditorPermission = "naturalclient-groundintegralstudy-service-execution-editor-permission";
+        public const string NaturalClientGroundIntegralStudyServiceExecutionRemoverPermission = "naturalclient-groundintegralstudy-service-execution-remover-permission";
         #endregion
     }
 }

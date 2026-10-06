@@ -12,6 +12,8 @@ public partial class SampleKindsListPage : Framework.Decisor.Core.Presentation.T
         InitializeComponent();
     }
 
+    protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.SampleKindViewerPermission;
+
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView()
     {
         return ItemsCollectionView;

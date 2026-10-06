@@ -7,7 +7,13 @@ public partial class NaturalClientSampleAnalysisServiceExecutionsManagePage : Fr
     public NaturalClientSampleAnalysisServiceExecutionsManagePage()
 	{
 		InitializeComponent();
-	}
+    }
+
+    protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.NaturalClientSampleAnalysisServiceExecutionViewerPermission;
+
+    protected override string CreatorPermissionCode => Interop.API.Common.Constants.Security.Authorization.NaturalClientSampleAnalysisServiceExecutionCreatorPermission;
+
+    protected override string EditorPermissionCode => Interop.API.Common.Constants.Security.Authorization.NaturalClientSampleAnalysisServiceExecutionEditorPermission;
 
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
 

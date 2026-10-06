@@ -9,7 +9,13 @@ public partial class CertificationManagePage : Framework.Decisor.Core.Presentati
     public CertificationManagePage()
 	{
 		InitializeComponent();
-	}
+    }
+
+    protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.CertificationViewerPermission;
+
+    protected override string CreatorPermissionCode => Interop.API.Common.Constants.Security.Authorization.CertificationCreatorPermission;
+
+    protected override string EditorPermissionCode => Interop.API.Common.Constants.Security.Authorization.CertificationEditorPermission;
 
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView()
     {

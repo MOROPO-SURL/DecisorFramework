@@ -1,11 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Constants.Security
+﻿namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Constants.Security
 {
     public static class Authorization
     {
+        #region Analysis
+        public const string AnalysisManagementPermissionGroup = "analysis-management-permission-group";
+
+        public const string AnalysisViewerPermission = "analysis-viewer-permission";
+        public const string AnalysisCreatorPermission = "analysis-creator-permission";
+        public const string AnalysisEditorPermission = "analysis-editor-permission";
+        public const string AnalysisRemoverPermission = "analysis-remover-permission";
+        #endregion
+
         #region Assessment
         public const string AssessmentManagementPermissionGroup = "assessment-management-permission-group";
 

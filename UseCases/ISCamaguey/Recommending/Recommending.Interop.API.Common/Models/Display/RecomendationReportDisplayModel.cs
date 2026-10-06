@@ -6,7 +6,7 @@ using MOROPO.ISCamaguey.Decisor.Recommending.Persistence.Entities;
 
 namespace MOROPO.ISCamaguey.Decisor.Recommending.Interop.API.Common.Models.Display
 {
-    public sealed class RecomendationReportDisplayModel : IEntityDisplayModel<RecomendationReport, System.Guid>
+    public class RecomendationReportDisplayModel : IEntityDisplayModel<RecomendationReport, System.Guid>
     {
         public System.Guid Id { get; set; }
 
@@ -22,7 +22,7 @@ namespace MOROPO.ISCamaguey.Decisor.Recommending.Interop.API.Common.Models.Displ
 
         public DocumentDisplayModel Document { get; set; }
 
-        public void Import(RecomendationReport entity)
+        public virtual void Import(RecomendationReport entity)
         {
             Id = entity.Id;
             Description = entity.Description;

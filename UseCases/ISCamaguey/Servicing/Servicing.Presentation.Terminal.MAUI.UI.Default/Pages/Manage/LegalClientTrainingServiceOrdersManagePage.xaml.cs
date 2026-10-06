@@ -7,7 +7,13 @@ public partial class LegalClientTrainingServiceOrdersManagePage : Framework.Deci
     public LegalClientTrainingServiceOrdersManagePage()
 	{
 		InitializeComponent();
-	}
+    }
+
+    protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.LegalClientTrainingServiceOrderViewerPermission;
+
+    protected override string CreatorPermissionCode => Interop.API.Common.Constants.Security.Authorization.LegalClientTrainingServiceOrderCreatorPermission;
+
+    protected override string EditorPermissionCode => Interop.API.Common.Constants.Security.Authorization.LegalClientTrainingServiceOrderEditorPermission;
 
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
 

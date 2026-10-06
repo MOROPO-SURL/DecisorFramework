@@ -9,6 +9,12 @@ public partial class NaturalClientSampleAnalysisServiceOrdersManagePage : Framew
         InitializeComponent();
     }
 
+    protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.NaturalClientSampleAnalysisServiceOrderViewerPermission;
+
+    protected override string CreatorPermissionCode => Interop.API.Common.Constants.Security.Authorization.NaturalClientSampleAnalysisServiceOrderCreatorPermission;
+
+    protected override string EditorPermissionCode => Interop.API.Common.Constants.Security.Authorization.NaturalClientSampleAnalysisServiceOrderEditorPermission;
+
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
 
     protected override double ItemViewRequestWidth => Constants.CardViewHeightConstants.ORDER_DEFAULT_CARD_VIEW_WIDTH;

@@ -7,7 +7,13 @@ public partial class NaturalClientGroundIntegralStudyServiceOrdersManagePage : F
     public NaturalClientGroundIntegralStudyServiceOrdersManagePage()
 	{
 		InitializeComponent();
-	}
+    }
+
+    protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.NaturalClientGroundIntegralStudyServiceOrderViewerPermission;
+
+    protected override string CreatorPermissionCode => Interop.API.Common.Constants.Security.Authorization.NaturalClientGroundIntegralStudyServiceOrderCreatorPermission;
+
+    protected override string EditorPermissionCode => Interop.API.Common.Constants.Security.Authorization.NaturalClientGroundIntegralStudyServiceOrderEditorPermission;
 
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
 

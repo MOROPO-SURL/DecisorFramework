@@ -9,5 +9,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<Framework.Guama.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.RecomendationReport, System.Guid>, Persistence.ORM.EF.Repositories.RecomendationReportRepository>();
 
         services.AddSingleton<Framework.Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade, Persistence.ORM.EF.Providers.RecommendingDbSchemaConfigurationProvider>();
+
+        services.AddSingleton<Framework.Guama.Core.Persistence.ORM.EF.Helpers.Facade.IDataInitializationHelper, Helpers.RecommendingDataInitializationHelper>();
     }
 }

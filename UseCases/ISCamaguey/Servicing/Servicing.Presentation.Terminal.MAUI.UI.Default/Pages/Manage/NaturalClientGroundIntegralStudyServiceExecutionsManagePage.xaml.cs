@@ -7,7 +7,13 @@ public partial class NaturalClientGroundIntegralStudyServiceExecutionsManagePage
     public NaturalClientGroundIntegralStudyServiceExecutionsManagePage()
 	{
 		InitializeComponent();
-	}
+    }
+
+    protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.NaturalClientGroundIntegralStudyServiceExecutionViewerPermission;
+
+    protected override string CreatorPermissionCode => Interop.API.Common.Constants.Security.Authorization.NaturalClientGroundIntegralStudyServiceExecutionCreatorPermission;
+
+    protected override string EditorPermissionCode => Interop.API.Common.Constants.Security.Authorization.NaturalClientGroundIntegralStudyServiceExecutionEditorPermission;
 
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
 

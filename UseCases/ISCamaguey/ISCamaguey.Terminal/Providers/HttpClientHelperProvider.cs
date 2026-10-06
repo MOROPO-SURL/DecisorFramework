@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using System.Text;
 
 namespace MOROPO.ISCamaguey.Decisor.Terminal.Providers
 {
@@ -13,12 +14,14 @@ namespace MOROPO.ISCamaguey.Decisor.Terminal.Providers
 
         public void Reset()
         {
-#if DEBUG
-            var baseUrl = Microsoft.Maui.Devices.DeviceInfo.Platform == Microsoft.Maui.Devices.DevicePlatform.Android ? "https://10.0.2.2:7208" : "https://localhost:7208";
-#else
-            var baseUrl = "http://192.168.0.12";
-#endif
             var settingManager = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISettingManagerFacade>();
+
+            StringBuilder baseUrlBuilder = new(settingManager.UseApiServerSSL ? "https://" : "http://");
+
+            baseUrlBuilder
+                .Append(settingManager.ApiServerAddress)
+                .Append(':')
+                .Append(settingManager.ApiServerPort);
 
             HttpClientHelper = new Framework.Guama.Core.Presentation.API.Connect.Helpers.HttpClientHelper(new System.Net.Http.HttpClientHandler
             {
@@ -28,7 +31,7 @@ namespace MOROPO.ISCamaguey.Decisor.Terminal.Providers
                     Credentials = !settingManager.UseProxyAuthentication ? null : new System.Net.NetworkCredential(settingManager.ProxyUsername, settingManager.ProxyPassword)
                 },
                 ServerCertificateCustomValidationCallback = (message, certificate, chain, errors) => true
-            }, baseUrl, GetAuthorizeHeader);
+            }, baseUrlBuilder.ToString(), GetAuthorizeHeader);
         }
 
         private System.Collections.Generic.KeyValuePair<string, string> GetAuthorizeHeader()

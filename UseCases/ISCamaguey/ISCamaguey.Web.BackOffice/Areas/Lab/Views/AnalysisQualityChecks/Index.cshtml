@@ -147,7 +147,7 @@
             <table class="table table-bordered table-striped m-0">
                 <thead>
                     <tr>
-                        <th>No</th>
+                        <th>Fecha</th>
                         <th>Especialista</th>
                         <th class="fit">Opciones</th>
                     </tr>
@@ -161,11 +161,11 @@
                                 <td style="vertical-align: middle;" title="No">
                                     @if (item.Archived)
                                     {
-                                        <span class="display-archived">@item.Id</span>
+                                        <span class="display-archived">@item.At.ToString("D")</span>
                                     }
                                     else
                                     {
-                                        <span>@item.Id</span>
+                                        <span>@item.At.ToString("D")</span>
                                     }
                                 </td>
                                 <td style="vertical-align: middle;" title="Especialista">
@@ -214,8 +214,8 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <dl class="mb-0">
-                                                        <dt>No</dt>
-                                                        <dd>@item.Id</dd>
+                                                        <dt>Fecha</dt>
+                                                        <dd>@item.At.ToString("D")</dd>
                                                         <dt>Especialista</dt>
                                                         <dd>@item.Author</dd>
                                                     </dl>

@@ -358,48 +358,51 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Extensions
 
             productionSection.Add(new ManagementDashboardSectionViewModel
             {
-                Title = "Productos",
-                Controller = "products",
+                Title = "Órdenes de Producción",
+                Controller = "productionorders",
                 Action = "Index",
                 Area = "production",
-                // TODO Set spected permission
-                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
+                Role = Framework.Decisor.Production.Interop.API.Common.Constants.Security.Authorization.ProductionPlanViewerPermission
             });
             productionSection.Add(new ManagementDashboardSectionViewModel
             {
-                Title = "Categorías",
-                Controller = "categories",
+                Title = "Producciones",
+                Controller = "productions",
                 Action = "Index",
                 Area = "production",
-                // TODO Set spected permission
-                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
+                Role = Framework.Decisor.Production.Interop.API.Common.Constants.Security.Authorization.ProductionViewerPermission
             });
             productionSection.Add(new ManagementDashboardSectionViewModel
             {
-                Title = "Planes de Producción",
-                Controller = "plans",
+                Title = "Técnicas de Producción",
+                Controller = "elaborations",
                 Action = "Index",
                 Area = "production",
-                // TODO Set spected permission
-                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
-            });
-            productionSection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Elaboraciones",
-                Controller = "elavorations",
-                Action = "Index",
-                Area = "production",
-                // TODO Set spected permission
-                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
+                Role = Framework.Decisor.Production.Interop.API.Common.Constants.Security.Authorization.ElaborationViewerPermission
             });
             productionSection.Add(new ManagementDashboardSectionViewModel
             {
                 Title = "Revisiones de Calidad",
-                Controller = "qualitychecks",
+                Controller = "productionqualitychecks",
                 Action = "Index",
                 Area = "production",
-                // TODO Set spected permission
-                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
+                Role = Production.Interop.API.Common.Constants.Security.Authorization.ProductionQualityCheckViewerPermission
+            });
+            productionSection.Add(new ManagementDashboardSectionViewModel
+            {
+                Title = "Productos",
+                Controller = "products",
+                Action = "Index",
+                Area = "inventory",
+                Role = Framework.Decisor.Inventory.Interop.API.Common.Constants.Security.Authorization.ProductViewerPermission
+            });
+            productionSection.Add(new ManagementDashboardSectionViewModel
+            {
+                Title = "Familia de Productos",
+                Controller = "families",
+                Action = "Index",
+                Area = "inventory",
+                Role = Framework.Decisor.Inventory.Interop.API.Common.Constants.Security.Authorization.FamilyViewerPermission
             });
 
             #endregion
@@ -477,11 +480,10 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Extensions
             recomendationSection.Add(new ManagementDashboardSectionViewModel
             {
                 Title = "Informes",
-                Controller = "releases",
+                Controller = "recomendationreports",
                 Action = "Index",
-                Area = "recomendation",
-                // TODO Set spected permission
-                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
+                Area = "recommending",
+                Role = Recommending.Interop.API.Common.Constants.Security.Authorization.RecomendationReportViewerPermission
             });
 
             #endregion

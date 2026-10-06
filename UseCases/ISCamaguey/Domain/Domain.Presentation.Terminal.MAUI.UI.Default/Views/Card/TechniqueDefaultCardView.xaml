@@ -6,6 +6,11 @@
     x:Class="MOROPO.ISCamaguey.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Views.Card.TechniqueDefaultCardView"
     x:DataType="interop_common_display_models:TechniqueDisplayModel">
     <Frame>
+        <Frame.InputTransparent>
+            <OnPlatform Default="False">
+                <On Platform="Android" Value="True" />
+            </OnPlatform>
+        </Frame.InputTransparent>
         <StackLayout>
             <Label 
                 LineBreakMode="TailTruncation"

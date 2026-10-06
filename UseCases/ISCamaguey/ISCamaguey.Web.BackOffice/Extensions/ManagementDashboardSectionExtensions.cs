@@ -34,7 +34,9 @@
 
             if (target.Controller == "warehouses") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-warehouse");
 
-            if (target.Controller == "products") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-package-variant-closed");
+            if (target.Controller == "products") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-hexagon");
+
+            if (target.Controller == "families") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-hexagon-multiple");
 
             if (target.Controller == "unitmeasurements") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-scale");
 
@@ -56,7 +58,7 @@
 
             if (target.Controller == "productions") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-cogs");
 
-            if (target.Controller == "productionplans") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-clipboard-text");
+            if (target.Controller == "productionorders") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-clipboard-text");
 
             if (target.Controller == "remunerations") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-account-cash");
 
@@ -134,7 +136,7 @@
 
             if (target.Controller == "categories") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-star-four-points");
 
-            if (target.Controller == "releases") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-file-chart");
+            if (target.Controller == "recomendationreports") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-file-chart");
 
             if (target.Controller == "sampleanalysisservices") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-beaker-question");
 
@@ -177,6 +179,8 @@
             if (target.Controller == "teachingcategories") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-google-classroom");
 
             if (target.Controller == "projectcategories") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-folder-settings-variant-outline");
+
+            if (target.Controller == "productionqualitychecks") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-clipboard-check");
 
             return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-toy-brick-outline");
         }

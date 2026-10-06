@@ -29,5 +29,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<Framework.Guama.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.NaturalClientGroundIntegralStudyServiceExecution, System.Guid>, Persistence.ORM.EF.Repositories.NaturalClientGroundIntegralStudyServiceExecutionRepository>();
 
         services.AddSingleton<Framework.Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade, Persistence.ORM.EF.Providers.ServicingDbSchemaConfigurationProvider>();
+
+        services.AddSingleton<Framework.Guama.Core.Persistence.ORM.EF.Helpers.Facade.IDataInitializationHelper, Helpers.ServicingDataInitializationHelper>();
     }
 }

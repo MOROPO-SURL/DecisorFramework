@@ -9,7 +9,13 @@ public partial class IsoStandardManagePage : Framework.Decisor.Core.Presentation
     public IsoStandardManagePage()
 	{
 		InitializeComponent();
-	}
+    }
+
+    protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.IsoStandardViewerPermission;
+
+    protected override string CreatorPermissionCode => Interop.API.Common.Constants.Security.Authorization.IsoStandardCreatorPermission;
+
+    protected override string EditorPermissionCode => Interop.API.Common.Constants.Security.Authorization.IsoStandardEditorPermission;
 
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView()
     {

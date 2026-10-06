@@ -9,6 +9,12 @@ public partial class ProductionQualityCheckQualityChecksManagePage : Framework.D
         InitializeComponent();
     }
 
+    protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.ProductionQualityCheckViewerPermission;
+
+    protected override string CreatorPermissionCode => Interop.API.Common.Constants.Security.Authorization.ProductionQualityCheckCreatorPermission;
+
+    protected override string EditorPermissionCode => Interop.API.Common.Constants.Security.Authorization.ProductionQualityCheckEditorPermission;
+
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
 
     protected override bool ConfigurationRequiredAsyncWorkPresentation => true;

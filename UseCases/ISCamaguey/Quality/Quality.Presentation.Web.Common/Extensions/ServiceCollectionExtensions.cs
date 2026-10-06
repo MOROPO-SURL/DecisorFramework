@@ -14,6 +14,8 @@ namespace MOROPO.ISCamaguey.Decisor.Quality.Presentation.Web.Common.Extensions
             services.AddScoped<IEntityRepository<Certification, System.Guid>, CertificationRepository>();
 
             services.AddSingleton<Framework.Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade, Persistence.ORM.EF.Providers.QualityDbSchemaConfigurationProvider>();
+
+            services.AddSingleton<Framework.Guama.Core.Persistence.ORM.EF.Helpers.Facade.IDataInitializationHelper, Helpers.QualityDataInitializationHelper>();
         }
     }
 }

@@ -14,7 +14,7 @@
 
         public FamilyDisplayModel Parent { get; set; }
 
-        public void Import(Persistence.Entities.Family entity)
+        public virtual void Import(Persistence.Entities.Family entity)
         {
             Id = entity.Id;
             Name = entity.Name;

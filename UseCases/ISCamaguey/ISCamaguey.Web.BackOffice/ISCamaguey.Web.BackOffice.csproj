@@ -58,11 +58,13 @@
 		<ProjectReference Include="..\..\..\Governance\Governance.Presentation.Web.Frontend\Governance.Presentation.Web.Frontend.csproj" />
 		<ProjectReference Include="..\..\..\HumanResources\HumanResources.Presentation.Web.Backend\HumanResources.Presentation.Web.Backend.csproj" />
 		<ProjectReference Include="..\..\..\HumanResources\HumanResources.Presentation.Web.Frontend\HumanResources.Presentation.Web.Frontend.csproj" />
+		<ProjectReference Include="..\..\..\Inventory\Inventory.Presentation.Web.Backend\Inventory.Presentation.Web.Backend.csproj" />
 		<ProjectReference Include="..\..\..\Inventory\Inventory.Presentation.Web.Frontend\Inventory.Presentation.Web.Frontend.csproj" />
 		<ProjectReference Include="..\..\..\Legal\Legal.Presentation.Web.Backend\Legal.Presentation.Web.Backend.csproj" />
 		<ProjectReference Include="..\..\..\Legal\Legal.Presentation.Web.Frontend\Legal.Presentation.Web.Frontend.csproj" />
 		<ProjectReference Include="..\..\..\Commercial\Commercial.Presentation.Web.Backend\Commercial.Presentation.Web.Backend.csproj" />
 		<ProjectReference Include="..\..\..\Commercial\Commercial.Presentation.Web.Frontend\Commercial.Presentation.Web.Frontend.csproj" />
+		<ProjectReference Include="..\..\..\Production\Production.Presentation.Web.Backend\Production.Presentation.Web.Backend.csproj" />
 		<ProjectReference Include="..\..\..\Production\Production.Presentation.Web.Frontend\Production.Presentation.Web.Frontend.csproj" />
 		<ProjectReference Include="..\Domain\Domain.Presentation.Web.Backend\Domain.Presentation.Web.Backend.csproj" />
 		<ProjectReference Include="..\Domain\Domain.Presentation.Web.Frontend\Domain.Presentation.Web.Frontend.csproj" />
@@ -71,8 +73,10 @@
 		<ProjectReference Include="..\ISCamaguey.Interop.API.Common\ISCamaguey.Interop.API.Common.csproj" />
 		<ProjectReference Include="..\Lab\Lab.Presentation.Web.Backend\Lab.Presentation.Web.Backend.csproj" />
 		<ProjectReference Include="..\Lab\Lab.Presentation.Web.Frontend\Lab.Presentation.Web.Frontend.csproj" />
+		<ProjectReference Include="..\Production\Production.Presentation.Web.Backend\Production.Presentation.Web.Backend.csproj" />
 		<ProjectReference Include="..\Quality\Quality.Presentation.Web.Backend\Quality.Presentation.Web.Backend.csproj" />
 		<ProjectReference Include="..\Quality\Quality.Presentation.Web.Frontend\Quality.Presentation.Web.Frontend.csproj" />
+		<ProjectReference Include="..\Recommending\Recommending.Presentation.Web.Backend\Recommending.Presentation.Web.Backend.csproj" />
 		<ProjectReference Include="..\Reporting\Reporting.Presentation.Web.Frontend\Reporting.Presentation.Web.Frontend.csproj" />
 		<ProjectReference Include="..\Servicing\Servicing.Presentation.Web.Backend\Servicing.Presentation.Web.Backend.csproj" />
 		<ProjectReference Include="..\Servicing\Servicing.Presentation.Web.Frontend\Servicing.Presentation.Web.Frontend.csproj" />
@@ -80,6 +84,10 @@
 		<ProjectReference Include="..\Recommending\Recommending.Presentation.Web.Frontend\Recommending.Presentation.Web.Frontend.csproj" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Content Update="Areas\Production\Views\Productions\Index.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
 	  <Content Update="Areas\Security\Views\Account\Edit.cshtml">
 	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
 	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>

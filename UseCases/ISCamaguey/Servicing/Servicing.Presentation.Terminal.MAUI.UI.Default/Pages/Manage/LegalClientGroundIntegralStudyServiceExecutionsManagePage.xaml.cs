@@ -7,7 +7,13 @@ public partial class LegalClientGroundIntegralStudyServiceExecutionsManagePage :
     public LegalClientGroundIntegralStudyServiceExecutionsManagePage()
 	{
 		InitializeComponent();
-	}
+    }
+
+    protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.LegalClientGroundIntegralStudyServiceExecutionViewerPermission;
+
+    protected override string CreatorPermissionCode => Interop.API.Common.Constants.Security.Authorization.LegalClientGroundIntegralStudyServiceExecutionCreatorPermission;
+
+    protected override string EditorPermissionCode => Interop.API.Common.Constants.Security.Authorization.LegalClientGroundIntegralStudyServiceExecutionEditorPermission;
 
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
 

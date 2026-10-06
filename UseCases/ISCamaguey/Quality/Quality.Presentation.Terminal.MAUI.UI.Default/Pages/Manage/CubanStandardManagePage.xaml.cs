@@ -9,7 +9,13 @@ public partial class CubanStandardManagePage : Framework.Decisor.Core.Presentati
     public CubanStandardManagePage()
 	{
 		InitializeComponent();
-	}
+    }
+
+    protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.CubanStandardViewerPermission;
+
+    protected override string CreatorPermissionCode => Interop.API.Common.Constants.Security.Authorization.CubanStandardCreatorPermission;
+
+    protected override string EditorPermissionCode => Interop.API.Common.Constants.Security.Authorization.CubanStandardEditorPermission;
 
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView()
     {
