@@ -2,6 +2,12 @@
 {
     public interface ISettingManagerFacade
     {
+        string ApiServerAddress { get; set; }
+
+        bool UseApiServerSSL { get; set; }
+
+        int ApiServerPort { get; set; }
+
         bool UseProxyServer { get; set; }
 
         string ProxyServerAddress { get; set; }

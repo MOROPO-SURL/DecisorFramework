@@ -29,6 +29,47 @@
                                 Text="Configuración"
                                 FontAttributes="Bold"
                                 FontSize="Medium" />
+                            <VerticalStackLayout Spacing="6">
+                                <Label 
+                                    Style="{StaticResource CaptionFieldLabelStyle}"
+                                    Text="Dirección del servidor API" />
+                                <Entry Text="{Binding ApiServerAddress}" />
+                                <Label
+                                    IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static core_presentation_page_models:SettingPageModel.ApiServerAddressValidableProperty}}"
+                                    Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static core_presentation_page_models:SettingPageModel.ApiServerAddressValidableProperty}}"
+                                    Style="{StaticResource ValidationMessageLabelStyle}" />
+                            </VerticalStackLayout>
+                            <Grid ColumnSpacing="6" RowSpacing="6">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <StackLayout 
+                                    Grid.Column="0"
+                                    Orientation="Vertical" Spacing="6">
+                                    <Label
+                                        Style="{StaticResource CaptionFieldLabelStyle}"
+                                        HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                        Text="Usar SSL" />
+                                    <Switch 
+                                        VerticalOptions="Center"
+                                        IsToggled="{Binding UseApiServerSSL}" />
+                                </StackLayout>                                
+                                <VerticalStackLayout
+                                    Grid.Column="1"
+                                    Spacing="6">
+                                    <Label 
+                                        Style="{StaticResource CaptionFieldLabelStyle}"
+                                        Text="Puerto del servidor API" />
+                                    <Entry 
+                                        Keyboard="Numeric"
+                                        Text="{Binding ApiServerPort}" />
+                                    <Label
+                                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static core_presentation_page_models:SettingPageModel.ApiServerPortValidableProperty}}"
+                                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static core_presentation_page_models:SettingPageModel.ApiServerPortValidableProperty}}"
+                                        Style="{StaticResource ValidationMessageLabelStyle}" />
+                                </VerticalStackLayout>
+                            </Grid>
                             <StackLayout Orientation="Vertical" Spacing="6">
                                 <Label
                                     Style="{StaticResource CaptionFieldLabelStyle}"

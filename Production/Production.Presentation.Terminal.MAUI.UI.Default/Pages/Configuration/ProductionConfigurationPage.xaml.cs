@@ -6,15 +6,15 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class ProductionConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<ProductionDisplayModel>
+public partial class ProductionConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<ProductionDisplayModel,ProductionDisplayModel, Models.Page.Configuration.ProductionConfigurationPageModel>
 {
-    public ProductionConfigurationPage(System.Action<ProductionDisplayModel> successAction, Models.Page.Configuration.ProductionConfigurationPageModel model) : base(successAction, model)
+    public ProductionConfigurationPage(System.Action<ProductionDisplayModel> successAction, Models.Page.Configuration.ProductionConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.ProductionConfigurationPageModel> validator) : base(successAction, model, validator)
     {
         InitializeComponent();
 
         if (model.UnitMeasurement != null)
         {
-            for (int i = 0; i < model.AvailableUnitMeasurements.Length; i++)
+            for (int i = 0; i < model.AvailableUnitMeasurements.Count; i++)
             {
                 var current = model.AvailableUnitMeasurements[i];
 
@@ -28,24 +28,24 @@ public partial class ProductionConfigurationPage : Core.Presentation.Terminal.MA
         }
     }
 
-    protected override string EntityTypeName => "Compra";
+    protected override string EntityTypeName => "Producción";
 
     protected override async System.Threading.Tasks.Task<ProductionDisplayModel> PerformCreationAsync()
     {
         var apiConnectClient = new Interop.API.Connect.Clients.ProductionsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-        var concreteBindingContext = (Models.Page.Configuration.ProductionConfigurationPageModel)BindingContext;
-
         var model = new Interop.API.Common.Models.Input.ProductionInputModel
         {
             Id = System.Guid.NewGuid(),
-            PlanId = concreteBindingContext.Order.Id,
-            Amount = concreteBindingContext.Amount,
-            UnitMeasurementId = concreteBindingContext.AvailableUnitMeasurements[UnitMeasurementPicker.SelectedIndex].Id,
-            Description = concreteBindingContext.Description,
-            ProductBridges = concreteBindingContext.ProductBridges.Select(_model => new Interop.API.Common.Models.Bridge.ProductionProductBridgeModel { Product = _model.Product, Amount = _model.Amount, UnitMeasurement = _model.UnitMeasurement }).ToList(),
-            EmployeeBridges = concreteBindingContext.EmployeeBridges.ToList(),
-            ColaboratorBridges = concreteBindingContext.ColaboratorBridges.ToList()
+            OrderId = ConcreteBindingContext.Order.Id,
+            Amount = ConcreteBindingContext.Amount,
+            UnitMeasurementId = ConcreteBindingContext.AvailableUnitMeasurements[UnitMeasurementPicker.SelectedIndex].Id,
+            At = ConcreteBindingContext.At,
+            Description = ConcreteBindingContext.Description,
+            ProductBridges = ConcreteBindingContext.ProductBridges.Select(_model => new Interop.API.Common.Models.Bridge.ProductionProductBridgeModel { Product = _model.Product, Amount = _model.Amount, UnitMeasurement = _model.UnitMeasurement }).ToList(),
+            EmployeeBridges = [.. ConcreteBindingContext.EmployeeBridges],
+            ColaboratorBridges = [.. ConcreteBindingContext.ColaboratorBridges],
+            NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray()
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -53,9 +53,37 @@ public partial class ProductionConfigurationPage : Core.Presentation.Terminal.MA
         return await apiConnectClient.GetAsync(model.Id);
     }
 
-    protected override System.Threading.Tasks.Task<ProductionDisplayModel> PerformEditionAsync()
+    protected async override System.Threading.Tasks.Task<ProductionDisplayModel> PerformEditionAsync()
     {
-        throw new System.InvalidOperationException();
+        var apiConnectClient = new Interop.API.Connect.Clients.ProductionsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+
+        var model = new Interop.API.Common.Models.Input.ProductionInputModel
+        {
+            Id = ConcreteBindingContext.Id,
+            OrderId = ConcreteBindingContext.Order.Id,
+            Amount = ConcreteBindingContext.Amount,
+            UnitMeasurementId = ConcreteBindingContext.AvailableUnitMeasurements[UnitMeasurementPicker.SelectedIndex].Id,
+            At = ConcreteBindingContext.At,
+            Description = ConcreteBindingContext.Description,
+            ProductBridges = ConcreteBindingContext.ProductBridges.Select(_model => new Interop.API.Common.Models.Bridge.ProductionProductBridgeModel { Product = _model.Product, Amount = _model.Amount, UnitMeasurement = _model.UnitMeasurement }).ToList(),
+            EmployeeBridges = [.. ConcreteBindingContext.EmployeeBridges],
+            ColaboratorBridges = [.. ConcreteBindingContext.ColaboratorBridges],
+            NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray()
+        };
+
+        await apiConnectClient.EditAsync(model);
+
+        return await apiConnectClient.GetAsync(model.Id);
+    }
+
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnApply(sender, eventArgs);
+    }
+
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
     }
 
     private void Picker_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -68,33 +96,77 @@ public partial class ProductionConfigurationPage : Core.Presentation.Terminal.MA
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.ProductionOrderPickPage(OrderPickComplete_Callback)));
     }
 
+    protected void NotificationUserAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Core.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.UserPickPage(NotificationUserPickComplete_Callback)));
+    }
+
+    private void NotificationUserRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar este usuario de las notificaciones?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Core.Interop.API.Common.Models.Display.UserDisplayModel;
+
+                ConcreteBindingContext.NotificationUsers.Remove(target);
+
+                hasChangesFlag = true;
+            });
+        });
+    }
+
+    private void NotificationUserPickComplete_Callback(Core.Interop.API.Common.Models.Display.UserDisplayModel model)
+    {
+        ConcreteBindingContext.NotificationUsers.Add(model);
+    }
+
     private void OrderPickComplete_Callback(ProductionOrderDisplayModel model)
     {
-        var concreteBindingContext = (Models.Page.Configuration.ProductionConfigurationPageModel)BindingContext;
+        ConcreteBindingContext.Order = model;
 
-        concreteBindingContext.Order = model;
+        ConcreteBindingContext.ProductBridges.Clear();
 
-        concreteBindingContext.ProductBridges.Clear();
+        foreach (var item in model.Elaboration.OutputProductBridges)
+        {
+            ConcreteBindingContext.ProductBridges.Add(new Models.View.ProductionProductBridgeViewModel
+            {
+                Product = item.Product,
+                UnitMeasurement = item.UnitMeasurement
+            });
+        }
 
-        //foreach (var item in model.Elaboration.OutputProductBridges)
-        //{
-        //    concreteBindingContext.ProductBridges.Add(new Models.View.ProductionProductBridgeViewModel
-        //    {
-        //        Product = item,
-        //        UnitMeasurement = item.DefaultUnitMeasurement
-        //    });
-        //}
+        ConcreteBindingContext.AvailableUnitMeasurements.Clear();
+
+        ConcreteBindingContext.IsBusy = true;
+
+        var unitMeasurementsAPIConnectClient = new Domain.Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+
+        unitMeasurementsAPIConnectClient.GetReleatedsAsync(model.Elaboration.Product.DefaultUnitMeasurement.Id).ContinueWith(task =>
+        {
+            Dispatcher.Dispatch(() =>
+            {
+                ConcreteBindingContext.IsBusy = false;
+
+                if (!task.IsCompletedSuccessfully) return;
+
+                foreach (var item in task.Result)
+                {
+                    ConcreteBindingContext.AvailableUnitMeasurements.Add(item);
+                }
+            });
+        });
     }
 
     private void AddEmployeeBridgeButton_Clicked(object sender, System.EventArgs e)
     {
-        var concreteBindingContext = (Models.Page.Configuration.ProductionConfigurationPageModel)BindingContext;
-
-        if (concreteBindingContext.Order == null) return;
+        if (ConcreteBindingContext.Order == null) return;
 
         var model = new Models.Page.Configuration.ProductionEmployeeBridgeConfigurationPageModel(null)
         {
-            AvailableSteps = concreteBindingContext.Order.Elaboration.Steps
+            AvailableSteps = ConcreteBindingContext.Order.Elaboration.Steps
         };
 
         this.NavigationPushPageAsync(new ProductionEmployeeBridgeConfigurationPage(EmployeeBridgeCreateSuccess_Callback, model));
@@ -102,11 +174,9 @@ public partial class ProductionConfigurationPage : Core.Presentation.Terminal.MA
 
     private void EditEmployeeBridgeButton_Clicked(object sender, System.EventArgs e)
     {
-        var concreteBindingContext = (Models.Page.Configuration.ProductionConfigurationPageModel)BindingContext;
-
         var model = new Models.Page.Configuration.ProductionEmployeeBridgeConfigurationPageModel(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Bridge.ProductionEmployeeBridgeModel)
         {
-            AvailableSteps = concreteBindingContext.Order.Elaboration.Steps
+            AvailableSteps = ConcreteBindingContext.Order.Elaboration.Steps
         };
 
         this.NavigationPushPageAsync(new ProductionEmployeeBridgeConfigurationPage(EmployeetBridgeEditSuccess_Callback, model));
@@ -133,13 +203,11 @@ public partial class ProductionConfigurationPage : Core.Presentation.Terminal.MA
 
     private void EmployeetBridgeEditSuccess_Callback(Interop.API.Common.Models.Bridge.ProductionEmployeeBridgeModel model)
     {
-        var concreteBindingContext = (Models.Page.Configuration.ProductionConfigurationPageModel)BindingContext;
+        var reference = ConcreteBindingContext.EmployeeBridges.First(item => item.Employee.Id == model.Employee.Id);
 
-        var reference = concreteBindingContext.EmployeeBridges.First(item => item.Employee.Id == model.Employee.Id);
+        var index = ConcreteBindingContext.EmployeeBridges.IndexOf(reference);
 
-        var index = concreteBindingContext.EmployeeBridges.IndexOf(reference);
-
-        concreteBindingContext.EmployeeBridges[index] = model;
+        ConcreteBindingContext.EmployeeBridges[index] = model;
 
         hasChangesFlag = true;
     }

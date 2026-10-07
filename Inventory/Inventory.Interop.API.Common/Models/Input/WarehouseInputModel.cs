@@ -2,10 +2,8 @@
 
 namespace MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Input
 {
-    public class WarehouseInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.Warehouse, System.Guid>
+    public class WarehouseInputModel : Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<Persistence.Entities.Warehouse, System.Guid>
     {
-        public System.Guid Id { get; set; } = System.Guid.NewGuid();
-
         [System.ComponentModel.DataAnnotations.Required]
         public string Name { get; set; }
 
@@ -19,7 +17,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Input
         public List<WarehousingAreaInputModel> IncomingAreas { get; set; } = new List<WarehousingAreaInputModel>();
         public List<Display.WarehousingAreaDisplayModel> OutgoingAreas { get; set; } = new List<Display.WarehousingAreaDisplayModel>();
 
-        public Persistence.Entities.Warehouse Export()
+        public override Persistence.Entities.Warehouse Export()
         {
             var entity = new Persistence.Entities.Warehouse
             {
@@ -32,12 +30,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Input
             return entity;
         }
 
-        public void Import(Persistence.Entities.Warehouse entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Mergue(Persistence.Entities.Warehouse entity)
+        public override void Mergue(Persistence.Entities.Warehouse entity)
         {
             entity.Name = Name;
             entity.Description = Description;

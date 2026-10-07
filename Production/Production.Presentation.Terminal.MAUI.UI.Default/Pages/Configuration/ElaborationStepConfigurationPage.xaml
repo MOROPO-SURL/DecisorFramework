@@ -117,7 +117,7 @@
                                     <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
                                 </CollectionView.ItemsLayout>
                                 <CollectionView.EmptyView>
-                                    <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" Margin="10" />
+                                    <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" Padding="8" />
                                 </CollectionView.EmptyView>
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="interop_common_bridge_models:ElaborationStepWorkPositionBridgeModel">
@@ -127,7 +127,9 @@
                                                     <ColumnDefinition />
                                                     <ColumnDefinition Width="Auto" />
                                                 </Grid.ColumnDefinitions>
-                                                <VerticalStackLayout Grid.Column="0">
+                                                <VerticalStackLayout 
+                                                    Margin="4,0,0,0"
+                                                    Grid.Column="0">
                                                     <Label 
                                                         HorizontalOptions="FillAndExpand" VerticalOptions="Center"
                                                         Text="{Binding WorkPosition.Name}"
@@ -137,9 +139,8 @@
                                                         <Label.FormattedText>
                                                             <FormattedString>
                                                                 <Span Text="Remuneración: " FontAttributes="Bold" TextColor="DimGray" />
-                                                                <Span Text="{Binding Participation}" />
-                                                                <Span Text=" " />
-                                                                <Span Text="{Binding Relative, Converter={StaticResource LinkedToObjectConverter}}" />
+                                                                <Span Text="{Binding Participation, StringFormat='{0:F2}', TargetNullValue='---'}" />
+                                                                <Span Text="{Binding Relative, Converter={StaticResource LinkedToObjectConverter}, StringFormat=' {0}'}" />
                                                             </FormattedString>
                                                         </Label.FormattedText>
                                                     </Label>
@@ -148,16 +149,16 @@
                                                         FontSize="Caption"
                                                         Margin="0,8,0,0"
                                                         Text="Descripción" />
-                                                    <Label
-                                                        Style="{StaticResource ValueFieldLabelStyle}"
-                                                        Text="{Binding Description, TargetNullValue='---'}" />
+                                                    <Label Text="{Binding Description}" />
                                                 </VerticalStackLayout>
                                                 <VerticalStackLayout Grid.Column="1" Spacing="8">
                                                     <Button
-                                                        FontFamily="MaterialDesignIcons" Text="&#xF90B;"
+                                                        Style="{StaticResource FontIconImageButtonStyle}"
+                                                        Text="&#xF90B;"
                                                         Clicked="EditRoleButton_Clicked" />
                                                     <Button
-                                                        FontFamily="MaterialDesignIcons" Text="&#xf1c0;"
+                                                        Style="{StaticResource DangerKindFontIconImageButtonStyle}"
+                                                        Text="&#xFA79;"
                                                         Clicked="RoleRemoveButton_Clicked" />
                                                 </VerticalStackLayout>
                                             </Grid>

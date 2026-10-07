@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
+using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
+using MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Extensions;
 using MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Filter;
 using MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input;
@@ -10,6 +12,7 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Production.Presentation.Web.Frontend.Controllers;
 
+[Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
 [Microsoft.AspNetCore.Mvc.Route("api/fwrk/production/[controller]")]
 [Microsoft.AspNetCore.Mvc.ApiController]
 public class ElaborationsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementFilteredController<Elaboration, System.Guid, ElaborationInputModel, ElaborationDisplayModel, ElaborationFilterModel>
@@ -17,12 +20,14 @@ public class ElaborationsController : Guama.Core.Presentation.Web.API.Controller
     private readonly IEntityRepository<ElaborationStep, System.Guid> stepRepository;
     private readonly IEntityRepository<Document, System.Guid> documentRepository;
     private readonly IDocumentFileManagerFacade documentFileManager;
+    private readonly IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository;
 
-    public ElaborationsController(IDocumentFileManagerFacade documentFileManager, IEntityRepository<Document, System.Guid> documentRepository, IEntityRepository<ElaborationStep, System.Guid> stepRepository, IEntityRepository<Elaboration, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ElaborationsController> localizer, ILogger<ElaborationsController> logger) : base(repository, localizer, logger)
+    public ElaborationsController(IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository, IDocumentFileManagerFacade documentFileManager, IEntityRepository<Document, System.Guid> documentRepository, IEntityRepository<ElaborationStep, System.Guid> stepRepository, IEntityRepository<Elaboration, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ElaborationsController> localizer, ILogger<ElaborationsController> logger) : base(repository, localizer, logger)
     {
         this.stepRepository = stepRepository;
         this.documentRepository = documentRepository;
         this.documentFileManager = documentFileManager;
+        this.changeNotificationRepository = changeNotificationRepository;
     }
 
     protected override System.Linq.Expressions.Expression<System.Func<Elaboration, bool>> GetGlobalSelector()
@@ -199,5 +204,19 @@ public class ElaborationsController : Guama.Core.Presentation.Web.API.Controller
         }
 
         #endregion
+    }
+
+    protected override void PostCreate(Elaboration entity, ElaborationInputModel model)
+    {
+        base.PostCreate(entity, model);
+
+        this.ChangeNotificationOnPostCreate(entity, model, changeNotificationRepository);
+    }
+
+    protected override void PostEdit(Elaboration entity, ElaborationInputModel model)
+    {
+        base.PostEdit(entity, model);
+
+        this.ChangeNotificationOnPostEdit(entity, model, changeNotificationRepository);
     }
 }

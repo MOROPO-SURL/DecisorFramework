@@ -5,8 +5,6 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Defa
 
 public partial class ProductionOrdersManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.ProductionOrderDisplayModel, Models.Page.Manage.ProductionOrdersManagePageModel, Models.Page.Configuration.ProductionOrderConfigurationPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 228;
-
     public ProductionOrdersManagePage()
     {
         InitializeComponent();
@@ -16,9 +14,9 @@ public partial class ProductionOrdersManagePage : Core.Presentation.Terminal.MAU
 
     protected override bool ConfigurationRequiredAsyncWorkPresentation => false;
 
-    protected override double ItemViewRequestWidth { get => 400; }
+    protected override double ItemViewRequestWidth => Constants.CardViewHeightConstants.PRODUCTION_ORDER_DEFAULT_CARD_VIEW_WIDTH;
 
-    protected override double MeasureCollectionViewCellHeight(double width) => ITEM_VIEW_REQUEST_HEIGHT;
+    protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewHeightConstants.PRODUCTION_ORDER_DEFAULT_CARD_VIEW_HEIGHT;
 
     protected override System.Threading.Tasks.Task<Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.ProductionOrderDisplayModel>> FetchItemsAsync()
     {

@@ -195,7 +195,7 @@ public partial class NaturalClientConfigurationPage : Core.Presentation.Terminal
                     Id = System.Guid.NewGuid(),
                     Name = name,
                     ContentData = data,
-                    ContentType = filePickResult.ContentType
+                    ContentType = MimeTypes.MimeTypeMap.GetMimeType(System.IO.Path.GetExtension(filePickResult.FileName))
                 };
 
                 incomingDocuments.Add(model);

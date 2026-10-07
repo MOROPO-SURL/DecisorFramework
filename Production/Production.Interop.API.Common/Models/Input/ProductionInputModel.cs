@@ -2,17 +2,17 @@
 
 namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input
 {
-    public class ProductionInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.Production, System.Guid>
+    public class ProductionInputModel : Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<Persistence.Entities.Production, System.Guid>
     {
-        public System.Guid Id { get; set; }
-
         public int Priority { get; set; }
 
-        public System.Guid PlanId { get; set; }
+        public System.Guid OrderId { get; set; }
 
         public decimal Amount { get; set; }
 
         public System.Guid UnitMeasurementId { get; set; }
+
+        public System.DateTime At { get; set; }
 
         public string Description { get; set; }
 
@@ -22,7 +22,7 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input
 
         public System.Collections.Generic.List<Bridge.ProductionColaboratorBridgeModel> ColaboratorBridges { get; set; } = new System.Collections.Generic.List<Bridge.ProductionColaboratorBridgeModel>();
 
-        public Persistence.Entities.Production Export()
+        public override Persistence.Entities.Production Export()
         {
             var entity = new Persistence.Entities.Production { Id = Id, Enabled = true };
 
@@ -31,21 +31,17 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input
             return entity;
         }
 
-        public void Import(Persistence.Entities.Production entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Mergue(Persistence.Entities.Production entity)
+        public override void Mergue(Persistence.Entities.Production entity)
         {
             entity.Priority = Priority;
             entity.Amount = Amount;
+            entity.At = At;
             entity.Description = Description;
 
-            if (entity.PlanId != PlanId)
+            if (entity.OrderId != OrderId)
             {
-                entity.Plan = null;
-                entity.PlanId = PlanId;
+                entity.Order = null;
+                entity.OrderId = OrderId;
             }
 
             if (entity.UnitMeasurementId != UnitMeasurementId)
