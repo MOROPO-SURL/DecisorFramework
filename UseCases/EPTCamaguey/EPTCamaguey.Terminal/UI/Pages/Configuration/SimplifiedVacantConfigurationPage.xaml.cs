@@ -30,7 +30,7 @@ public partial class SimplifiedVacantConfigurationPage : Framework.Decisor.Core.
         return System.Threading.Tasks.Task.FromResult(new Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.View.WorkforceConfigurationVacantViewModel
         {
             Id = System.Guid.NewGuid(),
-            OrganizationUnity = ConcreteBindingContext.OrganizationUnity,
+            Context = ConcreteBindingContext.Context,
             Priority = ConcreteBindingContext.Priority,
             OcupationMode = ConcreteBindingContext.OcupationMode,
             WorkPosition = ConcreteBindingContext.WorkPosition,
@@ -43,7 +43,7 @@ public partial class SimplifiedVacantConfigurationPage : Framework.Decisor.Core.
         return System.Threading.Tasks.Task.FromResult(new Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.View.WorkforceConfigurationVacantViewModel
         {
             Id = ConcreteBindingContext.Id,
-            OrganizationUnity = ConcreteBindingContext.OrganizationUnity,
+            Context = ConcreteBindingContext.Context,
             Priority = ConcreteBindingContext.Priority,
             OcupationMode = ConcreteBindingContext.OcupationMode,
             WorkPosition = ConcreteBindingContext.WorkPosition,

@@ -11,7 +11,7 @@
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
 
-                <fwrk_core_presentation_dictionary_resources:ExplicitStylesDictionary />
+                <fwrk_core_presentation_dictionary_resources:SharedStylesDictionary />
             </ResourceDictionary.MergedDictionaries>
 
             <Style x:Key="LogoImageViewStyle" TargetType="Image">

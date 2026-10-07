@@ -7,12 +7,16 @@
     xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:caneyframework_mvvm_pages="clr-namespace:MOROPO.Framework.Caney.MVVM.Core.Pages;assembly=MOROPO.Framework.Caney.MVVM"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.EPTCamaguey.Decisor.Terminal.UI.Pages.Manage.OcupationsSimplifiedManagePage"
     x:DataType="fwrk_presentation_manage_page_models:OcupationsManagePageModel"
     Title="Definición de Personal en Plantilla">
     <ContentPage.Resources>
         <ResourceDictionary>
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" SingleSpacing="8" />
+
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+            <communitytoolkit_converters:IsNullConverter x:Key="IsNullConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
@@ -38,7 +42,7 @@
                         <Picker 
                             x:Name="StaffPicker" 
                             ItemsSource="{Binding AvailableStaffs}"
-                            ItemDisplayBinding="{Binding Path=Structure.Identity.Name}"
+                            ItemDisplayBinding="{Binding Path=AdministrativeEntity.Identity.Name}"
                             SelectedIndexChanged="StaffPicker_SelectedIndexChanged" />
                     </VerticalStackLayout>
                     <VerticalStackLayout 
@@ -54,28 +58,28 @@
                     </VerticalStackLayout>
                 </FlexLayout>
                 <VerticalStackLayout>
-                    <Label 
-                        Style="{StaticResource CaptionFieldLabelStyle}" 
+                    <Label
+                        Style="{StaticResource CaptionFieldLabelStyle}"
                         Margin="8,8,8,0" 
-                        Text="Unidades Organizativas" />
-                    <BoxView Color="DimGray" Margin="8,4,8,8" HeightRequest="1" />
-                    <CollectionView ItemsSource="{Binding OrganizationalUnities}">
-                        <CollectionView.ItemsLayout>
-                            <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
-                        </CollectionView.ItemsLayout>
-                        <CollectionView.EmptyView>
-                            <Label Text="Seleccione estructura de plantilla de una entidad administrativa ..." FontAttributes="Italic" TextColor="DimGray" Padding="8,4" />
-                        </CollectionView.EmptyView>
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <local_card_views:OcupationsSimplifiedManageOrganizationalUnityAndVacantsCardView 
-                                    Padding="8,4"
-                                    ContactPickButtonClick="ContactPickButton_Clicked"
-                                    RemoveOcupationButtonClick="RemoveOcupationButton_Clicked"
-                                    EmployeeDetailButtonClick="EmployeeDetailButton_Clicked" />
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
+                        Text="Especificación de ocupaciones" />
+                    <BoxView
+                        Color="DimGray" 
+                        Margin="8,4,8,8" HeightRequest="1" />
+                    <ContentView 
+                        IsVisible="{Binding RootTreeOcupationManageOrganizationalStructuringUnit, Converter={StaticResource IsNotNullConverter}}"
+                        Margin="0,4,0,0">
+                        <local_card_views:OcupationSimplifiedManageOrganizationalStructuringUnitTreeCardView
+                            BindingContext="{Binding RootTreeOcupationManageOrganizationalStructuringUnit}"
+                            ContactPickButtonClick="ContactPickButton_Clicked"
+                            RemoveOcupationButtonClick="RemoveOcupationButton_Clicked"
+                            EmployeeDetailButtonClick="EmployeeDetailButton_Clicked" />
+                    </ContentView>
+                    <Label
+                        IsVisible="{Binding RootTreeOcupationManageOrganizationalStructuringUnit, Converter={StaticResource IsNullConverter}}"
+                        Margin="8,0"
+                        FontAttributes="Italic"
+                        TextColor="DimGray"
+                        Text="Seleccione estructura de plantilla de una entidad administrativa ..." />
                 </VerticalStackLayout>
             </VerticalStackLayout>
         </ScrollView>

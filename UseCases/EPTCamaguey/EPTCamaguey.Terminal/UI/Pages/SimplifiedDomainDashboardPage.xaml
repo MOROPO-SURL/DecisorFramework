@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<caneyframework_mvvm_pages:BindingContextedContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:fwrk_core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:fwrk_core_dashboard_page_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page.Dashboard;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:fwrk_core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:caneyframework_mvvm_pages="clr-namespace:MOROPO.Framework.Caney.MVVM.Core.Pages;assembly=MOROPO.Framework.Caney.MVVM"
+    xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.EPTCamaguey.Decisor.Terminal.UI.Pages.SimplifiedDomainDashboardPage"
+    x:TypeArguments="fwrk_core_dashboard_page_models:BaseDomainDashboardPageModel"
+    x:DataType="fwrk_core_dashboard_page_models:BaseDomainDashboardPageModel"
+    Title="Panel de Control para Dominio">
+    <ContentPage.Resources>
+        <fwrk_core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
+        
+        <communitytoolkit_converters:BoolToObjectConverter 
+            x:Key="BoolToColor" 
+            TrueObject="#45A049"            
+            FalseObject="#E65100" />
+        <communitytoolkit_converters:BoolToObjectConverter 
+            x:Key="IsModuleReadeyToGlyph" 
+            TrueObject="&#xF790;"
+            FalseObject="&#xFCC1;" />
+        <communitytoolkit_converters:BoolToObjectConverter 
+            x:Key="HasAnyToGlyph" 
+            TrueObject="&#xFE70;"
+            FalseObject="&#xF026;" />
+        <communitytoolkit_converters:BoolToObjectConverter 
+            x:Key="IsModuleReadeyToTitle" 
+            TrueObject="Configuración mínima del módulo completada"
+            FalseObject="Se requiere configuración mínima del módulo" />
+        <communitytoolkit_converters:BoolToObjectConverter 
+            x:Key="BoolToTitle" 
+            TrueObject="Al menos una definida"
+            FalseObject="0 definidas" />
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Actualizar"
+            Clicked="ReloadToolbarItems_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF450;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <Grid>
+        <ScrollView Orientation="Vertical">
+            <VerticalStackLayout Spacing="4" Margin="8">
+                <Frame Margin="8">
+                    <VerticalStackLayout>
+                        <Label
+                            HorizontalTextAlignment="Center"
+                            FontFamily="MaterialDesignIcons"
+                            FontSize="96"
+                            TextColor="{Binding IsModuleReady, Converter={StaticResource BoolToColor}}"
+                            Text="{Binding IsModuleReady, Converter={StaticResource IsModuleReadeyToGlyph}}" />
+                        <Label
+                            HorizontalTextAlignment="Center"
+                            FontSize="Medium"
+                            TextColor="{Binding IsModuleReady, Converter={StaticResource BoolToColor}}"
+                            Text="{Binding IsModuleReady, Converter={StaticResource IsModuleReadeyToTitle}}" />
+                        <BoxView
+                            Style="{StaticResource SeparatorBoxView}"
+                            Margin="0,24"
+                            HeightRequest="2" />
+                        <FlexLayout
+                            Wrap="Wrap"
+                            AlignItems="Start" AlignContent="Start">
+                            <VerticalStackLayout
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, SmallContainerColumn=6}}"
+                                Margin="4,8">
+                                <Label
+                                    HorizontalTextAlignment="Center"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="48"
+                                    Text="{StaticResource OrganizationalUnitDesignGlyphIconId}" />
+                                <Label
+                                    HorizontalTextAlignment="Center"
+                                    FontAttributes="Bold"
+                                    Text="Unidades Organizativas" />
+                                <Label
+                                    HorizontalOptions="Center"
+                                    Margin="0,8,0,0"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="36"
+                                    TextColor="{Binding HasAnyOrganizationalUnit, Converter={StaticResource BoolToColor}}"
+                                    Text="{Binding HasAnyOrganizationalUnit, Converter={StaticResource HasAnyToGlyph}}" />
+                                <Label
+                                    HorizontalOptions="Center"
+                                    TextColor="{Binding HasAnyOrganizationalUnit, Converter={StaticResource BoolToColor}}"
+                                    Text="{Binding HasAnyOrganizationalUnit, Converter={StaticResource BoolToTitle}}" />
+                                <Button
+                                    HorizontalOptions="Center"
+                                    Margin="0,8,0,0"
+                                    Text="Gestionar"
+                                    Clicked="GoOrganizationalUnitsManageSiteButton_Clicked" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, SmallContainerColumn=6}}"
+                                Margin="4,8">
+                                <Label
+                                    HorizontalTextAlignment="Center"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="48"
+                                    Text="{StaticResource OrganizationalStructureMaterialDesignGlyphIconId}" />
+                                <Label
+                                    HorizontalTextAlignment="Center"
+                                    FontAttributes="Bold"
+                                    Text="Estructuras Organizacionales" />
+                                <Label
+                                    HorizontalOptions="Center"
+                                    Margin="0,8,0,0"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="36"
+                                    TextColor="{Binding HasAnyOrganizationalUnit, Converter={StaticResource BoolToColor}}"
+                                    Text="{Binding HasAnyOrganizationalUnit, Converter={StaticResource HasAnyToGlyph}}" />
+                                <Label
+                                    HorizontalOptions="Center"
+                                    TextColor="{Binding HasAnyOrganizationalUnit, Converter={StaticResource BoolToColor}}"
+                                    Text="{Binding HasAnyOrganizationalUnit, Converter={StaticResource BoolToTitle}}" />
+                                <Button
+                                    HorizontalOptions="Center"
+                                    Margin="0,8,0,0"
+                                    Text="Gestionar"
+                                    Clicked="GoOrganizationalStructuresManageSiteButton_Clicked" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, SmallContainerColumn=6}}"
+                                Margin="4,8">
+                                <Label
+                                    HorizontalTextAlignment="Center"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="48"
+                                    Text="&#xF1D7;" />
+                                <Label
+                                    HorizontalTextAlignment="Center"
+                                    FontAttributes="Bold"
+                                    Text="Tipos de Ent. Administrativa" />
+                                <Label
+                                    HorizontalOptions="Center"
+                                    Margin="0,8,0,0"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="36"
+                                    TextColor="{Binding HasAnyAdministrativeEntityKind, Converter={StaticResource BoolToColor}}"
+                                    Text="{Binding HasAnyAdministrativeEntityKind, Converter={StaticResource HasAnyToGlyph}}" />
+                                <Label
+                                    HorizontalOptions="Center"
+                                    TextColor="{Binding HasAnyAdministrativeEntityKind, Converter={StaticResource BoolToColor}}"
+                                    Text="{Binding HasAnyAdministrativeEntityKind, Converter={StaticResource BoolToTitle}}" />
+                                <Button
+                                    HorizontalOptions="Center"
+                                    Margin="0,8,0,0"
+                                    Text="Administrar"
+                                    Clicked="GoAdministrativeEntityKindsAdminSiteManagePageButton_Clicked" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, SmallContainerColumn=6}}"
+                                Margin="4,8">
+                                <Label
+                                    HorizontalTextAlignment="Center"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="48"
+                                    Text="{StaticResource AdministrativeEntityMaterialDesignGlyphIconId}" />
+                                <Label
+                                    HorizontalTextAlignment="Center"
+                                    FontAttributes="Bold"
+                                    Text="Entidades Administrativas" />
+                                <Label
+                                    HorizontalOptions="Center"
+                                    Margin="0,8,0,0"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="36"
+                                    TextColor="{Binding HasAnyOrganizationalUnit, Converter={StaticResource BoolToColor}}"
+                                    Text="{Binding HasAnyOrganizationalUnit, Converter={StaticResource HasAnyToGlyph}}" />
+                                <Label
+                                    HorizontalOptions="Center"
+                                    TextColor="{Binding HasAnyOrganizationalUnit, Converter={StaticResource BoolToColor}}"
+                                    Text="{Binding HasAnyOrganizationalUnit, Converter={StaticResource BoolToTitle}}" />
+                                <Button
+                                    HorizontalOptions="Center"
+                                    Margin="0,8,0,0"
+                                    Text="Gestionar"
+                                    Clicked="GoAdministrativeEntitiesManageSiteManagePageButton_Clicked" />
+                            </VerticalStackLayout>
+                        </FlexLayout>
+                    </VerticalStackLayout>
+                </Frame>
+            </VerticalStackLayout>
+        </ScrollView>
+        <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}" />
+    </Grid>
+</caneyframework_mvvm_pages:BindingContextedContentPage>

@@ -46,8 +46,7 @@ public partial class OcupationsSimplifiedManagePage : Framework.Caney.MVVM.Core.
 
         ConcreteBindingContext.AvailableStaffs.Clear();
         ConcreteBindingContext.AvailableStaffWorkforces.Clear();
-        ConcreteBindingContext.OrganizationalUnities.Clear();
-        ConcreteBindingContext.Items.Clear();
+        ConcreteBindingContext.RootTreeOcupationManageOrganizationalStructuringUnit = null;
 
         var apiConnectClient = new Framework.Decisor.HumanResources.Interop.API.Connect.Clients.StaffsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
@@ -104,9 +103,7 @@ public partial class OcupationsSimplifiedManagePage : Framework.Caney.MVVM.Core.
         var staffId = ConcreteBindingContext.AvailableStaffs[StaffPicker.SelectedIndex].Id;
         var targetWorkforceId = ConcreteBindingContext.AvailableStaffWorkforces[StaffWorkforcePicker.SelectedIndex].Workforce.Id;
 
-        ConcreteBindingContext.Items.Clear();
-
-        System.Threading.Tasks.Task.Run(async () => 
+        System.Threading.Tasks.Task.Run(async () =>
         {
             var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>();
 
@@ -117,22 +114,18 @@ public partial class OcupationsSimplifiedManagePage : Framework.Caney.MVVM.Core.
 
             var ocupations = new System.Collections.Generic.List<Framework.Decisor.HumanResources.Interop.API.Common.Models.Display.OcupationDisplayModel>(await ocupationsAPIConnectClient.FilterAsync(new Framework.Decisor.HumanResources.Interop.API.Common.Models.Filter.OcupationFilterModel { StaffId = staffId, WorkforceId = targetWorkforceId }));
 
-            var _models = targetWorkforce.OrganizationalUnities.ToOcupationsManageOrganizationalUnityViewModelChildren(ocupations);
-
-            Dispatcher.Dispatch(() =>
-            {
-                foreach (var _model in _models)
-                {
-                    ConcreteBindingContext.OrganizationalUnities.Add(_model);
-                }
-            });
-        }).ContinueWith(task => 
+            return targetWorkforce.OrganizationalStructure.RootStructuringUnit.ToConfigurationTreeViewModel([.. targetWorkforce.OrganizationalUnits], ocupations, null);
+        }).ContinueWith(task =>
         {
             Dispatcher.Dispatch(() =>
             {
                 if (task.Exception != null || task.IsCanceled)
                 {
                     Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
+                }
+                else
+                {
+                    ConcreteBindingContext.RootTreeOcupationManageOrganizationalStructuringUnit = task.Result;
                 }
 
                 ConcreteBindingContext.IsBusy = false;

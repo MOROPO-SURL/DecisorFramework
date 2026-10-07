@@ -6,7 +6,7 @@
     xmlns:presentation_configuration_view_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.View;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI"
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
-    xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"    
     x:Class="MOROPO.EPTCamaguey.Decisor.Terminal.UI.Pages.Configuration.SimplifiedVacantConfigurationPage"
     x:TypeArguments="presentation_configuration_view_models:WorkforceConfigurationVacantViewModel,presentation_configuration_view_models:WorkforceConfigurationVacantViewModel,presentation_configuration_page_models:VacantConfigurationPageModel"
     x:DataType="presentation_configuration_page_models:VacantConfigurationPageModel">
@@ -73,17 +73,34 @@
             <BoxView 
                 Margin="8,16,8,8"
                 HeightRequest="1" 
-                Color="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
+                Color="DimGray" />
             <FlexLayout
                 Wrap="Wrap"
                 AlignItems="Start" AlignContent="Start">
-                <VerticalStackLayout 
+                <Grid
                     WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=1, ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
                     Margin="4"
-                    Spacing="6">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
-                    <Picker SelectedItem="{Binding Priority}" ItemsSource="{StaticResource PriorityValues}" />
-                </VerticalStackLayout>
+                    ColumnSpacing="6" RowSpacing="6">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Label 
+                        Grid.Row="0"
+                        Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
+                    <Entry
+                        Grid.Row="1"
+                        BackgroundColor="Transparent"
+                        IsReadOnly="True"
+                        Text="{Binding Priority}" />
+                    <Stepper
+                        Grid.Row="1"
+                        Margin="0,0,6,0"
+                        HorizontalOptions="End" VerticalOptions="Center"
+                        Minimum="1"
+                        Maximum="100"
+                        Value="{Binding Priority}" />
+                </Grid>
             </FlexLayout>
         </VerticalStackLayout>
     </ScrollView>

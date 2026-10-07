@@ -72,8 +72,6 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition />
                     <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="2" />
-                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -127,33 +125,13 @@
                     Padding="20" Spacing="4">
                     <Label
                         HorizontalOptions="Center"
-                        Text="&#xF09E;"
+                        Text="&#xF0E6;"
                         TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
                         FontFamily="MaterialDesignIcons"
-                        FontSize="Header" />
+                        FontSize="60" />
                     <Label
                         HorizontalOptions="Center"
                         Text="Avisos"
-                        TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
-                        FontSize="Medium" />
-                </VerticalStackLayout>
-                <BoxView
-                    Grid.Column="4" Grid.RowSpan="3"
-                    Color="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray900}}" />
-                <VerticalStackLayout
-                    Grid.Column="5" Grid.RowSpan="3"
-                    MinimumWidthRequest="124"
-                    VerticalOptions="Center"
-                    Padding="20" Spacing="4">
-                    <Label
-                        HorizontalOptions="Center"
-                        Text="&#xF78A;"
-                        TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
-                        FontFamily="MaterialDesignIcons"
-                        FontSize="Header" />
-                    <Label
-                        HorizontalOptions="Center"
-                        Text="Ayuda"
                         TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
                         FontSize="Medium" />
                 </VerticalStackLayout>

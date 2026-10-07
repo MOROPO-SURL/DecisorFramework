@@ -2,10 +2,11 @@
 <Shell
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_pages="clr-namespace:MOROPO.EPTCamaguey.Decisor.Terminal.UI.Pages"
     xmlns:local_manage_pages="clr-namespace:MOROPO.EPTCamaguey.Decisor.Terminal.UI.Pages.Manage"
-    xmlns:decisorframework_humanresources_manage_pages="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default"
-    xmlns:decisorframework_humanresources_list_pages="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.List;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default"
-    xmlns:decisorframework_domain_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:frwk_humanresources_manage_pages="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:frwk_humanresources_list_pages="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.List;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:frwk_domain_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
     x:Class="MOROPO.EPTCamaguey.Decisor.Terminal.UI.Shells.HumanResourcesShell">
     <Shell.FlyoutBehavior>
         <OnIdiom Default="Flyout" Desktop="Locked" />
@@ -16,7 +17,8 @@
                 Aspect="AspectFill"
                 Source="rr_hh.jpg" />
             <BoxView
-                Color="#A7000000" />
+                Color="Black"
+                Opacity="0.5" />
             <Grid
                 Padding="16">
                 <Button
@@ -36,41 +38,77 @@
             </Grid>
         </Grid>
     </Shell.FlyoutHeader>
-    <MenuFlyoutItem Text="Plantilla" />
+    <MenuFlyoutItem Text="Inicio" IsEnabled="False" />
     <ShellContent
-        Title="Estructuras"
-        ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:WorkforcesManagePage}">
+        Title="Panel de Control"
+        ContentTemplate="{DataTemplate local_pages:SimplifiedHumanResourcesDashboardPage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xF645;"
+                Glyph="&#xF9E7;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <MenuFlyoutItem Text="Plantilla" />
+    <ShellContent
+        Title="Estructuras"
+        Route="WorkforcesManagePage"
+        ContentTemplate="{DataTemplate frwk_humanresources_manage_pages:WorkforcesManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="{StaticResource WorkforceMaterialDesignGlyphIconId}"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
-        Title="Asignaciones"
-        ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:StaffsManagePage}">
+        Title="Configuraciones"
+        Route="StaffsManagePage"
+        ContentTemplate="{DataTemplate frwk_humanresources_manage_pages:StaffsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xFCF8;"
+                Glyph="{StaticResource StaffMaterialDesignGlyphIconId}"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
         Title="Personal"
+        Route="OcupationsSimplifiedManagePage"
         ContentTemplate="{DataTemplate local_manage_pages:OcupationsSimplifiedManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xF002C;"
+                Glyph="{StaticResource OcupationMaterialDesignGlyphIconId}"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
     <MenuFlyoutItem Text="Gestión" />
     <ShellContent
+        Title="Plazas laborales"
+        Route="WorkPositionsManagePage"
+        ContentTemplate="{DataTemplate frwk_humanresources_manage_pages:WorkPositionsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="{StaticResource WorkPositionMaterialDesignGlyphIconId}"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Escalas salariales"
+        Route="SalaryStandardsManagePage"
+        ContentTemplate="{DataTemplate frwk_humanresources_manage_pages:SalaryStandardsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="{StaticResource SalaryStandardMaterialDesignGlyphIconId}"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
         Title="Contactos"
-        ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:PersonContactsManagePage}">
+        ContentTemplate="{DataTemplate frwk_domain_manage_pages:PersonContactsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -78,44 +116,14 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
-    <ShellContent
-        Title="Plazas laborales"
-        ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:WorkPositionsManagePage}">
-        <ShellContent.Icon>
-            <FontImageSource
-                FontFamily="MaterialDesignIcons"
-                Glyph="&#xF631;"
-                Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </ShellContent.Icon>
-    </ShellContent>
-    <ShellContent
-        Title="Escalas salariales"
-        ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:SalaryStandardsManagePage}">
-        <ShellContent.Icon>
-            <FontImageSource
-                FontFamily="MaterialDesignIcons"
-                Glyph="&#xF00C2;"
-                Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </ShellContent.Icon>
-    </ShellContent>
     <MenuFlyoutItem Text="Configuración" />
     <ShellContent
         Title="Categorías ocupacionales"
-        ContentTemplate="{DataTemplate decisorframework_humanresources_list_pages:WorkPositionKindsListPage}">
+        ContentTemplate="{DataTemplate frwk_humanresources_list_pages:WorkPositionKindsListPage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xF017;"
-                Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </ShellContent.Icon>
-    </ShellContent>
-    <ShellContent
-        Title="Niveles de preparación"
-        ContentTemplate="{DataTemplate decisorframework_humanresources_list_pages:SchoolingsListPage}">
-        <ShellContent.Icon>
-            <FontImageSource
-                FontFamily="MaterialDesignIcons"
-                Glyph="&#xF474;"
+                Glyph="{StaticResource WorkPositionKindMaterialDesignGlyphIconId}"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
