@@ -94,9 +94,9 @@
             Title="Inmuebles"
             ContentTemplate="{DataTemplate decisorframework_leasing_list_pages:PropertyLeaseOfferTenderListPage}" />
     </FlyoutItem>
-    <MenuFlyoutItem Text="Supervisión" IsEnabled="False" />
+    <MenuFlyoutItem Text="Expedientes" IsEnabled="False" />
     <FlyoutItem
-        Title="Expedientes de Arrend. Inmuebles">
+        Title="Arrendamiento de Inmuebles">
         <FlyoutItem.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -111,7 +111,7 @@
             ContentTemplate="{DataTemplate decisorframework_leasing_list_pages:NaturalClientPropertyLeasingListPage}" />
     </FlyoutItem>
     <FlyoutItem
-        Title="Expedientes de Arrend. Vehículos">
+        Title="Arrendamiento de Vehículos">
         <FlyoutItem.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -125,7 +125,48 @@
             Title="Clientes Naturales"
             ContentTemplate="{DataTemplate decisorframework_leasing_list_pages:NaturalClientVehicleLeasingListPage}" />
     </FlyoutItem>
+    <MenuFlyoutItem Text="Acciones de Control" IsEnabled="False" />
+    <FlyoutItem
+        Title="Arrendamiento de Inmuebles">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFCF1;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </FlyoutItem.Icon>
+        <ShellContent
+            Title="Clientes Jurídicos"
+            ContentTemplate="{DataTemplate ContentPage}" />
+        <ShellContent
+            Title="Clientes Naturales"
+            ContentTemplate="{DataTemplate ContentPage}" />
+    </FlyoutItem>
+    <FlyoutItem
+        Title="Arrendamiento de Vehículos">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF0E7;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </FlyoutItem.Icon>
+        <ShellContent
+            Title="Clientes Jurídicos"
+            ContentTemplate="{DataTemplate ContentPage}" />
+        <ShellContent
+            Title="Clientes Naturales"
+            ContentTemplate="{DataTemplate ContentPage}" />
+    </FlyoutItem>
     <MenuFlyoutItem Text="Gestión" IsEnabled="False" />
+    <ShellContent
+        Title="Grupos de Supervisión"
+        ContentTemplate="{DataTemplate decisorframework_leasing_manage_pages:SupervisionGroupsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF0192;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
     <ShellContent
         Title="Inmuebles"
         ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:PropertiesManagePage}">
@@ -146,6 +187,17 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
+    <ShellContent
+        Title="Marcas"
+        Route="BrandsManagePage"
+        ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:BrandsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF4CF;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
     <FlyoutItem Title="Contactos">
         <FlyoutItem.Icon>
             <FontImageSource
@@ -160,14 +212,4 @@
             Title="Personas"
             ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:PersonContactsManagePage}" />
     </FlyoutItem>
-    <ShellContent
-        Title="Grupos de Supervisión"
-        ContentTemplate="{DataTemplate decisorframework_leasing_manage_pages:SupervisionGroupsManagePage}">
-        <ShellContent.Icon>
-            <FontImageSource
-                FontFamily="MaterialDesignIcons"
-                Glyph="&#xF0192;"
-                Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </ShellContent.Icon>
-    </ShellContent>
 </Shell>

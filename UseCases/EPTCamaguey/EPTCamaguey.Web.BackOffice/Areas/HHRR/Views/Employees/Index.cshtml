@@ -1,7 +1,7 @@
-﻿@model MOROPO.Framework.Guama.Core.Presentation.Web.Frontend.Models.View.PaginationViewModel<MOROPO.Framework.Decisor.Domain.Persistence.Entities.StructureKind, System.Guid, MOROPO.Framework.Decisor.Domain.Presentation.Web.Backend.Models.View.Display.StructureKindDisplayViewModel>
+﻿@model MOROPO.Framework.Guama.Core.Presentation.Web.Frontend.Models.View.PaginationViewModel<MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee, System.Guid, MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Backend.Models.View.Display.EmployeeDisplayViewModel>
 
 @{
-    const string HEADER = "Administración de Tipos de Estructura";
+    const string HEADER = "Administración de Empleados";
 
     ViewData["TITLE"] = ViewData["HEADER"] = HEADER;
 
@@ -22,10 +22,6 @@
 }
 
 <hr class="mt-0 mb-4" />
-
-<a class="btn btn-primary float-right" href="@Url.Action("create")"><span class="mdi mdi-plus"></span> Agregar</a>
-
-<div class="clearfix mb-3"></div>
 
 <div class="card">
     <div class="card-header">
@@ -133,8 +129,8 @@
                 <thead>
                     <tr>
                         <th>Nombre</th>
-                        <th>Creado</th>
-                        <th class="fit">Habilitada?</th>
+                        <th>Apellidos</th>
+                        <th class="fit">Habilitado?</th>
                         <th class="fit">Opciones</th>
                     </tr>        
                 </thead>
@@ -144,24 +140,24 @@
                         foreach (var item in Model.List)
                         {
                             <tr>
-                                <td style="vertical-align: middle;" title="Título">
+                                <td style="vertical-align: middle;" title="Nombre">
                                     @if (item.Archived)
                                     {
-                                        <span class="display-archived">@item.Name</span>
+                                        <span class="display-archived">@item.Contact.Identity.Name</span>
                                     }
                                     else
                                     {
-                                        <span>@item.Name</span>
+                                        <span>@item.Contact.Identity.Name</span>
                                     }
                                 </td>
-                                <td style="vertical-align: middle;" title="Fecha">
+                                <td style="vertical-align: middle;" title="Apellidos">
                                     @if (item.Archived)
                                     {
-                                        <span class="display-archived">@item.At.ToShortDateString()</span>
+                                        <span class="display-archived">@item.Contact.Identity.LastName</span>
                                     }
                                     else
                                     {
-                                        <span>@item.At.ToShortDateString()</span>
+                                        <span>@item.Contact.Identity.LastName</span>
                                     }
                                 </td>
                                 <td style="vertical-align: middle; text-align: center;" title="Habilitado?">
@@ -178,7 +174,7 @@
                                     }
                                     else
                                     {
-                                        using (Html.BeginForm(item.Enabled ? "disable" : "enable", "structurekinds", null, FormMethod.Post, true, null))
+                                        using (Html.BeginForm(item.Enabled ? "disable" : "enable", "Employees", new { Area = "HHRR" }, FormMethod.Post, true, null))
                                         {
                                             <input type="hidden" name="key" value="@Html.Raw(item.Id)" />
 
@@ -196,20 +192,12 @@
                                     }
                                 </td>
                                 <td class="fit" style="vertical-align: middle;">
-                                    @using (Html.BeginForm(item.Archived ? "unarchive" : "archive", "structurekinds", null, FormMethod.Post, true, null))
+                                    @using (Html.BeginForm(item.Archived ? "unarchive" : "archive", "Employees", new { Area = "HHRR" }, FormMethod.Post, true, null))
                                     {
                                         <input type="hidden" name="key" value="@Html.Raw(item.Id)" />
 
                                         <div class="btn-group btn-group-sm">
                                             <button type="button" class="btn btn-light" data-toggle="modal" data-target="#descrip-@item.Id"><span class="mdi mdi-eye"></span><span class="ml-1">Detalles</span></button>
-                                            @if (!item.Archived)
-                                            {
-                                                <a role="button" href="@Url.Action("edit", new { key = item.Id })" class="btn btn-light" title="Editar"><span class="mdi mdi-pencil"></span><span class="ml-1">Modificar</span></a>
-                                            }
-                                            else
-                                            {
-                                                <button type="button" class="btn btn-light" disabled="disabled" title="Editar"><span class="mdi mdi-pencil"></span><span class="ml-1">Modificar</span></button>
-                                            }
                                             @if (!item.Archived)
                                             {
                                                 <button type="submit" class="btn btn-warning" style="width: 96px;">
@@ -240,7 +228,20 @@
                                                 <div class="modal-body">
                                                     <dl class="mb-0">
                                                         <dt>Nombre</dt>
-                                                        <dd>@item.Name</dd>
+                                                        <dd>@item.Contact.Identity.Name</dd>
+                                                        <dt>Apellidos</dt>
+                                                        <dd>
+                                                            @if (string.IsNullOrEmpty(item.Contact.Identity.LastName))
+                                                            {
+                                                                <span>---</span>
+                                                            }
+                                                            else
+                                                            {
+                                                                <span>@item.Contact.Identity.LastName</span>
+                                                            }
+                                                        </dd>
+                                                        <dt>Sexo</dt>
+                                                        <dd>@item.Contact.Identity.Sex</dd>
                                                         <dt>Creado</dt>
                                                         <dd>@item.At.ToShortDateString()</dd>
                                                         <dt>Habilitado?</dt>
@@ -256,17 +257,6 @@
                                                         </dd>
                                                         <dt>Prioridad</dt>
                                                         <dd>@item.Priority</dd>
-                                                        <dt>Descripción</dt>
-                                                        <dd class="mb-0">
-                                                            @if (string.IsNullOrEmpty(item.Description))
-                                                            {
-                                                                <span>---</span>
-                                                            }
-                                                            else
-                                                            {
-                                                                <span>@item.Description</span>
-                                                            }
-                                                        </dd>
                                                     </dl>
                                                 </div>
                                             </div>
@@ -276,16 +266,16 @@
                                     <div class="modal fade" id="delete-@item.Id" tabindex="-1" role="dialog" aria-labelledby="delete-@item.Id-lable" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
-                                                @using (Html.BeginForm("delete", "structurekinds", null, FormMethod.Post, true, new { @class = "modal-content" }))
+                                                @using (Html.BeginForm("delete", "Employees", new { Area = "HHRR" }, FormMethod.Post, true, new { @class = "modal-content" }))
                                                 {
                                                     @Html.Hidden("Id", item.Id)
 
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title font-weight-bold text-primary" id="delete-@item.Id-lable">Eliminar Tipo de Estructura</h5>
+                                                        <h5 class="modal-title font-weight-bold text-primary" id="delete-@item.Id-lable">Eliminar Empleado</h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <p class="mb-0">Esta seguro que desea eliminar el tipo de estructura seleccionado?</p>
+                                                        <p class="mb-0">Está seguro que desea eliminar el empleado seleccionado?</p>
                                                     </div>
                                                     <div class="modal-footer" style="margin-top: 0;">
                                                         <button type="submit" class="btn btn-danger">Eliminar</button>

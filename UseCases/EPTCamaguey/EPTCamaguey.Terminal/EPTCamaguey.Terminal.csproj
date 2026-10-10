@@ -86,6 +86,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="LocalizationResources.Designer.cs">
+	    <DependentUpon>LocalizationResources.resx</DependentUpon>
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	  </Compile>
 	  <Compile Update="UI\Shells\GovernanceShell.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
@@ -96,6 +101,13 @@
 
 	<ItemGroup>
 	  <Folder Include="Clients\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="LocalizationResources.resx">
+	    <LastGenOutput>LocalizationResources.Designer.cs</LastGenOutput>
+	    <Generator>ResXFileCodeGenerator</Generator>
+	  </EmbeddedResource>
 	</ItemGroup>
 
 	<ItemGroup>

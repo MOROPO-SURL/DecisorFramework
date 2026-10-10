@@ -129,19 +129,19 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Extensions
             #region HH.RR.
             humanResourcesSection.Add(new ManagementDashboardSectionViewModel
             {
-                Title = "Niveles de Escolaridad",
-                Controller = "schoolings",
-                Action = "Index",
-                Area = "HHRR",
-                Role = Framework.Decisor.HumanResources.Interop.API.Common.Constants.Security.Authorization.SchoolingViewerPermission
-            });
-            humanResourcesSection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Categorías ocupacionales",
+                Title = "Tipos de Plaza",
                 Controller = "workpositionkinds",
                 Action = "Index",
                 Area = "HHRR",
                 Role = Framework.Decisor.HumanResources.Interop.API.Common.Constants.Security.Authorization.WorkPositionKindViewerPermission
+            });
+            humanResourcesSection.Add(new ManagementDashboardSectionViewModel
+            {
+                Title = "Empleados",
+                Controller = "employees",
+                Action = "Index",
+                Area = "HHRR",
+                Role = Framework.Decisor.HumanResources.Interop.API.Common.Constants.Security.Authorization.EmployeeViewerPermission
             });
             #endregion
 

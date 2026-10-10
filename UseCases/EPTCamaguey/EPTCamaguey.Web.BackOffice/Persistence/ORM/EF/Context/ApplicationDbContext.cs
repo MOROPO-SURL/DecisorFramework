@@ -119,6 +119,8 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<Regulation> Regulations { get; set; }
         public DbSet<Disposition> Dispositions { get; set; }
         public DbSet<DispositionTagBridge> DispositionTagBridges { get; set; }
+        public DbSet<ChangeNotification> ChangeNotifications { get; set; }
+        public DbSet<ChangeNotificationUserBridge> ChangeNotificationUserBridges { get; set; }
         public DbSet<LegalBusinessKind> LegalBusinessKinds { get; set; }
         public DbSet<NaturalBusinessKind> NaturalBusinessKinds { get; set; }
         public DbSet<CentralStateStructure> CentralStateStructures { get; set; }
@@ -134,14 +136,17 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<VehicleEngineKind> VehicleEngineKinds { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<VehicleImageBridge> VehicleImageBridges { get; set; }
-        public DbSet<StructureKind> StructureKinds { get; set; }
-        public DbSet<OrganizationalUnity> OrganizationalUnities { get; set; }
-        public DbSet<StructureOrganizationalUnityBridge> StructureOrganizationalUnityBridges { get; set; }
-        public DbSet<Structure> Structures { get; set; }
+        public DbSet<AdministrativeEntityKind> AdministrativeEntityKinds { get; set; }
+        public DbSet<OrganizationalUnit> OrganizationalUnits { get; set; }
+        public DbSet<OrganizationalStructure> OrganizationalStructures { get; set; }
+        public DbSet<OrganizationalStructuringUnit> OrganizationalStructuringUnits { get; set; }
+        public DbSet<AdministrativeEntity> AdministrativeEntities { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<UnitMeasurement> UnitMeasurements { get; set; }
         public DbSet<UnitMeasurementConversionBridge> UnitMeasurementConversionBridges { get; set; }
-
+        public DbSet<KnowledgeArea> KnowledgeAreas { get; set; }
+        public DbSet<AcademicAchievement> AcademicAchievements { get; set; }
+        public DbSet<AcademicAchievementKnowledgeAreaBridge> AcademicAchievementKnowledgeAreaBridges { get; set; }
         public DbSet<DriveLicence> DriveLicences { get; set; }
         public DbSet<DriveLicenceVehicleKindBridge> DriveLicenceVehicleKindBridges { get; set; }
         public DbSet<PropertyLeasePropousal> PropertyLeasePropousals { get; set; }
@@ -178,10 +183,10 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<NaturalClientPropertyLeasingPersonContactBridge> NatClientPropLeasPersonContactBridges { get; set; }
         public DbSet<SupervisionGroup> SupervisionGroups { get; set; }
         public DbSet<SupervisionGroupEmployeeBridge> SupervisionGroupEmployeeBridges { get; set; }
-        public DbSet<LegalClientPropertySupervisionControlAction> LegClientPropSupervControlActions { get; set; }
-        public DbSet<NaturalClientPropertySupervisionControlAction> NatClientPropSupervControlActions { get; set; }
-        public DbSet<LegalClientVehicleSupervisionControlAction> LegClientVehSupervControlActions { get; set; }
-        public DbSet<NaturalClientVehicleSupervisionControlAction> NatClientVehSupervControlActions { get; set; }
+        public DbSet<LegalClientPropertyLeasingControlAction> LegClientPropLeasingControlActions { get; set; }
+        public DbSet<NaturalClientPropertyLeasingControlAction> NatClientPropLeasingControlActions { get; set; }
+        public DbSet<LegalClientVehicleLeasingControlAction> LegClientVehLeasingControlActions { get; set; }
+        public DbSet<NaturalClientVehicleLeasingControlAction> NatClientVehLeasingControlActions { get; set; }
         public DbSet<LegalClientPropertyLeasingCompensation> LegalClientPropertyLeasingCompensations { get; set; }
         public DbSet<LegalClientPropertyLeasingCompensationDocumentBridge> LegClientPropLeasCompDocumentBridges { get; set; }
         public DbSet<NaturalClientPropertyLeasingCompensation> NaturalClientPropertyLeasingCompensations { get; set; }

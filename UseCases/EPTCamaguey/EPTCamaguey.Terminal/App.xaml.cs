@@ -13,6 +13,8 @@
         {
             base.OnStart();
 
+            FFImageLoading.ImageService.Instance.Configuration.DiskCacheDuration = System.TimeSpan.MaxValue;
+
             Windows[0].Title = "EPT Camagüey Decisor™";
         }
     }

@@ -23,6 +23,10 @@
     <x:String x:Key="OrganizationalStructureMaterialDesignGlyphIconId">&#xF645;</x:String>
     <x:String x:Key="OrganizationalUnitDesignGlyphIconId">&#xF006B;</x:String>
     <x:String x:Key="UnitMeasurementMaterialDesignGlyphIconId">&#xF472;</x:String>
+    <x:String x:Key="VehicleEngineKindMaterialDesignGlyphIconId">&#xF1FA;</x:String>
+    <x:String x:Key="VehicleKindMaterialDesignGlyphIconId">&#xFA98;</x:String>
+    <x:String x:Key="PropertyKindMaterialDesignGlyphIconId">&#xFCF2;</x:String>
+    <x:String x:Key="BrandMaterialDesignGlyphIconId">&#xF4CF;</x:String>
 
     <x:String x:Key="WorkPositionKindMaterialDesignGlyphIconId">&#xF017;</x:String>
     <x:String x:Key="SalaryStandardMaterialDesignGlyphIconId">&#xF00C2;</x:String>
