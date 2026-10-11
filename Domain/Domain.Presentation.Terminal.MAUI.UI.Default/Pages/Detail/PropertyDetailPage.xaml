@@ -7,6 +7,7 @@
     xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     x:Class="MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.PropertyDetailPage"
     x:TypeArguments="interop_common_display_models:PropertyDisplayModel"
     x:DataType="interop_common_display_models:PropertyDisplayModel"
@@ -36,7 +37,7 @@
                                 Margin="8"
                                 HeightRequest="{Binding Source={RelativeSource AncestorType={Type Grid}}, Path=Width, Converter={StaticResource DoubleToFractionConverter}, ConverterParameter=1.8}"
                                 Padding="0">
-                                <Image
+                                <ffimageloading_views:CachedImage
                                     Aspect="AspectFill"
                                     Source="{Binding FeatureImage, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
                             </Frame>
@@ -109,7 +110,7 @@
                                                         <ColumnDefinition Width="2*" />
                                                         <ColumnDefinition Width="3*" />
                                                     </Grid.ColumnDefinitions>
-                                                    <Image
+                                                    <ffimageloading_views:CachedImage
                                                         Grid.Column="0"
                                                         Aspect="AspectFill"
                                                         Source="{Binding FeatureImage, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />

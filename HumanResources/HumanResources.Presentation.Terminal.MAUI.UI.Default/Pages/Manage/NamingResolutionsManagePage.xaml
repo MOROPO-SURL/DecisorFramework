@@ -11,6 +11,7 @@
     xmlns:caneyframework_mvvm_pages="clr-namespace:MOROPO.Framework.Caney.MVVM.Core.Pages;assembly=MOROPO.Framework.Caney.MVVM"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.NamingResolutionsManagePage"
     x:TypeArguments="interop_common_display_models:NamingResolutionDisplayModel,presentation_manage_page_models:NamingResolutionsManagePageModel,presentation_configuration_page_models:NamingResolutionConfigurationPageModel"
     x:DataType="presentation_manage_page_models:NamingResolutionsManagePageModel"
@@ -89,7 +90,7 @@
                                                 <Border.StrokeShape>
                                                     <RoundRectangle CornerRadius="48" />
                                                 </Border.StrokeShape>
-                                                <Image
+                                                <ffimageloading_views:CachedImage
                                                     WidthRequest="96" HeightRequest="96"
                                                     Source="{Binding AdmitionPropousal.Candidate.Postulation.Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
                                             </Border>

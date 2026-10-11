@@ -11,6 +11,7 @@
     xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Financial.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Financial.Interop.API.Common"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     x:Class="MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.BankAgencyConfigurationPage"
     x:TypeArguments="interop_common_display_models:BankAgencyDisplayModel,interop_common_display_models:BankAgencyDisplayModel,presentation_configuration_page_models:BankAgencyConfigurationPageModel"
     x:DataType="presentation_configuration_page_models:BankAgencyConfigurationPageModel">
@@ -81,7 +82,7 @@
                         Margin="4"
                         Padding="0">
                         <Grid>
-                            <Image Source="{Binding ImageSource, TargetNullValue='default_organization_picture.png'}" />
+                            <ffimageloading_views:CachedImage Source="{Binding ImageSource, TargetNullValue='default_organization_picture.png'}" />
                             <Grid BackgroundColor="#A7000000">
                                 <Grid.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="ImageLayoutTapGestureRecognizer_Tapped" />

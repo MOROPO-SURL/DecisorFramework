@@ -5,6 +5,7 @@
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Purchasing.Interop.API.Common"
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     x:Class="MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Views.Card.NaturalProviderBudgetDefaultCardView"
     x:DataType="interop_common_display_models:NaturalProviderBudgetDisplayModel">
     <ContentView.Resources>
@@ -18,15 +19,17 @@
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="1" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Image
+            <ffimageloading_views:CachedImage
                 Grid.Column="0" Grid.RowSpan="3"
                 Aspect="AspectFill"
                 WidthRequest="{Binding Source={RelativeSource Mode=Self}, Path=Height}"
                 Source="{Binding Provider.Contact.Identity.Image, Mode=OneTime, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
+            <BoxView Grid.Column="1" Color="{AppThemeBinding Light=LightGray, Dark=DimGray}" />
             <StackLayout 
-                Grid.Column="1"
+                Grid.Column="2"
                 Padding="10">
                 <Label 
                     FontAttributes="Bold"

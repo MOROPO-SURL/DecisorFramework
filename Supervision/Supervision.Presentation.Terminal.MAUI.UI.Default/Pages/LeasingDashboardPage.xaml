@@ -18,6 +18,27 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
+        
+            <communitytoolkit_converters:BoolToObjectConverter 
+                x:Key="BoolToColor" 
+                TrueObject="#45A049"            
+                FalseObject="#E65100" />
+            <communitytoolkit_converters:BoolToObjectConverter 
+                x:Key="IsModuleReadeyToGlyph" 
+                TrueObject="&#xF790;"
+                FalseObject="&#xFCC1;" />
+            <communitytoolkit_converters:BoolToObjectConverter 
+                x:Key="HasAnyToGlyph" 
+                TrueObject="&#xFE70;"
+                FalseObject="&#xF026;" />
+            <communitytoolkit_converters:BoolToObjectConverter 
+                x:Key="IsModuleReadeyToTitle" 
+                TrueObject="Configuración mínima del módulo completada"
+                FalseObject="Se requiere configuración mínima del módulo" />
+            <communitytoolkit_converters:BoolToObjectConverter 
+                x:Key="BoolToTitle" 
+                TrueObject="Al menos una definida"
+                FalseObject="0 definidas" />
 
             <communitytoolkit_converters:BoolToObjectConverter x:Key="BoolToMockOpacityObjectConverter">
                 <communitytoolkit_converters:BoolToObjectConverter.TrueObject>
@@ -47,11 +68,150 @@
     <Grid>
         <ScrollView Orientation="Vertical">
             <VerticalStackLayout Spacing="4" Margin="8">
+                <Frame Margin="8">
+                    <VerticalStackLayout>
+                        <Label
+                            HorizontalTextAlignment="Center"
+                            FontFamily="MaterialDesignIcons"
+                            FontSize="96"
+                            TextColor="{Binding IsModuleReady, Converter={StaticResource BoolToColor}}"
+                            Text="{Binding IsModuleReady, Converter={StaticResource IsModuleReadeyToGlyph}}" />
+                        <Label
+                            HorizontalTextAlignment="Center"
+                            FontSize="Medium"
+                            TextColor="{Binding IsModuleReady, Converter={StaticResource BoolToColor}}"
+                            Text="{Binding IsModuleReady, Converter={StaticResource IsModuleReadeyToTitle}}" />
+                        <BoxView
+                            Style="{StaticResource SeparatorBoxView}"
+                            Margin="0,24"
+                            HeightRequest="2" />
+                        <FlexLayout
+                            Wrap="Wrap"
+                            AlignItems="Start" AlignContent="Start">
+                            <VerticalStackLayout
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, SmallContainerColumn=6}}"
+                                Margin="4,8">
+                                <Label
+                                    HorizontalTextAlignment="Center"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="48"
+                                    Text="{StaticResource PropertyKindMaterialDesignGlyphIconId}" />
+                                <Label
+                                    HorizontalTextAlignment="Center"
+                                    FontAttributes="Bold"
+                                    Text="Tipos de Inmueble" />
+                                <Label
+                                    HorizontalOptions="Center"
+                                    Margin="0,8,0,0"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="36"
+                                    TextColor="{Binding HasAnyPropertyKind, Converter={StaticResource BoolToColor}}"
+                                    Text="{Binding HasAnyPropertyKind, Converter={StaticResource HasAnyToGlyph}}" />
+                                <Label
+                                    HorizontalOptions="Center"
+                                    TextColor="{Binding HasAnyPropertyKind, Converter={StaticResource BoolToColor}}"
+                                    Text="{Binding HasAnyPropertyKind, Converter={StaticResource BoolToTitle}}" />
+                                <Button
+                                    HorizontalOptions="Center"
+                                    Margin="0,8,0,0"
+                                    Text="Administrar"
+                                    Clicked="GoPropertyKindsAdminSiteManagePageButton_Clicked" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, SmallContainerColumn=6}}"
+                                Margin="4,8">
+                                <Label
+                                    HorizontalTextAlignment="Center"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="48"
+                                    Text="{StaticResource VehicleKindMaterialDesignGlyphIconId}" />
+                                <Label
+                                    HorizontalTextAlignment="Center"
+                                    FontAttributes="Bold"
+                                    Text="Tipos de Vehículo" />
+                                <Label
+                                    HorizontalOptions="Center"
+                                    Margin="0,8,0,0"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="36"
+                                    TextColor="{Binding HasAnyVehicleKind, Converter={StaticResource BoolToColor}}"
+                                    Text="{Binding HasAnyVehicleKind, Converter={StaticResource HasAnyToGlyph}}" />
+                                <Label
+                                    HorizontalOptions="Center"
+                                    TextColor="{Binding HasAnyVehicleKind, Converter={StaticResource BoolToColor}}"
+                                    Text="{Binding HasAnyVehicleKind, Converter={StaticResource BoolToTitle}}" />
+                                <Button
+                                    HorizontalOptions="Center"
+                                    Margin="0,8,0,0"
+                                    Text="Administrar"
+                                    Clicked="GoVehicleKindsAdminSiteManagePageButton_Clicked" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, SmallContainerColumn=6}}"
+                                Margin="4,8">
+                                <Label
+                                    HorizontalTextAlignment="Center"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="48"
+                                    Text="{StaticResource VehicleEngineKindMaterialDesignGlyphIconId}" />
+                                <Label
+                                    HorizontalTextAlignment="Center"
+                                    FontAttributes="Bold"
+                                    Text="Tipos de Motorización" />
+                                <Label
+                                    HorizontalOptions="Center"
+                                    Margin="0,8,0,0"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="36"
+                                    TextColor="{Binding HasAnyVehicleEngineKind, Converter={StaticResource BoolToColor}}"
+                                    Text="{Binding HasAnyVehicleEngineKind, Converter={StaticResource HasAnyToGlyph}}" />
+                                <Label
+                                    HorizontalOptions="Center"
+                                    TextColor="{Binding HasAnyVehicleEngineKind, Converter={StaticResource BoolToColor}}"
+                                    Text="{Binding HasAnyVehicleEngineKind, Converter={StaticResource BoolToTitle}}" />
+                                <Button
+                                    HorizontalOptions="Center"
+                                    Margin="0,8,0,0"
+                                    Text="Administrar"
+                                    Clicked="GoVehicleEngineKindsAdminSiteManagePageButton_Clicked" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, SmallContainerColumn=6}}"
+                                Margin="4,8">
+                                <Label
+                                    HorizontalTextAlignment="Center"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="48"
+                                    Text="{StaticResource BrandMaterialDesignGlyphIconId}" />
+                                <Label
+                                    HorizontalTextAlignment="Center"
+                                    FontAttributes="Bold"
+                                    Text="Marcas" />
+                                <Label
+                                    HorizontalOptions="Center"
+                                    Margin="0,8,0,0"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="36"
+                                    TextColor="{Binding HasAnyBrand, Converter={StaticResource BoolToColor}}"
+                                    Text="{Binding HasAnyBrand, Converter={StaticResource HasAnyToGlyph}}" />
+                                <Label
+                                    HorizontalOptions="Center"
+                                    TextColor="{Binding HasAnyBrand, Converter={StaticResource BoolToColor}}"
+                                    Text="{Binding HasAnyBrand, Converter={StaticResource BoolToTitle}}" />
+                                <Button
+                                    HorizontalOptions="Center"
+                                    Margin="0,8,0,0"
+                                    Text="Gestionar"
+                                    Clicked="GoBrandsManageSiteButton_Clicked" />
+                            </VerticalStackLayout>
+                        </FlexLayout>
+                    </VerticalStackLayout>
+                </Frame>
                 <FlexLayout
                     Wrap="Wrap"
                     AlignItems="Start" AlignContent="Start">
                     <Frame
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, ExtraLargeContainerColumn=3, LargeContainerColumn=4, SmallContainerColumn=6}}"
                         Margin="4"
                         VerticalOptions="Start">
                         <Grid>
@@ -90,7 +250,7 @@
                         </Grid>
                     </Frame>
                     <Frame
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, ExtraLargeContainerColumn=3, LargeContainerColumn=4, SmallContainerColumn=6}}"
                         Margin="4"
                         VerticalOptions="Start">
                         <Grid>
@@ -129,7 +289,7 @@
                         </Grid>
                     </Frame>
                     <Frame
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, ExtraLargeContainerColumn=3, LargeContainerColumn=4, SmallContainerColumn=6}}"
                         Margin="4"
                         VerticalOptions="Start">
                         <Grid>
@@ -168,7 +328,7 @@
                         </Grid>
                     </Frame>
                     <Frame
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, ExtraLargeContainerColumn=3, LargeContainerColumn=4, SmallContainerColumn=6}}"
                         Margin="4"
                         VerticalOptions="Start">
                         <Grid>
@@ -207,7 +367,7 @@
                         </Grid>
                     </Frame>
                     <Frame
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, ExtraLargeContainerColumn=6, LargeContainerColumn=4, SmallContainerColumn=6}}"
                         Margin="4"
                         VerticalOptions="Start">
                         <Grid>
@@ -246,7 +406,7 @@
                         </Grid>
                     </Frame>
                     <Frame
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, ExtraLargeContainerColumn=6, LargeContainerColumn=4, SmallContainerColumn=6}}"
                         Margin="4"
                         VerticalOptions="Start">
                         <Grid>

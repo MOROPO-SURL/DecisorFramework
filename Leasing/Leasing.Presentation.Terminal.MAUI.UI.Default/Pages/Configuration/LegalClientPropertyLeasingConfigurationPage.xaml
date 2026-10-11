@@ -13,6 +13,7 @@
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     x:Class="MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.LegalClientPropertyLeasingConfigurationPage"
     x:TypeArguments="interop_common_display_models:LegalClientPropertyLeasingDisplayModel,interop_common_display_models:LegalClientPropertyLeasingDisplayModel,presentation_configuration_page_models:LegalClientPropertyLeasingConfigurationPageModel"
     x:DataType="presentation_configuration_page_models:LegalClientPropertyLeasingConfigurationPageModel">
@@ -61,15 +62,17 @@
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="1" />
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
-                                <Image
-                                    Grid.Column="0" Grid.RowSpan="3"
+                                <ffimageloading_views:CachedImage
+                                    Grid.Column="0"
                                     Aspect="AspectFill"
                                     WidthRequest="152" HeightRequest="152"
                                     Source="{Binding Postulation.Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
+                                <BoxView Grid.Column="1" Color="{AppThemeBinding Light=LightGray, Dark=DimGray}" />
                                 <StackLayout 
-                                    Grid.Column="1"
+                                    Grid.Column="2"
                                     Padding="10">
                                     <Label 
                                         FontSize="Medium"
@@ -220,7 +223,7 @@
                                             WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource ViewChildParentWidthToRelativeWidthConverter}}">
                                             <VerticalStackLayout Spacing="0">
                                                 <Grid>
-                                                    <Image 
+                                                    <ffimageloading_views:CachedImage 
                                                         BackgroundColor="DimGray"
                                                         HeightRequest="{Binding Source={RelativeSource AncestorType={Type Frame}}, Path=Width}"
                                                         Aspect="AspectFill"
@@ -241,6 +244,7 @@
                                                         </VerticalStackLayout>
                                                     </Grid>
                                                 </Grid>
+                                                <BoxView Grid.Column="1" Color="{AppThemeBinding Light=LightGray, Dark=DimGray}" />
                                                 <Grid Margin="4" ColumnSpacing="4">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition />

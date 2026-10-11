@@ -16,6 +16,7 @@
     xmlns:inventory_interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Inventory.Interop.API.Common"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     x:Class="MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.ElaborationConfigurationPage"
     x:TypeArguments="interop_common_display_models:ElaborationDisplayModel,interop_common_display_models:ElaborationDisplayModel,presentation_configuration_page_models:ElaborationConfigurationPageModel"
     x:DataType="presentation_configuration_page_models:ElaborationConfigurationPageModel">
@@ -195,7 +196,7 @@
                                                     <Frame 
                                                         Grid.Column="0" Grid.RowSpan="2"
                                                         Padding="0">
-                                                        <Image
+                                                        <ffimageloading_views:CachedImage
                                                             WidthRequest="96" HeightRequest="96"
                                                             Source="{Binding Product.FeatureImage, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
                                                     </Frame>
@@ -298,7 +299,7 @@
                                                     <Frame 
                                                         Grid.Column="0" Grid.RowSpan="2"
                                                         Padding="0">
-                                                        <Image
+                                                        <ffimageloading_views:CachedImage
                                                             WidthRequest="96" HeightRequest="96"
                                                             Source="{Binding Product.FeatureImage, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
                                                     </Frame>

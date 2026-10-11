@@ -15,6 +15,7 @@
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     x:Class="MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.LegalClientVehicleLeasingConfigurationPage"
     x:TypeArguments="interop_common_display_models:LegalClientVehicleLeasingDisplayModel,interop_common_display_models:LegalClientVehicleLeasingDisplayModel,presentation_configuration_page_models:LegalClientVehicleLeasingConfigurationPageModel"
     x:DataType="presentation_configuration_page_models:LegalClientVehicleLeasingConfigurationPageModel">
@@ -81,15 +82,17 @@
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="1" />
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
-                                <Image
+                                <ffimageloading_views:CachedImage
                                     Grid.Column="0" Grid.RowSpan="3"
                                     Aspect="AspectFill"
                                     WidthRequest="152" HeightRequest="152"
                                     Source="{Binding Postulation.Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
+                                <BoxView Grid.Column="1" Color="{AppThemeBinding Light=LightGray, Dark=DimGray}" />
                                 <StackLayout 
-                                    Grid.Column="1"
+                                    Grid.Column="2"
                                     Padding="10">
                                     <Label 
                                         FontSize="Medium"
@@ -275,7 +278,7 @@
                                                         <RowDefinition Height="Auto" />
                                                         <RowDefinition Height="Auto" />
                                                     </Grid.RowDefinitions>
-                                                    <Image 
+                                                    <ffimageloading_views:CachedImage 
                                                         Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="4"
                                                         Margin="0,0,0,8"
                                                         VerticalOptions="Start"
@@ -423,7 +426,7 @@
                                                             Text="&#xF90B;"
                                                             Clicked="DriveLicenceEditionButton_Clicked" />
                                                         <Button
-                                                            Style="{StaticResource FontIconImageButtonStyle}"
+                                                            Style="{StaticResource DangerKindFontIconImageButtonStyle}"
                                                             Text="&#xFA78;"
                                                             Clicked="DriveLicenceRemotionButton_Clicked" />
                                                     </VerticalStackLayout>

@@ -13,6 +13,7 @@
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Domain.Interop.API.Common"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     x:Class="MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.OrganizationContactConfigurationPage"
     x:TypeArguments="interop_common_display_models:OrganizationContactDisplayModel,interop_common_display_models:OrganizationContactDisplayModel,presentation_configuration_page_models:OrganizationContactConfigurationPageModel"
     x:DataType="presentation_configuration_page_models:OrganizationContactConfigurationPageModel">
@@ -56,7 +57,7 @@
                         Margin="4"
                         Padding="0">
                         <Grid>
-                            <Image Source="{Binding ImageSource, TargetNullValue='default_organization_picture.png'}" />
+                            <ffimageloading_views:CachedImage Source="{Binding ImageSource, TargetNullValue='default_organization_picture.png'}" />
                             <Grid BackgroundColor="#A7000000">
                                 <Grid.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="ImageLayoutTapGestureRecognizer_Tapped" />

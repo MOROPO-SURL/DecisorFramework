@@ -12,6 +12,7 @@
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     x:Class="MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.SupervisionGroupConfigurationPage"
     x:TypeArguments="interop_common_display_models:SupervisionGroupDisplayModel,interop_common_display_models:SupervisionGroupDisplayModel,presentation_configuration_page_models:SupervisionGroupConfigurationPageModel"
     x:DataType="presentation_configuration_page_models:SupervisionGroupConfigurationPageModel">
@@ -27,15 +28,15 @@
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem 
-        Text="Aplicar"
-        Clicked="ApplyToolbarItem_Clicked">
+            Text="Aplicar"
+            Clicked="ApplyToolbarItem_Clicked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf12c;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
         <ToolbarItem 
-        Text="Cancelar"
-        Clicked="CancelToolbarItem_Clicked">
+            Text="Cancelar"
+            Clicked="CancelToolbarItem_Clicked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
@@ -109,7 +110,7 @@
                                                 WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource ViewChildParentWidthToRelativeWidthConverter}}">
                                                 <VerticalStackLayout Spacing="0">
                                                     <Grid>
-                                                        <Image 
+                                                        <ffimageloading_views:CachedImage 
                                                             BackgroundColor="DimGray"
                                                             HeightRequest="{Binding Source={RelativeSource AncestorType={Type Frame}}, Path=Width}"
                                                             Aspect="AspectFill"
@@ -130,6 +131,7 @@
                                                             </VerticalStackLayout>
                                                         </Grid>
                                                     </Grid>
+                                                    <BoxView WidthRequest="1" Color="{AppThemeBinding Light=LightGray, Dark=DimaGray}" />
                                                     <Grid Margin="4" ColumnSpacing="4">
                                                         <Grid.ColumnDefinitions>
                                                             <ColumnDefinition />

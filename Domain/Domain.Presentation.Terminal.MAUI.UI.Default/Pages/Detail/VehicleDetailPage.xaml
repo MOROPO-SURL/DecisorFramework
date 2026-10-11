@@ -8,6 +8,7 @@
     xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"    
     xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     x:Class="MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.VehicleDetailPage"
     x:TypeArguments="interop_common_display_models:VehicleDisplayModel"
     x:DataType="interop_common_display_models:VehicleDisplayModel"
@@ -43,7 +44,7 @@
                                         <RowDefinition />
                                         <RowDefinition />
                                     </Grid.RowDefinitions>
-                                    <Image
+                                    <ffimageloading_views:CachedImage
                                         Grid.RowSpan="2"
                                         Aspect="AspectFill"
                                         HeightRequest="{Binding Source={RelativeSource AncestorType={Type Grid}, AncestorLevel=2}, Path=Width, Converter={StaticResource DoubleToFractionConverter}, ConverterParameter=1.8}"

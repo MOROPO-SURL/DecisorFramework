@@ -11,6 +11,7 @@
     xmlns:core_constants="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Constants;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"    
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     xmlns:uraniumui_material_controls="clr-namespace:UraniumUI.Material.Controls;assembly=UraniumUI.Material"
     x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.EmployeeDetailPage"
     x:TypeArguments="presentation_detail_page_models:EmployeeDetailPageModel"
@@ -364,7 +365,7 @@
                                 WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=1, LargeContainerColumn=2, MediumContainerColumn=3, SmallContainerColumn=4}}"                        
                                 Margin="4"
                                 Padding="0">
-                                <Image
+                                <ffimageloading_views:CachedImage
                                     Aspect="AspectFill"
                                     HeightRequest="{Binding Source={RelativeSource AncestorType={Type Frame}}, Path=Width}"
                                     Source="{Binding Domain.Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />

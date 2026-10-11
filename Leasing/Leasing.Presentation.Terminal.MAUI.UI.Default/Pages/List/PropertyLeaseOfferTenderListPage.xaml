@@ -10,6 +10,7 @@
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     x:Class="MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.List.PropertyLeaseOfferTenderListPage"
     x:TypeArguments="interop_common_display_models:PropertyLeaseOfferDisplayModel,presentation_list_page_models:PropertyLeaseOfferTenderListPageModel"
     x:DataType="presentation_list_page_models:PropertyLeaseOfferTenderListPageModel"
@@ -35,7 +36,6 @@
     <ContentPage.Content>
         <Grid>
             <StackLayout Orientation="Vertical">
-                <SearchBar Margin="20,20,20,0" />
                 <Grid 
                     VerticalOptions="FillAndExpand"
                     SizeChanged="ItemsCollectionViewLayout_SizeChanged">
@@ -123,15 +123,17 @@
                                                                                 <Grid>
                                                                                     <Grid.ColumnDefinitions>
                                                                                         <ColumnDefinition Width="Auto" />
+                                                                                        <ColumnDefinition Width="1" />
                                                                                         <ColumnDefinition />
                                                                                     </Grid.ColumnDefinitions>
-                                                                                    <Image
-                                                                                        Grid.Column="0" Grid.RowSpan="3"
+                                                                                    <ffimageloading_views:CachedImage
+                                                                                        Grid.Column="0"
                                                                                         Aspect="AspectFill"
                                                                                         WidthRequest="152" HeightRequest="152"
                                                                                         Source="{Binding Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
+                                                                                    <BoxView Grid.Column="1" Color="{AppThemeBinding Light=LightGray, Dark=DimGray}" />
                                                                                     <StackLayout 
-                                                                                        Grid.Column="1"
+                                                                                        Grid.Column="2"
                                                                                         Padding="10">
                                                                                         <Label 
                                                                                             FontSize="Medium"
@@ -161,23 +163,17 @@
                                                                             </Frame>
                                                                             <Button
                                                                                 Grid.Column="1" Grid.Row="0"
-                                                                                Padding="0"
-                                                                                FontSize="21"
-                                                                                FontFamily="MaterialDesignIcons" 
+                                                                                Style="{StaticResource FontIconImageButtonStyle}"
                                                                                 Text="&#xF90B;"
                                                                                 Clicked="OrganizationPostulationEditionButton_Clicked" />
                                                                             <Button
                                                                                 Grid.Column="1" Grid.Row="1"
-                                                                                Padding="0"
-                                                                                FontSize="21"
-                                                                                FontFamily="MaterialDesignIcons" 
+                                                                                Style="{StaticResource DangerKindFontIconImageButtonStyle}"
                                                                                 Text="&#xFA78;"
                                                                                 Clicked="OrganizationPostulationRemotionButton_Clicked" />
                                                                             <Button
                                                                                 Grid.Column="1" Grid.Row="2"
-                                                                                Padding="0"
-                                                                                FontSize="21"
-                                                                                FontFamily="MaterialDesignIcons" 
+                                                                                Style="{StaticResource PrimaryKindFontIconImageButtonStyle}"
                                                                                 Text="&#xFE70;"
                                                                                 Clicked="OrganizationPostulationApproveButton_Clicked" />
                                                                         </Grid>
@@ -250,15 +246,17 @@
                                                                                 <Grid>
                                                                                     <Grid.ColumnDefinitions>
                                                                                         <ColumnDefinition Width="Auto" />
+                                                                                        <ColumnDefinition Width="1" />
                                                                                         <ColumnDefinition />
                                                                                     </Grid.ColumnDefinitions>
-                                                                                    <Image
+                                                                                    <ffimageloading_views:CachedImage
                                                                                         Grid.Column="0" Grid.RowSpan="3"
                                                                                         Aspect="AspectFill"
                                                                                         WidthRequest="152" HeightRequest="152"
                                                                                         Source="{Binding Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
+                                                                                    <BoxView Grid.Column="1" Color="{AppThemeBinding Light=LightGray, Dark=DimGray}" />
                                                                                     <StackLayout 
-                                                                                        Grid.Column="1"
+                                                                                        Grid.Column="2"
                                                                                         Padding="10">
                                                                                         <Label 
                                                                                             FontSize="Medium"
@@ -294,23 +292,17 @@
                                                                             </Frame>
                                                                             <Button
                                                                                 Grid.Column="1" Grid.Row="0"
-                                                                                Padding="0"
-                                                                                FontSize="21"
-                                                                                FontFamily="MaterialDesignIcons" 
+                                                                                Style="{StaticResource FontIconImageButtonStyle}"
                                                                                 Text="&#xF90B;"
                                                                                 Clicked="PersonPostulationEditionButton_Clicked" />
                                                                             <Button
                                                                                 Grid.Column="1" Grid.Row="1"
-                                                                                Padding="0"
-                                                                                FontSize="21"
-                                                                                FontFamily="MaterialDesignIcons" 
+                                                                                Style="{StaticResource DangerKindFontIconImageButtonStyle}"
                                                                                 Text="&#xFA78;"
                                                                                 Clicked="PersonPostulationRemotionButton_Clicked" />
                                                                             <Button
                                                                                 Grid.Column="1" Grid.Row="2"
-                                                                                Padding="0"
-                                                                                FontSize="21"
-                                                                                FontFamily="MaterialDesignIcons" 
+                                                                                Style="{StaticResource PrimaryKindFontIconImageButtonStyle}"
                                                                                 Text="&#xFE70;"
                                                                                 Clicked="PersonPostulationApproveButton_Clicked" />
                                                                         </Grid>
