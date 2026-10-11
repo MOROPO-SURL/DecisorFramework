@@ -245,10 +245,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<NaturalClientPropertyLeasingPersonContactBridge> NatClientPropLeasPersonContactBridges { get; set; }
         public DbSet<SupervisionGroup> SupervisionGroups { get; set; }
         public DbSet<SupervisionGroupEmployeeBridge> SupervisionGroupEmployeeBridges { get; set; }
-        public DbSet<LegalClientPropertySupervisionControlAction> LegClientPropSupervControlActions { get; set; }
-        public DbSet<NaturalClientPropertySupervisionControlAction> NatClientPropSupervControlActions { get; set; }
-        public DbSet<LegalClientVehicleSupervisionControlAction> LegClientVehSupervControlActions { get; set; }
-        public DbSet<NaturalClientVehicleSupervisionControlAction> NatClientVehSupervControlActions { get; set; }
+        public DbSet<LegalClientPropertyLeasingControlAction> LegClientPropLeasingControlActions { get; set; }
+        public DbSet<NaturalClientPropertyLeasingControlAction> NatClientPropLeasingControlActions { get; set; }
+        public DbSet<LegalClientVehicleLeasingControlAction> LegClientVehLeasingControlActions { get; set; }
+        public DbSet<NaturalClientVehicleLeasingControlAction> NatClientVehLeasingControlActions { get; set; }
         public DbSet<LegalClientPropertyLeasingCompensation> LegalClientPropertyLeasingCompensations { get; set; }
         public DbSet<LegalClientPropertyLeasingCompensationDocumentBridge> LegClientPropLeasCompDocumentBridges { get; set; }
         public DbSet<NaturalClientPropertyLeasingCompensation> NaturalClientPropertyLeasingCompensations { get; set; }

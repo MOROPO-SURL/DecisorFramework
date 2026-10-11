@@ -9,6 +9,7 @@
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"    
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Views.Card.OcupationManageOrganizationalStructuringUnitTreeCardView"
     x:DataType="presentation_view_models:TreeOcupationManageOrganizationalStructuringUnitViewModel">
     <ContentView.Resources>
@@ -72,7 +73,7 @@
                             <Frame Padding="0">
                                 <VerticalStackLayout Spacing="0">
                                     <Grid HeightRequest="240">
-                                        <Image 
+                                        <ffimageloading_views:CachedImage 
                                             BackgroundColor="DimGray"
                                             Aspect="AspectFill"
                                             Source="{Binding Ocupation.Employee.Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
@@ -93,6 +94,7 @@
                                             </VerticalStackLayout>
                                         </Grid>
                                     </Grid>
+                                    <BoxView HeightRequest="1" Color="{AppThemeBinding Light=LightGray, Dark=DimGray}" />
                                     <VerticalStackLayout Margin="8,8,8,12" Spacing="8">
                                         <Label
                                             HorizontalOptions="Center"

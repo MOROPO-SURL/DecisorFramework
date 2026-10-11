@@ -1,7 +1,11 @@
 ﻿namespace MOROPO.Framework.Decisor.Supervision.Presentation.Terminal.MAUI.Models.Page
 {
-    public class LeasingDashboardPageModel : Caney.MVVM.Core.Models.Page.BasePageModel
+    public class LeasingDashboardPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Dashboard.Contract.AbstractDashboardPageModel
     {
+        private bool hasAnyPropertyKind;
+        private bool hasAnyVehicleKind;
+        private bool hasAnyVehicleEngineKind;
+        private bool hasAnyBrand;
         private View.ChartViewModel clientPaymentPertinenceHeatChart;
         private View.ChartViewModel pertinentCollectAndIncomeStatusCartesianChart;
         private long propousalCount;
@@ -17,6 +21,14 @@
         private bool isClientPaymentPertinenceHeatChartMock;
         private bool isPertinentCollectAndIncomeStatusCartesianChartMock;
         private bool isRunningMonthCollectStatusChartMock;
+
+        public bool HasAnyPropertyKind { get => hasAnyPropertyKind; set => SetProperty(ref hasAnyPropertyKind, value); }
+
+        public bool HasAnyVehicleKind { get => hasAnyVehicleKind; set => SetProperty(ref hasAnyVehicleKind, value); }
+
+        public bool HasAnyVehicleEngineKind { get => hasAnyVehicleEngineKind; set => SetProperty(ref hasAnyVehicleEngineKind, value); }
+
+        public bool HasAnyBrand { get => hasAnyBrand; set => SetProperty(ref hasAnyBrand, value); }
 
         public View.ChartViewModel VehicleAssignmentPieChart { get; set; }
 

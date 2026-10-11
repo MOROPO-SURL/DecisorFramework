@@ -1,10 +1,12 @@
 ﻿namespace MOROPO.Framework.Decisor.Leasing.Persistence.Entities.Contract
 {
     [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-    public abstract class AbstractSupervisionControlAction : Guama.Core.Persistence.Entities.Contract.IEntity<System.Guid>
+    public abstract class AbstractLeasingControlAction : Guama.Core.Persistence.Entities.Contract.IArchivableEntity<System.Guid>
     {
         [System.ComponentModel.DataAnnotations.Key]
         public System.Guid Id { get; set; } = System.Guid.NewGuid();
+
+        public bool Archived { get; set; }
 
         public System.DateTime At { get; set; }
 

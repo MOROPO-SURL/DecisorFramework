@@ -8,7 +8,7 @@ namespace MOROPO.Framework.Decisor.Supervision.Presentation.Terminal.MAUI.UI.Def
 
 public partial class LeasingDashboardPage : Caney.MVVM.Core.Pages.BindingContextedContentPage<Models.Page.LeasingDashboardPageModel>
 {
-    private static string[] LEASING_GROUPS = new string[] { "Inmuebles a jurídicos", "Vehículos a jurídicos", "Inmuebles a naturales", "Vehículos a naturales" };
+    private static string[] LEASING_GROUPS = ["Inmuebles a jurídicos", "Vehículos a jurídicos", "Inmuebles a naturales", "Vehículos a naturales"];
 
     public LeasingDashboardPage() : base(new Models.Page.LeasingDashboardPageModel
     {
@@ -57,52 +57,91 @@ public partial class LeasingDashboardPage : Caney.MVVM.Core.Pages.BindingContext
     {
         if (BindingContextPageModel.IsBusy) return;
 
+        var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
+
+        var propertyKindsAPIConnectClient = new Domain.Interop.API.Connect.Clients.PropertyKindsAPIConnectClient(httpClientHelperProvider);
+        var vehicleKindsAPIConnectClient = new Domain.Interop.API.Connect.Clients.VehicleKindsAPIConnectClient(httpClientHelperProvider);
+        var vehicleEngineKindsAPIConnectClient = new Domain.Interop.API.Connect.Clients.VehicleEngineKindsAPIConnectClient(httpClientHelperProvider);
+        var brandsAPIConnectClient = new Domain.Interop.API.Connect.Clients.BrandsAPIConnectClient(httpClientHelperProvider);
+        var propertiesAPIConnectClient = new Domain.Interop.API.Connect.Clients.PropertiesAPIConnectClient(httpClientHelperProvider);
+        var vehiclesAPIConnectClient = new Domain.Interop.API.Connect.Clients.VehiclesAPIConnectClient(httpClientHelperProvider);
+        var propertyPropousalAPIConnectClient = new Leasing.Interop.API.Connect.Clients.PropertyLeasePropousalsAPIConnectClient(httpClientHelperProvider);
+        var vehiclePropousalAPIConnectClient = new Leasing.Interop.API.Connect.Clients.VehicleLeasePropousalsAPIConnectClient(httpClientHelperProvider);
+        var propertyOfferAPIConnectClient = new Leasing.Interop.API.Connect.Clients.PropertyLeaseOffersAPIConnectClient(httpClientHelperProvider);
+        var vehicleOfferAPIConnectClient = new Leasing.Interop.API.Connect.Clients.VehicleLeaseOffersAPIConnectClient(httpClientHelperProvider);
+        var propertyOrganizationPostulationAPIConnectClient = new Leasing.Interop.API.Connect.Clients.PropertyLeaseOrganizationPostulationsAPIConnectClient(httpClientHelperProvider);
+        var propertyPersonPostulationAPIConnectClient = new Leasing.Interop.API.Connect.Clients.PropertyLeasePersonPostulationsAPIConnectClient(httpClientHelperProvider);
+        var vehicleOrganizationPostulationAPIConnectClient = new Leasing.Interop.API.Connect.Clients.VehicleLeaseOrganizationPostulationsAPIConnectClient(httpClientHelperProvider);
+        var vehiclePersonPostulationAPIConnectClient = new Leasing.Interop.API.Connect.Clients.VehicleLeasePersonPostulationsAPIConnectClient(httpClientHelperProvider);
+        var legalClientPropertyLeasingAPIConnectClient = new Leasing.Interop.API.Connect.Clients.LegalClientPropertyLeasingsAPIConnectClient(httpClientHelperProvider);
+        var naturalClientPropertyLeasingAPIConnectClient = new Leasing.Interop.API.Connect.Clients.NaturalClientPropertyLeasingsAPIConnectClient(httpClientHelperProvider);
+        var legalClientVehicleLeasingAPIConnectClient = new Leasing.Interop.API.Connect.Clients.LegalClientVehicleLeasingsAPIConnectClient(httpClientHelperProvider);
+        var naturalClientVehicleLeasingAPIConnectClient = new Leasing.Interop.API.Connect.Clients.NaturalClientVehicleLeasingsAPIConnectClient(httpClientHelperProvider);
+
+        var propertyKindCountTask = propertyKindsAPIConnectClient.CountAsync();
+        var vehicleKindCountTask = vehicleKindsAPIConnectClient.CountAsync();
+        var vehicleEngineKindCountTask = vehicleEngineKindsAPIConnectClient.CountAsync();
+        var brandCountTask = brandsAPIConnectClient.CountAsync();
+
+        var propertyPropousalCountTask = propertyPropousalAPIConnectClient.CountAsync();
+        var vehiclePropousalCountTask = vehiclePropousalAPIConnectClient.CountAsync();
+        var propertyOfferCountTask = propertyOfferAPIConnectClient.CountAsync();
+        var vehicleOfferCountTask = vehicleOfferAPIConnectClient.CountAsync();
+        var propertyOrganizationPostulationCountTask = propertyOrganizationPostulationAPIConnectClient.CountAsync();
+        var propertyPersonPostulationCountTask = propertyPersonPostulationAPIConnectClient.CountAsync();
+        var vehicleOrganizationPostulationCountTask = vehicleOrganizationPostulationAPIConnectClient.CountAsync();
+        var vehiclePersonPostulationCountTask = vehiclePersonPostulationAPIConnectClient.CountAsync();
+
+        var getPropertiesTask = propertiesAPIConnectClient.GetAsync();
+        var getVehiclesTask = vehiclesAPIConnectClient.GetAsync();
+
+        var getLegalClientPropertyLeasingsTask = legalClientPropertyLeasingAPIConnectClient.GetAsync();
+        var getNaturalClientPropertyLeasingsTask = naturalClientPropertyLeasingAPIConnectClient.GetAsync();
+        var getLegalClientVehicleLeasingsTask = legalClientVehicleLeasingAPIConnectClient.GetAsync();
+        var getNaturalClientVehicleLeasingsTask = naturalClientVehicleLeasingAPIConnectClient.GetAsync();
+
         BindingContextPageModel.IsBusy = true;
 
-        System.Threading.Tasks.Task.Run(async () =>
+        System.Threading.Tasks.Task.WhenAll(
+            propertyKindCountTask,
+            vehicleKindCountTask,
+            vehicleEngineKindCountTask,
+            brandCountTask,
+            propertyPropousalCountTask,
+            vehiclePropousalCountTask,
+            propertyOfferCountTask,
+            vehicleOfferCountTask,
+            propertyOrganizationPostulationCountTask,
+            propertyPersonPostulationCountTask,
+            vehicleOrganizationPostulationCountTask,
+            vehiclePersonPostulationCountTask,
+            getPropertiesTask,
+            getVehiclesTask,
+            getLegalClientPropertyLeasingsTask,
+            getNaturalClientPropertyLeasingsTask,
+            getLegalClientVehicleLeasingsTask,
+            getNaturalClientVehicleLeasingsTask).ContinueWith(task =>
         {
-            var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
+            if (!task.IsCompletedSuccessfully)
+            {
+                Dispatcher.Dispatch(() =>
+                {
+                    BindingContextPageModel.IsBusy = false;
 
-            var propertiesAPIConnectClient = new Domain.Interop.API.Connect.Clients.PropertiesAPIConnectClient(httpClientHelperProvider);
-            var vehiclesAPIConnectClient = new Domain.Interop.API.Connect.Clients.VehiclesAPIConnectClient(httpClientHelperProvider);
-            var propertyPropousalAPIConnectClient = new Leasing.Interop.API.Connect.Clients.PropertyLeasePropousalsAPIConnectClient(httpClientHelperProvider);
-            var vehiclePropousalAPIConnectClient = new Leasing.Interop.API.Connect.Clients.VehicleLeasePropousalsAPIConnectClient(httpClientHelperProvider);
-            var propertyOfferAPIConnectClient = new Leasing.Interop.API.Connect.Clients.PropertyLeaseOffersAPIConnectClient(httpClientHelperProvider);
-            var vehicleOfferAPIConnectClient = new Leasing.Interop.API.Connect.Clients.VehicleLeaseOffersAPIConnectClient(httpClientHelperProvider);
-            var propertyOrganizationPostulationAPIConnectClient = new Leasing.Interop.API.Connect.Clients.PropertyLeaseOrganizationPostulationsAPIConnectClient(httpClientHelperProvider);
-            var propertyPersonPostulationAPIConnectClient = new Leasing.Interop.API.Connect.Clients.PropertyLeasePersonPostulationsAPIConnectClient(httpClientHelperProvider);
-            var vehicleOrganizationPostulationAPIConnectClient = new Leasing.Interop.API.Connect.Clients.VehicleLeaseOrganizationPostulationsAPIConnectClient(httpClientHelperProvider);
-            var vehiclePersonPostulationAPIConnectClient = new Leasing.Interop.API.Connect.Clients.VehicleLeasePersonPostulationsAPIConnectClient(httpClientHelperProvider);
-            var legalClientPropertyLeasingAPIConnectClient = new Leasing.Interop.API.Connect.Clients.LegalClientPropertyLeasingsAPIConnectClient(httpClientHelperProvider);
-            var naturalClientPropertyLeasingAPIConnectClient = new Leasing.Interop.API.Connect.Clients.NaturalClientPropertyLeasingsAPIConnectClient(httpClientHelperProvider);
-            var legalClientVehicleLeasingAPIConnectClient = new Leasing.Interop.API.Connect.Clients.LegalClientVehicleLeasingsAPIConnectClient(httpClientHelperProvider);
-            var naturalClientVehicleLeasingAPIConnectClient = new Leasing.Interop.API.Connect.Clients.NaturalClientVehicleLeasingsAPIConnectClient(httpClientHelperProvider);
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
+                });
 
-            var propertyPropousalCount = await propertyPropousalAPIConnectClient.CountAsync();
-            var vehiclePropousalCount = await vehiclePropousalAPIConnectClient.CountAsync();
-            var propertyOfferCount = await propertyOfferAPIConnectClient.CountAsync();
-            var vehicleOfferCount = await vehicleOfferAPIConnectClient.CountAsync();
-            var propertyOrganizationPostulationCount = await propertyOrganizationPostulationAPIConnectClient.CountAsync();
-            var propertyPersonPostulationCount = await propertyPersonPostulationAPIConnectClient.CountAsync();
-            var vehicleOrganizationPostulationCount = await vehicleOrganizationPostulationAPIConnectClient.CountAsync();
-            var vehiclePersonPostulationCount = await vehiclePersonPostulationAPIConnectClient.CountAsync();
+                return;
+            }
 
-            var properties = await propertiesAPIConnectClient.GetAsync();
-            var vehicles = await vehiclesAPIConnectClient.GetAsync();
-
-            var legalClientPropertyLeasings = await legalClientPropertyLeasingAPIConnectClient.GetAsync();
-            var naturalClientPropertyLeasings = await naturalClientPropertyLeasingAPIConnectClient.GetAsync();
-            var legalClientVehicleLeasings = await legalClientVehicleLeasingAPIConnectClient.GetAsync();
-            var naturalClientVehicleLeasings = await naturalClientVehicleLeasingAPIConnectClient.GetAsync();
-
-            var endingContractCount = 0;
-            var endedContractCount = 0;
+            int endingContractCount = 0;
+            int endedContractCount = 0;
 
             var vehicleLeasingDictionary = new System.Collections.Generic.Dictionary<Guama.Core.Persistence.Entities.Contract.INamedEntity<System.Guid>, int>();
 
             var now = System.DateTime.Now;
 
-            foreach (var model in legalClientVehicleLeasings)
+            foreach (var model in getLegalClientVehicleLeasingsTask.Result)
             {
                 if (model.Contract.DurationUnitCount != null && model.Contract.DurationUnitCount.Value > 0)
                 {
@@ -165,7 +204,7 @@ public partial class LeasingDashboardPage : Caney.MVVM.Core.Pages.BindingContext
                 }
             }
 
-            foreach (var model in naturalClientVehicleLeasings)
+            foreach (var model in getNaturalClientVehicleLeasingsTask.Result)
             {
                 if (model.Contract.DurationUnitCount != null && model.Contract.DurationUnitCount.Value > 0)
                 {
@@ -243,7 +282,7 @@ public partial class LeasingDashboardPage : Caney.MVVM.Core.Pages.BindingContext
 
             var propertyLeasingDictionary = new System.Collections.Generic.Dictionary<Guama.Core.Persistence.Entities.Contract.INamedEntity<System.Guid>, int>();
 
-            foreach (var model in legalClientPropertyLeasings)
+            foreach (var model in getLegalClientPropertyLeasingsTask.Result)
             {
                 if (model.Contract.DurationUnitCount != null && model.Contract.DurationUnitCount.Value > 0)
                 {
@@ -306,7 +345,7 @@ public partial class LeasingDashboardPage : Caney.MVVM.Core.Pages.BindingContext
                 }
             }
 
-            foreach (var model in naturalClientPropertyLeasings)
+            foreach (var model in getNaturalClientPropertyLeasingsTask.Result)
             {
                 if (model.Contract.DurationUnitCount != null && model.Contract.DurationUnitCount.Value > 0)
                 {
@@ -384,37 +423,45 @@ public partial class LeasingDashboardPage : Caney.MVVM.Core.Pages.BindingContext
 
             var propertySpaces = new System.Collections.Generic.List<Domain.Interop.API.Common.Models.Display.PropertySpaceDisplayModel>();
 
-            foreach (var property in properties)
+            foreach (var property in getPropertiesTask.Result)
             {
                 propertySpaces.AddRange(property.Spaces);
             }
 
             Dispatcher.Dispatch(() =>
             {
-                BindingContextPageModel.PropousalCount = propertyPropousalCount + vehiclePropousalCount;
-                BindingContextPageModel.OfferCount = propertyOfferCount + vehicleOfferCount;
-                BindingContextPageModel.PostulationCount = propertyOrganizationPostulationCount + vehicleOrganizationPostulationCount + propertyPersonPostulationCount + vehiclePersonPostulationCount;
-                BindingContextPageModel.LeasingCount = legalClientPropertyLeasings.LongLength + naturalClientPropertyLeasings.LongLength + legalClientVehicleLeasings.LongLength + naturalClientVehicleLeasings.LongLength;
+                BindingContextPageModel.PropousalCount = propertyPropousalCountTask.Result + vehiclePropousalCountTask.Result;
+                BindingContextPageModel.OfferCount = propertyOfferCountTask.Result + vehicleOfferCountTask.Result;
+                BindingContextPageModel.PostulationCount = 
+                    propertyOrganizationPostulationCountTask.Result +
+                    vehicleOrganizationPostulationCountTask.Result +
+                    propertyPersonPostulationCountTask.Result +
+                    vehiclePersonPostulationCountTask.Result;
+                BindingContextPageModel.LeasingCount = 
+                    getLegalClientPropertyLeasingsTask.Result.LongLength +
+                    getNaturalClientPropertyLeasingsTask.Result.LongLength +
+                    getLegalClientVehicleLeasingsTask.Result.LongLength +
+                    getNaturalClientVehicleLeasingsTask.Result.LongLength;
                 BindingContextPageModel.EndingContractCount = endingContractCount;
                 BindingContextPageModel.EndedContractCount = endedContractCount;
-                BindingContextPageModel.IsVehicleAssignmentPieChartMock = vehicles.Length <= 0;
+                BindingContextPageModel.IsVehicleAssignmentPieChartMock = getVehiclesTask.Result.Length <= 0;
                 BindingContextPageModel.VehicleAssignmentPieChart.Series = new[]
                 {
                     new PieSeries<int>
                     {
-                        Values = new int[] { BindingContextPageModel.IsVehicleAssignmentPieChartMock ? System.Random.Shared.Next(1, 25) : vehicles.Where(model => model.Assignment == null).Count() },
+                        Values = new int[] { BindingContextPageModel.IsVehicleAssignmentPieChartMock ? System.Random.Shared.Next(1, 25) : getVehiclesTask.Result.Where(model => model.Assignment == null).Count() },
                         Name = "Disponibles",
                         Stroke = null
                     },
                     new PieSeries<int>
                     {
-                        Values = new int[] { BindingContextPageModel.IsVehicleAssignmentPieChartMock ? System.Random.Shared.Next(1, 25) : vehicles.Where(model => model.Assignment == Domain.Persistence.Enumerations.VehicleAssignment.Fleet).Count() },
+                        Values = new int[] { BindingContextPageModel.IsVehicleAssignmentPieChartMock ? System.Random.Shared.Next(1, 25) : getVehiclesTask.Result.Where(model => model.Assignment == Domain.Persistence.Enumerations.VehicleAssignment.Fleet).Count() },
                         Name = "Operaciones",
                         Stroke = null
                     },
                     new PieSeries<int>
                     {
-                        Values = new int[] { BindingContextPageModel.IsVehicleAssignmentPieChartMock ? System.Random.Shared.Next(1, 25) : vehicles.Where(model => model.Assignment == Domain.Persistence.Enumerations.VehicleAssignment.Leasing).Count() },
+                        Values = new int[] { BindingContextPageModel.IsVehicleAssignmentPieChartMock ? System.Random.Shared.Next(1, 25) : getVehiclesTask.Result.Where(model => model.Assignment == Domain.Persistence.Enumerations.VehicleAssignment.Leasing).Count() },
                         Name = "Arrendamiento",
                         Stroke = null
                     }
@@ -442,9 +489,9 @@ public partial class LeasingDashboardPage : Caney.MVVM.Core.Pages.BindingContext
                     }
                 };
                 BindingContextPageModel.IsVehicleLeasingPieChartMock = vehicleLeasingPieCharSeries.Count <= 0;
-                BindingContextPageModel.VehicleLeasingPieChart.Series = BindingContextPageModel.IsVehicleLeasingPieChartMock ? GeMockLeasingPieCharSeries() : vehicleLeasingPieCharSeries.ToArray();
+                BindingContextPageModel.VehicleLeasingPieChart.Series = BindingContextPageModel.IsVehicleLeasingPieChartMock ? LeasingDashboardPage.GeMockLeasingPieCharSeries() : vehicleLeasingPieCharSeries.ToArray();
                 BindingContextPageModel.IsPropertyLeasingPieChartMock = propertyLeasingPieCharSeries.Count <= 0;
-                BindingContextPageModel.PropertyLeasingPieChart.Series = BindingContextPageModel.IsPropertyLeasingPieChartMock ? GeMockLeasingPieCharSeries() : propertyLeasingPieCharSeries.ToArray();
+                BindingContextPageModel.PropertyLeasingPieChart.Series = BindingContextPageModel.IsPropertyLeasingPieChartMock ? LeasingDashboardPage.GeMockLeasingPieCharSeries() : propertyLeasingPieCharSeries.ToArray();
                 BindingContextPageModel.IsRunningMonthCollectStatusChartMock = true;
                 BindingContextPageModel.RunningMonthCollectStatusChart.Series =
                 [
@@ -595,17 +642,44 @@ public partial class LeasingDashboardPage : Caney.MVVM.Core.Pages.BindingContext
                         }
                     }
                 };
+
+                BindingContextPageModel.HasAnyPropertyKind = propertyKindCountTask.Result > 0;
+                BindingContextPageModel.HasAnyVehicleKind = vehicleKindCountTask.Result > 0;
+                BindingContextPageModel.HasAnyVehicleEngineKind = vehicleEngineKindCountTask.Result > 0;
+                BindingContextPageModel.HasAnyBrand = brandCountTask.Result > 0;
+
+                BindingContextPageModel.IsModuleReady =
+                    BindingContextPageModel.HasAnyPropertyKind &&
+                    BindingContextPageModel.HasAnyVehicleKind &&
+                    BindingContextPageModel.HasAnyVehicleEngineKind &&
+                    BindingContextPageModel.HasAnyBrand;
+
                 BindingContextPageModel.IsBusy = false;
             });
-        }).ContinueWith(task =>
-        {
-            if (!task.IsCanceled && task.Exception == null) return;
-
-            Dispatcher.Dispatch(() => Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this));
         });
     }
 
-    private PieSeries<int>[] GeMockLeasingPieCharSeries()
+    private async void GoBrandsManageSiteButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        await Shell.Current.GoToAsync(new ShellNavigationState($"///{typeof(Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.BrandsManagePage).Name}"));
+    }
+
+    private async void GoPropertyKindsAdminSiteManagePageButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        await Microsoft.Maui.ApplicationModel.Launcher.OpenAsync($"{Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>().HttpClientHelper.ClientBaseAddress}management/domain/propertykinds");
+    }
+
+    private async void GoVehicleKindsAdminSiteManagePageButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        await Microsoft.Maui.ApplicationModel.Launcher.OpenAsync($"{Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>().HttpClientHelper.ClientBaseAddress}management/domain/vehiclekinds");
+    }
+
+    private async void GoVehicleEngineKindsAdminSiteManagePageButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        await Microsoft.Maui.ApplicationModel.Launcher.OpenAsync($"{Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>().HttpClientHelper.ClientBaseAddress}management/domain/vehicleenginekinds");
+    }
+
+    private static PieSeries<int>[] GeMockLeasingPieCharSeries()
     {
         var result = new System.Collections.Generic.List<PieSeries<int>>();
 

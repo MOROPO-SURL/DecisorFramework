@@ -10,6 +10,7 @@
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     x:Class="MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.PropertyLeaseOfferConfigurationPage"
     x:TypeArguments="interop_common_display_models:PropertyLeaseOfferDisplayModel,interop_common_display_models:PropertyLeaseOfferDisplayModel,presentation_configuration_page_models:PropertyLeaseOfferConfigurationPageModel"
     x:DataType="presentation_configuration_page_models:PropertyLeaseOfferConfigurationPageModel">
@@ -62,14 +63,16 @@
                                     <Grid ColumnSpacing="0">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition />
+                                            <ColumnDefinition Width="1" />
                                             <ColumnDefinition Width="2*" />
                                         </Grid.ColumnDefinitions>
-                                        <Image
+                                        <ffimageloading_views:CachedImage
                                             Grid.Column="0"
                                             Aspect="AspectFill"               
                                             Source="{Binding Propousal.Property.FeatureImage, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
+                                        <BoxView Grid.Column="1" Color="{AppThemeBinding Light=LightGray, Dark=DimGray}" />
                                         <StackLayout 
-                                            Grid.Column="1"
+                                            Grid.Column="2"
                                             Padding="16">
                                             <Label 
                                                 FontAttributes="Bold"
@@ -130,14 +133,16 @@
                                                 <Grid ColumnSpacing="0">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="2*" />
+                                                        <ColumnDefinition Width="1" />
                                                         <ColumnDefinition Width="3*" />
                                                     </Grid.ColumnDefinitions>
-                                                    <Image
+                                                    <ffimageloading_views:CachedImage
                                                         Grid.Column="0"
                                                         Aspect="AspectFill"               
                                                         Source="{Binding Space.FeatureImage, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
+                                                    <BoxView Grid.Column="1" Color="{AppThemeBinding Light=LightGray, Dark=DimGray}" />
                                                     <StackLayout 
-                                                        Grid.Column="1"
+                                                        Grid.Column="2"
                                                         Padding="8">
                                                         <Label 
                                                             FontAttributes="Bold"

@@ -15,6 +15,7 @@
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     x:Class="MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.DecisionMakingGroupConfigurationPage"
     x:TypeArguments="interop_common_display_models:DecisionMakingGroupDisplayModel,interop_common_display_models:DecisionMakingGroupDisplayModel,presentation_configuration_page_models:DecisionMakingGroupConfigurationPageModel"
     x:DataType="presentation_configuration_page_models:DecisionMakingGroupConfigurationPageModel">
@@ -139,11 +140,12 @@
                                             WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource ViewChildParentWidthToRelativeWidthConverter}}">
                                             <VerticalStackLayout Spacing="0">
                                                 <Grid>
-                                                    <Image 
+                                                    <ffimageloading_views:CachedImage 
                                                         BackgroundColor="DimGray"
                                                         HeightRequest="{Binding Source={RelativeSource AncestorType={Type Frame}}, Path=Width}"
                                                         Aspect="AspectFill"
                                                         Source="{Binding Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
+                                                    <BoxView HeightRequest="1" Color="{AppThemeBinding Light=LightGray, Dark=DimGray}" />
                                                     <Grid
                                                         VerticalOptions="End"
                                                         BackgroundColor="{AppThemeBinding Light=#BBDDDDDD, Dark=#A9333333}">
@@ -222,11 +224,12 @@
                                             WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource ViewChildParentWidthToRelativeWidthConverter}}">
                                             <VerticalStackLayout Spacing="0">
                                                 <Grid>
-                                                    <Image 
+                                                    <ffimageloading_views:CachedImage 
                                                         BackgroundColor="DimGray"
                                                         HeightRequest="{Binding Source={RelativeSource AncestorType={Type Frame}}, Path=Width}"
                                                         Aspect="AspectFill"
                                                         Source="{Binding Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
+                                                    <BoxView HeightRequest="1" Color="{AppThemeBinding Light=LightGray, Dark=DimGray}" />
                                                     <Grid
                                                         VerticalOptions="End"
                                                         BackgroundColor="{AppThemeBinding Light=#BBDDDDDD, Dark=#A9333333}">

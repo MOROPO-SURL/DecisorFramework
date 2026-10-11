@@ -68,5 +68,7 @@ public partial class LegalClientVehicleLeasingCollectConfigurationPage : Core.Pr
     private void LeasingPickComplete_Callback(LegalClientVehicleLeasingDisplayModel model)
     {
         ConcreteBindingContext.Leasing = model;
+
+        hasChangesFlag = true;
     }
 }

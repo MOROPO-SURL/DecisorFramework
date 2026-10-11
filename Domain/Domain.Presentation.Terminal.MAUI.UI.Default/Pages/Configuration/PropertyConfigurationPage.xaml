@@ -10,6 +10,7 @@
     xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     x:Class="MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.PropertyConfigurationPage"
     x:TypeArguments="interop_common_display_models:PropertyDisplayModel,interop_common_display_models:PropertyDisplayModel,presentation_configuration_page_models:PropertyConfigurationPageModel"
     x:DataType="presentation_configuration_page_models:PropertyConfigurationPageModel">
@@ -59,7 +60,7 @@
                         Margin="4"
                         Padding="0">
                         <Grid>
-                            <Image 
+                            <ffimageloading_views:CachedImage 
                                 Aspect="AspectFill"
                                 Source="{Binding Path=FeatureImageSource, TargetNullValue='default_organization_picture.png'}" />
                             <Grid BackgroundColor="#A7000000">
@@ -224,7 +225,7 @@
                                                     <ColumnDefinition Width="3*" />
                                                     <ColumnDefinition Width="Auto" />
                                                 </Grid.ColumnDefinitions>
-                                                <Image
+                                                <ffimageloading_views:CachedImage
                                                     IsVisible="{Binding InputFeatureImage, Converter={StaticResource IsNullConverter}}"
                                                     Grid.Column="0"
                                                     Aspect="AspectFill"               
@@ -274,7 +275,7 @@
                                                         Clicked="SpaceEditionButton_Clicked" />
                                                     <Button
                                                         VerticalOptions="Start"
-                                                        Style="{StaticResource FontIconImageButtonStyle}"
+                                                        Style="{StaticResource DangerKindFontIconImageButtonStyle}"
                                                         Text="&#xFA78;"
                                                         Clicked="SpaceRemotionButton_Clicked" />
                                                 </VerticalStackLayout>
@@ -332,7 +333,7 @@
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="ImageSource">
                                         <Grid>
-                                            <Image
+                                            <ffimageloading_views:CachedImage
                                                 Margin="8"
                                                 HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width}"
                                                 Source="{Binding .}"
