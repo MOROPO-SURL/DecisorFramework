@@ -9,12 +9,12 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Extensions
         {
             var securitySection = new List<ManagementDashboardSectionViewModel>();
             var locationSection = new List<ManagementDashboardSectionViewModel>();
-            var legalSection = new List<ManagementDashboardSectionViewModel>();
+            //var legalSection = new List<ManagementDashboardSectionViewModel>();
             var domainSection = new List<ManagementDashboardSectionViewModel>();
-            var financialSection = new List<ManagementDashboardSectionViewModel>();
+            //var financialSection = new List<ManagementDashboardSectionViewModel>();
             var humanResourcesSection = new List<ManagementDashboardSectionViewModel>();
             var commercialSection = new List<ManagementDashboardSectionViewModel>();
-            var governanceSection = new List<ManagementDashboardSectionViewModel>();
+            //var governanceSection = new List<ManagementDashboardSectionViewModel>();
             var leasingSection = new List<ManagementDashboardSectionViewModel>();
 
             #region Security
@@ -74,35 +74,8 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Extensions
             #region Domain
             domainSection.Add(new ManagementDashboardSectionViewModel
             {
-                Title = "Tipos de Estructura",
-                Controller = "structurekinds",
-                Action = "Index",
-                Area = "domain",
-                // TODO Set spected permission
-                //Role = Framework.Decisor.Domain.Interop.API.Common.Constants.Security.Authorization.EmployeeViewerPermission
-            });
-            domainSection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Tipos de Inmueble",
-                Controller = "propertykinds",
-                Action = "Index",
-                Area = "domain",
-                // TODO Set spected permission
-                //Role = Framework.Decisor.Domain.Interop.API.Common.Constants.Security.Authorization.EmployeeViewerPermission
-            });
-            domainSection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Tipos de Vehículo",
-                Controller = "vehiclekinds",
-                Action = "Index",
-                Area = "domain",
-                // TODO Set spected permission
-                //Role = Framework.Decisor.Domain.Interop.API.Common.Constants.Security.Authorization.EmployeeViewerPermission
-            });
-            domainSection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Tipos de Motorización",
-                Controller = "vehicleenginekinds",
+                Title = "Tipos de Ent. Administrativa",
+                Controller = "administrativeentitykinds",
                 Action = "Index",
                 Area = "domain",
                 // TODO Set spected permission
@@ -173,85 +146,139 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Extensions
             });
             #endregion
 
-            #region Financial
-            financialSection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Centros de Costo",
-                Controller = "costcenters",
-                Action = "Index",
-                Area = "financial",
-                // TODO Set spected permission
-                Role = Framework.Decisor.Financial.Interop.API.Common.Constants.Security.Authorization.CostCenterViewerPermission
-            });
-            financialSection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Agencias Bancarias",
-                Controller = "bankagencies",
-                Action = "Index",
-                Area = "financial",
-                // TODO Set spected permission
-                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
-            });
-            financialSection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Sucursales Bancarias",
-                Controller = "bankbranches",
-                Action = "Index",
-                Area = "financial",
-                // TODO Set spected permission
-                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
-            });
-            financialSection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Cuentas Bancarias",
-                Controller = "bankaccounts",
-                Action = "Index",
-                Area = "financial",
-                // TODO Set spected permission
-                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
-            });
-            financialSection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Monedas",
-                Controller = "currencies",
-                Action = "Index",
-                Area = "financial",
-                // TODO Set spected permission
-                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
-            });
-            financialSection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Cobros",
-                Controller = "incomes",
-                Action = "Index",
-                Area = "financial",
-                // TODO Set spected permission
-                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
-            });
-            #endregion
+            //#region Financial
+            //financialSection.Add(new ManagementDashboardSectionViewModel
+            //{
+            //    Title = "Centros de Costo",
+            //    Controller = "costcenters",
+            //    Action = "Index",
+            //    Area = "financial",
+            //    // TODO Set spected permission
+            //    Role = Framework.Decisor.Financial.Interop.API.Common.Constants.Security.Authorization.CostCenterViewerPermission
+            //});
+            //financialSection.Add(new ManagementDashboardSectionViewModel
+            //{
+            //    Title = "Agencias Bancarias",
+            //    Controller = "bankagencies",
+            //    Action = "Index",
+            //    Area = "financial",
+            //    // TODO Set spected permission
+            //    //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
+            //});
+            //financialSection.Add(new ManagementDashboardSectionViewModel
+            //{
+            //    Title = "Sucursales Bancarias",
+            //    Controller = "bankbranches",
+            //    Action = "Index",
+            //    Area = "financial",
+            //    // TODO Set spected permission
+            //    //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
+            //});
+            //financialSection.Add(new ManagementDashboardSectionViewModel
+            //{
+            //    Title = "Cuentas Bancarias",
+            //    Controller = "bankaccounts",
+            //    Action = "Index",
+            //    Area = "financial",
+            //    // TODO Set spected permission
+            //    //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
+            //});
+            //financialSection.Add(new ManagementDashboardSectionViewModel
+            //{
+            //    Title = "Monedas",
+            //    Controller = "currencies",
+            //    Action = "Index",
+            //    Area = "financial",
+            //    // TODO Set spected permission
+            //    //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
+            //});
+            //financialSection.Add(new ManagementDashboardSectionViewModel
+            //{
+            //    Title = "Cobros",
+            //    Controller = "incomes",
+            //    Action = "Index",
+            //    Area = "financial",
+            //    // TODO Set spected permission
+            //    //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
+            //});
+            //#endregion
 
-            #region Governance
-            governanceSection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Grupos Decisores",
-                Controller = "decisionmakinggroups",
-                Action = "Index",
-                Area = "governance",
-                // TODO Set spected permission
-                //Role = Constants.Security.Authorization.LegalProviderViewerPermission
-            });
-            governanceSection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Reuniones",
-                Controller = "meetings",
-                Action = "Index",
-                Area = "governance",
-                // TODO Set spected permission
-                //Role = Constants.Security.Authorization.LegalProviderViewerPermission
-            });
-            #endregion
+            //#region Governance
+            //governanceSection.Add(new ManagementDashboardSectionViewModel
+            //{
+            //    Title = "Grupos Decisores",
+            //    Controller = "decisionmakinggroups",
+            //    Action = "Index",
+            //    Area = "governance",
+            //    // TODO Set spected permission
+            //    //Role = Constants.Security.Authorization.LegalProviderViewerPermission
+            //});
+            //governanceSection.Add(new ManagementDashboardSectionViewModel
+            //{
+            //    Title = "Reuniones",
+            //    Controller = "meetings",
+            //    Action = "Index",
+            //    Area = "governance",
+            //    // TODO Set spected permission
+            //    //Role = Constants.Security.Authorization.LegalProviderViewerPermission
+            //});
+            //#endregion
 
-            #region Purchasing
+            #region Leasing
+            leasingSection.Add(new ManagementDashboardSectionViewModel
+            {
+                Title = "Tipos de Inmueble",
+                Controller = "propertykinds",
+                Action = "Index",
+                Area = "domain",
+                // TODO Set spected permission
+                //Role = Framework.Decisor.Domain.Interop.API.Common.Constants.Security.Authorization.EmployeeViewerPermission
+            });
+            leasingSection.Add(new ManagementDashboardSectionViewModel
+            {
+                Title = "Tipos de Vehículo",
+                Controller = "vehiclekinds",
+                Action = "Index",
+                Area = "domain",
+                // TODO Set spected permission
+                //Role = Framework.Decisor.Domain.Interop.API.Common.Constants.Security.Authorization.EmployeeViewerPermission
+            });
+            leasingSection.Add(new ManagementDashboardSectionViewModel
+            {
+                Title = "Tipos de Motorización",
+                Controller = "vehicleenginekinds",
+                Action = "Index",
+                Area = "domain",
+                // TODO Set spected permission
+                //Role = Framework.Decisor.Domain.Interop.API.Common.Constants.Security.Authorization.EmployeeViewerPermission
+            });
+            leasingSection.Add(new ManagementDashboardSectionViewModel
+            {
+                Title = "Marcas",
+                Controller = "brands",
+                Action = "Index",
+                Area = "domain",
+                // TODO Set spected permission
+                //Role = Framework.Decisor.Domain.Interop.API.Common.Constants.Security.Authorization.EmployeeViewerPermission
+            });
+            leasingSection.Add(new ManagementDashboardSectionViewModel
+            {
+                Title = "Vehículos",
+                Controller = "vehicles",
+                Action = "Index",
+                Area = "domain",
+                // TODO Set spected permission
+                //Role = Framework.Decisor.Domain.Interop.API.Common.Constants.Security.Authorization.EmployeeViewerPermission
+            });
+            leasingSection.Add(new ManagementDashboardSectionViewModel
+            {
+                Title = "Inmuebles",
+                Controller = "properties",
+                Action = "Index",
+                Area = "domain",
+                // TODO Set spected permission
+                //Role = Framework.Decisor.Domain.Interop.API.Common.Constants.Security.Authorization.EmployeeViewerPermission
+            });
             leasingSection.Add(new ManagementDashboardSectionViewModel
             {
                 Title = "Propuestas",
@@ -296,11 +323,12 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Extensions
                 { "Locación", locationSection },
                 //{ "Jurídico", legalSection },
                 { "Dominio", domainSection },
-                { "Finanzas", financialSection },
-                { "Recursos Humanos", humanResourcesSection },
-                { "Comercial", commercialSection },
+                //{ "Finanzas", financialSection },
                 { "jump-0", null },
-                { "Gobernanza", governanceSection },
+                { "Recursos Humanos", humanResourcesSection },
+                { "jump-1", null },
+                { "Comercial", commercialSection },
+                //{ "Gobernanza", governanceSection },
                 { "Arrendamiento", leasingSection }
             };
         }

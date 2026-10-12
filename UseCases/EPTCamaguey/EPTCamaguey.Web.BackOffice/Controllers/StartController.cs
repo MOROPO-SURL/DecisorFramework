@@ -4,7 +4,7 @@
     {
         public Microsoft.AspNetCore.Mvc.IActionResult Index()
         {
-            return Redirect("management/dashboard");
+            return RedirectToAction("index", "account", new { Area = "security" });
         }
     }
 }

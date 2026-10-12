@@ -11,12 +11,7 @@
     {
         new BreadcrumbViewModel
         {
-            Caption = "<span class=\"mdi mdi-desktop-mac-dashboard\" style=\"margin-right: 4px;\"></span> Panel de Control",
-            Url = Url.Action("Index", "Dashboard", new { Area = "management" })
-        },
-        new BreadcrumbViewModel
-        {
-            Caption = "Perfil de Usuario",
+            Caption = "<span class=\"mdi mdi-account-circle\" style=\"margin-right: 4px;\"></span> Perfil de Usuario",
             Url = Url.Action("index", "account", new { Area = "security" })
         },
         new BreadcrumbViewModel
@@ -25,7 +20,7 @@
         }
     };
 
-    Layout = "_BackendLayout";
+    Layout = "_AuthenticatedFrontendLayout";
 }
 
 @section styles {
@@ -126,6 +121,6 @@
         @Html.ValidationMessageFor(model => model.About, null, new { @class = "text-danger" })
     </div>
     <hr />
-    <button type="submit" class="btn btn-primary">Modificar</button>
-    <a class="btn btn-light" href="@Url.Action("index")">Cancelar</a>
+    <button type="submit" class="btn btn-primary">Aplicar</button>
+    <a class="btn btn-outline-secondary" href="@Url.Action("index")">Cancelar</a>
 </form>

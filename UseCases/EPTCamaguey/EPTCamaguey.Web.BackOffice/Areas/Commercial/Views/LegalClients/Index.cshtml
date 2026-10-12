@@ -1,7 +1,7 @@
-﻿@model MOROPO.Framework.Guama.Core.Presentation.Web.Frontend.Models.View.PaginationViewModel<MOROPO.Framework.Decisor.Commercial.Persistence.Entities.LegalProvider, System.Guid, MOROPO.Framework.Decisor.Commercial.Presentation.Web.Backend.Models.View.Display.LegalProviderDisplayViewModel>
+﻿@model MOROPO.Framework.Guama.Core.Presentation.Web.Frontend.Models.View.PaginationViewModel<MOROPO.Framework.Decisor.Commercial.Persistence.Entities.LegalClient, System.Guid, MOROPO.Framework.Decisor.Commercial.Presentation.Web.Backend.Models.View.Display.LegalClientDisplayViewModel>
 
 @{
-    const string HEADER = "Administración de Proveedores Jurídicos";
+    const string HEADER = "Administración de Clientes Jurídicos";
 
     ViewData["TITLE"] = ViewData["HEADER"] = HEADER;
 
@@ -123,7 +123,7 @@
                 </div>
             </div>
         }
-    
+
         <div style="border: 1px solid #DDD; border-radius: 4px;">
             <table class="table table-bordered table-striped m-0">
                 <thead>
@@ -131,7 +131,7 @@
                         <th>Nombre</th>
                         <th class="fit">Habilitado?</th>
                         <th class="fit">Opciones</th>
-                    </tr>        
+                    </tr>
                 </thead>
                 <tbody>
                     @if (Model.List.Count > 0)
@@ -163,7 +163,7 @@
                                     }
                                     else
                                     {
-                                        using (Html.BeginForm(item.Enabled ? "disable" : "enable", "LegalProviders", null, FormMethod.Post, true, null))
+                                        using (Html.BeginForm(item.Enabled ? "disable" : "enable", "LegalClients", null, FormMethod.Post, true, null))
                                         {
                                             <input type="hidden" name="key" value="@Html.Raw(item.Id)" />
 
@@ -181,7 +181,7 @@
                                     }
                                 </td>
                                 <td class="fit" style="vertical-align: middle;">
-                                    @using (Html.BeginForm(item.Archived ? "unarchive" : "archive", "LegalProviders", null, FormMethod.Post, true, null))
+                                    @using (Html.BeginForm(item.Archived ? "unarchive" : "archive", "LegalClients", null, FormMethod.Post, true, null))
                                     {
                                         <input type="hidden" name="key" value="@Html.Raw(item.Id)" />
 
@@ -244,7 +244,7 @@
                                     <div class="modal fade" id="delete-@item.Id" tabindex="-1" role="dialog" aria-labelledby="delete-@item.Id-lable" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
-                                                @using (Html.BeginForm("delete", "LegalProviders", new { Area = "purchasing" }, FormMethod.Post, true, new { @class = "modal-content" }))
+                                                @using (Html.BeginForm("delete", "LegalClients", new { Area = "purchasing" }, FormMethod.Post, true, new { @class = "modal-content" }))
                                                 {
                                                     @Html.Hidden("Id", item.Id)
 
@@ -278,3 +278,4 @@
         </div>
     </div>
 </div>
+

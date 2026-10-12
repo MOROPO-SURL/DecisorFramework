@@ -98,7 +98,7 @@
 
             if (target.Controller == "costcenters") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-finance");
 
-            if (target.Controller == "structurekinds") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-graph-outline");
+            if (target.Controller == "administrativeentitykinds") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-graph-outline");
 
             if (target.Controller == "propertykinds") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-home-city-outline");
 
@@ -115,6 +115,20 @@
             if (target.Controller == "workpositionkinds") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-account-star");
 
             if (target.Controller == "schoolings") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-school");
+
+            if (target.Controller == "propousals") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-human-greeting");
+
+            if (target.Controller == "offers") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-offer");
+
+            if (target.Controller == "postulations") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-clipboard-check-outline");
+
+            if (target.Controller == "leasings") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-key-star");
+
+            if (target.Controller == "brands") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-star-circle");
+
+            if (target.Controller == "properties") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-home-city");
+
+            if (target.Controller == "vehicles") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-bus");
 
             return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-toy-brick-outline");
         }

@@ -1,7 +1,7 @@
-﻿@model MOROPO.Framework.Guama.Core.Presentation.Web.Frontend.Models.View.PaginationViewModel<MOROPO.Framework.Decisor.Commercial.Persistence.Entities.NaturalProvider, System.Guid, MOROPO.Framework.Decisor.Commercial.Presentation.Web.Backend.Models.View.Display.NaturalProviderDisplayViewModel>
+﻿@model MOROPO.Framework.Guama.Core.Presentation.Web.Frontend.Models.View.PaginationViewModel<MOROPO.Framework.Decisor.Commercial.Persistence.Entities.NaturalClient, System.Guid, MOROPO.Framework.Decisor.Commercial.Presentation.Web.Backend.Models.View.Display.NaturalClientDisplayViewModel>
 
 @{
-    const string HEADER = "Administración de Proveedores Naturales";
+    const string HEADER = "Administración de Clientes Naturales";
 
     ViewData["TITLE"] = ViewData["HEADER"] = HEADER;
 
@@ -22,6 +22,7 @@
 }
 
 <hr class="mt-0 mb-4" />
+
 
 <div class="card">
     <div class="card-header">
@@ -123,7 +124,7 @@
                 </div>
             </div>
         }
-    
+
         <div style="border: 1px solid #DDD; border-radius: 4px;">
             <table class="table table-bordered table-striped m-0">
                 <thead>
@@ -132,7 +133,7 @@
                         <th>Apellidos</th>
                         <th class="fit">Habilitado?</th>
                         <th class="fit">Opciones</th>
-                    </tr>        
+                    </tr>
                 </thead>
                 <tbody>
                     @if (Model.List.Count > 0)
@@ -174,7 +175,7 @@
                                     }
                                     else
                                     {
-                                        using (Html.BeginForm(item.Enabled ? "disable" : "enable", "NaturalProviders", new { Area = "purchasing" }, FormMethod.Post, true, null))
+                                        using (Html.BeginForm(item.Enabled ? "disable" : "enable", "NaturalClients", null, FormMethod.Post, true, null))
                                         {
                                             <input type="hidden" name="key" value="@Html.Raw(item.Id)" />
 
@@ -192,7 +193,7 @@
                                     }
                                 </td>
                                 <td class="fit" style="vertical-align: middle;">
-                                    @using (Html.BeginForm(item.Archived ? "unarchive" : "archive", "NaturalProviders", new { Area = "purchasing" }, FormMethod.Post, true, null))
+                                    @using (Html.BeginForm(item.Archived ? "unarchive" : "archive", "NaturalClients", null, FormMethod.Post, true, null))
                                     {
                                         <input type="hidden" name="key" value="@Html.Raw(item.Id)" />
 
@@ -230,18 +231,7 @@
                                                         <dt>Nombre</dt>
                                                         <dd>@item.Contact.Identity.Name</dd>
                                                         <dt>Apellidos</dt>
-                                                        <dd>
-                                                            @if (string.IsNullOrEmpty(item.Contact.Identity.LastName))
-                                                            {
-                                                                <span>---</span>
-                                                            }
-                                                            else
-                                                            {
-                                                                <span>@item.Contact.Identity.LastName</span>
-                                                            }
-                                                        </dd>
-                                                        <dt>Sexo</dt>
-                                                        <dd>@item.Contact.Identity.Sex</dd>
+                                                        <dd>@item.Contact.Identity.LastName</dd>
                                                         <dt>Creado</dt>
                                                         <dd>@item.At.ToShortDateString()</dd>
                                                         <dt>Habilitado?</dt>
@@ -266,16 +256,16 @@
                                     <div class="modal fade" id="delete-@item.Id" tabindex="-1" role="dialog" aria-labelledby="delete-@item.Id-lable" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
-                                                @using (Html.BeginForm("delete", "NaturalProviders", new { Area = "purchasing" }, FormMethod.Post, true, new { @class = "modal-content" }))
+                                                @using (Html.BeginForm("delete", "NaturalClients", new { Area = "purchasing" }, FormMethod.Post, true, new { @class = "modal-content" }))
                                                 {
                                                     @Html.Hidden("Id", item.Id)
 
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title font-weight-bold text-primary" id="delete-@item.Id-lable">Eliminar Proveedor Natural</h5>
+                                                        <h5 class="modal-title font-weight-bold text-primary" id="delete-@item.Id-lable">Eliminar Proveedor Jurídico</h5>
                                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <p class="mb-0">Está seguro que desea eliminar el proveedor natural seleccionado?</p>
+                                                        <p class="mb-0">Está seguro que desea eliminar el proveedor jurídico seleccionado?</p>
                                                     </div>
                                                     <div class="modal-footer" style="margin-top: 0;">
                                                         <button type="submit" class="btn btn-danger">Eliminar</button>
@@ -292,7 +282,7 @@
                     else
                     {
                         <tr>
-                            <td colspan="4"><p style="margin: 0 5px;" class="text-muted">Sin elementos que mostrar</p></td>
+                            <td colspan="3"><p style="margin: 0 5px;" class="text-muted">Sin elementos que mostrar</p></td>
                         </tr>
                     }
                 </tbody>
