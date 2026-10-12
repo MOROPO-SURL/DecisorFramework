@@ -204,54 +204,52 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default.Pr
 
             using (var imageFileStream = await task.Result.OpenReadAsync())
             {
-                using (var skStream = new SkiaSharp.SKManagedStream(imageFileStream))
-                {
-                    croppingImageTarget = SkiaSharp.SKBitmap.Decode(skStream);
-                }
+                using var skStream = new SkiaSharp.SKManagedStream(imageFileStream);
+
+                croppingImageTarget = SkiaSharp.SKBitmap.Decode(skStream);
             }
 
             page.Dispatcher.Dispatch(() =>
             {
-                page.DisplayAlert("Recortar", "Desea recortar esta imagen?", "Si", "No").ContinueWith(cropAskTask =>
+                //page.DisplayAlert("Recortar", "Desea recortar esta imagen?", "Si", "No").ContinueWith(cropAskTask =>
+                //{
+                //    page.Dispatcher.Dispatch(() =>
+                //    {
+                //        if (cropAskTask.Result)
+                //        {
+                //            concreteBindingContext.BusyProgressMessage = "Recortando imagen ...";
+
+                //            page.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pages.ImageCropPage(croppingImageTarget, PickedImageCroppingComplete_Callback)));
+                //        }
+                //        else
+                //        {
+                Interop.API.Common.Models.Input.ImageInputModel result = null;
+
+                using (var skImage = SkiaSharp.SKImage.FromBitmap(croppingImageTarget))
                 {
-                    page.Dispatcher.Dispatch(() =>
+                    using var skData = skImage.Encode(SkiaSharp.SKEncodedImageFormat.Jpeg, 75);
+
+                    result = new Interop.API.Common.Models.Input.ImageInputModel
                     {
-                        if (cropAskTask.Result)
-                        {
-                            concreteBindingContext.BusyProgressMessage = "Recortando imagen ...";
+                        ContentData = skData.ToArray(),
+                        ContentType = task.Result.ContentType
+                    };
+                }
 
-                            page.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pages.ImageCropPage(croppingImageTarget, PickedImageCroppingComplete_Callback)));
-                        }
-                        else
-                        {
-                            Interop.API.Common.Models.Input.ImageInputModel result = null;
+                croppingImageTarget.Dispose();
 
-                            using (var skImage = SkiaSharp.SKImage.FromBitmap(croppingImageTarget))
-                            {
-                                using (var skData = skImage.Encode(SkiaSharp.SKEncodedImageFormat.Jpeg, 75))
-                                {
-                                    result = new Interop.API.Common.Models.Input.ImageInputModel
-                                    {
-                                        ContentData = skData.ToArray(),
-                                        ContentType = task.Result.ContentType
-                                    };
-                                }
-                            }
+                var concreteBindingContext = (page.BindingContext as Caney.MVVM.Core.Models.Page.BasePageModel);
 
-                            croppingImageTarget.Dispose();
+                concreteBindingContext.IsBusy = false;
+                concreteBindingContext.BusyProgressMessage = string.Empty;
 
-                            var concreteBindingContext = (page.BindingContext as Caney.MVVM.Core.Models.Page.BasePageModel);
+                successAction.Invoke(result);
 
-                            concreteBindingContext.IsBusy = false;
-                            concreteBindingContext.BusyProgressMessage = string.Empty;
-
-                            successAction.Invoke(result);
-
-                            page = null;
-                            successAction = null;
-                        }
-                    });
-                });
+                page = null;
+                successAction = null;
+                //        }
+                //    });
+                //});
             });
         }
     }
