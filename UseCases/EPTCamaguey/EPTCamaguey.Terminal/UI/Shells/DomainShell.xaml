@@ -88,7 +88,7 @@
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="{StaticResource PropertyMaterialDesignGlyphIconId}"
+                Glyph="&#xFCF1;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
@@ -98,7 +98,7 @@
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="{StaticResource VehicleMaterialDesignGlyphIconId}"
+                Glyph="&#xF0E7;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>

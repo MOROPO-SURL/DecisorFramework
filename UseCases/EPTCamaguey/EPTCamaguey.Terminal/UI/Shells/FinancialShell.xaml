@@ -39,7 +39,7 @@
         <FlyoutItem.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="{StaticResource CollectMaterialDesignGlyphIconId}"
+                Glyph="&#xF028C;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </FlyoutItem.Icon>
         <ShellContent 
