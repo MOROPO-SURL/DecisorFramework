@@ -12,6 +12,7 @@
     <ContentView.Resources>
         <ResourceDictionary>
             <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
+            <core_ui_converters:StringToLocalizedStringConverter x:Key="StringToLocalizedStringConverter" />
 
             <caneyframework_presentation_converters:DoubleToFractionConverter x:Key="DoubleToFractionConverter" />
 
@@ -46,7 +47,7 @@
                         HorizontalTextAlignment="Center"
                         FontAttributes="Bold"
                         TextColor="White"
-                        Text="{Binding Assignment}" />
+                        Text="{Binding Assignment, Converter={StaticResource StringToLocalizedStringConverter}}" />
                 </Grid>
             </Grid>
             <BoxView HeightRequest="1" Color="{AppThemeBinding Light=LightGray, Dark=DimGray}" />

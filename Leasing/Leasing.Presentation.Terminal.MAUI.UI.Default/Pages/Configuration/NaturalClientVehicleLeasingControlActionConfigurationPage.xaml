@@ -95,6 +95,10 @@
                     Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Margin="0,8,0,0" Text="Descrición" />
                     <Editor Text="{Binding Description}" HeightRequest="240" />
+                    <Label
+                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:NaturalClientVehicleLeasingControlActionConfigurationPageModel.DescriptionValidableProperty}}"
+                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:NaturalClientVehicleLeasingControlActionConfigurationPageModel.DescriptionValidableProperty}}"
+                        Style="{StaticResource ValidationMessageLabelStyle}" />
                 </VerticalStackLayout>
             </VerticalStackLayout>
         </ScrollView>

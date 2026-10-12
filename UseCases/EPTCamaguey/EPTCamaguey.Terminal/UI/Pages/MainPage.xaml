@@ -155,7 +155,7 @@
                         </Grid>
                     </Grid>
                 </Frame>
-                <Frame Style="{StaticResource SectionCardFrameStyle}">
+                <!--<Frame Style="{StaticResource SectionCardFrameStyle}">
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Tapped="LegalSectionCardFrameTapGestureRecognizer_Tapped" />
                     </Frame.GestureRecognizers>
@@ -166,7 +166,7 @@
                             <Label Style="{StaticResource SectionCardNameLabelStyle}" Text="Jurídico" />
                         </Grid>
                     </Grid>
-                </Frame>
+                </Frame>-->
                 <Frame Style="{StaticResource SectionCardFrameStyle}">
                     <Frame.GestureRecognizers>
                         <TapGestureRecognizer Tapped="HumanResourcesSectionCardFrameTapGestureRecognizer_Tapped" />

@@ -23,6 +23,7 @@
             <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
             <core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
             <core_ui_converters:ValidationResultToTargetPropertyHasErrorConverter x:Key="ValidationResultToTargetPropertyHasErrorConverter" />
+            <core_ui_converters:StringToLocalizedStringConverter x:Key="StringToLocalizedStringConverter" />
 
             <caneyframework_presentation_converters:ViewChildParentWidthToRelativeWidthConverter x:Key="ViewChildParentWidthToRelativeWidthConverter" ReferenceWidth="180" AbsoluteHorizontalSeparation="12" />
 
@@ -331,7 +332,7 @@
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Duración (U/M)" />
                         <Picker 
                             ItemsSource="{Binding AvailableDurationUnitMeasureKinds}"
-                            SelectedItem="{Binding DurationUnitMeasureKind}"
+                            SelectedItem="{Binding DurationUnitMeasureKind, Converter={StaticResource StringToLocalizedStringConverter}}"
                             SelectedIndexChanged="Picker_SelectedIndexChanged" />
                         <Label
                             IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:LegalClientPropertyLeasingConfigurationPageModel.DurationUnitMeasureKindValidableProperty}}"

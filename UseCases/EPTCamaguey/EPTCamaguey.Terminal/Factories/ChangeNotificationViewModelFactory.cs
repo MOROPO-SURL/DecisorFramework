@@ -11,7 +11,7 @@ public class ChangeNotificationViewModelFactory : Framework.Decisor.Domain.Prese
 
         var entityType = System.Type.GetType(model.EntityName);
 
-        #region Domain Fwrk
+        #region Domain
 
         if (typeof(Framework.Decisor.Domain.Persistence.Entities.UnitMeasurement) == entityType)
         {

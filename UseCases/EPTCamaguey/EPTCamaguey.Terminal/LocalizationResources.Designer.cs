@@ -97,6 +97,15 @@ namespace MOROPO.EPTCamaguey.Decisor.Terminal {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Día(s).
+        /// </summary>
+        internal static string Days {
+            get {
+                return ResourceManager.GetString("Days", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Designación.
         /// </summary>
         internal static string Designation {
@@ -133,11 +142,38 @@ namespace MOROPO.EPTCamaguey.Decisor.Terminal {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Uso Institucional.
+        /// </summary>
+        internal static string Fleet {
+            get {
+                return ResourceManager.GetString("Fleet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Bachillerato.
         /// </summary>
         internal static string HighSchool {
             get {
                 return ResourceManager.GetString("HighSchool", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Hora(s).
+        /// </summary>
+        internal static string Hours {
+            get {
+                return ResourceManager.GetString("Hours", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Arrendamiento.
+        /// </summary>
+        internal static string Leasing {
+            get {
+                return ResourceManager.GetString("Leasing", resourceCulture);
             }
         }
         
@@ -156,6 +192,15 @@ namespace MOROPO.EPTCamaguey.Decisor.Terminal {
         internal static string Married {
             get {
                 return ResourceManager.GetString("Married", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Mes(es).
+        /// </summary>
+        internal static string Months {
+            get {
+                return ResourceManager.GetString("Months", resourceCulture);
             }
         }
         
@@ -255,6 +300,15 @@ namespace MOROPO.EPTCamaguey.Decisor.Terminal {
         internal static string Widower {
             get {
                 return ResourceManager.GetString("Widower", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Año(s).
+        /// </summary>
+        internal static string Years {
+            get {
+                return ResourceManager.GetString("Years", resourceCulture);
             }
         }
     }

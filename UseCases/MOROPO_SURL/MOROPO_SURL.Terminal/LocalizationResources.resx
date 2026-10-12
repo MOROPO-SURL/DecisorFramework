@@ -141,8 +141,14 @@
   <data name="Famale" xml:space="preserve">
     <value>Femenino</value>
   </data>
+  <data name="Fleet" xml:space="preserve">
+    <value>Uso Institucional</value>
+  </data>
   <data name="HighSchool" xml:space="preserve">
     <value>Bachillerato</value>
+  </data>
+  <data name="Leasing" xml:space="preserve">
+    <value>Arrendamiento</value>
   </data>
   <data name="Male" xml:space="preserve">
     <value>Masculino</value>

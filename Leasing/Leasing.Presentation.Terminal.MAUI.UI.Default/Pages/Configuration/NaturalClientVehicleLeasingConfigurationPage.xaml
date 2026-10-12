@@ -507,7 +507,7 @@
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Duración (U/M)" />
                         <Picker 
                             ItemsSource="{Binding AvailableDurationUnitMeasureKinds}"
-                            SelectedItem="{Binding DurationUnitMeasureKind}"
+                            SelectedItem="{Binding DurationUnitMeasureKind, Converter={StaticResource StringToLocalizedStringConverter}}"
                             SelectedIndexChanged="Picker_SelectedIndexChanged" />
                         <Label
                             IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:NaturalClientVehicleLeasingConfigurationPageModel.DurationUnitMeasureKindValidableProperty}}"

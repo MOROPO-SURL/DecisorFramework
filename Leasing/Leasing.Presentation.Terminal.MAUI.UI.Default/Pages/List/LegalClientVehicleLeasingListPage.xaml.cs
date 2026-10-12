@@ -1,4 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
+using MOROPO.Framework.Caney.MVVM.Core.Extensions;
+using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Extensions;
 using MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;
 
 namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.List;
@@ -48,6 +50,36 @@ public partial class LegalClientVehicleLeasingListPage : Core.Presentation.Termi
 
     private void ItemTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
-        base.ItemDetailRequestControl_Invoked(sender, System.EventArgs.Empty);
+        if (ConcreteBindingContext.IsBusy) return;
+
+        var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IDetailContentPageFactoryFacade<LegalClientVehicleLeasingDisplayModel>>();
+
+        try
+        {
+            var page = factory.Build((sender as Microsoft.Maui.Controls.BindableObject).BindingContext as LegalClientVehicleLeasingDisplayModel, DetailActionDelegationRequest_Callback);
+
+            this.NavigationPushModalPageAsync(page);
+        }
+        catch (System.Exception exception)
+        {
+            DisplayAlert("Aviso", string.Format("Unspected runtime error!! {0}", exception.Message), "Aceptar");
+
+            return;
+        }
+    }
+
+    private void DetailActionDelegationRequest_Callback(LegalClientVehicleLeasingDisplayModel target, int? discriminator)
+    {
+        var apiConnectClient = new Interop.API.Connect.Clients.LegalClientVehicleLeasingsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
+        apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>
+        {
+            Dispatcher.Dispatch(() =>
+            {
+                this.PresentToastNotification(Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Success, "Arrendamiento terminado y contrato cerrado con éxito.");
+
+                LoadItems(true);
+            });
+        });
     }
 }

@@ -34,14 +34,18 @@
                             <Label 
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
                                 Text="Cliente" />
-                            <Label
-                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Leasing.Contract.Client.Contact.Identity}" />
+                            <Label Style="{StaticResource ValuePropertyLabelStyle}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding Leasing.Contract.Client.Contact.Identity}" />
+                                        <Span Text="{Binding Leasing.Contract.Client.Contact.BusinessKind.Name, StringFormat=' ({0})'}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
                             <Label 
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
                                 Text="Vehículo" />
-                            <Label
-                                Style="{StaticResource ValuePropertyLabelStyle}">
+                            <Label Style="{StaticResource ValuePropertyLabelStyle}">
                                 <Label.FormattedText>
                                     <FormattedString>
                                         <Span Text="{Binding Leasing.Contract.Property.Name}" />

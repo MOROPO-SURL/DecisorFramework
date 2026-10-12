@@ -18,6 +18,7 @@
         <ResourceDictionary>
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
             <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
+            <core_ui_converters:StringToLocalizedStringConverter x:Key="StringToLocalizedStringConverter" />
 
             <caneyframework_presentation_converters:DoubleToFractionConverter x:Key="DoubleToFractionConverter" />
 
@@ -129,7 +130,7 @@
                                                             HorizontalTextAlignment="Center"
                                                             FontAttributes="Bold"
                                                             TextColor="White"
-                                                            Text="{Binding Assignment}" />
+                                                            Text="{Binding Assignment, Converter={StaticResource StringToLocalizedStringConverter}}" />
                                                     </Grid>
                                                     <StackLayout 
                                                         Grid.Column="1"
