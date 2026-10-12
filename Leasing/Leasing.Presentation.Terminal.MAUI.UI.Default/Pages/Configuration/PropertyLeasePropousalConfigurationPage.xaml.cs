@@ -47,7 +47,8 @@ public partial class PropertyLeasePropousalConfigurationPage : Core.Presentation
             Priority = ConcreteBindingContext.Priority,
             BaselineAmount = ConcreteBindingContext.BaselineAmount,
             BaselineCurrencyId = ConcreteBindingContext.BaselineCurrency.Id,
-            IncomingSpaces = incomingSpaces
+            IncomingSpaces = incomingSpaces,
+            NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray()
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -70,7 +71,8 @@ public partial class PropertyLeasePropousalConfigurationPage : Core.Presentation
             BaselineAmount = ConcreteBindingContext.BaselineAmount,
             BaselineCurrencyId = ConcreteBindingContext.BaselineCurrency.Id,
             IncomingSpaces = incomingSpaces,
-            OutgoingSpaces = outgoingSpaces
+            OutgoingSpaces = outgoingSpaces,
+            NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray()
         };
 
         await apiConnectClient.EditAsync(model);
@@ -170,6 +172,33 @@ public partial class PropertyLeasePropousalConfigurationPage : Core.Presentation
         }
 
         ConcreteBindingContext.Property = model;
+    }
+
+    protected void NotificationUserAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Core.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.UserPickPage(NotificationUserPickComplete_Callback)));
+    }
+
+    private void NotificationUserRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar este usuario de las notificaciones?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Core.Interop.API.Common.Models.Display.UserDisplayModel;
+
+                ConcreteBindingContext.NotificationUsers.Remove(target);
+
+                hasChangesFlag = true;
+            });
+        });
+    }
+
+    private void NotificationUserPickComplete_Callback(Core.Interop.API.Common.Models.Display.UserDisplayModel model)
+    {
+        ConcreteBindingContext.NotificationUsers.Add(model);
     }
 
     private void AuthorPickComplete_Callback(Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel model)

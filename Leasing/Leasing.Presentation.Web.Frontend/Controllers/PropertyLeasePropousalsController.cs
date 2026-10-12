@@ -1,115 +1,133 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
+using MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Extensions;
 using MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Leasing.Persistence.Entities;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using System.Linq;
 
-namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
+namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers;
+
+[Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
+[Route("api/fwrk/leasing/[controller]")]
+[ApiController]
+public class PropertyLeasePropousalsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<PropertyLeasePropousal, System.Guid, PropertyLeasePropousalInputModel, PropertyLeasePropousalDisplayModel>
 {
-    [Route("api/fwrk/leasing/[controller]")]
-    [ApiController]
-    public class PropertyLeasePropousalsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<PropertyLeasePropousal, System.Guid, PropertyLeasePropousalInputModel, PropertyLeasePropousalDisplayModel>
+    private readonly IEntityRepository<PropertySpaceLeasePropousal, System.Guid> spaceLeasePropousalRepository;
+    private readonly IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository;
+
+    public PropertyLeasePropousalsController(IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository, IEntityRepository<PropertySpaceLeasePropousal, System.Guid> spaceLeasePropousalRepository, IEntityRepository<PropertyLeasePropousal, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<PropertyLeasePropousalsController> localizer, ILogger<PropertyLeasePropousalsController> logger) : base(repository, localizer, logger)
     {
-        private readonly IEntityRepository<PropertySpaceLeasePropousal, System.Guid> spaceLeasePropousalRepository;
+        this.spaceLeasePropousalRepository = spaceLeasePropousalRepository;
+        this.changeNotificationRepository = changeNotificationRepository;
+    }
 
-        public PropertyLeasePropousalsController(IEntityRepository<PropertySpaceLeasePropousal, System.Guid> spaceLeasePropousalRepository, IEntityRepository<PropertyLeasePropousal, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<PropertyLeasePropousalsController> localizer, ILogger<PropertyLeasePropousalsController> logger) : base(repository, localizer, logger)
+    protected override System.Linq.Expressions.Expression<System.Func<PropertyLeasePropousal, bool>> GetGlobalSelector()
+    {
+        return entity => !entity.Archived;
+    }
+
+    protected override System.Func<PropertyLeasePropousal, object> GetOrderSelector()
+    {
+        return entity => entity.Priority;
+    }
+
+    protected override PropertyLeasePropousalDisplayModel EntityToDisplayModel(PropertyLeasePropousal entity)
+    {
+        var model = base.EntityToDisplayModel(entity);
+
+        if (model.Author.Contact.Identity.Image != null)
         {
-            this.spaceLeasePropousalRepository = spaceLeasePropousalRepository;
+            model.Author.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Author.Contact.Identity.Image.ContentType);
         }
 
-        protected override System.Linq.Expressions.Expression<System.Func<PropertyLeasePropousal, bool>> GetGlobalSelector()
+        if (model.Property.FeatureImage != null)
         {
-            return entity => !entity.Archived;
+            model.Property.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Property.FeatureImage.ContentType);
         }
 
-        protected override System.Func<PropertyLeasePropousal, object> GetOrderSelector()
+        model.Property.Spaces = entity.Property.Spaces.OrderBy(entity => entity.Name).ToArray().Select(_entity =>
         {
-            return entity => entity.Priority;
-        }
+            var _model = new PropertySpaceDisplayModel();
 
-        protected override PropertyLeasePropousalDisplayModel EntityToDisplayModel(PropertyLeasePropousal entity)
-        {
-            var model = base.EntityToDisplayModel(entity);
+            _model.Import(_entity);
 
-            if (model.Author.Contact.Identity.Image != null)
+            if (_entity.FeatureImage != null)
             {
-                model.Author.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Author.Contact.Identity.Image.ContentType);
+                _model.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(_entity.FeatureImage.ContentType);
             }
 
-            if (model.Property.FeatureImage != null)
-            {
-                model.Property.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Property.FeatureImage.ContentType);
-            }
+            return _model;
+        }).ToArray();
 
-            model.Property.Spaces = entity.Property.Spaces.OrderBy(entity => entity.Name).ToArray().Select(_entity =>
-            {
-                var _model = new PropertySpaceDisplayModel();
-
-                _model.Import(_entity);
-
-                if (_entity.FeatureImage != null)
-                {
-                    _model.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(_entity.FeatureImage.ContentType);
-                }
-
-                return _model;
-            }).ToArray();
-
-            model.SpacePropousals = spaceLeasePropousalRepository.FindBy(_entity => _entity.PropertyLeasePropousalId == entity.Id).OrderBy(entity => entity.PropertySpace.Name).ToArray().Select(_entity =>
-            {
-                var _model = new PropertySpaceLeasePropousalDisplayModel();
-
-                _model.Import(_entity);
-
-                if (_entity.PropertySpace.FeatureImage != null)
-                {
-                    _model.Space.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(_entity.PropertySpace.FeatureImage.ContentType);
-                }
-
-                return _model;
-            }).ToArray();
-
-            return model;
-        }
-
-        protected override void PreCreate(PropertyLeasePropousal entity, PropertyLeasePropousalInputModel model)
+        model.SpacePropousals = spaceLeasePropousalRepository.FindBy(_entity => _entity.PropertyLeasePropousalId == entity.Id).OrderBy(entity => entity.PropertySpace.Name).ToArray().Select(_entity =>
         {
-            base.PreCreate(entity, model);
+            var _model = new PropertySpaceLeasePropousalDisplayModel();
 
-            foreach (var _model in model.IncomingSpaces)
+            _model.Import(_entity);
+
+            if (_entity.PropertySpace.FeatureImage != null)
             {
-                var _entity = _model.Export();
-
-                _entity.PropertyLeasePropousalId = entity.Id;
-
-                spaceLeasePropousalRepository.Add(_entity, User.Identity.Name, false);
+                _model.Space.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(_entity.PropertySpace.FeatureImage.ContentType);
             }
-        }
 
-        protected override void PreEdit(PropertyLeasePropousal entity, PropertyLeasePropousalInputModel model)
+            return _model;
+        }).ToArray();
+
+        return model;
+    }
+
+    protected override void PreCreate(PropertyLeasePropousal entity, PropertyLeasePropousalInputModel model)
+    {
+        base.PreCreate(entity, model);
+
+        foreach (var _model in model.IncomingSpaces)
         {
-            base.PreEdit(entity, model);
+            var _entity = _model.Export();
 
-            #region Spaces
+            _entity.PropertyLeasePropousalId = entity.Id;
 
-            foreach (var _model in model.OutgoingSpaces)
-            {
-                spaceLeasePropousalRepository.Delete(new PropertySpaceLeasePropousal { Id = _model.Id }, User.Identity.Name, false);
-            }
-
-            foreach (var _model in model.IncomingSpaces)
-            {
-                var _entity = _model.Export();
-
-                _entity.PropertyLeasePropousalId = entity.Id;
-
-                spaceLeasePropousalRepository.Add(_entity, User.Identity.Name, false);
-            }
-
-            #endregion
+            spaceLeasePropousalRepository.Add(_entity, User.Identity.Name, false);
         }
+    }
+
+    protected override void PreEdit(PropertyLeasePropousal entity, PropertyLeasePropousalInputModel model)
+    {
+        base.PreEdit(entity, model);
+
+        #region Spaces
+
+        foreach (var _model in model.OutgoingSpaces)
+        {
+            spaceLeasePropousalRepository.Delete(new PropertySpaceLeasePropousal { Id = _model.Id }, User.Identity.Name, false);
+        }
+
+        foreach (var _model in model.IncomingSpaces)
+        {
+            var _entity = _model.Export();
+
+            _entity.PropertyLeasePropousalId = entity.Id;
+
+            spaceLeasePropousalRepository.Add(_entity, User.Identity.Name, false);
+        }
+
+        #endregion
+    }
+
+    protected override void PostCreate(PropertyLeasePropousal entity, PropertyLeasePropousalInputModel model)
+    {
+        base.PostCreate(entity, model);
+
+        this.ChangeNotificationOnPostCreate(entity, model, changeNotificationRepository);
+    }
+
+    protected override void PostEdit(PropertyLeasePropousal entity, PropertyLeasePropousalInputModel model)
+    {
+        base.PostEdit(entity, model);
+
+        this.ChangeNotificationOnPostEdit(entity, model, changeNotificationRepository);
     }
 }

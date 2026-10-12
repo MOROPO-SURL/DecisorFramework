@@ -83,7 +83,8 @@ public partial class PropertyConfigurationPage : Core.Presentation.Terminal.MAUI
                 Longitude = ConcreteBindingContext.PostalContact.Longitude
             },
             IncomingImageItems = incomingImages,
-            IncomingSpaces = incomingSpaces
+            IncomingSpaces = incomingSpaces,
+            NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray()
         };
 
         if (featureImagePickedModel != null)
@@ -125,7 +126,8 @@ public partial class PropertyConfigurationPage : Core.Presentation.Terminal.MAUI
             OutgoingImagetItems = outgoingImages,
             IncomingSpaces = incomingSpaces,
             EditionSpaces = editionSpaces,
-            OutgoingSpaces = outgoingSpaces
+            OutgoingSpaces = outgoingSpaces,
+            NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray()
         };
 
         if (featureImagePickedModel != null)
@@ -314,6 +316,33 @@ public partial class PropertyConfigurationPage : Core.Presentation.Terminal.MAUI
                 hasChangesFlag = true;
             });
         });
+    }
+
+    protected void NotificationUserAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Core.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.UserPickPage(NotificationUserPickComplete_Callback)));
+    }
+
+    private void NotificationUserRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar este usuario de las notificaciones?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Core.Interop.API.Common.Models.Display.UserDisplayModel;
+
+                ConcreteBindingContext.NotificationUsers.Remove(target);
+
+                hasChangesFlag = true;
+            });
+        });
+    }
+
+    private void NotificationUserPickComplete_Callback(Core.Interop.API.Common.Models.Display.UserDisplayModel model)
+    {
+        ConcreteBindingContext.NotificationUsers.Add(model);
     }
 
     private void SpaceCreateSuccess_Callback(Interop.API.Common.Models.Input.PropertySpaceInputModel model)

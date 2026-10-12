@@ -4,10 +4,8 @@ using System.Collections.Generic;
 
 namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
 {
-    public class PropertyInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.Property, System.Guid>
+    public class PropertyInputModel : Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<Persistence.Entities.Property, System.Guid>
     {
-        public System.Guid Id { get; set; } = System.Guid.NewGuid();
-
         public int Priority { get; set; }
 
         public System.Guid KindId { get; set; }
@@ -34,7 +32,7 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
         public List<PropertySpaceInputModel> IncomingSpaces { get; set; } = new List<PropertySpaceInputModel>();
         public List<Display.PropertySpaceDisplayModel> OutgoingSpaces { get; set; } = new List<Display.PropertySpaceDisplayModel>();
 
-        public Persistence.Entities.Property Export()
+        public override Persistence.Entities.Property Export()
         {
             var entity = new Persistence.Entities.Property { Id = Id, Enabled = true };
 
@@ -43,12 +41,7 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
             return entity;
         }
 
-        public void Import(Persistence.Entities.Property entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Mergue(Persistence.Entities.Property entity)
+        public override void Mergue(Persistence.Entities.Property entity)
         {
             entity.Priority = Priority;
             entity.Name = Name;

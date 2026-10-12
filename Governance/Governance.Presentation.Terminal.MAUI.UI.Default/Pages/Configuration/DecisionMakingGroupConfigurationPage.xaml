@@ -145,7 +145,6 @@
                                                         HeightRequest="{Binding Source={RelativeSource AncestorType={Type Frame}}, Path=Width}"
                                                         Aspect="AspectFill"
                                                         Source="{Binding Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
-                                                    <BoxView HeightRequest="1" Color="{AppThemeBinding Light=LightGray, Dark=DimGray}" />
                                                     <Grid
                                                         VerticalOptions="End"
                                                         BackgroundColor="{AppThemeBinding Light=#BBDDDDDD, Dark=#A9333333}">

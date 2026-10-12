@@ -1,9 +1,7 @@
 ﻿namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input
 {
-    public class VehicleLeaseOfferInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.VehicleLeaseOffer, System.Guid>
+    public class VehicleLeaseOfferInputModel : Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<Persistence.Entities.VehicleLeaseOffer, System.Guid>
     {
-        public System.Guid Id { get; set; }
-
         public int Priority { get; set; }
 
         public System.DateTime OpenAt { get; set; }
@@ -20,7 +18,7 @@
 
         public System.Guid BaselineCurrencyId { get; set; }
 
-        public Persistence.Entities.VehicleLeaseOffer Export()
+        public override Persistence.Entities.VehicleLeaseOffer Export()
         {
             var entity = new Persistence.Entities.VehicleLeaseOffer { Id = Id, Enabled = true };
 
@@ -29,12 +27,7 @@
             return entity;
         }
 
-        public void Import(Persistence.Entities.VehicleLeaseOffer entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Mergue(Persistence.Entities.VehicleLeaseOffer entity)
+        public override void Mergue(Persistence.Entities.VehicleLeaseOffer entity)
         {
             entity.Priority = Priority;
             entity.OpenAt = OpenAt;

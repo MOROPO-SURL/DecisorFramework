@@ -10,6 +10,8 @@ public partial class LegalClientPropertyLeasingControlActionsManagePage : Core.P
         InitializeComponent();
     }
 
+    protected override bool ConfigurationRequiredAsyncWorkPresentation => true;
+
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
 
     protected override double ItemViewRequestWidth => Constants.CardViewHeightConstants.LEASING_CONTROL_ACTION_CARD_VIEW_WIDTH;

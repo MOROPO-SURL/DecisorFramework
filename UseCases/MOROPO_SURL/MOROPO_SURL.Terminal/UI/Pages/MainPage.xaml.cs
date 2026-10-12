@@ -45,6 +45,7 @@ public partial class MainPage : Framework.Caney.MVVM.Core.Pages.BindingContexted
             });
         }
     }
+
     private void LogOutButton_Clicked(object sender, System.EventArgs eventArgs)
     {
         var sessionManager = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade>();

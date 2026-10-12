@@ -54,7 +54,8 @@ public partial class PropertyLeaseOrganizationPostulationConfigurationPage : Cor
             Argument = ConcreteBindingContext.Argument,
             BankAccountId = ConcreteBindingContext.BankAccount.Id,
             IncomingDocuments = incomingDocuments,
-            IncomingSpaces = incomingSpaces
+            IncomingSpaces = incomingSpaces,
+            NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray()
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -80,7 +81,8 @@ public partial class PropertyLeaseOrganizationPostulationConfigurationPage : Cor
             EditionDocuments = editionDocuments,
             OutgoingDocuments = outgoingDocuments,
             IncomingSpaces = incomingSpaces,
-            OutgoingSpaces = outgoingSpaces
+            OutgoingSpaces = outgoingSpaces,
+            NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray()
         };
 
         await apiConnectClient.EditAsync(model);
@@ -255,6 +257,33 @@ public partial class PropertyLeaseOrganizationPostulationConfigurationPage : Cor
     private void BankAccountPickButton_Clicked(object sender, System.EventArgs eventArgs)
     {
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.LegalClientByContactBankAccountPickPage(BankAccountPickComplete_Callback, ConcreteBindingContext.Contact)));
+    }
+
+    protected void NotificationUserAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Core.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.UserPickPage(NotificationUserPickComplete_Callback)));
+    }
+
+    private void NotificationUserRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar este usuario de las notificaciones?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Core.Interop.API.Common.Models.Display.UserDisplayModel;
+
+                ConcreteBindingContext.NotificationUsers.Remove(target);
+
+                hasChangesFlag = true;
+            });
+        });
+    }
+
+    private void NotificationUserPickComplete_Callback(Core.Interop.API.Common.Models.Display.UserDisplayModel model)
+    {
+        ConcreteBindingContext.NotificationUsers.Add(model);
     }
 
     private void BankAccountPickComplete_Callback(Financial.Interop.API.Common.Models.Display.BankAccountDisplayModel model)

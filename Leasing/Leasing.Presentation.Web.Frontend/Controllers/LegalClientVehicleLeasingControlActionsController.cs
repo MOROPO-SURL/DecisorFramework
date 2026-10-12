@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
+using MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Extensions;
 using MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Filter;
 using MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input;
@@ -8,12 +10,16 @@ using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 
 namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers;
 
+[Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
 [Route("api/fwrk/leasing/[controller]")]
 [ApiController]
 public sealed class LegalClientVehicleLeasingControlActionsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementFilteredController<LegalClientVehicleLeasingControlAction, System.Guid, LegalClientVehicleLeasingControlActionInputModel, LegalClientVehicleLeasingControlActionDisplayModel, LegalClientVehicleLeasingControlActionFilterModel>
 {
-    public LegalClientVehicleLeasingControlActionsController(IEntityRepository<LegalClientVehicleLeasingControlAction, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<LegalClientVehicleLeasingControlActionsController> localizer, ILogger<LegalClientVehicleLeasingControlActionsController> logger) : base(repository, localizer, logger)
+    private readonly IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository;
+
+    public LegalClientVehicleLeasingControlActionsController(IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository, IEntityRepository<LegalClientVehicleLeasingControlAction, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<LegalClientVehicleLeasingControlActionsController> localizer, ILogger<LegalClientVehicleLeasingControlActionsController> logger) : base(repository, localizer, logger)
     {
+        this.changeNotificationRepository = changeNotificationRepository;
     }
 
     protected override System.Linq.Expressions.Expression<System.Func<LegalClientVehicleLeasingControlAction, bool>> GetGlobalSelector() => entity => !entity.Archived;
@@ -42,5 +48,19 @@ public sealed class LegalClientVehicleLeasingControlActionsController : Guama.Co
         }
 
         return model;
+    }
+
+    protected override void PostCreate(LegalClientVehicleLeasingControlAction entity, LegalClientVehicleLeasingControlActionInputModel model)
+    {
+        base.PostCreate(entity, model);
+
+        this.ChangeNotificationOnPostCreate(entity, model, changeNotificationRepository);
+    }
+
+    protected override void PostEdit(LegalClientVehicleLeasingControlAction entity, LegalClientVehicleLeasingControlActionInputModel model)
+    {
+        base.PostEdit(entity, model);
+
+        this.ChangeNotificationOnPostEdit(entity, model, changeNotificationRepository);
     }
 }

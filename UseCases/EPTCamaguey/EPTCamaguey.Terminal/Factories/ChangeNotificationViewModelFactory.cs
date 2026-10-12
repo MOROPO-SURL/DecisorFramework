@@ -61,6 +61,30 @@ public class ChangeNotificationViewModelFactory : Framework.Decisor.Domain.Prese
             return result;
         }
 
+        if (typeof(Framework.Decisor.Domain.Persistence.Entities.Brand) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creada" : "Modificada")} Marca";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["BrandMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        if (typeof(Framework.Decisor.Domain.Persistence.Entities.Property) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creado" : "Modificado")} Inmueble";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["PropertyMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        if (typeof(Framework.Decisor.Domain.Persistence.Entities.Vehicle) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creado" : "Modificado")} Vehículo";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["VehicleMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
         #endregion
 
         #region HumanResources
@@ -177,6 +201,146 @@ public class ChangeNotificationViewModelFactory : Framework.Decisor.Domain.Prese
         {
             result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creado" : "Modificado")} Cliente (Natural)";
             result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["ClientMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        #endregion
+
+        #region Leasing
+
+        if (typeof(Framework.Decisor.Leasing.Persistence.Entities.PropertyLeasePropousal) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creada" : "Modificada")} Propuesta de Arrendamiento (Inmueble)";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["LeasePropousalMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        if (typeof(Framework.Decisor.Leasing.Persistence.Entities.VehicleLeasePropousal) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creada" : "Modificada")} Propuesta de Arrendamiento (Vehículo)";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["LeasePropousalMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        if (typeof(Framework.Decisor.Leasing.Persistence.Entities.PropertyLeaseOffer) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creada" : "Modificada")} Oferta de Arrendamiento (Inmueble)";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["LeaseOfferMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        if (typeof(Framework.Decisor.Leasing.Persistence.Entities.VehicleLeaseOffer) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creada" : "Modificada")} Oferta de Arrendamiento (Vehículo)";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["LeaseOfferMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        if (typeof(Framework.Decisor.Leasing.Persistence.Entities.PropertyLeaseOrganizationPostulation) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creada" : "Modificada")} Postulación a Licitación de Arrendamiento de Inmueble (Persona Jurídica)";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["LeasePostulationMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        if (typeof(Framework.Decisor.Leasing.Persistence.Entities.PropertyLeasePersonPostulation) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creada" : "Modificada")} Postulación a Licitación de Arrendamiento de Inmueble (Persona Natural)";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["LeasePostulationMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        if (typeof(Framework.Decisor.Leasing.Persistence.Entities.VehicleLeaseOrganizationPostulation) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creada" : "Modificada")} Postulación a Licitación de Arrendamiento de Vehículo (Persona Jurídica)";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["LeasePostulationMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        if (typeof(Framework.Decisor.Leasing.Persistence.Entities.VehicleLeasePersonPostulation) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creada" : "Modificada")} Postulación a Licitación de Arrendamiento de Vehículo (Persona Natural)";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["LeasePostulationMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        if (typeof(Framework.Decisor.Leasing.Persistence.Entities.LegalClientPropertyLeasingControlAction) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creada" : "Modificada")} Acción de Control de Arrendamiento de Inmueble (Persona Jurídica)";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["LeaseControlActionMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        if (typeof(Framework.Decisor.Leasing.Persistence.Entities.NaturalClientPropertyLeasingControlAction) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creada" : "Modificada")} Acción de Control de Arrendamiento de Inmueble (Persona Natural)";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["LeaseControlActionMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        if (typeof(Framework.Decisor.Leasing.Persistence.Entities.LegalClientVehicleLeasingControlAction) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creada" : "Modificada")} Acción de Control de Arrendamiento de Vehículo (Persona Jurídica)";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["LeaseControlActionMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        if (typeof(Framework.Decisor.Leasing.Persistence.Entities.NaturalClientVehicleLeasingControlAction) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creada" : "Modificada")} Acción de Control de Arrendamiento de Vehículo (Persona Natural)";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["LeaseControlActionMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        if (typeof(Framework.Decisor.Leasing.Persistence.Entities.SupervisionGroup) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creado" : "Modificado")} Grupo de Supervisión";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["SupervisionGroupMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        if (typeof(Framework.Decisor.Leasing.Persistence.Entities.LegalClientPropertyLeasingCollect) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creado" : "Modificado")} Cobro de Arrendamiento de Inmueble (Persona Jurídica)";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["CollectMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        if (typeof(Framework.Decisor.Leasing.Persistence.Entities.NaturalClientPropertyLeasingCollect) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creado" : "Modificado")} Cobro de Arrendamiento de Inmueble (Persona Natural)";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["CollectMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        if (typeof(Framework.Decisor.Leasing.Persistence.Entities.LegalClientVehicleLeasingCollect) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creado" : "Modificado")} Cobro de Arrendamiento de Vehículo (Persona Jurídica)";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["CollectMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        if (typeof(Framework.Decisor.Leasing.Persistence.Entities.NaturalClientVehicleLeasingCollect) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creado" : "Modificado")} Cobro de Arrendamiento de Vehículo (Persona Natural)";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["CollectMaterialDesignGlyphIconId"];
 
             return result;
         }

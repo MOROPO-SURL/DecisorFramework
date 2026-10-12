@@ -16,7 +16,7 @@
         </ResourceDictionary>
     </ContentView.Resources>
     <Frame Padding="0">
-        <Grid ColumnSpacing="4">
+        <Grid ColumnSpacing="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="1" />

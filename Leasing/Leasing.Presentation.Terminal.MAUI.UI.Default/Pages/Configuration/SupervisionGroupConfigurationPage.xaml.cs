@@ -25,7 +25,8 @@ public partial class SupervisionGroupConfigurationPage : Core.Presentation.Termi
             Description = ConcreteBindingContext.Description,
             Priority = ConcreteBindingContext.Priority,
             RepresentativeId = ConcreteBindingContext.Representative.Id,
-            Members = ConcreteBindingContext.Members.ToList()
+            Members = [.. ConcreteBindingContext.Members],
+            NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray()
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -44,7 +45,8 @@ public partial class SupervisionGroupConfigurationPage : Core.Presentation.Termi
             Description = ConcreteBindingContext.Description,
             Priority = ConcreteBindingContext.Priority,
             RepresentativeId = ConcreteBindingContext.Representative.Id,
-            Members = ConcreteBindingContext.Members.ToList()
+            Members = [.. ConcreteBindingContext.Members],
+            NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray()
         };
 
         await apiConnectClient.EditAsync(model);
@@ -94,6 +96,33 @@ public partial class SupervisionGroupConfigurationPage : Core.Presentation.Termi
                 hasChangesFlag = true;
             });
         });
+    }
+
+    protected void NotificationUserAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Core.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.UserPickPage(NotificationUserPickComplete_Callback)));
+    }
+
+    private void NotificationUserRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar este usuario de las notificaciones?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Core.Interop.API.Common.Models.Display.UserDisplayModel;
+
+                ConcreteBindingContext.NotificationUsers.Remove(target);
+
+                hasChangesFlag = true;
+            });
+        });
+    }
+
+    private void NotificationUserPickComplete_Callback(Core.Interop.API.Common.Models.Display.UserDisplayModel model)
+    {
+        ConcreteBindingContext.NotificationUsers.Add(model);
     }
 
     private void RepresentativePickComplete_Callback(Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel model)

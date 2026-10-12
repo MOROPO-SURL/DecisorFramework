@@ -27,6 +27,8 @@
     <x:String x:Key="VehicleKindMaterialDesignGlyphIconId">&#xFA98;</x:String>
     <x:String x:Key="PropertyKindMaterialDesignGlyphIconId">&#xFCF2;</x:String>
     <x:String x:Key="BrandMaterialDesignGlyphIconId">&#xF4CF;</x:String>
+    <x:String x:Key="VehicleMaterialDesignGlyphIconId">&#xF0E7;</x:String>
+    <x:String x:Key="PropertyMaterialDesignGlyphIconId">&#xFCF1;</x:String>
 
     <x:String x:Key="WorkPositionKindMaterialDesignGlyphIconId">&#xF017;</x:String>
     <x:String x:Key="SalaryStandardMaterialDesignGlyphIconId">&#xF00C2;</x:String>
@@ -44,11 +46,19 @@
     <x:String x:Key="BankAccountMaterialDesignGlyphIconId">"&#xF02A8;</x:String>
     <x:String x:Key="CurrencyMaterialDesignGlyphIconId">&#xF4CB;</x:String>
 
+    <x:String x:Key="CollectMaterialDesignGlyphIconId">&#xF028C;</x:String>
+
     <x:String x:Key="ProviderMaterialDesignGlyphIconId">&#xF6D8;</x:String>
     <x:String x:Key="ClientMaterialDesignGlyphIconId">&#xFAC0;</x:String>
     <x:String x:Key="ContactMaterialDesignGlyphIconId">&#xF5D2;</x:String>
     <x:String x:Key="LegalBusinessKindMaterialDesignGlyphIconId">&#xF070;</x:String>
     <x:String x:Key="NaturalBusinessKindMaterialDesignGlyphIconId">&#xF00F5;</x:String>
     <x:String x:Key="PaymentTermMaterialDesignGlyphIconId">&#xF0F0;</x:String>
+
+    <x:String x:Key="LeasePropousalMaterialDesignGlyphIconId">&#xF64A;</x:String>
+    <x:String x:Key="LeaseOfferMaterialDesignGlyphIconId">&#xF0246;</x:String>
+    <x:String x:Key="LeasePostulationMaterialDesignGlyphIconId">&#xF8A7;</x:String>
+    <x:String x:Key="LeaseControlActionMaterialDesignGlyphIconId">&#xF755;</x:String>
+    <x:String x:Key="SupervisionGroupMaterialDesignGlyphIconId">&#xF0192;</x:String>
 
 </ResourceDictionary>

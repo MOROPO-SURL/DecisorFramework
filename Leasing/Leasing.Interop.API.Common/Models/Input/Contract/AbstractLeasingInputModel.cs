@@ -1,11 +1,7 @@
-﻿using MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;
-
-namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input.Contract
+﻿namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input.Contract
 {
-    public abstract class AbstractLeasingInputModel<TEntity> : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<TEntity, System.Guid> where TEntity : Persistence.Entities.Contract.AbstractLeasing
+    public abstract class AbstractLeasingInputModel<TEntity> : Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<TEntity, System.Guid> where TEntity : Persistence.Entities.Contract.AbstractLeasing
     {
-        public System.Guid Id { get; set; }
-
         public System.Guid PostulationId { get; set; }
 
         public System.Guid AgreementId { get; set; }
@@ -29,14 +25,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input.Contr
 
         public System.Guid PaymentTermId { get; set; }
 
-        public abstract TEntity Export();
-
-        public void Import(TEntity entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public virtual void Mergue(TEntity entity)
+        public override void Mergue(TEntity entity)
         {
             if (entity.AgreementId != AgreementId)
             {

@@ -4,10 +4,8 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input
 {
-    public class SupervisionGroupInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.SupervisionGroup, System.Guid>
+    public class SupervisionGroupInputModel : Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<Persistence.Entities.SupervisionGroup, System.Guid>
     {
-        public System.Guid Id { get; set; }
-
         public int Priority { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
@@ -19,7 +17,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input
 
         public List<EmployeeDisplayModel> Members { get; set; } = new List<EmployeeDisplayModel>();
 
-        public Persistence.Entities.SupervisionGroup Export()
+        public override Persistence.Entities.SupervisionGroup Export()
         {
             var entity = new Persistence.Entities.SupervisionGroup { Id = Id, Enabled = true };
 
@@ -28,12 +26,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input
             return entity;
         }
 
-        public void Import(Persistence.Entities.SupervisionGroup entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Mergue(Persistence.Entities.SupervisionGroup entity)
+        public override void Mergue(Persistence.Entities.SupervisionGroup entity)
         {
             entity.Priority = Priority;
             entity.Name = Name;

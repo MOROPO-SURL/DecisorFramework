@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
+using MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Extensions;
 using MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Leasing.Persistence.Entities;
@@ -7,12 +9,16 @@ using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 
 namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers;
 
+[Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
 [Route("api/fwrk/leasing/[controller]")]
 [ApiController]
 public class SupervisionGroupsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<SupervisionGroup, System.Guid, SupervisionGroupInputModel, SupervisionGroupDisplayModel>
 {
-    public SupervisionGroupsController(IEntityRepository<SupervisionGroup, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<SupervisionGroupsController> localizer, ILogger<SupervisionGroupsController> logger) : base(repository, localizer, logger)
+    private readonly IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository;
+
+    public SupervisionGroupsController(IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository, IEntityRepository<SupervisionGroup, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<SupervisionGroupsController> localizer, ILogger<SupervisionGroupsController> logger) : base(repository, localizer, logger)
     {
+        this.changeNotificationRepository = changeNotificationRepository;
     }
 
     protected override System.Linq.Expressions.Expression<System.Func<SupervisionGroup, bool>> GetGlobalSelector()
@@ -56,5 +62,19 @@ public class SupervisionGroupsController : Guama.Core.Presentation.Web.API.Contr
         model.Members = members.ToArray();
 
         return model;
+    }
+
+    protected override void PostCreate(SupervisionGroup entity, SupervisionGroupInputModel model)
+    {
+        base.PostCreate(entity, model);
+
+        this.ChangeNotificationOnPostCreate(entity, model, changeNotificationRepository);
+    }
+
+    protected override void PostEdit(SupervisionGroup entity, SupervisionGroupInputModel model)
+    {
+        base.PostEdit(entity, model);
+
+        this.ChangeNotificationOnPostEdit(entity, model, changeNotificationRepository);
     }
 }

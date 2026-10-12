@@ -4,10 +4,8 @@ using System.Collections.Generic;
 
 namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
 {
-    public class VehicleInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.Vehicle, System.Guid>
+    public class VehicleInputModel : Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<Persistence.Entities.Vehicle, System.Guid>
     {
-        public System.Guid Id { get; set; } = System.Guid.NewGuid();
-
         public int Priority { get; set; }
 
         public System.Guid BrandId { get; set; }
@@ -55,7 +53,7 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
         public List<ImageInputModel> IncomingImageItems { get; set; } = new List<ImageInputModel>();
         public List<ImageDisplayModel> OutgoingImagetItems { get; set; } = new List<ImageDisplayModel>();
 
-        public Persistence.Entities.Vehicle Export()
+        public override Persistence.Entities.Vehicle Export()
         {
             var entity = new Persistence.Entities.Vehicle { Id = Id, Enabled = true };
 
@@ -64,12 +62,7 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
             return entity;
         }
 
-        public void Import(Persistence.Entities.Vehicle entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Mergue(Persistence.Entities.Vehicle entity)
+        public override void Mergue(Persistence.Entities.Vehicle entity)
         {
             entity.Priority = Priority;
             entity.Model = Model;

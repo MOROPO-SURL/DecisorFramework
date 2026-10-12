@@ -2,10 +2,8 @@
 
 namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input
 {
-    public class PropertyLeasePropousalInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.PropertyLeasePropousal, System.Guid>
+    public class PropertyLeasePropousalInputModel : Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<Persistence.Entities.PropertyLeasePropousal, System.Guid>
     {
-        public System.Guid Id { get; set; }
-
         public int Priority { get; set; }
 
         public System.Guid AuthorId { get; set; }
@@ -23,7 +21,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input
         public List<PropertySpaceLeasePropousalInputModel> IncomingSpaces { get; set; } = new List<PropertySpaceLeasePropousalInputModel>();
         public List<Display.PropertySpaceLeasePropousalDisplayModel> OutgoingSpaces { get; set; } = new List<Display.PropertySpaceLeasePropousalDisplayModel>();
 
-        public Persistence.Entities.PropertyLeasePropousal Export()
+        public override Persistence.Entities.PropertyLeasePropousal Export()
         {
             var entity = new Persistence.Entities.PropertyLeasePropousal { Id = Id };
 
@@ -32,12 +30,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input
             return entity;
         }
 
-        public void Import(Persistence.Entities.PropertyLeasePropousal entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Mergue(Persistence.Entities.PropertyLeasePropousal entity)
+        public override void Mergue(Persistence.Entities.PropertyLeasePropousal entity)
         {
             entity.Priority = Priority;
             entity.Description = Description;
