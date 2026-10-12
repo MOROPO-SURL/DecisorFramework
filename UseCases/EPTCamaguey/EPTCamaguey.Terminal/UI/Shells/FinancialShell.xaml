@@ -48,7 +48,7 @@
             <ShellContent.Icon>
                 <FontImageSource
                     FontFamily="MaterialDesignIcons"
-                    Glyph="&#xF81E;"
+                    Glyph="{StaticResource CollectMaterialDesignGlyphIconId}"
                     Color="{AppThemeBinding Light=Black, Dark=White}" />
             </ShellContent.Icon>
         </ShellContent>
