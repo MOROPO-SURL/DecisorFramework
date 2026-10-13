@@ -102,6 +102,23 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice
             builder.Services.AddScoped<Framework.Guama.Core.Presentation.Web.Security.Managers.Facade.IUserProfileManagerFacade, Managers.UserProfileManager>();
             #endregion
 
+            #region Globalization configuration
+            var defaultCulture = new System.Globalization.CultureInfo("es");
+
+            builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+            builder.Services.Configure<RequestLocalizationOptions>(options =>
+            {
+                options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture(defaultCulture);
+                options.SupportedCultures = [defaultCulture];
+                options.SupportedUICultures = [defaultCulture];
+
+                options.RequestCultureProviders = [new Framework.Guama.Core.Presentation.Web.Common.Localization.UrlRequestCultureProvider()];
+            });
+
+            builder.Services.AddSingleton<Helpers.GlobalViewLocalizationHelper>();
+            #endregion
+
             builder.Services.Configure<Microsoft.AspNetCore.Routing.RouteOptions>(options => options.LowercaseUrls = true);
 
             builder.Services.AddLocalization();
@@ -198,6 +215,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice
                 .UseStaticFiles()
                 .UseCors()
                 .UseRouting()
+                .UseRequestLocalization(app.Services.GetService<Microsoft.Extensions.Options.IOptions<RequestLocalizationOptions>>().Value)
                 .UseAuthentication()
                 .UseAuthorization()
                 .UseSession()

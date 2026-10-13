@@ -41,13 +41,12 @@
                                 </button>
                                 @if (notification.Title != null)
                                 {
-                                    <h4>@notification.Title</h4>
+                                    <h4>@GlobalViewLocalizationHelper.Localize(notification.Title, ViewLocalizer)</h4>
                                 }
 
                                 @if (notification.Message != null)
                                 {
-                                    @Html.Raw(notification.Message)
-                                    ;
+                                    <div>@GlobalViewLocalizationHelper.Localize(notification.Message, ViewLocalizer)</div>
                                 }
 
                                 @if (notification.Messages != null)
@@ -55,7 +54,7 @@
                                     <ul>
                                         @foreach (var item in notification.Messages)
                                         {
-                                            <li>@item</li>
+                                            <li>@GlobalViewLocalizationHelper.Localize(item, ViewLocalizer)</li>
                                         }
                                     </ul>
                                 }
