@@ -25,6 +25,7 @@ using MOROPO.Framework.Guama.Security.Personal.Presentation.Web.Backend.Extensio
 using Serilog;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using MOROPO.Framework.Guama.Core.Security.Common.Persistence.Extensions;
 
 namespace MOROPO.Tool.Decisor.Web.BackOffice
 {
@@ -101,6 +102,23 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice
             builder.Services.AddScoped<Framework.Guama.Core.Presentation.Web.Security.Managers.Facade.IUserProfileManagerFacade, Managers.UserProfileManager>();
             #endregion
 
+            #region Globalization configuration
+            var defaultCulture = new System.Globalization.CultureInfo("es");
+
+            builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+
+            builder.Services.Configure<RequestLocalizationOptions>(options =>
+            {
+                options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture(defaultCulture);
+                options.SupportedCultures = [defaultCulture];
+                options.SupportedUICultures = [defaultCulture];
+
+                options.RequestCultureProviders = [new Framework.Guama.Core.Presentation.Web.Common.Localization.UrlRequestCultureProvider()];
+            });
+
+            builder.Services.AddSingleton<Helpers.GlobalViewLocalizationHelper>();
+            #endregion
+
             builder.Services.Configure<Microsoft.AspNetCore.Routing.RouteOptions>(options => options.LowercaseUrls = true);
 
             builder.Services.AddLocalization();
@@ -153,12 +171,27 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice
 
                     if (!((Persistence.ORM.EF.Context.ApplicationDbContext)dbContext).Users.Any())
                     {
-                        var defaultUserId = "admin";
-                        var k3y = new System.Guid(0x7c9294dd, 0x1e74, 0x45b2, 0xa8, 0x45, 0xaf, 0x6A, 0xe5, 0x2a, 0xf6, 0x19);
+                        var userId = builder.Configuration["DefaultUser:Id"];
 
-                        var protectedPassword = (dbContext as Persistence.ORM.EF.Context.ApplicationDbContext).CreateSecureUser(k3y, defaultUserId, "system");
+                        var defaultUser = new Framework.Guama.Security.Personal.Persistence.Entities.User
+                        {
+                            Id = userId,
+                            Password = builder.Configuration["DefaultUser:Password"].ToHashedPassword(),
+                            Enabled = true,
+                            HasFullAccess = true,
+                            PasswordChangeRequired = true,
+                            Identity = new Framework.Guama.Identity.Persistence.Entities.PersonIdentity
+                            {
+                                Name = userId,
+                                Sex = Framework.Guama.Identity.Persistence.Enumerations.Sex.Unknown
+                            }
+                        };
 
-                        Log.Logger.Information(string.Format(">>>>>> Protected Password : '{0}' => '{1}'", defaultUserId, protectedPassword));
+                        defaultUser.Signature = Framework.Guama.Security.Personal.Persistence.ORM.EF.Helpers.Integrity.UserIntegrityHelper.GetSignature(defaultUser);
+
+                        dbContext.Set<Framework.Guama.Security.Personal.Persistence.Entities.User>().Add(defaultUser);
+
+                        (dbContext as Framework.Guama.Core.Persistence.ORM.EF.Context.Contract.AbstractTraceableDbContext).SaveChanges("system");
                     }
                 }
                 else
@@ -182,6 +215,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice
                 .UseStaticFiles()
                 .UseCors()
                 .UseRouting()
+                .UseRequestLocalization(app.Services.GetService<Microsoft.Extensions.Options.IOptions<RequestLocalizationOptions>>().Value)
                 .UseAuthentication()
                 .UseAuthorization()
                 .UseSession()

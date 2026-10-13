@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Core.Interop.API.Common"
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     x:Class="MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default.Views.Card.UserDefaultCardView"
     x:DataType="interop_common_display_models:UserDisplayModel">
     <ContentView.Resources>
@@ -29,7 +30,7 @@
                 <Border.StrokeShape>
                     <RoundRectangle CornerRadius="36" />
                 </Border.StrokeShape>
-                <Image
+                <ffimageloading_views:CachedImage
                     WidthRequest="72" HeightRequest="72"
                     Source="{Binding Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
             </Border>

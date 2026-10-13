@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Leasing.Interop.API.Common"
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     x:Class="MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Views.Card.VehicleLeaseOfferDefaultCardView"
     x:DataType="interop_common_display_models:VehicleLeaseOfferDisplayModel">
     <ContentView.Resources>
@@ -15,14 +16,16 @@
         <Grid ColumnSpacing="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
+                <ColumnDefinition Width="1" />
                 <ColumnDefinition Width="2*" />
             </Grid.ColumnDefinitions>
-            <Image
+            <ffimageloading_views:CachedImage
                 Grid.Column="0"
                 Aspect="AspectFill"               
-                Source="{Binding Propousal.Vehicle.FeatureImage, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />                                
+                Source="{Binding Propousal.Vehicle.FeatureImage, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
+            <BoxView Grid.Column="1" Color="{AppThemeBinding Light=LightGray, Dark=DimGray}" />
             <StackLayout 
-                Grid.Column="1"
+                Grid.Column="2"
                 Padding="16">
                 <Label 
                     FontAttributes="Bold"

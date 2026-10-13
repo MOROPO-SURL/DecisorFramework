@@ -27,6 +27,8 @@
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.100" />
 		<PackageReference Include="CaneyFramework.MVVM" Version="0.1.0" />
 		<PackageReference Include="CommunityToolkit.Maui" Version="9.1.1" />
+		<PackageReference Include="FFImageLoading.Maui" Version="1.2.8" />
+		<PackageReference Include="SkiaSharp" Version="2.88.9" />
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\Core.Interop.API.Connect\Core.Interop.API.Connect.csproj" />

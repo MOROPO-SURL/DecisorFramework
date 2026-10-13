@@ -11,6 +11,8 @@ public partial class LegalClientByContactBankAccountPickPage : Core.Presentation
     private System.Action<Financial.Interop.API.Common.Models.Display.BankAccountDisplayModel> pickCompleteAction;
     private readonly Domain.Interop.API.Common.Models.Display.OrganizationContactDisplayModel organization;
 
+    private Interop.API.Common.Models.Display.LegalClientDisplayModel client;
+
     public LegalClientByContactBankAccountPickPage(System.Action<Financial.Interop.API.Common.Models.Display.BankAccountDisplayModel> pickCompleteAction, Domain.Interop.API.Common.Models.Display.OrganizationContactDisplayModel organization)
     {
         InitializeComponent();
@@ -36,7 +38,7 @@ public partial class LegalClientByContactBankAccountPickPage : Core.Presentation
 
         try
         {
-            var client = await apiConnectClient.GetByContactAsync(organization.Id);
+            client = await apiConnectClient.GetByContactAsync(organization.Id);
 
             return new Guama.Core.Presentation.Models.PaginationModel<Financial.Interop.API.Common.Models.Display.BankAccountDisplayModel>
             {
@@ -99,6 +101,8 @@ public partial class LegalClientByContactBankAccountPickPage : Core.Presentation
                 var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IConfigurationContentPageFactoryFacade<Financial.Interop.API.Common.Models.Display.BankAccountDisplayModel, Financial.Presentation.Terminal.MAUI.Models.Page.Configuration.BankAccountConfigurationPageModel>>();
 
                 var page = await factory.BuildAsync(ConfigurationSuccess_Callback, null);
+
+                page.ConcreteBindingContext.IsExternal = true;
 
                 Dispatcher.Dispatch(() =>
                 {

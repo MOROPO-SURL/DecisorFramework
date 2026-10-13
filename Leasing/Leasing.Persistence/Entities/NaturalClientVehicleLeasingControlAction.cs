@@ -1,9 +1,9 @@
 ﻿namespace MOROPO.Framework.Decisor.Leasing.Persistence.Entities
 {
-    public class NaturalClientPropertySupervisionControlAction : Contract.AbstractSupervisionControlAction
+    public class NaturalClientVehicleLeasingControlAction : Contract.AbstractLeasingControlAction
     {
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(LeasingId))]
-        public NaturalClientPropertyLeasing Leasing { get; set; }
+        public NaturalClientVehicleLeasing Leasing { get; set; }
         public System.Guid LeasingId { get; set; }
     }
 }

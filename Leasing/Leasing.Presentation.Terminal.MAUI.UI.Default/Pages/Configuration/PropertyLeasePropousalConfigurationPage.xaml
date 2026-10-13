@@ -11,6 +11,7 @@
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     x:Class="MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.PropertyLeasePropousalConfigurationPage"
     x:TypeArguments="interop_common_display_models:PropertyLeasePropousalDisplayModel,interop_common_display_models:PropertyLeasePropousalDisplayModel,presentation_configuration_page_models:PropertyLeasePropousalConfigurationPageModel"
     x:DataType="presentation_configuration_page_models:PropertyLeasePropousalConfigurationPageModel">
@@ -122,15 +123,17 @@
                                             <Grid ColumnSpacing="0">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="2*" />
+                                                    <ColumnDefinition Width="1" />
                                                     <ColumnDefinition Width="3*" />
                                                     <ColumnDefinition Width="Auto" />
                                                 </Grid.ColumnDefinitions>
-                                                <Image
+                                                <ffimageloading_views:CachedImage
                                                     Grid.Column="0"
                                                     Aspect="AspectFill"               
                                                     Source="{Binding Space.FeatureImage, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
+                                                <BoxView Grid.Column="1" Color="{AppThemeBinding Light=LightGray, Dark=DimGray}" />
                                                 <StackLayout 
-                                                    Grid.Column="1"
+                                                    Grid.Column="2"
                                                     Padding="8">
                                                     <Label 
                                                         FontAttributes="Bold"
@@ -160,11 +163,11 @@
                                                         Text="{Binding Space.Description, TargetNullValue='---'}" />
                                                 </StackLayout>
                                                 <VerticalStackLayout 
-                                                    Grid.Column="2"
+                                                    Grid.Column="3"
                                                     Padding="8"
                                                     Spacing="8">
                                                     <Button
-                                                        Style="{StaticResource FontIconImageButtonStyle}"
+                                                        Style="{StaticResource DangerKindFontIconImageButtonStyle}"
                                                         VerticalOptions="Start"
                                                         Text="&#xFA78;"
                                                         Clicked="SpacePropousalRemotionButton_Clicked" />

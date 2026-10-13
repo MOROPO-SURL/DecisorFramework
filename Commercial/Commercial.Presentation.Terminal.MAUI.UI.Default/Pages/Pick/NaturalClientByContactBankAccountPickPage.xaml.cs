@@ -100,6 +100,8 @@ public partial class NaturalClientByContactBankAccountPickPage : Core.Presentati
 
                 var page = await factory.BuildAsync(ConfigurationSuccess_Callback, null);
 
+                page.ConcreteBindingContext.IsExternal = true;
+
                 Dispatcher.Dispatch(() =>
                 {
                     concreteBindingContext.IsBusy = false;

@@ -3,46 +3,322 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Leasing.Interop.API.Common"
+    xmlns:fwrk_domain_interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Domain.Interop.API.Common"
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"    
+    xmlns:core_constants="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Constants;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     x:Class="MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.NaturalClientPropertyLeasingDetailPage"
     x:TypeArguments="interop_common_display_models:NaturalClientPropertyLeasingDisplayModel"
     x:DataType="interop_common_display_models:NaturalClientPropertyLeasingDisplayModel"
     Title="Detalles de Expediente de Arrendamiento de Inmueble"
     BackgroundColor="Transparent"
     Background="{StaticResource OverlayBackgroundBrush}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
+            <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
+            <core_ui_converters:StringToLocalizedStringConverter x:Key="StringToLocalizedStringConverter" />
+
+            <communitytoolkit_converters:MathExpressionConverter x:Key="MathExpressionConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ScrollView Orientation="Vertical">
         <Grid>
             <Grid
                 Padding="10"
-                MaximumWidthRequest="400"
+                MaximumWidthRequest="{Static core_constants:CommonDetailPageConstants.MediumShortDetailPageFrameWrapperWidth}"
                 VerticalOptions="Center">
                 <Frame Style="{StaticResource PopupFrameStyle}">
-                    <StackLayout Margin="20">
-                        <Label 
-                            Margin="0,0,0,20"
-                            Text="Detalles"
-                            FontAttributes="Bold"
-                            FontSize="Medium" />
-                        <Label
-                            Style="{StaticResource CaptionPropertyLabelStyle}"
-                            Margin="0"
-                            Text="Cliente" />
-                        <Label
-                            Style="{StaticResource ValuePropertyLabelStyle}"
-                            Text="{Binding Contract.Client.Contact.Identity}" />
-                        <Label 
-                            Style="{StaticResource CaptionPropertyLabelStyle}"
-                            Text="Fecha Inicial" />
-                        <Label
-                            Style="{StaticResource ValuePropertyLabelStyle}"
-                            Text="{Binding Contract.At}" />
-                        <Label 
-                            Style="{StaticResource CaptionPropertyLabelStyle}"
-                            Text="Objeto" />
-                        <Label
-                            Style="{StaticResource ValuePropertyLabelStyle}"
-                            Text="{Binding Contract.Objective}" />
-                    </StackLayout>
+                    <VerticalStackLayout Margin="12" Padding="8">
+                        <VerticalStackLayout>
+                            <Frame
+                                Margin="8"
+                                Padding="0"
+                                HeightRequest="{Binding Source={RelativeSource AncestorType={Type Grid}}, Path=Width, Converter={StaticResource MathExpressionConverter}, ConverterParameter='X * 0.5'}">
+                                <ffimageloading_views:CachedImage
+                                    Aspect="AspectFill"
+                                    Source="{Binding Contract.Property.FeatureImage, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
+                            </Frame>
+                            <Label
+                                Margin="8,4"
+                                LineBreakMode="TailTruncation"
+                                FontSize="Large"
+                                Text="{Binding Contract.Property.Reference}" />
+                            <VerticalStackLayout 
+                                Margin="8,4"
+                                Spacing="6">
+                                <Label 
+                                    Style="{StaticResource CaptionPropertyLabelStyle}" 
+                                    Text="Entidad Administrativa" />
+                                <Label 
+                                    Style="{StaticResource ValuePropertyLabelStyle}"
+                                    Text="{Binding Contract.Property.Structure.Identity.Name}" />
+                            </VerticalStackLayout>
+                            <Label
+                                Margin="8,4"
+                                LineBreakMode="TailTruncation"
+                                FontSize="Large"
+                                Text="{Binding Contract.Property.Reference}" />
+                            <VerticalStackLayout 
+                                Margin="8,4"
+                                Spacing="6">
+                                <Label 
+                                    Style="{StaticResource CaptionPropertyLabelStyle}" 
+                                    Text="Nombre" />
+                                <Label 
+                                    Style="{StaticResource ValuePropertyLabelStyle}"
+                                    Text="{Binding Contract.Property.Name}" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout 
+                                Margin="8,4"
+                                Spacing="6">
+                                <Label 
+                                    Style="{StaticResource CaptionPropertyLabelStyle}" 
+                                    Text="Tipo" />
+                                <Label 
+                                    Style="{StaticResource ValuePropertyLabelStyle}"
+                                    Text="{Binding Contract.Property.Kind.Name}" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout 
+                                Margin="8,4"
+                                Spacing="6">
+                                <Label 
+                                    Style="{StaticResource CaptionPropertyLabelStyle}" 
+                                    Text="Entidad Administrativa" />
+                                <Label 
+                                    Style="{StaticResource ValuePropertyLabelStyle}"
+                                    Text="{Binding Contract.Property.Structure.Identity.Name}" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Margin="8,4">
+                                <Label 
+                                    Style="{StaticResource CaptionPropertyLabelStyle}" 
+                                    Text="Dirección postal" />
+                                <Label>
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding Contract.Property.PostalContact.Address}" />
+                                            <Span Text="{Binding Contract.Property.PostalContact.Municipality.Name, StringFormat=', {0}'}" />
+                                            <Span Text="{Binding Contract.Property.PostalContact.Municipality.State.Name, StringFormat=', {0}'}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </VerticalStackLayout>
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}" 
+                                Text="Espacios" />
+                            <BoxView Margin="0,6" Color="DimGray" HeightRequest="2" />
+                            <VerticalStackLayout
+                                Margin="0,4,0,8"
+                                Spacing="8"
+                                BindableLayout.ItemsSource="{Binding Contract.Property.Spaces}">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate x:DataType="fwrk_domain_interop_common_display_models:PropertySpaceDisplayModel">
+                                        <Frame
+                                            Padding="0"
+                                            HeightRequest="172">
+                                            <Grid 
+                                                VerticalOptions="FillAndExpand"
+                                                IsClippedToBounds="True"
+                                                ColumnSpacing="0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="2*" />
+                                                    <ColumnDefinition Width="3*" />
+                                                </Grid.ColumnDefinitions>
+                                                <ffimageloading_views:CachedImage
+                                                    Grid.Column="0"
+                                                    Aspect="AspectFill"
+                                                    Source="{Binding FeatureImage, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
+                                                <Grid
+                                                    IsVisible="{Binding Assignment, Converter={StaticResource IsNotNullConverter}}"
+                                                    Grid.Row="0"
+                                                    VerticalOptions="Center"
+                                                    Padding="0,2"
+                                                    BackgroundColor="#A7FFFFFF"
+                                                    Rotation="-45"
+                                                    TranslationY="{Binding Source={RelativeSource AncestorType={Type Frame}}, Path=Height, Converter={StaticResource DoubleToFractionConverter}, ConverterParameter=-12}"
+                                                    TranslationX="{Binding Source={RelativeSource AncestorType={Type Frame}}, Path=Height, Converter={StaticResource DoubleToFractionConverter}, ConverterParameter=-3}">
+                                                    <Label                    
+                                                        Padding="8"
+                                                        BackgroundColor="{StaticResource Primary}"
+                                                        HorizontalTextAlignment="Center"
+                                                        FontAttributes="Bold"
+                                                        TextColor="White"
+                                                        Text="{Binding Assignment, Converter={StaticResource StringToLocalizedStringConverter}}" />
+                                                </Grid>
+                                                <StackLayout 
+                                                    Grid.Column="1"
+                                                    Padding="8">
+                                                    <Label 
+                                                        FontAttributes="Bold"
+                                                        FontSize="Medium"
+                                                        LineBreakMode="TailTruncation"
+                                                        MaxLines="2"
+                                                        Text="{Binding Name}" />
+                                                    <Label 
+                                                        Margin="0,8,0,0"
+                                                        Text="Espacio útil"
+                                                        TextColor="DimGray"
+                                                        FontSize="Caption"
+                                                        FontAttributes="Bold" />
+                                                    <Label
+                                                        LineBreakMode="TailTruncation"
+                                                        Text="{Binding Area, StringFormat='{0:F2} m²'}" />
+                                                    <Label 
+                                                        Margin="0,8,0,0"
+                                                        Text="Descripción"
+                                                        TextColor="DimGray"
+                                                        FontSize="Caption"
+                                                        FontAttributes="Bold" />
+                                                    <Label
+                                                        VerticalOptions="FillAndExpand"
+                                                        LineBreakMode="TailTruncation"
+                                                        MaxLines="3"
+                                                        Text="{Binding Description, TargetNullValue='---'}" />
+                                                </StackLayout>
+                                            </Grid>
+                                        </Frame>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </VerticalStackLayout>
+                        </VerticalStackLayout>
+                        <Grid 
+                            Margin="8"
+                            ColumnSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <BoxView 
+                                Grid.Column="0"
+                                VerticalOptions="Center"
+                                HeightRequest="1" 
+                                Color="DimGray" />
+                            <Label
+                                Grid.Column="1"
+                                TextColor="DimGray"
+                                Text="Información relativa a la contratación" />
+                            <BoxView 
+                                Grid.Column="2"
+                                VerticalOptions="Center"
+                                HeightRequest="1" 
+                                Color="DimGray" />
+                        </Grid>
+                        <FlexLayout 
+                            Wrap="Wrap"
+                            AlignItems="Start" AlignContent="Start">
+                            <VerticalStackLayout
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel SmallContainerColumn=4}}"                        
+                                Margin="4">
+                                <Label
+                                    Margin="0"
+                                    Style="{StaticResource CaptionPropertyLabelStyle}"
+                                    Text="Contracto" />
+                                <Label
+                                    Style="{StaticResource ValuePropertyLabelStyle}">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding Contract.Index}" />
+                                            <Span Text=" / " />
+                                            <Span Text="{Binding Contract.Year}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </VerticalStackLayout>
+                            <VerticalStackLayout
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel SmallContainerColumn=4}}"                        
+                                Margin="4">
+                                <Label
+                                    Margin="0"
+                                    Style="{StaticResource CaptionPropertyLabelStyle}"
+                                    Text="Inicio" />
+                                <Label
+                                    Style="{StaticResource ValuePropertyLabelStyle}"
+                                    Text="{Binding Contract.StarAt, StringFormat='{0:dd MMM yyy}'}" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel SmallContainerColumn=4}}"                        
+                                Margin="4">
+                                <Label
+                                    Margin="0"
+                                    Style="{StaticResource CaptionPropertyLabelStyle}"
+                                    Text="Duración" />
+                                <Label Style="{StaticResource ValuePropertyLabelStyle}">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding Contract.DurationUnitCount, TargetNullValue='Indeterminada'}" />
+                                            <Span Text=" " />
+                                            <Span Text="{Binding Contract.DurationUnitMeasureKind, Converter={StaticResource StringToLocalizedStringConverter}, FallbackValue='', TargetNullValue=''}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </VerticalStackLayout>
+                        </FlexLayout>
+                        <VerticalStackLayout Margin="8,0,8,8" Spacing="6">
+                            <Label
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Arrendatario" />
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Border 
+                                    Grid.Column="0"
+                                    VerticalOptions="Center"
+                                    StrokeThickness="4"
+                                    StrokeLineJoin="Bevel">
+                                    <Border.StrokeShape>
+                                        <RoundRectangle CornerRadius="32" />
+                                    </Border.StrokeShape>
+                                    <ffimageloading_views:CachedImage
+                                        WidthRequest="64" HeightRequest="64"
+                                        Source="{Binding Contract.Client.Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
+                                </Border>
+                                <StackLayout 
+                                    Grid.Column="1"
+                                    VerticalOptions="Center"
+                                    Padding="10,0">
+                                    <Label
+                                        ToolTipProperties.Text="{Binding Contract.Client.Contact.Identity.Name}"
+                                        Text="{Binding Contract.Client.Contact.Identity.Name}"
+                                        FontSize="Medium"
+                                        LineBreakMode="TailTruncation" />
+                                    <Label
+                                        IsVisible="{Binding Contract.Client.Contact.Identity.LastName, Converter={StaticResource IsNotNullConverter}}"
+                                        ToolTipProperties.Text="{Binding Contract.Client.Contact.Identity.LastName}"
+                                        Text="{Binding Contract.Client.Contact.Identity.LastName}"
+                                        LineBreakMode="TailTruncation" />
+                                    <Label
+                                        ToolTipProperties.Text="{Binding Contract.Client.Contact.BusinessKind.Name}"
+                                        Text="{Binding Contract.Client.Contact.BusinessKind.Name}"
+                                        LineBreakMode="TailTruncation" />
+                                </StackLayout>
+                            </Grid>
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Margin="8" Spacing="6">
+                            <Label
+                                Margin="0"
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Monto" />
+                            <Label Style="{StaticResource ValuePropertyLabelStyle}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding Contract.Feed, StringFormat='{0:F2}'}" />
+                                        <Span Text="{Binding CostCenter.DefaultBankAccount.Currency.Symbol, StringFormat=' {0}'}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </VerticalStackLayout>
+                        <Button 
+                            Style="{StaticResource DangerKindButtonStyle}"
+                            HorizontalOptions="End"
+                            Text="Terminar"
+                            Clicked="DeleteButton_Clicked" />
+                    </VerticalStackLayout>
                 </Frame>
                 <Button
                     Style="{StaticResource DetailPageCloseButtonStyle}"

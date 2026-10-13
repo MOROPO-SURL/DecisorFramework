@@ -9,6 +9,7 @@
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.List.EmployeesListPage"
     x:TypeArguments="presentation_detail_page_models:EmployeeDetailPageModel,presentation_list_page_models:EmployeesListPageModel"
     x:DataType="presentation_list_page_models:EmployeesListPageModel"
@@ -59,15 +60,17 @@
                                     <Grid ColumnSpacing="4">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="1" />
                                             <ColumnDefinition />
                                         </Grid.ColumnDefinitions>
-                                        <Image
+                                        <ffimageloading_views:CachedImage
                                             Grid.Column="0"
                                             Aspect="AspectFill"
                                             WidthRequest="{Binding Source={RelativeSource Mode=Self}, Path=Height}"
                                             Source="{Binding Domain.Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
+                                        <BoxView Grid.Column="1" Color="{AppThemeBinding Light=LightGray, Dark=DimGray}" />
                                         <StackLayout 
-                                            Grid.Column="1"
+                                            Grid.Column="2"
                                             Padding="10">
                                             <Label 
                                                 FontSize="Medium"

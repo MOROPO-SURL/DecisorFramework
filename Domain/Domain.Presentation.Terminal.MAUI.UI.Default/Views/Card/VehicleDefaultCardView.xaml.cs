@@ -6,4 +6,9 @@ public partial class VehicleDefaultCardView : Microsoft.Maui.Controls.ContentVie
 	{
 		InitializeComponent();
 	}
+
+    private void CachedImage_Error(object sender, FFImageLoading.Maui.CachedImageEvents.ErrorEventArgs e)
+    {
+
+    }
 }

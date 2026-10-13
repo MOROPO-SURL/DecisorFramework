@@ -14,6 +14,7 @@ public class VehicleLeaseOfferRepository : Guama.Core.Persistence.ORM.EF.Reposit
             .Include(entity => entity.BaselineCurrency)
             .Include(entity => entity.Agreement).ThenInclude(entity => entity.Meeting).ThenInclude(entity => entity.DecisionMakingGroup).ThenInclude(entity => entity.AdministrativeEntity).ThenInclude(entity => entity.Identity)
             .Include(entity => entity.Propousal).ThenInclude(entity => entity.Agreement)
+            .Include(entity => entity.Propousal).ThenInclude(entity => entity.Vehicle).ThenInclude(entity => entity.AdministrativeEntity).ThenInclude(entity => entity.Identity)
             .Include(entity => entity.Propousal).ThenInclude(entity => entity.Vehicle).ThenInclude(entity => entity.FeatureImage)
             .Include(entity => entity.Propousal).ThenInclude(entity => entity.Vehicle).ThenInclude(entity => entity.Brand)
             .Include(entity => entity.Propousal).ThenInclude(entity => entity.Vehicle).ThenInclude(entity => entity.Kind)

@@ -34,6 +34,15 @@
 		<ProjectReference Include="..\Leasing.Presentation.Terminal.MAUI\Leasing.Presentation.Terminal.MAUI.csproj" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Compile Update="Pages\Configuration\NaturalClientPropertyLeasingControlActionConfigurationPage.xaml.cs">
+	    <DependentUpon>NaturalClientPropertyLeasingControlActionConfigurationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Configuration\LegalClientPropertyLeasingControlActionConfigurationPage.xaml.cs">
+	    <DependentUpon>LegalClientPropertyLeasingControlActionConfigurationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Configuration\LegalClientVehicleLeasingControlActionConfigurationPage.xaml.cs">
+	    <DependentUpon>LegalClientVehicleLeasingControlActionConfigurationPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\Configuration\VehicleLeaseOrganizationPostulationConfigurationPage.xaml.cs">
 	    <DependentUpon>VehicleLeaseOrganizationPostulationConfigurationPage.xaml</DependentUpon>
 	  </Compile>
@@ -49,6 +58,15 @@
 	  <Compile Update="Pages\Configuration\VehicleLeasePropousalConfigurationPage.xaml.cs">
 	    <DependentUpon>VehicleLeasePropousalConfigurationPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Pages\Detail\NaturalClientPropertyLeasingControlActionDetailPage.xaml.cs">
+	    <DependentUpon>NaturalClientPropertyLeasingControlActionDetailPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Detail\LegalClientPropertyLeasingControlActionDetailPage.xaml.cs">
+	    <DependentUpon>LegalClientPropertyLeasingControlActionDetailPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Detail\LegalClientVehicleLeasingControlActionDetailPage.xaml.cs">
+	    <DependentUpon>LegalClientVehicleLeasingControlActionDetailPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\Detail\PropertyLeasePropousalDetailPage.xaml.cs">
 	    <DependentUpon>PropertyLeasePropousalDetailPage.xaml</DependentUpon>
 	  </Compile>
@@ -57,6 +75,15 @@
 	  </Compile>
 	  <Compile Update="Pages\Detail\VehicleLeasePropousalDetailPage.xaml.cs">
 	    <DependentUpon>VehicleLeasePropousalDetailPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Manage\NaturalClientPropertyLeasingControlActionsManagePage.xaml.cs">
+	    <DependentUpon>NaturalClientPropertyLeasingControlActionsManagePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Manage\LegalClientPropertyLeasingControlActionsManagePage.xaml.cs">
+	    <DependentUpon>LegalClientPropertyLeasingControlActionsManagePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Manage\LegalClientVehicleLeasingControlActionsManagePage.xaml.cs">
+	    <DependentUpon>LegalClientVehicleLeasingControlActionsManagePage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Pages\Manage\VehicleLeaseOffersManagePage.xaml.cs">
 	    <DependentUpon>VehicleLeaseOffersManagePage.xaml</DependentUpon>
@@ -75,10 +102,16 @@
 	  <MauiXaml Update="Pages\Configuration\LegalClientPropertyLeasingConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\NaturalClientPropertyLeasingControlActionConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Configuration\LegalClientVehicleLeasingCollectConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Configuration\LegalClientVehicleLeasingConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\LegalClientPropertyLeasingControlActionConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Configuration\NaturalClientPropertyLeasingCollectConfigurationPage.xaml">
@@ -91,6 +124,12 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Configuration\NaturalClientVehicleLeasingConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\LegalClientVehicleLeasingControlActionConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\NaturalClientVehicleLeasingControlActionConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Configuration\PropertyLeaseOrganizationPostulationConfigurationPage.xaml">
@@ -123,10 +162,16 @@
 	  <MauiXaml Update="Pages\Detail\LegalClientPropertyLeasingCollectDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\NaturalClientPropertyLeasingControlActionDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Detail\LegalClientPropertyLeasingDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Detail\LegalClientVehicleLeasingCollectDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\LegalClientPropertyLeasingControlActionDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Detail\LegalClientVehicleLeasingDetailPage.xaml">
@@ -139,6 +184,12 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Detail\NaturalClientVehicleLeasingCollectDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\LegalClientVehicleLeasingControlActionDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\NaturalClientVehicleLeasingControlActionDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Detail\NaturalClientVehicleLeasingDetailPage.xaml">
@@ -190,6 +241,18 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Manage\LeasingCollectsManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\NaturalClientPropertyLeasingControlActionsManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\LegalClientPropertyLeasingControlActionsManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\LegalClientVehicleLeasingControlActionsManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\NaturalClientVehicleLeasingControlActionsManagePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Manage\PropertyLeaseOffersManagePage.xaml">

@@ -12,7 +12,7 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display
 
         public Persistence.Enumerations.VehicleAssignment? Assignment { get; set; }
 
-        public Core.Interop.API.Common.Models.Display.ImageDisplayModel FeatureImage { get; set; }
+        public ImageDisplayModel FeatureImage { get; set; }
 
         public AdministrativeEntityParentalDisplayModel Structure { get; set; }
 

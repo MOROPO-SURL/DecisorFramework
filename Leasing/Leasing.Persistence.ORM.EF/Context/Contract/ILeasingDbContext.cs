@@ -40,10 +40,10 @@ namespace MOROPO.Framework.Decisor.Leasing.Persistence.ORM.EF.Context.Contract
         public DbSet<Entities.NaturalClientPropertyLeasingPersonContactBridge> NatClientPropLeasPersonContactBridges { get; set; }
         public DbSet<Entities.SupervisionGroup> SupervisionGroups { get; set; }
         public DbSet<Entities.SupervisionGroupEmployeeBridge> SupervisionGroupEmployeeBridges { get; set; }
-        public DbSet<Entities.LegalClientPropertySupervisionControlAction> LegClientPropSupervControlActions { get; set; }
-        public DbSet<Entities.NaturalClientPropertySupervisionControlAction> NatClientPropSupervControlActions { get; set; }
-        public DbSet<Entities.LegalClientVehicleSupervisionControlAction> LegClientVehSupervControlActions { get; set; }
-        public DbSet<Entities.NaturalClientVehicleSupervisionControlAction> NatClientVehSupervControlActions { get; set; }
+        public DbSet<Entities.LegalClientPropertyLeasingControlAction> LegClientPropLeasingControlActions { get; set; }
+        public DbSet<Entities.NaturalClientPropertyLeasingControlAction> NatClientPropLeasingControlActions { get; set; }
+        public DbSet<Entities.LegalClientVehicleLeasingControlAction> LegClientVehLeasingControlActions { get; set; }
+        public DbSet<Entities.NaturalClientVehicleLeasingControlAction> NatClientVehLeasingControlActions { get; set; }
         public DbSet<Entities.LegalClientPropertyLeasingCompensation> LegalClientPropertyLeasingCompensations { get; set; }
         public DbSet<Entities.LegalClientPropertyLeasingCompensationDocumentBridge> LegClientPropLeasCompDocumentBridges { get; set; }
         public DbSet<Entities.NaturalClientPropertyLeasingCompensation> NaturalClientPropertyLeasingCompensations { get; set; }
