@@ -15,6 +15,7 @@
     xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     x:Class="MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.ServiceOrderSampleConfigurationPage"
     x:TypeArguments="interop_common_display_models:ServiceOrderSampleDisplayModel,interop_common_display_models:ServiceOrderSampleDisplayModel,presentation_configuration_page_models:ServiceOrderSampleConfigurationPageModel"
     x:DataType="presentation_configuration_page_models:ServiceOrderSampleConfigurationPageModel">
@@ -58,7 +59,7 @@
                         Margin="4"
                         Padding="0">
                         <Grid>
-                            <Image 
+                            <ffimageloading_views:CachedImage 
                                 Aspect="AspectFill"
                                 Source="{Binding FeatureImageSource, TargetNullValue='default_organization_picture.png'}" />
                             <Grid BackgroundColor="#A7000000">

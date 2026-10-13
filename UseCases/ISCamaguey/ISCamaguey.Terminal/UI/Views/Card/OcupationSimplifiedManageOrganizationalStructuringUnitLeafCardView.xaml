@@ -6,6 +6,7 @@
     xmlns:core_ui_behaviors="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Behaviors;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     x:Class="MOROPO.ISCamaguey.Decisor.Terminal.UI.Views.Card.OcupationSimplifiedManageOrganizationalStructuringUnitLeafCardView"
     x:DataType="presentation_view_models:LeafOcupationManageOrganizationalStructuringUnitViewModel">
     <ContentView.Resources>
@@ -57,7 +58,7 @@
                             <Frame Padding="0">
                                 <VerticalStackLayout Spacing="0">
                                     <Grid HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width}">
-                                        <Image 
+                                        <ffimageloading_views:CachedImage 
                                             BackgroundColor="DimGray"
                                             Source="{Binding Ocupation.Employee.Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
                                         <Grid

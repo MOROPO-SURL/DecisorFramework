@@ -6,6 +6,7 @@
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:fwrk_core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     x:Class="MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.NaturalClientTrainingServiceOrderDetailPage"
     x:TypeArguments="interop_common_display_models:NaturalClientTrainingServiceOrderDisplayModel"
     x:DataType="interop_common_display_models:NaturalClientTrainingServiceOrderDisplayModel"
@@ -57,7 +58,7 @@
                                 <Border.StrokeShape>
                                     <RoundRectangle CornerRadius="32" />
                                 </Border.StrokeShape>
-                                <Image
+                                <ffimageloading_views:CachedImage
                                     WidthRequest="64" HeightRequest="64"
                                     Source="{Binding Contract.Client.Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
                             </Border>

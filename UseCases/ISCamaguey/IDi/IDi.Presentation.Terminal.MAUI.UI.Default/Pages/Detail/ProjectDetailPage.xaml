@@ -10,6 +10,7 @@
     xmlns:fwrk_core_constants="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Constants;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:fwrk_core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     x:Class="MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.ProjectDetailPage"
     x:TypeArguments="interop_common_display_models:ProjectDisplayModel"
     x:DataType="interop_common_display_models:ProjectDisplayModel"
@@ -295,7 +296,7 @@
                                                             <ColumnDefinition Width="Auto" />
                                                             <ColumnDefinition />
                                                         </Grid.ColumnDefinitions>
-                                                        <Image
+                                                        <ffimageloading_views:CachedImage
                                                             Grid.Column="0" Grid.RowSpan="3"
                                                             Aspect="AspectFill"
                                                             WidthRequest="{Binding Source={RelativeSource Mode=Self}, Path=Height}"
@@ -359,7 +360,7 @@
                                                             <ColumnDefinition Width="Auto" />
                                                             <ColumnDefinition />
                                                         </Grid.ColumnDefinitions>
-                                                        <Image
+                                                        <ffimageloading_views:CachedImage
                                                             Grid.Column="0" Grid.RowSpan="3"
                                                             Aspect="AspectFill"
                                                             WidthRequest="{Binding Source={RelativeSource Mode=Self}, Path=Height}"

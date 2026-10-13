@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.ISCamaguey.Decisor.Servicing.Interop.API.Common.Models.Display;assembly=MOROPO.ISCamaguey.Decisor.Servicing.Interop.API.Common"
     xmlns:fwrk_core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     x:Class="MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Default.Views.Card.LegalClientTrainingServiceOrderDefaultCardView"
     x:DataType="interop_common_display_models:LegalClientTrainingServiceOrderDisplayModel">
     <ContentView.Resources>
@@ -49,7 +50,7 @@
                     <Border.StrokeShape>
                         <RoundRectangle CornerRadius="4" />
                     </Border.StrokeShape>
-                    <Image
+                    <ffimageloading_views:CachedImage
                         WidthRequest="64" HeightRequest="64"
                         Source="{Binding Contract.Client.Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
                 </Border>

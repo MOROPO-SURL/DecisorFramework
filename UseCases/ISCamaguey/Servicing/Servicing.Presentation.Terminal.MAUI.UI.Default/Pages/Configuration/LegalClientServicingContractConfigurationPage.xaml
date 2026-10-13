@@ -14,6 +14,7 @@
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     x:Class="MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.LegalClientServicingContractConfigurationPage"
     x:TypeArguments="interop_common_display_models:LegalClientServicingContractDisplayModel,interop_common_display_models:LegalClientServicingContractDisplayModel,presentation_configuration_page_models:LegalClientServicingContractConfigurationPageModel"
     x:DataType="presentation_configuration_page_models:LegalClientServicingContractConfigurationPageModel">
@@ -75,7 +76,7 @@
                             <RowDefinition Height="Auto" />
                             <RowDefinition />
                         </Grid.RowDefinitions>
-                        <Image
+                        <ffimageloading_views:CachedImage
                             Grid.Column="0" Grid.RowSpan="4"
                             Aspect="AspectFill"
                             Source="{Binding Client.Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />

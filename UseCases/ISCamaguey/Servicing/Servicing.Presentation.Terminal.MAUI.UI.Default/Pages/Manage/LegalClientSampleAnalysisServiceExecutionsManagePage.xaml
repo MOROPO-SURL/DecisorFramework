@@ -11,6 +11,7 @@
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     x:Class="MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.LegalClientSampleAnalysisServiceExecutionsManagePage"
     x:TypeArguments="interop_common_display_models:LegalClientSampleAnalysisServiceExecutionDisplayModel,presentation_manage_page_models:LegalClientSampleAnalysisServiceExecutionsManagePageModel,presentation_configuration_page_models:LegalClientSampleAnalysisServiceExecutionConfigurationPageModel"
     x:DataType="presentation_manage_page_models:LegalClientSampleAnalysisServiceExecutionsManagePageModel"
@@ -121,7 +122,7 @@
                                                 <Border.StrokeShape>
                                                     <RoundRectangle CornerRadius="4" />
                                                 </Border.StrokeShape>
-                                                <Image
+                                                <ffimageloading_views:CachedImage
                                                     WidthRequest="64" HeightRequest="64"
                                                     Source="{Binding Order.Contract.Client.Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
                                             </Border>

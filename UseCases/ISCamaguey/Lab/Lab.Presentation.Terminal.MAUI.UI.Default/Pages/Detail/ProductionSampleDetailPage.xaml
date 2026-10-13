@@ -10,6 +10,7 @@
     x:Class="MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.ProductionSampleDetailPage"
     x:TypeArguments="interop_common_display_models:ProductionSampleDisplayModel"
     x:DataType="interop_common_display_models:ProductionSampleDisplayModel"
+    xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     Title="Detalles de Muestra de Producción"
     BackgroundColor="Transparent"
     Background="{StaticResource OverlayBackgroundBrush}">
@@ -39,7 +40,7 @@
                                 IsVisible="{Binding FeatureImage, Converter={StaticResource IsNotNullConverter}}"
                                 Margin="0,0,0,16" Padding="0"
                                 IsClippedToBounds="True">
-                                <Image Source="{Binding FeatureImage, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
+                                <ffimageloading_views:CachedImage Source="{Binding FeatureImage, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
                             </Frame>
                             <Label 
                                 Style="{StaticResource CaptionPropertyLabelStyle}"

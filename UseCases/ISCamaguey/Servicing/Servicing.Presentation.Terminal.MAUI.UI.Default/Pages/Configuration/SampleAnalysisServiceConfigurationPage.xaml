@@ -16,6 +16,7 @@
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    xmlns:ffimageloading_views="clr-namespace:FFImageLoading.Maui;assembly=FFImageLoading.Maui"
     x:Class="MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.SampleAnalysisServiceConfigurationPage"
     x:TypeArguments="interop_common_display_models:SampleAnalysisServiceDisplayModel,interop_common_display_models:SampleAnalysisServiceDisplayModel,presentation_configuration_page_models:SampleAnalysisServiceConfigurationPageModel"
     x:DataType="presentation_configuration_page_models:SampleAnalysisServiceConfigurationPageModel">
@@ -146,7 +147,7 @@
                                                 WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource ViewChildParentWidthToRelativeWidthConverter}}">
                                                 <VerticalStackLayout Spacing="0">
                                                     <Grid>
-                                                        <Image 
+                                                        <ffimageloading_views:CachedImage 
                                                             BackgroundColor="DimGray"
                                                             HeightRequest="{Binding Source={RelativeSource AncestorType={Type Frame}}, Path=Width}"
                                                             Aspect="AspectFill"
