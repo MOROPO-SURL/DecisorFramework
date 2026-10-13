@@ -104,7 +104,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Extensions
                 Title = "Unidades de Medida",
                 Controller = "unitmeasurements",
                 Action = "Index",
-                Area = "inventory",
+                Area = "domain",
                 Role = Framework.Decisor.Domain.Interop.API.Common.Constants.Security.Authorization.UnitMeasurementViewerPermission
             });
             #endregion
