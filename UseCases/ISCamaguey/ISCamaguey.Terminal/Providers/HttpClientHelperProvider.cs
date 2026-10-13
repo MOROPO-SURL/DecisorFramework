@@ -23,7 +23,7 @@ namespace MOROPO.ISCamaguey.Decisor.Terminal.Providers
                 .Append(':')
                 .Append(settingManager.ApiServerPort);
 
-            HttpClientHelper = new Framework.Guama.Core.Presentation.API.Connect.Helpers.HttpClientHelper(new System.Net.Http.HttpClientHandler
+            var handler = new System.Net.Http.HttpClientHandler
             {
                 Proxy = !settingManager.UseProxyServer ? null : new System.Net.WebProxy
                 {
@@ -31,7 +31,11 @@ namespace MOROPO.ISCamaguey.Decisor.Terminal.Providers
                     Credentials = !settingManager.UseProxyAuthentication ? null : new System.Net.NetworkCredential(settingManager.ProxyUsername, settingManager.ProxyPassword)
                 },
                 ServerCertificateCustomValidationCallback = (message, certificate, chain, errors) => true
-            }, baseUrlBuilder.ToString(), GetAuthorizeHeader);
+            };
+
+            HttpClientHelper = new Framework.Guama.Core.Presentation.API.Connect.Helpers.HttpClientHelper(handler, baseUrlBuilder.ToString(), GetAuthorizeHeader);
+
+            FFImageLoading.ImageService.Instance.Configuration.HttpClient = new System.Net.Http.HttpClient(handler);
         }
 
         private System.Collections.Generic.KeyValuePair<string, string> GetAuthorizeHeader()
